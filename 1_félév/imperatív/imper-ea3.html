@@ -1,0 +1,757 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-3/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-3">Imperatív programozás 3.</h1>
+
+<h1 id="a-c-programok-szerkezete">A C programok szerkezete</h1>
+
+<p>A C programozási nyelvű programjainkat különálló <strong>fordítási egységek</strong> 
+(translational unit, TU), lényegében <strong>forrásfájlok</strong> (source file) 
+halmazaként írjuk meg. Ezeket a fájlokat <strong>.c</strong> kiterjesztéssel kell 
+elkészítenünk, a C fordító csak a .c kiterjesztésű fájlokat fordítja le.</p>
+
+<p>A forrásfájlokba háromféle dolgot írhatunk:</p>
+
+<ul>
+  <li>előfordító utasítások (preprocessor directive)</li>
+  <li>kommenteket (comment)</li>
+  <li>C nyelvi tokeneket (token)</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * my first C program    &lt;--- comment </span>
+<span class="lineno"> 3</span> <span class="cm"> *</span>
+<span class="lineno"> 4</span> <span class="cm"> */</span>
+<span class="lineno"> 5</span> <span class="cp">#include &lt;stdio.h&gt;   &lt;---- preprocessor directvive</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>               <span class="kt">int</span>    <span class="o">&lt;--</span> <span class="n">type</span> <span class="nl">name</span><span class="p">:</span> <span class="n">keyword</span>
+<span class="lineno"> 8</span>                          <span class="n">main</span>   <span class="o">&lt;--</span> <span class="n">function</span> <span class="nl">name</span><span class="p">:</span> <span class="n">identifier</span>
+<span class="lineno"> 9</span>                          <span class="p">()</span>     <span class="o">&lt;--</span> <span class="n">function</span> <span class="nl">call</span><span class="p">:</span> <span class="n">operator</span>
+<span class="lineno">10</span> <span class="p">{</span>                        <span class="p">{</span>      <span class="o">&lt;--</span> <span class="n">block</span> <span class="nl">begin</span><span class="p">:</span> <span class="n">separator</span>
+<span class="lineno">11</span>                          <span class="n">printf</span> <span class="o">&lt;--</span> <span class="n">function</span> <span class="nl">name</span><span class="p">:</span> <span class="n">identifier</span>
+<span class="lineno">12</span>                          <span class="p">(</span>      <span class="o">&lt;--</span> <span class="n">function</span> <span class="nl">call</span><span class="p">:</span> <span class="n">operator</span>
+<span class="lineno">13</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span> <span class="s">&quot;Hello world&quot;</span>  <span class="o">&lt;--</span> <span class="n">string</span> <span class="n">literal</span><span class="p">,</span> <span class="n">type</span> <span class="kt">char</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+<span class="lineno">14</span>                          <span class="p">)</span>      <span class="o">&lt;--</span> <span class="n">function</span> <span class="nl">call</span><span class="p">:</span> <span class="n">operator</span>
+<span class="lineno">15</span>                          <span class="p">;</span> <span class="o">&lt;--</span> <span class="n">command</span><span class="o">-</span><span class="n">end</span> <span class="n">separator</span>
+<span class="lineno">16</span>                          <span class="k">return</span> <span class="o">&lt;--</span> <span class="n">keyword</span>
+<span class="lineno">17</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>              <span class="mi">0</span>      <span class="o">&lt;--</span> <span class="n">decimal</span> <span class="kt">int</span> <span class="n">literal</span><span class="p">,</span> <span class="n">type</span> <span class="kt">int</span>
+<span class="lineno">18</span> <span class="p">}</span>                        <span class="p">}</span>      <span class="o">&lt;--</span> <span class="n">block</span> <span class="nl">end</span><span class="p">:</span> <span class="n">separator</span></code></pre></div>
+
+<h2 id="preprocesszor-utastsok">Preprocesszor utasítások</h2>
+
+<p>Az előfordító a C/C++ fordítás első logikai lépése. Gyakran ténylegesen egy 
+külön program (cpp) hajtja végre, emiatt akár más programozási nyelvekhez is 
+használhatjuk. Az előfordító feladata a <strong>header</strong> fájlok betöltése, a 
+<strong>makrók</strong> kifejtése, <strong>feltételes fordítás</strong> és a sorok kezelése. Például
+az előfordító kidobja a forrásfájlból az <strong>&lt;újsor&gt;</strong> karakterpárokat, így
+a sor végére írt <em>__</em> segítségével tudunk folytatósorokat írni.</p>
+
+<h3 id="include-utasts">Include utasítás</h3>
+
+<p>Az <strong>include</strong> utasítás a sort kicseréli a fájl tartalmára. A legtöbbször
+a fájl deklarációkat tartalmaz, az <em>stdio.h</em> pl. az input-output 
+tevékenységekkel kapcsolatban. Az ilyen fájlokat nevezzük <strong>header</strong> 
+fájloknak. A header fájlok legtöbbször (de nem kötelezően) <strong>.h</strong> 
+kiterjesztésűek.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &quot;filename2&quot;</span>
+<span class="cp">#include &quot;../relative/filename3.h&quot;</span></code></pre></div>
+
+<p>A fájlokat a szabványos include keresési úton (include path) keressük, a
+<strong>"”</strong> esetén ez kiegészül a kurrens könyvtárral. A keresési utat mi is 
+kiegészíthetjük, pl. gcc-nél a parancssori <strong>-I/dir1/dir2</strong> kapcsolóval.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -I/usr/local/include/add/path1 -I/usr/local/include/add/path2 ...</code></pre></div>
+
+<h3 id="makr-defincik">Makró definíciók</h3>
+
+<p>Kétféle makró létezik, a változószerű, amelyiknek nincsen paramétere és 
+a függvényszerű, aminek van. Egy makrót a <strong>#define</strong> paranccsal definiálunk
+és hatását ki lehet kapcsolni az <strong>#undef</strong> parancssal.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define &lt;identifier&gt;  &lt;token-list&gt; </span>
+<span class="cp">#define &lt;identifier&gt;(param1, param2, ..., paramN) &lt;token-list&gt;</span>
+<span class="o">:</span>
+<span class="cp">#undef &lt;identifier&gt;</span></code></pre></div>
+
+<p>Példák makrók definiálására és használatára:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#define BUFSIZE    1024</span>
+<span class="lineno"> 2</span> <span class="cp">#define PI         3.14159</span>
+<span class="lineno"> 3</span> <span class="cp">#define USAGE_MSG  &quot;Usage: command -flags args...&quot;</span>
+<span class="lineno"> 4</span> <span class="cp">#define LONG_MACRO struct MyType \</span>
+<span class="lineno"> 5</span> <span class="cp">                   {             \</span>
+<span class="lineno"> 6</span> <span class="cp">                     int data;   \</span>
+<span class="lineno"> 7</span> <span class="cp">                   };     </span>
+<span class="lineno"> 8</span> <span class="cp">#define FAHR2CELS(x)  ((5./9.)*(x-32))</span>
+<span class="lineno"> 9</span> <span class="cp">#define MAX(a,b)  ((a) &gt; (b) ? (a) : (b))</span>
+<span class="lineno">10</span> <span class="o">:</span>
+<span class="lineno">11</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span>
+<span class="lineno">12</span> <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+<span class="lineno">13</span> <span class="n">c</span> <span class="o">=</span> <span class="n">FAHR2CELS</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+<span class="lineno">14</span> <span class="n">x</span> <span class="o">=</span> <span class="n">MAX</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="n">x</span><span class="p">);</span>
+<span class="lineno">15</span> <span class="n">x</span> <span class="o">=</span> <span class="n">MAX</span><span class="p">(</span><span class="o">++</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">);</span></code></pre></div>
+
+<h3 id="feltteles-fordts">Feltételes fordítás</h3>
+
+<p>A feltételes fordítás során bizonyos kódrészletek fordítását ki- vagy
+bekapcsolhatjuk. A feltételes fordítást felhasználhatjuk a kód 
+konfigurálására az #if #ifdef #ifndef #elif #else #endif parancsokkal.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#if DEBUG_LEVEL &gt; 2</span>
+<span class="lineno"> 2</span>   <span class="n">fprintf</span><span class="p">(</span><span class="s">&quot;program was in file %s, line %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span>
+<span class="lineno"> 3</span> <span class="cp">#endif</span>
+<span class="lineno"> 4</span> <span class="o">:</span>
+<span class="lineno"> 5</span> <span class="cp">#ifdef __unix__ </span><span class="cm">/* __unix__ is usually defined by compilers for Unix */</span><span class="cp"></span>
+<span class="lineno"> 6</span> <span class="cp">#  include &lt;unistd.h&gt;</span>
+<span class="lineno"> 7</span> <span class="cp">#elif defined _WIN32 </span><span class="cm">/* _Win32 is usually defined for 32/64 bit Windows */</span><span class="cp"></span>
+<span class="lineno"> 8</span> <span class="cp">#  include &lt;windows.h&gt;</span>
+<span class="lineno"> 9</span> <span class="cp">#endif</span>
+<span class="lineno">10</span> <span class="o">:</span>
+<span class="lineno">11</span> <span class="cp">#if !(defined( __unix__ ) || defined (_WIN32) )</span>
+<span class="lineno">12</span>   <span class="cm">/* ... */</span>
+<span class="lineno">13</span> <span class="cp">#else</span>
+<span class="lineno">14</span>   <span class="cm">/* ... */</span>
+<span class="lineno">15</span> <span class="cp">#endif</span>
+<span class="lineno">16</span> <span class="o">:</span>
+<span class="lineno">17</span> <span class="cp">#if RUBY_VERSION == 190</span>
+<span class="lineno">18</span> <span class="cp"># error 1.9.0 not supported</span>
+<span class="lineno">19</span> <span class="cp">#endif</span></code></pre></div>
+
+<p>Az #error <message> parancs hatására a fordítás hibával megáll, és 
+a <message> hibaüzenet jelenik meg.</message></message></p>
+
+<p>A feltételes fordítás egyik leggyakoribb esete a <strong>header őrszemek</strong> 
+(header guard) alkalmazása. Ennek az az értelme, hogy megelőzzük a 
+többszörös deklarációkat.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#ifndef MYHEADER_H</span>
+<span class="lineno">2</span> <span class="cp">#define MYHEADER_H</span>
+<span class="lineno">3</span> <span class="o">:</span>
+<span class="lineno">4</span> <span class="cm">/* header content */</span>
+<span class="lineno">5</span> <span class="o">:</span>
+<span class="lineno">6</span> <span class="cp">#endif </span><span class="cm">/* MYHEADER_H */</span><span class="cp"></span></code></pre></div>
+
+<h3 id="standard-makrk">Standard makrók</h3>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="n">__FILE__</span>
+<span class="lineno"> 2</span> <span class="n">__LINE__</span>
+<span class="lineno"> 3</span> <span class="n">__DATE__</span>
+<span class="lineno"> 4</span> <span class="n">__TIME__</span>
+<span class="lineno"> 5</span> <span class="n">__STDC__</span>
+<span class="lineno"> 6</span> <span class="n">__STDC_VERSION__</span>
+<span class="lineno"> 7</span> <span class="nl">__cplusplus</span>
+<span class="lineno"> 8</span> <span class="p">:</span>
+<span class="lineno"> 9</span> <span class="cp">#ifdef __cplusplus</span>
+<span class="lineno">10</span> <span class="k">extern</span> <span class="n">C</span> <span class="p">{</span>
+<span class="lineno">11</span> <span class="cp">#endif</span>
+<span class="lineno">12</span> <span class="cm">/* ... */</span>
+<span class="lineno">13</span> <span class="cp">#ifdef __cplusplus</span>
+<span class="lineno">14</span> <span class="p">}</span>
+<span class="lineno">15</span> <span class="cp">#endif</span></code></pre></div>
+
+<p>A <strong>LINE</strong> és <strong>FILE</strong> makrók értékeit szabályozhatjuk a #line paranccsal:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#line 1000 &quot;myfile.c&quot;</span>
+<span class="lineno">2</span> <span class="n">fprintf</span><span class="p">(</span><span class="s">&quot;program was in file %s, line %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span></code></pre></div>
+
+<h3 id="string-mveletek">String műveletek</h3>
+
+<p>Stringesítés</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#define str(s) #s</span>
+<span class="lineno">2</span> <span class="cp">#define BUFSIZE 1024</span>
+<span class="lineno">3</span> <span class="c1">// ...</span>
+<span class="lineno">4</span> <span class="n">str</span><span class="p">(</span><span class="err">\</span><span class="n">n</span><span class="p">)</span>       <span class="o">--&gt;</span>   <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="lineno">5</span> <span class="n">str</span><span class="p">(</span><span class="n">BUFSIZE</span><span class="p">)</span>  <span class="o">--&gt;</span>   <span class="mi">1024</span></code></pre></div>
+
+<p>String konkatenáció</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">struct</span> <span class="n">my_int_20_array</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kt">int</span> <span class="n">v</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="lineno"> 4</span> <span class="p">};</span>
+<span class="lineno"> 5</span> <span class="k">struct</span> <span class="n">my_int_30_array</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="kt">int</span> <span class="n">v</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+<span class="lineno"> 8</span> <span class="p">};</span>
+<span class="lineno"> 9</span> <span class="k">struct</span> <span class="n">my_double_40_array</span>
+<span class="lineno">10</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="kt">double</span> <span class="n">v</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+<span class="lineno">12</span> <span class="p">};</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="cp">#define DECLARE_ARRAY(NAME, TYPE, SIZE) \</span>
+<span class="lineno">15</span> <span class="cp">typedef struct TYPE##_##SIZE##_array    \</span>
+<span class="lineno">16</span> <span class="cp">{                                       \</span>
+<span class="lineno">17</span> <span class="cp">  TYPE v[SIZE];                         \</span>
+<span class="lineno">18</span> <span class="cp">                                        \</span>
+<span class="lineno">19</span> <span class="cp">} NAME##_t;</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="n">DECLARE_ARRAY</span><span class="p">(</span><span class="n">yours</span><span class="p">,</span><span class="kt">float</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="lineno">22</span> <span class="kt">yours_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span></code></pre></div>
+
+<h3 id="egyb">Egyéb</h3>
+
+<p>A #pragma utasítás segítségével fordítófüggő akciókat definiálhatunk. 
+Ilyen akciók lehetnek biznyos warning-ok be/kikapcsolása, stb.
+A <strong>#pragma once</strong>, amit gyakran látunk használni a header őrszemek helyett
+<em>nem szabványos</em>!</p>
+
+<h2 id="kommentek">Kommentek</h2>
+
+<p>A kommentek nem kerülnek a fordítóprogram által felhasználásra, de
+fontosak lehetnek a program megértése, későbbi karbantartása, módosítása
+szempontjából. Mindig törekedjük önmagát magyarázó, világos programozási 
+stílusra, de ezt kommentekkel kiegészíthetjük a kód által nem kifejezhető 
+információkkal.</p>
+
+<p>A klasszikus C kommentek a /* és */ szimbólumok között helyezkednek 
+el, akár több soron át, de nem egymásba ágyazhatóak. A többsoros kommentek, 
+melyek a <strong>//</strong> szimbólumtól a sor végéig tartanak, csak a C99 szabványtól 
+használhatóak.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/* multi</span>
+<span class="lineno"> 2</span> <span class="cm">   line    </span>
+<span class="lineno"> 3</span> <span class="cm">   comments  // hiding single line comments</span>
+<span class="lineno"> 4</span> <span class="cm">*/</span>
+<span class="lineno"> 5</span> <span class="cm">/*************************************\</span>
+<span class="lineno"> 6</span> <span class="cm">*                                     *</span>
+<span class="lineno"> 7</span> <span class="cm">*  exist in various style and format  *</span>
+<span class="lineno"> 8</span> <span class="cm">*                                     *</span>
+<span class="lineno"> 9</span> <span class="cm">\*************************************/</span>
+<span class="lineno">10</span> <span class="o">:</span>
+<span class="lineno">11</span> <span class="cm">/*</span>
+<span class="lineno">12</span> <span class="cm">   /*  but can not be nested */</span>
+<span class="lineno">13</span> <span class="err">*/</span></code></pre></div>
+
+<p>“Hel /* this is not a comment */ lo”: A stringeken belül nem használhatunk 
+kommenteket.</p>
+
+<h2 id="c-tokenek">C tokenek</h2>
+
+<p>A C forrásfájl a kommenteken és az előfordító utasításokon túl ún. C nyelvi
+k__token__-eket tartalmaz. A token ebben az értelemben tovább nem bontható
+elemi nyelvi egység. A legtöbb modern programozási nyelvben a tokenek között
+tetszőleges üres helyet (whitespace) hagyhatunk: space, tabulátor vagy újsor 
+karakter formájában. A Pythonban ugyanakkor a helyesen elhelyezett indentálás 
+alapján dől el a program struktúrája.</p>
+
+<p>Az imperatív programozási nyelvek token típusai meglehetősen hasonlóak:</p>
+
+<ul>
+  <li>kulcsszavak (keyword)</li>
+  <li>azonosítók (identifier)</li>
+  <li>konstansok/literálok (literal)</li>
+  <li>operátorok (operator)</li>
+  <li>egyebek, a C-ben szeparátorok (separators)</li>
+</ul>
+
+<h2 id="kulcsszavak">Kulcsszavak</h2>
+
+<p>Ezek a programozási nyelv “beépített” szavai: pl utasítások nevei (pl. <strong>if</strong>, 
+<strong>while</strong>), gyakran az alaptípusok nevei (pl. C-ben: <strong>int</strong>, <strong>double</strong>), és
+pár más kulcsszó (pl. C-ben <strong>extern</strong>, <strong>typedef</strong>, stb.)</p>
+
+<p>A C-ben ezek mind csupa kisbetűvel írandóak, és más nyelvekhez képest nagyon 
+kevés van belőlük:</p>
+
+<ul>
+  <li>C89: 32</li>
+  <li>C99: +5</li>
+  <li>C11: +7</li>
+</ul>
+
+<h2 id="azonostk">Azonosítók</h2>
+
+<p>Azok a nevek, amit mi adunk egyes programelemeknek: változóknak, függvényeknek,
+új típusoknak, stb.</p>
+
+<p>A C-ben az azonosítók</p>
+
+<ul>
+  <li>betűvel kezdődnek (betűnek számít az ‘_’ alulvonás, underscore karakter is)</li>
+  <li>betűkkel és számokkal folytatódhatnak akármilyen hosszan</li>
+  <li>de a fordító csak az első 63/31 betűt veszi figyelembe</li>
+  <li>tilos kulcsszavakat használni</li>
+  <li>a kis és nagybetűket megkülönböztetjük</li>
+</ul>
+
+<p>Okos gondolat a neveket konzisztensen használni és alaposan átgondolni 
+a névválasztást. Minél nagyobb területen használható egy függvény vagy 
+változó neve, annál inkább segít a program megértésében, ha jól választjuk 
+meg. Ugyanakkor egy ciklusváltozót nevezhetünk <strong>i</strong>-nek, mindenki látni 
+fogja, hogy az egy ciklusváltozó.</p>
+
+<p>Vannak bizonyos elterjedt konvenciók:</p>
+
+<ul>
+  <li>camelCaseNotation</li>
+  <li>CTypenamesStartsWithUppercase</li>
+  <li>under_score_notation</li>
+</ul>
+
+<p>Ezen a honlapon elérhető egy evvel kapcsolatos <a href="https://whathecode.wordpress.com/2011/02/10/camelcase-vs-underscores-scientific-showdown/">tanulmány</a> és egy
+<a href="http://www.cs.loyola.edu/~binkley/papers/icpc09-clouds.pdf">másik cikk</a>.</p>
+
+<p>A MACRO_NEVEK_MINDIG_CSUPA_NAGYBETUSOK az általános C szokások szerint.</p>
+
+<p>Régebben szokásos volt használni C-ben (és néhány más nyelvben) az ún. 
+<a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian Notation</a>
+névkonvenciót, ami a névbe belerakta a típussal és használatával kapcsolatos
+alapvető információkat. Az elnevezés a kitalálójára Charles Simonyira utal.</p>
+
+<h2 id="konstansokliterlok">Konstansok/Literálok</h2>
+
+<p>Lényegében a programunkban felhasznált konstansok, értékek. Számok, karakterek,
+karakterkáncok, amiknek <strong>értéke</strong> és <strong>típusa</strong> van. Az, hogy egy nyelvben mi
+használható literálként, az összefügg a nyelv céljaival, absztrakciós 
+szintjével.</p>
+
+<h3 id="egsz-szmok">Egész számok</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>megnevezés</th>
+      <th>példa</th>
+      <th>típus</th>
+      <th>értéke</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>decimmális egész</td>
+      <td>25</td>
+      <td>int</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>oktális egész</td>
+      <td>031</td>
+      <td>int</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>hexadecimális egész</td>
+      <td>0x19</td>
+      <td>int</td>
+      <td>25</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>hosszú egész</td>
+      <td>12L</td>
+      <td>long in</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>C99 méghosszabb egész</td>
+      <td>12LL</td>
+      <td>long long int</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>előjel nélküli egész</td>
+      <td>12u</td>
+      <td>unsigned int</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Számos programozási nyelv rögzíti az egyes típusok méretét vagy értékhatárát. 
+A Pascal-ban pl. az <strong>integer</strong> típus 2 byte-os, ami azt jelenti, hogy pl. 
+egy nagyobb fájlban lebegőpontos számmal kell pozícionálnunk. A Java 
+ugyancsak rögzíti az egészek méretét, aminek a futási idejű hordozhatóság
+az oka.</p>
+
+<p>A C nyelv a típusok méretét nem definiálja, csak a számábrázolási minimum 
+értéket adja meg. Viszont a számoknak több méretbeli variánsát is adja.
+Így pl. egy <strong>short int</strong> legalább két bájt, egy <strong>int</strong> legalább
+négy bájt méretű. A fordító mindig az adott platformhoz legalkalmasabb méretet 
+választhatja. Azt viszont (fordítási időben) lekérdezhetjük a <strong>sizeof</strong> 
+operátorral, hogy az adott platformon mi egy konkrét típus vagy valamely 
+kifejezés típusának mérete. Egyes típusok mérete között fennállnak relációk:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">sizeof</span><span class="p">(</span><span class="kt">short</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span>
+<span class="c1">// at least 16 bit              at least 32 bit    at least 64 bit</span></code></pre></div>
+
+<h3 id="karakterek">Karakterek</h3>
+
+<p>A karakterekből is több fajta van a C nyelvben. Az egyszerű karakterek egy
+aposztróf pár között szerepelnek, kivéve a ‘ (single-quote) , \ (backslash) 
+és az újsor karakter. Ezeknek a karaktereknek típus <strong>char</strong> értéke a 
+megfelelő karakterkód.</p>
+
+<p>Egyes speciális karaktereket, az ún. escape sorozattal tudunk leírni:</p>
+
+<pre><code>- '\''    single quote
+- '\"'    double quote
+- '\?'    question mark
+- '\\'    backslash
+- '\a'    bell (audio)
+- '\b'    backspace
+- '\f'    form feed -- new page
+- '\n'    newline
+- '\r'    carriage return
+- '\t'    horizontal tab
+- '\v'    vertical tab            
+</code></pre>
+
+<p>Az ezektől eltérő karaktereket is megadhatjuk a kódjukkal:</p>
+
+<pre><code>- oktális forma:       '\377'  -&gt; 11111111
+- hexadecimális forma: '\xff'  -&gt; 11111111     
+- univerzális karakter értékek (C99 óta):      
+  - '\U1234'                típus = char16_t (min 16bit)
+  - '\U12345678             típus = char32_t (min 32bit)
+</code></pre>
+
+<p>A karakterek alapértelmezetten <strong>char</strong> típusúak, a C99 óta léteznek 16 és 32 
+byte-os karakter típusok (<strong>char16_t</strong> ill. <strong>char32_t</strong>). A leghosszabb 
+karakter típus a <strong>wchar_t</strong>.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="mi">1</span> <span class="o">==</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char16_t</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char32_t</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">wchar_t</span><span class="p">)</span></code></pre></div>
+
+<p>A karakter típusok között is létezik <strong>signed</strong> és <strong>unsigned</strong> típus, de 
+ellentétben az egészekkel, itt a nem minősített <strong>char</strong> típus nem feltétlenül
+azonos a <strong>signed char</strong> típussal. Az “előjeles” karakterek értelme, hogy ha
+egészekkel hasonlítjuk össze őket, akkor a 128 feletti ASCII értékek nullánál 
+kisebbek lesznek.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">char</span>  <span class="n">ch</span> <span class="o">=</span> <span class="sc">&#39;\xff&#39;</span><span class="p">;</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">uch</span> <span class="o">=</span> <span class="sc">&#39;\xff&#39;</span><span class="p">;</span>
+  <span class="kt">signed</span> <span class="kt">char</span> <span class="n">sch</span> <span class="o">=</span> <span class="sc">&#39;\xff&#39;</span><span class="p">;</span>
+<span class="o">:</span>
+<span class="n">uch</span> <span class="o">&gt;</span> <span class="mi">0</span>   <span class="cm">/* true */</span>
+<span class="n">sch</span> <span class="o">&lt;</span> <span class="mi">0</span>   <span class="cm">/* true */</span>
+ <span class="n">ch</span> <span class="o">&lt;</span> <span class="mi">0</span>   <span class="cm">/* true on some platforms, false on others */</span></code></pre></div>
+
+<h3 id="boolean">Boolean</h3>
+
+<p>Az ANSI C89-ben nem volt speciális logikai (igaz/hamis) típus, a C99 adta 
+hozzá a nyelvhez a _Bool típust és a <strong>bool</strong> makrót. Klasszikusan az egész 
+értékek közül a nulla hamisnak, minden nem nulla érték igaznak számít.
+Ezen kívül bizonyos program-környezetekben (pl. elágazásban vagy ciklusban) 
+a pointerek is logikai értékként értékelődnek ki, a NULL pointer hamis, 
+a többi igaz érték.</p>
+
+<p>Amikor C operátorok logikai értékeket készítenek, akkor az igaz értéke <strong>1</strong>,
+a hamis <strong>0</strong>.</p>
+
+<ul>
+  <li>C99 óta kulcsszó:  _Bool</li>
+  <li>C99 óta makró:     bool, true, false, használatukhoz kell az <stdbool.h></stdbool.h></li>
+</ul>
+
+<p>A logikai és egész értékek eltérő módon konvertálódnak:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;_Bool == %d</span><span class="se">\t</span><span class="s"> int == %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">_Bool</span><span class="p">)</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">0.5</span><span class="p">);</span>
+<span class="lineno">5</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">6</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./a.out
+<span class="nv">_Bool</span> <span class="o">==</span> <span class="m">1</span>      <span class="nv">int</span> <span class="o">==</span> 0</code></pre></div>
+
+<h3 id="lebegpontos-szmok">Lebegőpontos számok</h3>
+
+<p>A valós számok kezelését a számítástechnikában a <strong>fixpontos</strong> (fixed point)
+és a <strong>lebegőpontos</strong> (floating point) számábrázolás teszi lehetővé. A 
+fixpontos ábrázolás esetében előre rögzítjük, hogy a rendelkezésre álló 
+memóriaterületen hány biten ábrázoljuk az egész és hányon a tört részt.</p>
+
+<p>A lebegőpontos ábrázolás esetében is két részt tárolunk. A <strong>mantissza</strong> egy 
+előjeles szám, melynek gyakran az abszolút értéke az [1,2] intervallumban
+van. A <strong>karakterisztika</strong> vagyis az exponenciális rész pedig egy szintén
+előjeles szám, ami a szám nagyságrendjét adja meg, azaz egy bázis <strong>kitevője</strong>.
+A legtöbbször mind a mantisza, mind a karakterisztika bináris szám és a bázis
+értéke is 2.</p>
+
+<p>Azaz, ha a lebegőpontos szám formátuma  <strong>(m,c)</strong>, akkor értéke <strong>m</strong> * 
+2<sup><strong>c</strong></sup>. Ha <strong>m</strong> negatív, akkor a lebegőpontos szám negatív. Ha 
+<strong>c</strong> negatív, akkor a lebegőpontos szám abszolút értéke kisebb, mint 1.</p>
+
+<p>A lebegőpontos számok előnye a fixpontossal szemben, hogy nagyon nagy és 
+nagyon pici abszolút értékű számokat is képesek megfelelő pontossággal 
+ábrázolni. Persze, ha műveletet képezünk nygaon nagy és nagyon pici számok
+között, akkor kerekítési hibák is történhetnek.</p>
+
+<p>A modern számítógépek és programozási nyelvek a szabványos <strong>IEEE 754</strong>
+<a href="https://hu.wikipedia.org/wiki/IEEE_lebeg%C5%91pontos_sz%C3%A1mform%C3%A1tum">lebegőpontos ábrázolást</a> használják.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>bitek</th>
+      <th>előjel</th>
+      <th>mantissza</th>
+      <th>karakterisztika</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>egyszeres</td>
+      <td>32</td>
+      <td>1</td>
+      <td>23</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>dupla</td>
+      <td>64</td>
+      <td>1</td>
+      <td>52</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>kiterjesztett</td>
+      <td>80</td>
+      <td>1</td>
+      <td>64</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>négyszeres</td>
+      <td>128</td>
+      <td>1</td>
+      <td>112</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Például a 64 bites lebegőpontos szám így néz ki:</p>
+
+<p><img src="/images/618px-IEEE_754_Double_Floating_Point_Format.svg.png" alt="alt text" /></p>
+
+<p>Bonyolultabb lebegőpontos számolásoknél előfordulhat <strong>túlcsordulás</strong> vagy 
+<strong>alulcsordulás</strong>. Az ilyen esetek kezelsére bevezettek pár speciális 
+lebegőpontos értéket:</p>
+
+<ul>
+  <li>A plusz és minusz végtelen</li>
+  <li>A plusz és minusz nulla</li>
+  <li>A denormalizált számokat</li>
+  <li>“NEM SZÁM” <strong>NaN</strong> értéket</li>
+</ul>
+
+<p>A C-ben a lebegőpontos számok típusai:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>C típus</th>
+      <th>Példa</th>
+      <th>IEEE 754</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>float</td>
+      <td>3.14f</td>
+      <td>egyszeres</td>
+    </tr>
+    <tr>
+      <td>double</td>
+      <td>3.14</td>
+      <td>dupla</td>
+    </tr>
+    <tr>
+      <td>long double</td>
+      <td>3.14l</td>
+      <td>kiterjesztett vagy négyszeres</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A pontos méreteket a <strong>sizeof</strong> operátorral lehet meghatározni.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span><span class="p">)</span></code></pre></div>
+
+<h3 id="komplex-szmok">Komplex számok</h3>
+
+<p>A komplex számok a Boolean típusokhoz hasonlóan csak a C99 óta része a 
+nyelvnek. A megoldás is hasonló: a _Complex kulcsszót, vagy a <complex.h>
+használatával a __complex__ makrót lehet használni.</complex.h></p>
+
+<pre><code>                           &lt;complex.h&gt;
+
+  float _Complex           float complex
+  double _Complex          double complex
+  long double _Complex     long double complex
+</code></pre>
+
+<p>Példa:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#include &lt;complex.h&gt;</span>
+<span class="lineno">2</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">3</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno">4</span> <span class="p">{</span>
+<span class="lineno">5</span>     <span class="kt">double</span> <span class="n">complex</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="p">;</span>
+<span class="lineno">6</span>     <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">z</span><span class="p">;</span>
+<span class="lineno">7</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;1/(1.0+2.0i) = %.1f%+.1fi</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">creal</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">cimag</span><span class="p">(</span><span class="n">z</span><span class="p">));</span>
+<span class="lineno">8</span> <span class="p">}</span></code></pre></div>
+
+<p>A komplex számok használatához használni kell a matematikai könyvtárat!
+Ezt a szerkesztésnél (linkelésnél) a <strong>-lm</strong> kapcsolóval adjuk meg.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="err">$</span> <span class="n">gcc</span>  <span class="o">-</span><span class="n">ansi</span> <span class="o">-</span><span class="n">pedantic</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">W</span> <span class="n">complex</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">lm</span>
+<span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+<span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="mf">2.0</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">-</span><span class="mf">0.4</span><span class="n">i</span></code></pre></div>
+
+<h3 id="string-literlok">String literálok</h3>
+
+<p>Egyes programozási nyelvekben a stringek elemi típusok, melyekkel hasonló
+módon végezhetünk műveleteket, mint pl. számokkal. Más nyelvekben a string
+nem módosítható, ún. <strong>immutábilis</strong> érték, amikkel lehet műveleteket végezni, 
+de magukat a stringeket nem tudjuk megváltoztatni.</p>
+
+<p>A C nyelvben a stringek nem elemi típusok, nem tudunk közvetlenül műveleteket
+alkalmazni rájuk. Lényegében karaktertömbök, de a C-ben a tömbökkel sem tudunk 
+elemi műveleteket végrahajtani. A C stringeket a <strong>string.h</strong> headerfájlban
+deklarált függvényekkel tudjuk majd kezelni.</p>
+
+<p>A string literál egy összefüggő memóriaterületen lefoglalt névtelen 
+karaktertömb, melyek egy <strong>NUL</strong> karakter (‘\0’) zár le. A string literál 
+típusa <strong>karakter tömb</strong>, melynek mérete tartalmazza a lezáró karaktert is.</p>
+
+<p>A string literálok <strong>immutábilisak</strong>, azaz nem módosíthatóak, de 
+felhasználhatóak karakter tömbök vagy karakterre mutató pointerek 
+inicializálására. Amennyiben egy string literált módosítani próbálunk, 
+az <em>nem definiált viselkedés</em> és futási idejű hibához vezethet.</p>
+
+<p>A fordító alkalmazhat olyan optimalizálást, hogy két azonos string literált 
+egyetlen egy példányban tárol, vagy akár egy literált egy részét is újra
+felhasználhatja.</p>
+
+<p>Az egymás mögé írt, csak üreshelyekkel elválasztott string literálokat
+a fordító egyetlen stringgé ragasztja össze.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>   <span class="cm">/* sizeof(p) is the size of a pointer */</span>
+<span class="lineno">2</span> <span class="kt">char</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>   <span class="cm">/* q may point to the same address as p */</span>
+<span class="lineno">3</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;lo&quot;</span>       <span class="cm">/* s may point to p+3 */</span>
+<span class="lineno">4</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>          <span class="cm">/* undefined behavior, may be run-time error */</span>
+<span class="lineno">5</span> <span class="kt">char</span> <span class="n">t1</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span> <span class="cm">/*sizeof(t1) == 6 */</span>
+<span class="lineno">6</span> <span class="kt">char</span> <span class="n">t2</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;H&#39;</span><span class="p">,</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="sc">&#39;\0&#39;</span><span class="p">};</span> <span class="cm">/*sizeof(t2) == 6 */</span>
+<span class="lineno">7</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>         <span class="cm">/* ok, modifies t1[], not the initializer literal */</span>
+<span class="lineno">8</span> <span class="kt">char</span> <span class="o">*</span><span class="n">r</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span>  <span class="s">&quot; &quot;</span>  <span class="s">&quot;world&quot;</span><span class="p">;</span>  <span class="cm">/* same as &quot;Hello world&quot; */</span></code></pre></div>
+
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

@@ -1,0 +1,108 @@
+# Házi feladat
+
+A házi feladatot egy `Homework3` nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartozó típus szignatúrát is! A feladatok után a zárójelben lévő név azt jelzi, milyen néven kell definiálni az adott függvényt, kifejezést.
+
+A bónusz feladatokat nem kötelező megoldani, megoldásukhoz a gyakorlaton vett anyag továbbgondolása szükséges.
+
+## Lista konstrukció
+
+Adjuk meg azt a függvényt, amely a kapott paraméterét belerakja egy listába! A végeredmény egy egy elemű lista legyen, amelyben a kapott argumentum szerepel.
+
+`putIntoList :: a -> [a]`
+
+Adjuk meg azt a függvényt, amely két egész számot kap, és előállítja a köztük értelmezett intervallumot! Például `interval 2 5 == [2,3,4,5]`. Abban az esetben, ha az első argumentum nagyobb, mint a második, akkor üres listát adjon vissza!
+
+`interval :: Int -> Int -> [Int]`
+
+## Lista dekonstrukció
+
+Adjuk meg azt a függvényt, amely egy rendezett párt állít elő egy listából. A pár első eleme a lista első eleme, a pár második eleme pedig a lista farok része legyen. Feltételezhetjük, hogy a lista nem üres.
+
+`headTail :: [a] -> (a, [a])`
+
+Adjuk meg azt a függvényt, amely kap két listát, és egy rendezett párt állít elő, amelynek első eleme az első lista első eleme, a második eleme a második lista első eleme! Feltételezhetjük, hogy a listák közül egyik sem üres.
+
+`doubleHead :: [a] -> [b] -> (a, b)`
+
+## Rekurzív függvények
+
+Adjuk meg azt a függvényt, amely összeszorozza egy lista elemeit!
+
+`prod :: [Int] -> Int`
+
+Adjuk meg azt a függvényt, amely eldönti egy listáról, hogy szerepel-e benne a `0`!
+
+`hasZero :: [Int] -> Bool`
+
+Adjuk meg azt a függvényt, amely eldönti egy listáról, hogy szerepel-e benne az üres lista!
+
+`hasEmpty :: [[a]] -> Bool`
+
+Adjuk meg azt a függvényt, amely egy lista összes elemét megszorozza kettővel!
+
+`doubleAll :: [Int] -> [Int]`
+
+Adjuk meg azt a függvényt, amely a kapott két listáról eldönti, hogy az első hosszabb-e, mint a második! Feltételezhetjük, hogy legalább az egyik lista mindig véges hosszú. Viszont ügyeljünk arra, hogy minden ilyen esetben termináljon a függvényünk.
+
+`isLonger :: [a] -> [b] -> Bool`
+
+## Bónusz
+
+Adjuk meg azt a függvényt, amely egy listából kiválogatja a páros számokat!
+
+`evens :: [Int] -> [Int]`
+
+Adjuk meg azt a függvényt, amely összeadja egy lista első `n` elemét! Például `sumFirst 2 [1,2,3] == 3`.
+
+`sumFirst :: Int -> [Int] -> [Int]`
+
+Adjuk meg azt a függvényt, amely egy listából kiválogat minden második elemet, kezdve az első elemmel!
+
+`everySecond :: [a] -> [a]`
+
+__Segítség__: Definiáljunk egy segédfüggvényt, amely egy extra paraméterében tárolja, hogy éppen hanyadik elemet dolgozzuk fel!
+
+-----
+
+putIntoList  0  == [0]
+putIntoList 'c' == "c"
+putIntoList []  == [[]]
+
+interval 1 5 == [1,2,3,4,5]
+interval 5 5 == [5]
+interval 5 4 == []
+interval 5 3 == []
+
+headTail [1..10] == (1, [2..10])
+headTail "hello" == ('h', "ello")
+headTail [5]     == (5, [])
+
+doubleHead [1..10] "hello" == (1, 'h')
+
+prod []           == 1
+prod [1..10]      == 3628800
+prod [(-1), 2, 3] == (-6)
+
+hasZero []        == False
+hasZero [0]       == True
+hasZero [1..10]   == False
+hasZero [0..10]   == True
+hasZero [1,2,3,0] == True
+
+hasEmpty []                          == False
+hasEmpty [[]]                        == True
+hasEmpty [[1..10], [2..10], [3..10]] == False
+hasEmpty ["", "asd", "qwe"]          == True
+hasEmpty ["asd", "qwe", ""]          == True
+
+doubleAll []        == []
+doubleAll [1]       == [2]
+doubleAll [0,1,2,3] == [0,2,4,6]
+
+isLonger [] []         == False
+isLonger [] [0]        == False
+isLonger [0] []        == True
+isLonger [1..9] [1..5] == True
+isLonger [1..5] [1..9] == False
+isLonger [1..]  [1..9] == True
+isLonger [1..9] [1..]  == False

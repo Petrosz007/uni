@@ -1,0 +1,1082 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-4/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-4">Imperatív programozás 4.</h1>
+
+<h1 id="opertorok-kifejezsek-utastsok">Operátorok, kifejezések, utasítások.</h1>
+
+<h2 id="kifejezsek">Kifejezések</h2>
+
+<p>A legelső magasszintű programozási nyelvek, mint pl. a Fortran, egyik 
+elsődleges célkitűzése volt, hogy a programokban matematikai kifejezéseket
+tudjunk használni. A kifejezések - melyek a matematikai egyenletekhez 
+hasonlítottak - változókból (amelyek egy-egy memória-területet azonosítottak)
+és operátorokból (melyek a matematikai műveleti jeleknek feleltek meg) 
+álltak. Általánosan, a <strong>kifejezéseket</strong>  a programozási nyelvekben
+<strong>operátorok</strong>-ból és <strong>konstans</strong> értékekből vagy <strong>változókból</strong> képezzük.</p>
+
+<p>Az alábbi kifejezés például számos programozási nyelvben érvényes:</p>
+
+<pre><code>A + B * C
+</code></pre>
+
+<p>Hasonlóan a matematikai egyenletekhez, a kifejezésekben is fontos, hogy 
+melyik az “erősebb” művelet, azaz hogyan kell értelmeznünk (zárójeleznünk) 
+egy kifejezést. Ebben az egyes műveleteket leíró operátorok <strong>precedenciája</strong> 
+(erőssége) az iránymutató. A szorzás például <strong>magasabb precedenciájú</strong>, 
+mint az összeadás, ezért a fenti kifejezést alábbi módon kell értelmezni:</p>
+
+<pre><code>A + (B * C)
+</code></pre>
+
+<p>mivel a szorzás magasabb precedenciájú, mint az összeadás. ha ettől eltérő
+viselkedést szeretnénk, akkor azt zárójelezéssel jelezhetjük. Ilyen értelemben 
+ez a kifejezés hasonlóan működik, mint a megfelelő matematikai képlet. 
+Azért ez ne tévesszen meg bennünket, <em>nem matematikai képleteket</em> írunk 
+a programozási nyelvekben, hanem <em>kifejezéseket</em> (expression), melyek egyrészt 
+viselkedhetnek másképpen, mint azt a matematikában megszoktuk, másrészt 
+lehet <strong>mellékhatásuk</strong> (side effect), azaz valami egyéb akciót is 
+végrehajthatnak, miközben <strong>kiértékeljük</strong> (evaluate) a kifejezéseket.</p>
+
+<p>A <em>funkcionális programozási nyelvekben</em> pont ezek a mellékhatások hiányoznak, 
+ezért az ott leírt függvények sokkal inkább matematikai <em>pure</em> jellegűek.</p>
+
+<p>A FORTRAN77 nyelvi verzióban az azonos precedenciájú műveletek sorrendje 
+nem volt meghatározott. Azaz, ha nem írtunk zárójeleket az alábbi kifejezésbe</p>
+
+<pre><code>A * B / C * D
+</code></pre>
+
+<p>akkor az jelenthette az alábbi zárójelezések bármelyikét:</p>
+
+<pre><code>((A * B) / C) * D
+(A * B * D) / C
+(A / C) * B * D
+</code></pre>
+
+<p>Könnyen látható, hogy ha pl. A, B, C, D egész számok (Fortran INTEGER típus), 
+akkor az egész értékű osztás miatt az egyes kiértékelési sorrendek eredménye 
+eltérő lehet. A kerekítési hibák miatt még akkor is kaphatnánk eltérő 
+eredményt, ha az értékek lebegőpontos számok lennének (Fortran REAL vagy 
+DOUBLE PRECISION típus).</p>
+
+<p>A modern programozási nyelvekben az egyes kifejezések értelmét az 
+operátor-<strong>precedencia</strong> (precedence) mellett az ún. <strong>asszociativitás</strong> 
+(associativity) határozza meg. Az asszociativitás azt definiálja, hogy 
+<em>azonos precedencia szintű</em> operátorok esetében hogyan (balról-jobbra
+vagy jobbról-balra) kell (gondolatban) zárójelezni a kifejezéseket.</p>
+
+<p>A kifejezéseknek <strong>típusa</strong> és <strong>értéke</strong> van. A statikus típusrendszerű 
+programozási nyelvekben (ilyen a C, Java, C#, és sok másik nyelv) a 
+kifejezések <em>típusát</em> a fordítási időben megállapítja a fordítóprogram. 
+A kifejezések <em>értékét</em> legtöbbször csak futási időben lehet megállapítani, 
+de vannak kivételes esetek, amikor ez az érték fordítási időben ismert. 
+Ezeket a kifejezéseket <strong>konstans kifejezéseknek</strong> (constant expression)
+nevezzük.</p>
+
+<h2 id="a-c-nyelv-opertorai">A C nyelv operátorai</h2>
+
+<p>A C programozási nyelvre (és leszármazottjaira) jellemző, hogy sok
+operátort használhatunk, köztük olyanokat is, melyek más nyelvekben 
+utasítások, függvények, vagy egyáltalán nem is léteznek.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Precedencia</th>
+      <th>Operátor</th>
+      <th>Leírás</th>
+      <th>Assoc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Posztfix</td>
+      <td>++</td>
+      <td>posztfix növelés</td>
+      <td>L-&gt;R</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>– –</td>
+      <td>posztfix csökkentés</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>()</td>
+      <td>függvényhívás</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>[]</td>
+      <td>tömb index</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>.</td>
+      <td>struct/union tag elérés</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>-&gt;</td>
+      <td>tag elérés mutatóval</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(type){list}</td>
+      <td>összetett literál (C99)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Unáris</td>
+      <td>++</td>
+      <td>prefix növelés</td>
+      <td><strong>R-&gt;L</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>– –</td>
+      <td>prefix csökkentés</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>+</td>
+      <td>pozitívlőjel</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–</td>
+      <td>negatív előjel</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>!</td>
+      <td>logikai negáció</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>~</td>
+      <td>bitenkénti negáció</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>(type)</td>
+      <td>típus konverzió</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>*</td>
+      <td>pointer indiekció</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>&amp;</td>
+      <td>címoperátor</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>sizeof</td>
+      <td>típus/objektum mérete</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>_Alignof</td>
+      <td>igazítási követelmény (C11)</td>
+      <td> </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Multiplikatív</td>
+      <td>*  /  %</td>
+      <td>szorzás, osztás, maradék</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Additív</td>
+      <td>+ –</td>
+      <td>összeadás, kivonás</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Léptetés</td>
+      <td>« »</td>
+      <td>bitenkénti bal/jobb léptetés</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Relációs</td>
+      <td>&lt; &lt;= &gt; &gt;=</td>
+      <td>relációs műveletek</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Egyenlőség</td>
+      <td>==  !=</td>
+      <td>egyenlő, nem egyenlő</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Bitenkénti</td>
+      <td>&amp;</td>
+      <td>bitenkénti és (AND)</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>^</td>
+      <td>bitenkénti kizáró vagy (XOR)</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>|</td>
+      <td>bitenknti vagy (OR)</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Logikai</td>
+      <td>&amp;&amp;</td>
+      <td>logikai és AND</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>||</td>
+      <td>logikai vagy OR</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Terciális</td>
+      <td>? :</td>
+      <td>feltételes kifejezés</td>
+      <td><strong>R-&gt;L</strong></td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Értékadás</td>
+      <td>=</td>
+      <td>értékadás</td>
+      <td><strong>R-&gt;L</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>+= –=</td>
+      <td>összetett értékadások</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>*= /= %=</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>«= »=</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>&amp;= |= ^=</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>Szekvencia</td>
+      <td>,</td>
+      <td>vessző (szekvencia) operátor</td>
+      <td>L-&gt;R</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="megjegyzsek">Megjegyzések</h2>
+
+<h3 id="nem-kirtkelt-opertorok">Nem kiértékelt operátorok</h3>
+
+<p>Néhány operátor ún. <strong>nem kiértékelt</strong> (unevaluated), azaz futási időben 
+ténylegesen nem történik velük semmi, Ezek a műveletek fordítási időben 
+felhasználható információt szolgáltatnak. C-ben ilyen az <strong>_Alignof</strong> és 
+a <strong>sizeof</strong>. Ebből leginkább a sizeof-ot használjuk, ami egy típus 
+méretét adja meg bájtokban. Például:</p>
+
+<pre><code>size_t int_size = sizeof(printf("%d", 42));
+</code></pre>
+
+<p>nem ír ki semmit sem az outputra, de int_size értéke 4 lesz (4 bájtos integer
+méret esetén).</p>
+
+<h3 id="binris-vagys-precedencija">Bináris vagy/és precedenciája</h3>
+
+<p>Figyeljünk arra, hogy pár operátornak nem túl magától értetődő a percedenciája.
+Például a <em>bitenkénti</em> <em>és</em> <em>vagy</em> műveletek “gyengébbek”, mint a relációs
+operátorok. Ebből furcsa hibák következhetnek:</p>
+
+<pre><code>if ( flag &amp; 0xff == 0 )  
+</code></pre>
+
+<p>valójában</p>
+
+<pre><code>if ( flag &amp; (0xff == 0) )
+</code></pre>
+
+<p>lesz és mindig <em>hamis</em>. Az ilyen hibák elkerüléséhez mindig írjuk ki a 
+zárójeleket a kifejezéseinkben:</p>
+
+<pre><code>if ( (flag &amp; 0xff) == 0 )
+</code></pre>
+
+<h3 id="rtkads-vs-egyenlsgvizsglat">Értékadás vs. egyenlőségvizsgálat</h3>
+
+<p>Hasonlóan figyelni kell az értékadás operátor és az egyenlőségvizsgálat
+különbségére. Az alábbi esetben</p>
+
+<pre><code>x = 10;
+/* ... */
+if ( x = 0 )
+</code></pre>
+
+<p>nem egyenlőségvizsgálat, hanem értékadás történik. Miután <strong>x</strong> felvette 
+a 0 értéket, a kifejezés értéke 0 és <em>hamis</em> lesz.  Egy praktikus ötlet: 
+konstanssal való összehasonlításkor írjuk balra a konstanst, így szintaktikus 
+hibát kapnánk, ha elhagyánk egy karaktert:</p>
+
+<pre><code>if ( 0 = x )
+</code></pre>
+
+<h2 id="az-rtkads-opertor-s-a-msols-szemantikja">Az értékadás operátor és a másolás szemantikája</h2>
+
+<p>Az értékadás a programozási nyelvek jó részében <em>utasítás</em> és csak a C nyelv
+óta használják <em>kifejezésként</em>. Ennek a C-ben csak annyi hatása van, hogy 
+az értékadásnak van <em>eredménye</em>, amit fel lehet használni egy további 
+kifejezésben:</p>
+
+<pre><code>int a, b;
+a = 3+(b = 5);  /* a = (3 + (b = 5) )*/
+</code></pre>
+
+<p>Itt <strong>a</strong> értéke 8, <strong>b</strong> értéke 5 lesz. Persze ilyet ritkán csinálunk. 
+Gyakrabban fordul elő, hogy több változónak adunk értéket, de figyeljünk arra, 
+hogy ez <em>nem párhuzamos értékadás</em>, hanem jobbról balra haladó 3 különálló
+értékadás.</p>
+
+<pre><code>double a, c;
+int    b;
+a = b = c = 3.14;  /* a = (b = (c = 3.14) ) */
+</code></pre>
+
+<p>Ami után <strong>c</strong> értéke 3.14, <strong>b</strong> értéke 3 és <strong>a</strong> értéke 3.0 lesz.</p>
+
+<p>Az értékadás működik néhány összetett típusra is, pl. <strong>struct</strong> és <strong>union</strong>,
+de nem működik <em>tömbökre</em>.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="k">struct</span> <span class="n">X</span>
+<span class="lineno"> 4</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="kt">int</span>    <span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 6</span>   <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="lineno"> 7</span>   <span class="kt">int</span>   <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+<span class="lineno"> 8</span> <span class="p">};</span>
+<span class="lineno"> 9</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">()</span>
+<span class="lineno">10</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="kt">int</span>      <span class="n">zz</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">12</span>   <span class="k">struct</span> <span class="n">X</span> <span class="n">aa</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="k">struct</span> <span class="n">X</span> <span class="n">bb</span><span class="p">;</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>   <span class="n">aa</span><span class="p">.</span><span class="n">i</span>   <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">16</span>   <span class="n">aa</span><span class="p">.</span><span class="n">d</span>   <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="lineno">17</span>   <span class="n">aa</span><span class="p">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">zz</span><span class="p">;</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span>   <span class="n">bb</span> <span class="o">=</span> <span class="n">aa</span><span class="p">;</span>   <span class="cm">/* 1 == bb.i és 3.14 == bb.d és *aa.ptr == *bb.ptr */</span>
+<span class="lineno">20</span>   <span class="o">++*</span><span class="n">aa</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="cm">/* 2 == zz  és  2 == *aa.ptr  és  2 == *bb.ptr !!! */</span>  
+<span class="lineno">21</span> <span class="p">}</span></code></pre></div>
+
+<p>Ilyenkor tagonkénti értékadás történik (valójában egyszerűen <strong>aa</strong> teljes
+területe átmásolódik <strong>bb</strong>-be). Az ilyen értékadások azonban lehetnek 
+veszélyesek, ha pl. az egyik tag <em>pointer</em>, akkor <strong>aa.ptr</strong> és <strong>bb.ptr</strong> 
+ugyanoda <em>mutat</em>, tehát ha az egyik módosítja a mutatott területet, akkor 
+a másik is ezt a módosított értéket fogja látni.</p>
+
+<p>Később, objektum-orientált nyelvekben gyakori lesz, hogy egy osztályt úgy
+implementálunk, hogy egy objektumból egy pointer mutat valami dinamikusan
+lefoglalt memóriaterületre. Ilyenkor a pointer által mutatott terület 
+<em>logikailag</em> az objektum sajátja, és ha másoljuk az objektumot, akkor nem 
+a pointert, hanem a <em>mutatott tárterületet</em> kéne másolni.</p>
+
+<p>Azokban a nyelvekben, ahol az operátorokat <em>túlterhelhetjük</em> és az értékadás 
+operátor, írhatunk saját értékadás operátort, ami elvégzi a kívánt 
+tevékenységet. Ilyen a C++ <em>másoló konstruktora</em> (copy constructor) és 
+<em>értékadó operátora</em> (assignment operator). Ahol ez nem lehetséges, vagy 
+megtiltjuk az értékadás használatát (ADA <em>private limited</em> típus) vagy
+valami “szokásos” függvényt (pl. Java <strong>clone</strong> metódus) hozunk létre. A Java
+nyelv <strong>Cloneable</strong> és a C# <strong>ICloneable</strong> interfésze ez utóbbi módszert
+támogatja, de erősen vitatott (<a href="https://www.artima.com/intv/bloch13.html">Java</a> 
+<a href="https://stackoverflow.com/questions/21116554/proper-way-to-implement-icloneable">C#</a>) módon.</p>
+
+<h2 id="konverzik">Konverziók</h2>
+
+<p>A kifejezések kiértékelésekor egyes esetekben az operandusok egyike, vagy mind
+konvertálódhat más típussá.</p>
+
+<ul>
+  <li>Értékadás, változó inicializálás, paraméterátadás és <strong>return</strong> utasításkor konverzió történik a cél típusra.</li>
+  <li>
+    <p><strong>Aritmetikai konverziók</strong> történnek a <em>szélesebb</em> számábrázolású típusok felé:</p>
+
+    <p>char –&gt;  short –&gt; int –&gt; long –&gt; long long</p>
+
+    <p>előjeles egészek –&gt; előjelnélküli egészek</p>
+
+    <p>egészek –&gt; float –&gt; double –&gt; long double</p>
+
+    <p>tömb –&gt; első elemre mutató pointer</p>
+  </li>
+</ul>
+
+<p>A konverziók bonyolult és széles skálája a szabványban és a C könyvekben 
+részletesen le van írva.</p>
+
+<h2 id="kifejezsek-kirtkelse">Kifejezések kiértékelése</h2>
+
+<p>Bár a kifejezések <em>értelmezését</em> egyértelműen meghatározza a precedencia 
+és az asszociativitás, a kifejezések <em>kiértékelésének</em> mikéntjét bizonyos
+keretek között szabadon meghatározhatja a fordítóprogram.</p>
+
+<p>Mit ír ki az alábbi program:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">5</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;i = %d, ++i = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span> <span class="p">);</span>
+<span class="lineno">6</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./a.out 
+<span class="nv">i</span> <span class="o">=</span> 2, ++i <span class="o">=</span> <span class="m">2</span>   <span class="c"># más platformon i = 1, ++i = 2 is lehet</span></code></pre></div>
+
+<p>A fenti kifejezés hibás, <em>nemdefiniált viselkedésű</em> (undefined behavior) 
+mert <strong>i</strong> és <strong>++i</strong> ugyanazt a memóriaterületet éri el és egyikük 
+módosítja is azt. Ha két kifejezés kiértékelése ugyanazt a memória-területet 
+éri el és legalább az egyik módosítja is azt, akkor <strong>konfliktusban vannak</strong> 
+(conflicting). Erősen leegyszerűsítve, ahhoz, hogy a programok helyes 
+viselkedését biztosítsuk, az ilyen konfliktusban levő kifejezéseket el 
+kell választanunk ún. <strong>szekvencia pontokkal</strong> (sequence point). 
+A szekvencia pont garantálja, hogy az előzőleg elkezdett kiértékelések
+befejeződjenek a szekvencia pontig és a rákövetkező kifejezések csak a 
+szekvencia pont után kezdődjenek el. Így a kiértékelések nem kerülnek
+konfliktusba. A precíz leírás a <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">C szabvány</a> 5.1.2.3 pontja alatt olvasható.</p>
+
+<p>Az <em>utasítások</em> eleje és vége szekvencia pont. Ezen kívül van néhány 
+<em>operátor</em>, amelyik maga is szekvencia pontként viselkedik. Ilyenek</p>
+
+<ol>
+  <li>a rövidzáras logikai operátorok ( &amp;&amp;  és  || )</li>
+  <li>a feltételes operátor feltételének a kiértékelése ( ? : )</li>
+  <li>a vessző operátor ( , )</li>
+</ol>
+
+<p>Hasonlóan, amikor egy <em>függvényt meghívunk</em>, akkor az összes paramétere
+kiértékelődik, <em>mielőtt</em> a függvény törzsének végrehajtása elkezdődne.
+Ugyanakkor a paraméterek kiértékelésének egymás közötti sorrendje nem
+meghatározott.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">()</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="lineno"> 5</span>   <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+<span class="lineno"> 6</span> <span class="p">}</span>
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">g</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;g</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="lineno">10</span>   <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">11</span> <span class="p">}</span>
+<span class="lineno">12</span> <span class="kt">int</span> <span class="nf">h</span><span class="p">()</span>
+<span class="lineno">13</span> <span class="p">{</span>
+<span class="lineno">14</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;h</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="lineno">15</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> <span class="kt">void</span> <span class="nf">func</span><span class="p">()</span>
+<span class="lineno">18</span> <span class="p">{</span>
+<span class="lineno">19</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;(f() == g() == h()) == %d&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">()</span> <span class="o">==</span> <span class="n">g</span><span class="p">()</span> <span class="o">==</span> <span class="n">h</span><span class="p">());</span>
+<span class="lineno">20</span> <span class="p">}</span>
+<span class="lineno">21</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">22</span> <span class="p">{</span>
+<span class="lineno">23</span>   <span class="n">func</span><span class="p">();</span>
+<span class="lineno">24</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">25</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -Wall f.c
+f.c: In <span class="k">function</span> ‘func’:
+f.c:20:44: warning: suggest parentheses around comparison in operand of ‘<span class="o">==</span>’ <span class="o">[</span>-Wparentheses<span class="o">]</span>
+<span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;func: (f() == g() == h()) == %d\n&quot;</span>, <span class="nv">fpar</span> <span class="o">==</span> <span class="nv">gpar</span> <span class="o">==</span> hpar<span class="o">)</span><span class="p">;</span>
+                                               ^
+<span class="nv">$ </span>./a.out 
+f
+g
+h
+func: <span class="o">(</span>f<span class="o">()</span> <span class="o">==</span> g<span class="o">()</span> <span class="o">==</span> h<span class="o">())</span> <span class="o">==</span> 1
+<span class="err">$</span></code></pre></div>
+
+<p>A fenti példában a kifejezés <em>jelentését</em> egyértelműen meghatározza a 
+precedencia és az asszociativitás szabály. Ugyanakkor az egyes függvények 
+meghívási sorrendjéről a fordító szabadon dönthet. Más fordítóprogramok,
+vagy akár ugyanaz a fordító más platformokon más sorrendet eredményezhet.</p>
+
+<p>A hiányzó szekvencia pont súlyos hibát okozhat a programunkban. A lenti
+programban a 11. sorban az <strong>i</strong> változó két elérése (köztük az <strong>i++</strong>
+módosító) konfliktusos akció, ezért ez a program <em>nemdefiniált viselkedésű</em>
+(undefined behavior). A nemdefiniált viselkedésű programok hibásak, még 
+akkor is, ha egyes platformokon lefutnak. Könnyen lehet, hogy a hiba csak 
+akkor jön elő, ha egy másik fordítóval fordítjuk a programot.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * BAD!</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="lineno"> 8</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="k">while</span><span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">10</span>   <span class="p">{</span>
+<span class="lineno">11</span>     <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="lineno">12</span>   <span class="p">}</span>
+<span class="lineno">13</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno">14</span>   <span class="p">{</span>
+<span class="lineno">15</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="lineno">16</span>   <span class="p">}</span>
+<span class="lineno">17</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">18</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -Wall -W  f.c
+f.c: In <span class="k">function</span> ‘main’:
+f.c:9:13: warning: operation on ‘i’ may be undefined <span class="o">[</span>-Wsequence-point<span class="o">]</span>
+   t<span class="o">[</span>i<span class="o">]</span> <span class="o">=</span> i++<span class="p">;</span>
+           ^
+<span class="nv">$ </span>./a.out 
+<span class="m">613478496</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> 
+<span class="err">$</span></code></pre></div>
+
+<p>A helyes megoldás:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * OK</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="lineno"> 8</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="k">while</span><span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">10</span>   <span class="p">{</span>
+<span class="lineno">11</span>     <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno">12</span>     <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="p">}</span>
+<span class="lineno">14</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno">15</span>   <span class="p">{</span>
+<span class="lineno">16</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="lineno">17</span>   <span class="p">}</span>
+<span class="lineno">18</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">19</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="utastsok-vezrlsi-szerkezetek">Utasítások, vezérlési szerkezetek</h2>
+
+<p>Az utasítások és vezérlési szerkezetek az imperatív programozási nyelvek 
+alapvető elemei. Ezek segítségével írjuk le, <em>hogyan</em> szeretnénk a programot 
+végrehajtani.</p>
+
+<h2 id="kifejezs-utasts">Kifejezés utasítás</h2>
+
+<p>Egy kifejezés az azt követő pontosvesszővel (;) egy kifejezés utasítást
+(expression statement) képez. Például a</p>
+
+<pre><code>printf("Hello world\n")
+</code></pre>
+
+<p>kifejezés típusa <strong>int</strong> értéke <strong>12</strong> (ugyanis a printf visszatérő értéke
+a kiírt karakterek száma). Ha pontosvesszőt teszünk utána, akkor utasítást 
+kapunk:</p>
+
+<pre><code>printf("Hello world\n");
+</code></pre>
+
+<h2 id="res-utasts">Üres utasítás</h2>
+
+<p>Az üres utasítás (null statement) hatás nélküli (bár kaphat cimkét).</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">2</span>   <span class="p">;</span>
+<span class="lineno">3</span> <span class="k">else</span>
+<span class="lineno">4</span>   <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;else branch&quot;</span><span class="p">);</span></code></pre></div>
+
+<h2 id="sszetett-utasts">Összetett utasítás</h2>
+
+<p>Az összetett utasítás (compound statement) vagy blokk utasítás arra szolgál,
+hogy több utasítást összefogjon.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="p">;</span>
+<span class="lineno">4</span> <span class="p">}</span>
+<span class="lineno">5</span> <span class="k">else</span>
+<span class="lineno">6</span> <span class="p">{</span>
+<span class="lineno">7</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;compound statement&quot;</span><span class="p">);</span>
+<span class="lineno">8</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;in the else branch&quot;</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="p">}</span></code></pre></div>
+
+<p>Sok véletlen hibát elkerülhetünk, ha a vezérlési szerkezetekben mindig 
+kirakjuk a <strong>{</strong> <strong>}</strong> kapcsos-zárójeleket, akkor is, ha csak egyetlen 
+utasítást szeretnénk végrehajtani.</p>
+
+<h2 id="elgazs">Elágazás</h2>
+
+<p>Az <strong>if</strong> elágazásnak két formája van.</p>
+
+<pre><code>if (expression) statement
+if (expression) statement1; else statement2;
+</code></pre>
+
+<p>Az <strong>if</strong> kifejezés feltételét kötelező zárójelbe írni, ahogy azt a <strong>switch</strong>
+<strong>while</strong> és <strong>for</strong> esetében is. Az utasítások lehetőleg legyenek összetett 
+utasítások. Az <strong>if</strong> utasítás esetében mindig érdekes kérdés, hogy hova 
+tartoznak a <em>lógó</em> (dangling) <strong>else</strong> utasítások. A C-ben és sok más 
+nyelvben az <strong>else</strong> a hozzá szintaktikusan legközelebbi <strong>if</strong>-hez tartozik.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">2</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno">3</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &gt; 5&quot;</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="k">else</span>
+<span class="lineno">5</span>   <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &lt;= 5&quot;</span><span class="p">);</span></code></pre></div>
+
+<p>ekvivalens az alábbival:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno">4</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &gt; 5&quot;</span><span class="p">);</span>
+<span class="lineno">5</span>   <span class="k">else</span>
+<span class="lineno">6</span>     <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &lt;= 5&quot;</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
+
+<p>és eltér ettől:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno">4</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &gt; 5&quot;</span><span class="p">);</span>
+<span class="lineno">5</span> <span class="p">}</span>
+<span class="lineno">6</span> <span class="k">else</span>
+<span class="lineno">7</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &gt;= 10&quot;</span><span class="p">);</span></code></pre></div>
+
+<p>A <em>Pythonban</em> persze a tabulálás jelöli ki a struktúrát. A C-ben nincsen 
+<em>elseif</em> vagy <em>elif</em>, de az else ág egyetlen utasításaként írhatunk egy
+újabb <strong>if</strong> utaítást. Ennek hatása hasonló, mintha elseif-ünk lenne,
+(kivéve persze, ha az egyik feltétel kiértékelésének olyan mellékhatása 
+van, ami befolyásol egy másik feltételt, de az ilyen konstrukciókat inkább 
+kerüljük).</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span>  <span class="o">&amp;&amp;</span>  <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &gt; 5&quot;</span><span class="p">);</span>
+<span class="lineno"> 4</span> <span class="p">}</span>
+<span class="lineno"> 5</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span>  <span class="o">&amp;&amp;</span>  <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 10 and y &lt;= 5&quot;</span><span class="p">);</span>
+<span class="lineno"> 8</span> <span class="p">}</span>
+<span class="lineno"> 9</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">10</span>  <span class="o">&amp;&amp;</span>  <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno">10</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &gt;= 10 and y &gt; 5&quot;</span><span class="p">);</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">10</span>  <span class="o">&amp;&amp;</span>  <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="lineno">14</span> <span class="p">{</span>
+<span class="lineno">15</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &gt;= 10 and y &lt;= 5&quot;</span><span class="p">);</span>
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> <span class="k">else</span>
+<span class="lineno">18</span> <span class="p">{</span>
+<span class="lineno">19</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;impossible&quot;</span><span class="p">);</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="szelekcis-utasts">Szelekciós utasítás</h2>
+
+<p>A <strong>switch</strong> utasítás egy alternatív elágazái forma, ahol az elágazást 
+egy kifejezés különböző értékei alapján hajtjuk végre. A switch formája:</p>
+
+<pre><code>switch (expression) statement
+</code></pre>
+
+<p>Az utasítás szinte mindig egy blokk, melyben <strong>case</strong> címkével ellátott 
+utasítások szerepelnek. A címkék értékének fordítási időben megadottnak 
+és egyedinek kell lennie, és azt a fordító ellenőrzi is.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="n">day_of_week</span><span class="p">;</span>
+<span class="lineno"> 2</span> <span class="c1">//...</span>
+<span class="lineno"> 3</span> <span class="k">switch</span> <span class="p">(</span> <span class="n">day_of_week</span> <span class="p">)</span>
+<span class="lineno"> 4</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="k">default</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Undefined&quot;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 6</span>   <span class="k">case</span>  <span class="mi">2</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Monday&quot;</span><span class="p">);</span>    <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 7</span>   <span class="k">case</span>  <span class="mi">3</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tuesday&quot;</span><span class="p">);</span>   <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 8</span>   <span class="k">case</span>  <span class="mi">4</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Wednesday&quot;</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="k">case</span>  <span class="mi">5</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thursday&quot;</span><span class="p">);</span>  <span class="k">break</span><span class="p">;</span>
+<span class="lineno">10</span>   <span class="k">case</span>  <span class="mi">6</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Friday&quot;</span><span class="p">);</span>    <span class="k">break</span><span class="p">;</span>
+<span class="lineno">11</span>   <span class="k">case</span>  <span class="mi">1</span><span class="o">:</span> <span class="cm">/* fallthrough */</span>
+<span class="lineno">12</span>   <span class="k">case</span>  <span class="mi">7</span><span class="o">:</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Week-end&quot;</span><span class="p">);</span>  <span class="k">break</span><span class="p">;</span>
+<span class="lineno">13</span> <span class="p">}</span></code></pre></div>
+
+<p>A cimkéket úgy tekinthetjük, mint célpontokat, ahová odaugrik a vezérlés, 
+ha értékük megegyezik a feltételben megadott értékkel. Onnan a vezérlés
+a megadott utasításoknak megfelelően, szekvenciálisan folytatódik, amíg 
+el nem érünk egy <strong>break</strong> utasításhoz. Onnan a vezérlés a switch-et követő
+utasítással folytatódik.</p>
+
+<p>Ha nincsen <strong>break</strong> utasítás, akkor a vezérlés <em>rácsorog</em> a következő 
+cimkét tartalmazó utasításra. Ez általában nem jó programozási stratégia, 
+de esetenként ezt használjuk a cimkék <em>csoportosítására</em>. Ilyenkor ajánlott 
+ezt a szándékunkat pl. kommentben jelezni.</p>
+
+<p>Ha egyetlen címke sem egyezik meg a feltételben megadott értékkel, és van
+<strong>default</strong> címke, akkor a vezérlés oda adódik át. Ettől eltekintve a default 
+címke viselkedése megegyezik a többi címkéjével. Ha nincsen default címke 
+sem, akkor a vezérlés a switch utáni utasítással folytatódik. Ha egyetlen 
+címkén sem csorgunk túl, akkor az egyes címkék és a default címke sorrendje 
+közömbös.</p>
+
+<h2 id="while-ciklus">While ciklus</h2>
+
+<p>A C nyelvben többféle módon szervezhetünk ciklust. Az egyik legalapvetőbb
+konstrukció a <strong>while</strong> ciklus.</p>
+
+<pre><code>while ( expression ) statement
+</code></pre>
+
+<p>A while ciklus <em>először</em> ellenőrzi a <em>ciklusfeltétel</em> kifejezést, és addig 
+hajtja végre a <em>ciklusmagot</em>, ameddig a feltétel igaz. A while ciklusban 
+nekünk kell gondoskodni arról, hogy a feltétel előbb vagy utóbb hamissá 
+váljon.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">struct</span> <span class="n">list_type</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kt">int</span>       <span class="n">value</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="n">list_type</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="p">};</span>
+<span class="lineno"> 6</span> <span class="c1">// ...pt-expr</span>
+<span class="lineno"> 7</span> <span class="n">list_type</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+<span class="lineno"> 8</span> <span class="k">while</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">!=</span> <span class="n">ptr</span>  <span class="p">)</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%d &quot;</span><span class="p">,</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+<span class="lineno">11</span>   <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="do-while-ciklus">Do-while ciklus</h2>
+
+<p>A do-while ciklus ún. hátul-tesztelő ciklus. Ez azt jelenti, hogy a 
+ciklusmagot egyszer mindenképpen végrehajtjuk, és csak utána ellenőrizzük 
+a feltételt.</p>
+
+<pre><code>do statement while ( expression ) ;
+</code></pre>
+
+<p>Figyeljük meg a feltétel-kifejezés zárójelét lezáró pontosvesszőt.
+A do-while utasítás ekvivalens a következő konstrukcióval:</p>
+
+<pre><code>statement
+while ( expression )
+  statement
+</code></pre>
+
+<p>A do-while konstrukciót néha alkalmazzák, amikor az első ciklusvégrehajtás 
+előtti ellenőrzést ki akarják spórolni pl. hatékonysági okokból.</p>
+
+<h2 id="for-ciklus">For ciklus</h2>
+
+<p>A for ciklus az egyik leggyakrabban előforduló ciklusfajta. Kétféle formája 
+van:</p>
+
+<pre><code>for ( opt-expr-1 ; opt-expr-2 ; opt-expr-3 ) statement 
+for ( declaration; opt-expr-2 ; opt-expr-3 ) statement  (C99 óta)
+</code></pre>
+
+<p>ahol</p>
+
+<ol>
+  <li>
+    <p><em>opt-expr-1</em> egy opcionális (elhagyható) kifejezés, ami a ciklusváltozó 
+kezdeti értékbeállítására szolgál és a legelső ciklusvégrehajtás előtt
+hajtódik végre. A C99 verzió óta ezt a kifejezést helyettesíthetjük egy 
+deklarációval. Az itt deklarált ciklusváltozó láthatósága nem terjed túl 
+a cikluson.</p>
+  </li>
+  <li>
+    <p><em>opt-expr-2</em> egy opcionális feltétel, ami minden ciklusmag végrehajtása 
+<em>előtt</em> kiértékelődik, és a ciklusmag csak akkor hajtódik végre, ha ennek 
+a kifejezésnek értéke igaz. Ha ezt a kifejezést elhagyjuk, akkor értékét 
+<em>mindig igaznak</em> tekintjük.</p>
+  </li>
+  <li>
+    <p><em>opt-expr-3</em> egy opcionális kifejezés, ami mindig kiértékelődik a ciklusmag
+után. Ez a kifejezés gyakran arra szolgál, hogy a ciklusváltozót módosítsa.</p>
+  </li>
+</ol>
+
+<p>Az alábbi for ciklus</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">for</span> <span class="p">(</span> <span class="n">e1</span> <span class="p">;</span> <span class="n">e2</span> <span class="p">;</span> <span class="n">e3</span> <span class="p">)</span> <span class="n">s</span><span class="p">;</span></code></pre></div>
+
+<p>nagyjából (de nem teljesen) azonos a következő while ciklussal:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
+  <span class="n">e1</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span> <span class="n">e2</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">s</span><span class="p">;</span>
+    <span class="n">e3</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>A három opcionális kifejezés bármelyikét elhagyhatjuk. A középső elmaradása
+olyan, mintha állandóan igaz kifejezést írnánk. A (látszólag) végtelen ciklus
+egy alakja:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">for</span><span class="p">(</span> <span class="p">;</span> <span class="p">;</span> <span class="p">)</span> <span class="n">statement</span></code></pre></div>
+
+<p>Ezt a ciklust még mindig elhagyhatjuk a <strong>return</strong> vagy a <strong>break</strong>
+utasítással.</p>
+
+<p>A C99 óta lehetséges az inicializáló kifejezést helyettesíteni egy 
+ciklusváltozó létrehozásával és inicializálásával.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%d &quot;</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="p">}</span>
+<span class="lineno">5</span> <span class="c1">// i is not visible here.</span></code></pre></div>
+
+<h2 id="a-break-s-a-continue-utastsok">A break és a continue utasítások</h2>
+
+<p>A <strong>break</strong> utasítást nemcsak a <strong>switch</strong>-ben, hanem bármely cikluson
+belül is alkalmazhatjuk. Hatására a ciklusból azonnal kilépünk, és a 
+következő utasítással folytatjuk a programot.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="lineno"> 2</span> <span class="c1">// ...</span>
+<span class="lineno"> 3</span> <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno"> 4</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno"> 6</span>   <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;negative found&quot;</span><span class="p">);</span>
+<span class="lineno"> 8</span>     <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="p">}</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;do something with non-negatives&quot;</span><span class="p">);</span>
+<span class="lineno">11</span> <span class="p">}</span>
+<span class="lineno">12</span> <span class="c1">// break jumps to here</span></code></pre></div>
+
+<p>A <strong>continue</strong> utasítás átugorja a ciklusmag hátralévő részét és a vezérlés
+a ciklusmag végére ugrik. Ezután a while és do-while ciklusban a feltétel 
+ellenőrzése, a for ciklusban az <em>opt-expr-3</em> majd a feltétel kiértékelése 
+következik.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="lineno"> 2</span> <span class="c1">// ...</span>
+<span class="lineno"> 3</span> <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno"> 4</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno"> 6</span>   <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;negative found&quot;</span><span class="p">);</span>
+<span class="lineno"> 8</span>     <span class="k">continue</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="p">}</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;do something with non-negatives&quot;</span><span class="p">);</span>
+<span class="lineno">11</span>   <span class="c1">// ...</span>
+<span class="lineno">12</span>   <span class="c1">// continue jumps to here</span>
+<span class="lineno">13</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="return-utasts">Return utasítás</h2>
+
+<p>A <strong>return</strong> visszatér a kurrens függvény végrehajtásából a hívó függvénybe. 
+A <em>main</em> függvény esetében a <strong>return</strong> hatására a program végrehajtása 
+befejeződik.</p>
+
+<pre><code>return;
+return expr;
+</code></pre>
+
+<p>Egy függvényben több return utasítás is szerepelhet. Ha a függvény visszatérő
+típusa nem <strong>void</strong> akkor a return argumentuma a függvény visszatérő típusára
+konvertálódik.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="nf">find_first_negative</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+<span class="lineno"> 4</span>   <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="k">if</span> <span class="p">(</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno"> 6</span>     <span class="p">{</span>
+<span class="lineno"> 7</span>       <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;negative found&quot;</span><span class="p">);</span>
+<span class="lineno"> 8</span>       <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span>   <span class="p">}</span>
+<span class="lineno">11</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="goto-utasts">Goto utasítás</h2>
+
+<p>Feltétel nélküli ugró utasítás. Csak az adott függvényen belülre ugorhatunk.</p>
+
+<pre><code>goto label;
+/* ... */
+label: statement
+</code></pre>
+
+<p>ahol <em>label</em> egy azonosító. Ne használjunk <strong>goto</strong> utasítást.</p>
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

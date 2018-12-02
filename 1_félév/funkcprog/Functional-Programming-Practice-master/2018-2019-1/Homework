@@ -1,0 +1,25 @@
+A házi feladatot egy Homework1 nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartotó típus szignatúrát is!
+
+Adjunk meg három különböző Int típusú kifejezést!
+
+Adjunk meg három különböző Char típusú kifejezést!
+
+Adjunk meg három különböző Bool típusú kifejezést!
+
+Katinak van 183 virágmagja, és 13 cserepe. Adjunk meg egy-egy olyan kifejezést, amely megválaszolja a következő két kérdést! Segítség: használjuk a div és mod függvényeket.
+  a) El tudja-e Kati ültetni az összes virágmagját?
+  b) Hány fölösleges virágmagja marad?
+
+Az órán definiált plusOne és double függvényeket használva adjunk meg három különböző kifejezést, amely a 7-et állítja elő!
+
+Adjuk meg azt a függvényt, amely eldönti, hogy:
+  a) egy szám osztható-e hárommal,
+  b) hárommal osztva 1 maradékot ad-e,
+  c) hárommal osztva 2 maradékot ad-e!
+
+Adjuk meg azt a függvényt, amely eldönti, hogy egy szám 5-tel osztva több maradékot ad-e, mint 7-tel osztva!
+
+Adjunk meg egy olyant függvényt, amely a következő típus szignatúrával rendelkezik: Int -> Bool -> Bool !
+
+Az előző függvény használatával adjuk meg azt a "legegyszerűbb" függvényt, amely a következő típus szignatúrával rendelkezik: Bool -> Int -> Bool !
+(Legegyszerűbb alatt azt értjük, hogy minél rövidebb legyen a függvény definiciója, de ugyanakkor szerepeljen benne az előzőleg definiált függvény)

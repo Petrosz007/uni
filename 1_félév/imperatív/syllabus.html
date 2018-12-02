@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+</head>
+<body>
+<h1 id="imperatív-programozás">Imperatív programozás</h1>
+<p>A tárgy a Programtervező informatikus alapszakos hallgatóknak van meghirdetve az őszi félévekben.</p>
+<h2 id="sillabusz">Sillabusz</h2>
+<p>A tárgy célja, hogy programozási nyelvekkel kapcsolatos fogalmakkal ismertesse meg a hallgatókat, melyek alapján a hallgatók a programozás során képesek lesznek tudatosan választani a nyelvi eszközök közül. A tárgyalt ismeretkör az imperatív, a procedurális és (kisebb részben) a moduláris programozási paradigmát fedi le, alapot teremtve későbbi, az objektum-orientált és konkurens programozási paradigmákat tárgyaló kurzusoknak. A tárgy utal a vele egy időben tartott <em>Funkcionális programozás</em> kurzusra is (és viszont). A tárgy szoros kapcsolatban áll a vele egy időben tartott <em>Programozás</em>, illetve (kisebb mértékben) a <em>Számítógépes rendszerek</em> kurzusokkal. Jelen tárgynak nem célja, hogy a hallgatókat programozni tanítsa -- ez a <em>Programozás</em> kurzus feladata --, de természetesen hozzájárul a hallgatók programozási készségeinek fejlődéséhez.</p>
+<p>Az előadásokon kötelező részt venni. A géptermi gyakorlatok a gyakorlatvezetővel segített önálló munkát tűzik ki célul. A félév során sem a gyakorlatokon, sem a géptermi zárthelyiken nem használunk integrált fejlesztői környezetet, csak programozói szövegszerkesztőket (pl. geany, notepad++, gedit, (g)vim, emacs) és parancssoros fordítást/futtatást. Ennek az a célja, hogy így a hallgatók megértik az eszközök működési elvét, tudatos eszközhasználókká válnak, és a későbbiekben az IDE-eszközök konfigurálására is képesek lesznek. A gyakorlatokon ösztönözzük a hallgatókat, hogy többféle operációs rendszeren (Windows, Linux) elsajátítsák a programkód megírásának, lefordításának és futtatásának technikáját.</p>
+<h2 id="tematika">Tematika</h2>
+<p>Az alábbi témaköröket C és Python nyelveken tekintjük át.</p>
+<ul>
+<li>Programozási paradigmák és nyelvek, történelem (opcionális).</li>
+<li>Programozási nyelv célja (ember-gép és ember-ember kommunikáció) és hatása a programok minőségére, a szoftverfejlesztési folyamat minőségére.</li>
+<li>Programozási nyelv szabályrendszere: lexika, szintaxis, szemantika. Pragmatika.</li>
+<li>Programok felépítése: kifejezések, utasítások, alprogramok, modulok.</li>
+<li>Forráskód, tárgykód. Előfeldolgozás, fordítás, szerkesztés, futtatás. Interpretálás, REPL.</li>
+<li>C-preprocesszor, makrók. (opcionális)</li>
+<li>Fordítási egységek, függőségek, külön fordítás. Moduláris programozás.</li>
+<li>Kifejezések és kiértékelésük
+<ul>
+<li>lexikális elemek: literálok, azonosítók, operátorok, zárójelek stb.</li>
+<li>szintaktika: arítás, fixitás;</li>
+<li>szemantika: precedencia, bal- és jobbasszociativitás, lustaság/mohóság, mellékhatás, operandusok kiértékelési sorrendje, szekvenciapont.</li>
+</ul></li>
+<li>Utasítások és vezérlési szerkezetek
+<ul>
+<li>változódeklarációk</li>
+<li>kifejezés-utasítás</li>
+<li>értékadás</li>
+<li>elágazások</li>
+<li>ciklusok (átírás egyikből a másikba)</li>
+<li>nem strukturált: break, continue, return, goto (mikor használjuk?)</li>
+</ul></li>
+<li>Deklarációk: hatókör, láthatóság. Változók élettartama.</li>
+<li>Alprogramok
+<ul>
+<li>programok struktúrálása</li>
+<li>végrehajtási verem, lokális változók automatikus tárolása</li>
+<li>paraméterátadás
+<ul>
+<li>érték- és cím-szerinti paraméterátadás</li>
+<li>érték-eredmény-szerinti paraméterátadás (opcionális)</li>
+</ul></li>
+<li>paraméterek alapértelmezett értéke</li>
+<li>globális változók, static local változók</li>
+<li>blokkszerkezetes nyelv.</li>
+</ul></li>
+<li>Típusok
+<ul>
+<li>alaptípusok és ábrázolásuk</li>
+<li>automatikus és explicit típuskonverziók</li>
+<li>tömbök, listák, rendezett n-esek</li>
+<li>rekordok / struktúrák</li>
+<li>unionok (opcionális)</li>
+<li>mutatók.</li>
+</ul></li>
+<li>Dinamikus memória kezelése. Élettartam. Szemétgyűjtés.</li>
+<li>Láncolt adatszerkezetek, sekély és mély másolás/összehasonlítás.</li>
+<li>Pointer aritmetika. Tömbök és pointerek kapcsolata C-ben.</li>
+<li>Input-output, printf/scanf.</li>
+</ul>
+<h2 id="követelmények">Követelmények</h2>
+<p>Mind a rendszerezett elméleti tudást, mind a gyakorlati készségeket mérjük a tárgyból. Az előbbi szokott több problémát okozni, ezért is kötelező az előadásokon részt venni.</p>
+<p>Az átlagos hallgatótól 150 munkaórányi (azaz 150 x 45 perc) befektetést várunk el (ez felel meg az 5 ECTS kreditnek, ami a tárgy elvégzéséért jár). Ezt a 150 munkaórát a következő bontásban javasolt a tanulási folyamatra fordítani.</p>
+<ul>
+<li>65 munkaóra a heti 5 tanórán, 13 héten át;</li>
+<li>52 munkaóra önálló tanulás (13 héten át heti 4);</li>
+<li>28 munkaóra a félév a zh-ra készülés (ismétlés);</li>
+<li>5 munkaóra a félév végén a zh.</li>
+</ul>
+<h3 id="a-tárgy-teljesítésének-előfeltételei">A tárgy teljesítésének előfeltételei</h3>
+<ul>
+<li>Az előadás és a gyakorlat rendszeres látogatása legfeljebb 4-4 hiányzással. (A gyakorlatról való negyedik hiányzás esetén a gyakorlatvezető extra feladatot szabhat ki.)</li>
+</ul>
+<h3 id="számonkérés">Számonkérés</h3>
+<p>A tárgy kombinált számonkérésű, azaz egyetlen (gyakorlati) jegy zárja a tárgyat. Ha valaki több, mint négyszer hiányzik akár az előadásról, akár a gyakorlatról, a jegyet megtagadjuk.</p>
+<p>A kurzus során különböző formákban pontokat kell gyűjteni. A pontok 50%-át a szorgalmi időszakban lehet megszerezni az órai röpdolgozatokkal. A fennmaradó 50%-ot a félév végén egy zárthelyi dolgozaton lehet megszerezni, melynek lesz elméleti (teszt jellegű) és gyakorlati (programozási) része is.</p>
+<p>A félév végi zárthelyit egy alkalommal meg lehet ismételni.</p>
+<p>Az érdemjegy a következőképpen kerül meghatározásra. Az elégséges jegy eléréséhez a megszerezhető pontok 50%-ra van szükség, közepes 63%-tól, jó 75%-tól, jeles pedig 87%-tól adható.</p>
+<h2 id="határidők-időpontok">Határidők, időpontok</h2>
+<p>A közelmúltban nyilvánosságra hozott időpontok sajnos mégsem tükrözik majd a valóságot. A Tanulmányi Hivatal kérésére, oktatásszervezési okokból a zh-kat január 15. előtt fogjuk lebonyolítani. Az időpontokat rövidesen nyilvánosságra hozzuk.</p>
+<h2 id="irodalom">Irodalom</h2>
+<ul>
+<li>Kozsik Tamás (és mások): Imperatív programozás. Jegyzetek az előadáshoz, 2018. Elérhető (meghívás után) a <a href="https://canvas.elte.hu/">canvasben</a>.</li>
+<li>Porkoláb Zoltán: Imperatív programozás. Jegyzetek az előadáshoz, 2018. <a href="http://gsd.web.elte.hu/imper/"><code class="url">http://gsd.web.elte.hu/imper/</code></a></li>
+<li>Kernighan – Ritchie: A C programozási nyelv, Műszaki Könyvkiadó. ISBN 9631605523</li>
+<li>Bjarne Stroustrup: A C++ programozási nyelv, Kiskapu Kiadó, 2001. ISBN: 9789639301191</li>
+<li>Mark Summerfield: Python 3 programozás. Kiskapu Kiadó, 2009. ISBN: 978 963 963 7641</li>
+<li>Kitlei Róbert: Assembly programozás, 2007. <a href="https://www.inf.elte.hu/dstore/document/269/assembly.pdf"><code class="url">https://www.inf.elte.hu/dstore/document/269/assembly.pdf</code></a></li>
+</ul>
+</body>
+</html>

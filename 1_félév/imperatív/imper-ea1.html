@@ -1,0 +1,785 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-1/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-1">Imperatív programozás 1.</h1>
+
+<h1 id="programozsi-alapfogalmak">Programozási alapfogalmak</h1>
+
+<h2 id="szintaxis-syntax">Szintaxis (syntax)</h2>
+
+<p>A programozási nyelv helyes <em>nyelvtana</em>. Például: mik a helyes kulcsszavak, 
+hogyan nézhet ki egy változó neve, hova tegyünk pontosvesszőt, stb.</p>
+
+<p>A <em>PL/I</em> programozási nyelv pl. legenerálta a hiányzó <strong>end</strong> utasításokat. 
+Az <em>Algol68</em> nyelvben az üres utasítás csak a <strong>skip</strong> utasítással valósult
+meg. A <em>Pascal</em>-ban <strong>else</strong> előtt sohasem szabad <strong>;</strong>-nek szerepelnie, a 
+C-ben ez előfordulhat. A <em>Go</em>-ban kötelező kiírni a nyitó-csukó 
+kapcsoszárójeleket a vezérlési szerkezetek esetén, így nem következhet be
+az ún. <a href="https://www.synopsys.com/blogs/software-security/understanding-apple-goto-fail-vulnerability-2/">goto-fail</a>. 
+A legtöbb programozási nyelvben a whitespace-ek közönbösek,
+de pl. <em>Python</em>-ban a tabulálás (is) azonosítja a programszerkezetet.
+Az <em>APL</em>-ben mind a 256 karakter egy-egy érvényes operátor.</p>
+
+<h2 id="szemantika-semantics">Szemantika (semantics)</h2>
+
+<p>A szintaktikailag helyes programok <em>jelentése</em>. Például: milyen típusrendszere 
+van a nyelvnek, milyen konverziók történnek, melyik függvényt hívjuk meg egy
+híváskor, stb.</p>
+
+<p>A C++-ban az <strong>int</strong> és <strong>bool</strong> típusok között automatkus oda-vissza konverzió
+van. Más nyelvekben szigorúbb a típusosság. Egyes objektum-orientált nyelvekben a meghívott virtuális függvény kiválasztása az objektum dinamikus típusától 
+függ (<em>dynamic dispatch</em>). Nagyon ritkán ez <em>több</em> objektumtól is függhet 
+(<em>multiple dispatch</em>).</p>
+
+<p>A szemantikát különböző nyelvekben eltérően definiálják. Pl. a <em>Haskell</em> 
+szemantikáját matematikai formulákkal (<em>denotational semantics</em>) adják meg.
+Az <em>Algol68</em> esetében logikai kifejezéseket használtak (<em>operational 
+semantics</em>), de van példa axiomatikus és szöveges megadásra is.</p>
+
+<p>Egyes esetekben a szemantika negyon bonyolult tud lenni. Mit jelent C++-ban
+a <em>protected abstract virtual base pure virtual private destructor</em> és 
+mikor volt rá utoljára szükséged? (Tom Cargill, 2009). (Egyébként 
+<a href="https://www.sololearn.com/Discuss/724668/if-you-think-c-is-not-overly-complicated-just-what-is-a-protected-abstract-virtual-base-pure-virtual">itt</a> egy példa, hogy mit jelent).</p>
+
+<!-- https://www.sololearn.com/Discuss/724668/if-you-think-c-is-not-overly-complicated-just-what-is-a-protected-abstract-virtual-base-pure-virtual --->
+
+<h2 id="pragmatika-pragmatics">Pragmatika (pragmatics)</h2>
+
+<p>A nyelv konstrukcióinak <em>haszálata</em>. Pl: hogyan használjuk az egyes nyelvi 
+konstrukciókat a céljaink eléréséért, hogyan alakult a története, milyen 
+fejlődési irányok léteznek.</p>
+
+<p>A legtöbb programozási nyelvben ugyanazt a feladatot sokféleképpen is 
+elvégezhetjük, pl. ciklust <em>while</em>, <em>for</em>, <em>range-for</em> vagy <em>do-while</em> 
+segítségével is. Melyik az adott esetben a legjobb konstrukció? Melyik a 
+legolvashatóbb, legkarbantarthatóbb, leghatékonyabb? Melyik a legkönnyebben
+debuggálhatóbb?</p>
+
+<p>Az informatika fejlődik, folyamatosan újabb és újabb konstrukciók jelennek meg.
+De ugyanígy fejlődnek az egyes programozási nyelvek is! A C 1971-es, a C++
+1980-tól fejlődik. A C <strong>malloc</strong>/<strong>free</strong> hívását C++-ban felváltotta a 
+<strong>new</strong>/<strong>delete</strong>, ami szükség esetén már végrehajtotta a <em>konstruktor</em>-t és
+<em>destruktor</em>-t is. Majd először külső könyvtári alapon, C++11-től a nyelvi 
+szabványban is megjelentek a <em>smart pointer</em> osztályok, akik levették a teher
+nagy részét a programozóról.</p>
+
+<p>A Python programozási nyelv gyökeres változásokon esett át a 2-es és a 3-as 
+verzió között. Vannak programok, amik hibásak, vagy (még rosszabb) nem hibásak, de másképpen működnek az új verzióban.</p>
+
+<h2 id="programozsi-paradigmk">Programozási paradigmák</h2>
+
+<p>Ahhoz, hogy bonyolult informatikai feladatokat megoldjuk, azokat kisebb 
+részekre bontjuk, amíg elég kicsik ahhoz, hogy vagy létezik már megoldás rá, 
+vagy hatékonyan megoldjuk magunk. Az, hogy milyen <em>elvek</em> szerint végezzük 
+ezt a felbontást, azt a <em>programozási paradigma</em> határozza meg.</p>
+
+<h3 id="imperatv-programozs">Imperatív programozás</h3>
+
+<p>Akkor beszélünk imperatív programokról, amikor explicit mi vezéreljük, 
+hogy a program hogyan változtatja meg az állapotát.</p>
+
+<h4 id="procedurlis-programozs">Procedurális programozás</h4>
+<p>A feladatot például felbonthatjuk az elvégzendő feladatok (algoritmusok) 
+szerint. Ezeket <em>alprogramokként</em> (függvények, eljárások) valósítjuk meg,
+köztük pl. paraméterátadással, függvény visszatérő értékkel kommunikálunk.
+Ez a procedurális programozás. Ebben az esetben probléma lehet, hogy 
+háttérbe szorulnak az adatszerkezetek. Pl. FORTRAN, Algol60, C, Go nyelvek.</p>
+
+<p>Kezdetben döntően procedurális nyelvek léteztek, hiszen az <em>assembly</em> 
+programok, a FORTRAN, COBOL, Algol60 és társai ilyen elvek mentén épültek fel,
+bár a Lisp 1957-ben már funkcionális nyelv volt.</p>
+
+<h4 id="objektumelv-programozs">Objektumelvű programozás</h4>
+<p>Amikor a valós világ objektumait próbáljuk modellezni, akkor összegyűjtjük a<br />
+hasonló tulajdonságúakat, elhanyagoljuk a feladat szempontjából kevéssé fontos 
+különbségeket és <em>absztrakció</em> segítségével egymással egy szűk <em>interfészen</em>
+kommunikáló <em>osztályokat</em> alkotunk belőlük. Itt az osztályok adatszerkezetén 
+és a rajtuk értelmezett műveleteken van a hangsúly. Ez az objetkumelvű
+(object-oriented) programozás. Pl. Simula67, Smalltalk, Eiffel, Java, C#.</p>
+
+<h3 id="deklaratv-programozs">Deklaratív programozás</h3>
+
+<p>Más esetekben egyzserűen csak deklarálni akarjuk a program elvárt működését,
+nem akarjuk explicit meghatározni annak mikéntjét. Ez a deklaratív programozás, amit szintén kategorizálhatunk:</p>
+
+<h4 id="funkcionlis-programozs">Funkcionális programozás</h4>
+<p>A kívánt eredmény egymást hívó függvényekként van definiálva. Ezek a függvények
+<em>mellékhatás-mentesek</em>, nincsen értékadás, minden memóriaterület egyszer kap 
+csak értéket, és később ez az érték nem változik (<em>referencial transparency</em>).
+Az ilyen programok helyességét könnyebb belátni. Pl. Lisp, ML, Haskell, Clean.</p>
+
+<h4 id="logikai-programozs">Logikai programozás</h4>
+<p>A rendszer tényeit és következtetési szabályait adjuk meg. Pl. Prolog.</p>
+
+<h3 id="multiparadigma-programozs">Multiparadigma programozás</h3>
+
+<p>Természetesen a fentiek némiképp szubjektív kategóriák, ezért más paradigmákról 
+is szoktak beszélni, pl. <em>matematikai programozás</em>, <em>generikus (generic) 
+programozás</em>, <em>szándékalapú (intentional) programozás</em>, stb.</p>
+
+<p>Másrészről az egyes programozási nyelvek is több paradigmára épülnek. Egy 
+objektumelvű programban is procedurálisan implementáljuk a metódusokat. 
+A C++ programozási nyelvben hozhatunk létre osztályokat, de ez nem kötelező, 
+mint pl. a Java-ban (az utóbbira azt mondjuk: tisztán objektumelvű). Emellett
+alkalmazhatunk funkcionális elemeket (pl. <em>lambda</em> objektumokat) és speciális
+<em>template</em> konstrukciókat (generikus programozás). A C++ <em>multiparadigma</em>
+programozási nyelv.</p>
+
+<h2 id="a-c-programozsi-nyelv">A C programozási nyelv</h2>
+
+<p>A procedurális programozás alapjait a C nyelv segítségével fogjuk bemutatni.
+<a href="https://www.youtube.com/watch?v=niO16JEbpWs">Miért?</a></p>
+
+<p>A nyelvek népszerűsége a <a href="https://www.tiobe.com/tiobe-index/">TIOBE</a> index 
+szerint 2018 szeptemberében:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sep 2018</th>
+      <th>Sep 2017</th>
+      <th>Change</th>
+      <th>Programming Language</th>
+      <th>Ratings</th>
+      <th>Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td> </td>
+      <td>Java</td>
+      <td>17.436%</td>
+      <td>+4.75%</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td> </td>
+      <td>C</td>
+      <td>15.447%</td>
+      <td>+8.06%</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>5</td>
+      <td>^</td>
+      <td>Python</td>
+      <td>7.653%</td>
+      <td>+4.67%</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>3</td>
+      <td>v</td>
+      <td>C++</td>
+      <td>7.394%</td>
+      <td>+1.83%</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>8</td>
+      <td>^</td>
+      <td>Visual Basic .NET</td>
+      <td>5.308%</td>
+      <td>+3.33%</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>4</td>
+      <td>v</td>
+      <td>C#</td>
+      <td>3.295%</td>
+      <td>-1.48%</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>6</td>
+      <td>v</td>
+      <td>PHP</td>
+      <td>2.775%</td>
+      <td>+0.57%</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>7</td>
+      <td>v</td>
+      <td>JavaScript</td>
+      <td>2.131%</td>
+      <td>+0.11%</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>-</td>
+      <td>^</td>
+      <td>SQL</td>
+      <td>2.062%</td>
+      <td>+2.06%</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>18</td>
+      <td>^</td>
+      <td>Objective-C</td>
+      <td>1.509%</td>
+      <td>+0.00%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="a-c-nyelv-s-trtnete">A C nyelv és története</h3>
+
+<p>A C egy általános célú programozási nyelv, melyet Dennis Ritchie fejlesztett 
+ki Ken Thompson segítségével 1969 és 1973 között a UNIX rendszerekre AT&amp;T Bell 
+Labs-nál. Idővel jóformán minden operációs rendszerre készítettek C 
+fordítóprogramot, és a legnépszerűbb programozási nyelvek egyikévé vált. 
+Rendszerprogramozáshoz és felhasználói programok készítéséhez egyaránt jól
+használható. Az oktatásban és a számítógép-tudományban is jelentős szerepe van.</p>
+
+<p>A C minden idők legszélesebb körben használt programozási nyelve, és a C 
+fordítók elérhetők a ma elérhető számítógép-architektúrák és operációs 
+rendszerek többségére. 
+(from <a href="https://hu.wikipedia.org/wiki/C_(programoz%C3%A1si_nyelv)">wikipedia</a>).</p>
+
+<p>A C helye a programozási nyelvek között:</p>
+
+<pre><code>                                      ----&gt; Objective-C
+                                     |
+        Fortran --------------       |            ---&gt; D
+                              |      |           |
+Assembly ----&gt; BCPL ----&gt; B ----&gt; C -----&gt; C++ ----&gt; Java
+                              |      |           |
+       Algol60 ---------------|      |            ---&gt; C#
+                |             |      |
+                 --&gt; Algol68--        -------------------&gt; Go
+</code></pre>
+
+<p><a href="https://exploring-data.com/vis/programming-languages-influence-network/">Programozási nyelvek hatása</a></p>
+
+<h3 id="a-c-idvonal">A C idővonal</h3>
+
+<ul>
+  <li>1969 Ken Thompson kifejleszti a B nyelvet (egy egyszerűsített BCPL)</li>
+  <li>1969- Ken Thompson, Dennis Ritchie és mások elkezdenek dolgozni a UNIX-on</li>
+  <li>1972 Dennis Ritchie kifejleszti a C nyelvet</li>
+  <li>1972-73 UNIX kernel-t újraírják C-ben</li>
+  <li>1977 Johnson Portable C Compiler-e</li>
+  <li>1978 Brian Kernighan és Dennis Ritchie: The C Programming Language könyve</li>
+  <li>1988 Brian Kernighan és Dennis Ritchie: The C Programming Language 2nd ed, az ANSI C leírása</li>
+  <li>1989 ANSI C standard (C90) (32 kulcsszó)</li>
+  <li>1999 ANSI C99 standard (+5 kulcsszó)</li>
+  <li>2011 ANSI C11 standard (+7 kulcsszó)</li>
+</ul>
+
+<p>Mi döntően az 1989-es ANSI C-t fogjuk használni.</p>
+
+<h2 id="fordts-szerkeszts-vgrehajts">Fordítás, szerkesztés, végrehajtás</h2>
+
+<h3 id="fordts-vagy-intrepretls">Fordítás vagy intrepretálás</h3>
+
+<p>A programozási nyelvek egy jó részét a <strong>fordítóprogram</strong> (több lépésben)
+ún. <strong>tárgykóddá</strong> (object code) fordítja. A tárgykód már az adott hardvernek
+megfelelő gépi kódú utasításokat tartalmazza, optimalizált, de még 
+tartalmaz(hat) fel nem oldott hivatkozásokat, pl. globális változókra vagy
+meghívott, de máshol implementált függvényekre. A tárgykód már nyelvfüggetlen 
+formátum, akár különböző nyelvekből készült tágykódok (C, Pascal, Fortran) is
+együttműködhetnek.</p>
+
+<p>A hivatkozásokat a <strong>szerkesztő</strong> (linker) oldja fel, más tárgykódokból, vagy
+könyvtárakból. A <strong>könyvtár</strong> (library) lényegében szerkesztésre optimalizált
+tárgykódok halmaza (tárgykódból is készítjük el). Ilyen szerkeztéskor 
+alkalmazott könyvtár a nyelv szabványos könyvtára (standard library).</p>
+
+<p>A szerkesztés történhet <strong>statikusan</strong>, amikor a <strong>végrehajtható</strong> (executable)
+állományba belekerül a hivatkozott kód. A másik mód, a <strong>dinamikus</strong> 
+szerkesztés, ekkor a végrehajtandó állományba csak egy kis kódrészlet kerül be,
+és a hivatkozott kód a program futási idejében kerül feloldásra.</p>
+
+<p>Unix rendszerekben a tárgykódok konvencionálisan .o kiterjesztésűek 
+(Windows-on .obj), a statikus könyvtárak .a (archive) (Windows-on .LIB), 
+a dinamikus könyvtárak .so (shared object) (Windows-on .DLL) kiterjesztésűek.</p>
+
+<pre><code>  előfordítás      fordítás       szerkesztés    végrehajtás
+(preprocessing)   (compiling)       (linking)    (executing)
+
+header      source      object       library
+
+  a.h
+  b.h   -&gt;    b.c    -&gt;   b.o  ---------|
+                                        -----&gt;    a.out (b.exe)
+  e.h                                   |            |
+  f.h   -&gt;    d.c    -&gt;   d.o  ---------|            |futási idő
+                                        |            |
+  g.h   -&gt;    g.c    -&gt;   g.o           |            |
+  h.h   -&gt;    h.c    -&gt;   h.o    -&gt;   h.a  (h.lib)   |
+                                       archive       |
+  i.h   -&gt;    i.c    -&gt;   i.o                        |
+  j.h   -&gt;    j.c    -&gt;   j.o    -&gt;   j.so (j.dll) --|
+                                      shared object
+</code></pre>
+
+<p>Más programozási nyelveket <strong>interpreter</strong> hajt végre. Az interpreter egy
+önálló program, ami olvassa a végrehajtandó program forrását és lépésenként
+végrehajtja. Az ilyen nyelvek sokkal rugalmasabbak (akár önmódosíthatóak) is 
+lehetnek. Gyakran az interpretált nyelvek elő-ellenőrzést vagy előfordítást
+is alkalmaznak.</p>
+
+<p>A Java nyelv <em>közbülső</em> kódra (Java bytecode) fordít, amit a Java Virtuális Gép
+(JVM, Java Virtual Machine) lényegében intrepreterként hajt végre. Valójában
+számos hibrid megoldást alkalmaznak, pl. Just In Time compiler-t (JIT), ami
+a sűrűn végrehajtott bájtkódot gépi kódra fordítja, így azokat sokkal 
+gyorsabban tudja végrehajtani.</p>
+
+<h3 id="az-els-c-program-hello-world">Az első C program: hello world</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>cat hello.c</code></pre></div>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;hello world</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">);</span>
+<span class="lineno">5</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>   
+<span class="lineno">6</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># compile + link</span>
+<span class="nv">$ </span>gcc  hello.c
+
+<span class="c"># execute</span>
+<span class="nv">$ </span>./a.out
+
+<span class="c"># compile + link + set warnings on</span>
+<span class="nv">$ </span>gcc -ansi -pedantic -Wall -W hello.c
+
+<span class="c"># c11 mode</span>
+<span class="nv">$ </span>gcc -std<span class="o">=</span>c11 -ansi -pedantic -Wall -W hello.c
+
+<span class="c"># set output name to a.exe</span>
+<span class="nv">$ </span>gcc -std<span class="o">=</span>c11 -ansi -pedantic -Wall -W hello.c -o a.exe</code></pre></div>
+
+<p>Mindezt külön lépésekben is elvégezhetjük:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># compile only</span>
+<span class="nv">$ </span>gcc -c  hello.c
+<span class="nv">$ </span>ls
+hello.o
+
+<span class="c"># will call the linker </span>
+<span class="nv">$ </span>gcc hello.o
+
+<span class="c"># calls the compiler for all sources then calls the linker</span>
+<span class="nv">$ </span>gcc  a.c  b.c  d.o  e.a  f.so</code></pre></div>
+
+<h3 id="fordtsi-hibk-figyelmeztetsek-warning-ok">Fordítási hibák, figyelmeztetések (warning-ok)</h3>
+
+<p>Ha szinaktikus hibát vétünk, a fordító hibaüzenetet ad, nem készül el a
+tárgykód, a linkelési lépésre nem kerül sor.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  BAD VERSION !!!</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Missing semicolon</span>
+<span class="lineno"> 4</span> <span class="cm"> */</span>
+<span class="lineno"> 5</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 6</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="c1">// missing ;</span>
+<span class="lineno"> 9</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall m.c 
+m.c: In <span class="k">function</span> ‘main’:
+m.c:6:28: error: expected expression before ‘/’ token
+   <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;hello world\n&quot;</span><span class="o">)</span> // missing <span class="p">;</span>
+                            ^</code></pre></div>
+
+<p>Ha hibát vétünk, de a fordító még képes a forráskódot lefordítani (de elég 
+gyanús az eredmény), a fordító figyelmeztetést (warning-ot) ad:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  BAD VERSION !!!</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Missing header</span>
+<span class="lineno"> 4</span> <span class="cm"> */</span>
+<span class="lineno"> 5</span> <span class="c1">// #include &lt;stdio.h&gt;</span>
+<span class="lineno"> 6</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="lineno"> 9</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall -std<span class="o">=</span>c11 hello2.c -c
+hello2.c: In <span class="k">function</span> ‘main’:
+hello2.c:6:3: warning: implicit declaration of <span class="k">function</span> ‘printf’ <span class="o">[</span>-Wimplicit-function-declaration<span class="o">]</span>
+   <span class="nb">printf</span><span class="o">(</span><span class="s2">&quot;hello world\n&quot;</span><span class="o">)</span><span class="p">;</span>
+   ^
+hello2.c:6:3: warning: incompatible implicit declaration of built-in <span class="k">function</span> ‘printf’</code></pre></div>
+
+<p>A figyelmeztetések komoly dolgok a C-ben, úgy kell kezelnünk őket, mint
+a fordító által adott szintaktikus hibákat. Csak nagyon kivételes esetekben
+(és csak amikor teljesen biztosak vagyunk magunkban) szabad őket figyelmen
+kívül hagyni. A helyes szokás <em>warning-free</em> kódot írni.</p>
+
+<p>Előfordulhat hiba a szerkesztési fázisban is. Ha pl. egy olyan függvényt
+próbálunk meghívni, amit egyetlen összeszerkesztendő állományban sincsen,
+vagy éppenséggel egynél többször szerepel azokban, szerkesztési hibát kapunk.</p>
+
+<h2 id="statikus-vagy-dinamikus-tpusrendszer">Statikus vagy dinamikus típusrendszer</h2>
+
+<p>A programozási nyelvek egy részénél a fordítóprogram már a fordítási időben
+minden egyes részkifejezésről el tudja dönteni, hogy az milyen típusú. Ezeket
+a nyelveket <strong>statikus típusrendszer</strong>-rel rendelkezőnek nevezzük. Ennek 
+vannak előnyei, hiszen a nyelv alaposabb ellenőrzéseket tud végrehajtani és 
+optimálisabb kódot is tud generálni. Ilyen nyelv a Fortran, Algol, C, Pascal,
+C++, Java, C#, Go.</p>
+
+<p>Más nyelveknél, legtöbbször az interpretált nyelveknél, egy változó idővel más
+típusú értékekre is hivatkozhat. Ilyenkor a fordító futási időben kezeli a 
+típusinformációkat. Ezt <strong>dinamikus típusrendszer</strong>-nek nevezzük. Ilyen nyelv 
+pl. a Python.</p>
+
+<p>Mindez nem jelenti, hogy a dinamikus típusrendszer nem ellenőrheti a típusok
+alkalmazását, sőt helytelen alkalmazás hibát okozhat. Azokat a nyelveket, ahol 
+ilyen hibák előfordulnak <strong>erősen típusos</strong>-nak nevezzük, szemben a <strong>gyengén 
+típusos</strong> nyelvekkel.</p>
+
+<p>A C erősen típusos statikus típusrendszerrel rendelkező nyelv, a Python erősen
+típusos dinamikus típusrendszerű.</p>
+
+<h3 id="a-msodik-c-program-fahrenheit---celsius-konverzi">A második C program: Fahrenheit - Celsius konverzió</h3>
+
+<p>(avagy <em>A jó, a rossz és a csúf</em> <a href="https://www.imdb.com/title/tt0060196/">imdb</a>)</p>
+
+<p>A feladat -100 és +400 közötti Fahrenheit értékek Celsius megfelelőinek 
+kiírása 100-as lépésközzel.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  BAD VERSION !!!</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="lineno">12</span>   <span class="p">{</span>
+<span class="lineno">13</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %d,</span><span class="se">\t</span><span class="s">Cels = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="o">*</span><span class="p">(</span><span class="n">fahr</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">14</span>   <span class="p">}</span>
+<span class="lineno">15</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall -std<span class="o">=</span>c11 fahrenheit.c -o fahrenheit
+
+<span class="nv">$ </span>./fahrenheit
+<span class="nv">Fahr</span> <span class="o">=</span> -100,	<span class="nv">Cels</span> <span class="o">=</span> 0
+<span class="nv">Fahr</span> <span class="o">=</span> 0,	<span class="nv">Cels</span> <span class="o">=</span> 0
+<span class="nv">Fahr</span> <span class="o">=</span> 100,	<span class="nv">Cels</span> <span class="o">=</span> 0
+<span class="nv">Fahr</span> <span class="o">=</span> 200,	<span class="nv">Cels</span> <span class="o">=</span> 0
+<span class="nv">Fahr</span> <span class="o">=</span> 300,	<span class="nv">Cels</span> <span class="o">=</span> 0
+<span class="nv">Fahr</span> <span class="o">=</span> 400,	<span class="nv">Cels</span> <span class="o">=</span> 0</code></pre></div>
+
+<p>A hiba oka, hogy a statikus típusrendszerben a fordító fordítási időben 
+eldönti, hogy mi az 5/9 részkifejezés típusa. Mivel 5 és 9 típusa is <strong>int</strong>,
+ez lesz az eredmény típusa is. A konkrét számértékek közömbösek. Az így kapott 
+egész osztás eredménye pedig 0.</p>
+
+<p>Mi más lehetne két egész szám hányadosa? Bizonyos programozási nyelvek más
+jelölést használnak az egész és a lebegőpontos osztás jelölésére. A Pascal 
+pl. a <strong>div</strong> operátort használja egész, és a <strong>/</strong> operátort lebegőpontos
+eredmény létrehozásásra. A Python3-ban a <strong>/</strong> lebegőpontos eredményt ad 
+(a Python2-ben még nem!). Viszont ezek a példák sem kivételek: a Pascal és 
+Python3 <strong>/</strong> művelete <em>mindig</em> lebegőpontos eredményt ad, akkor is, ha 
+matematikailag a hányados egész lenne, pl. 4/2.</p>
+
+<p>Próbáljuk ki 5/9 helyett az 5./9. kifejezést. (Valójában elég lenne 5./9 is,
+mert ha az egyik operátor lebegőpontos, akkor a C a másikat is azzá 
+konvertálja).</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  BAD VERSION !!!</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="lineno">12</span>   <span class="p">{</span>
+<span class="lineno">13</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %d,</span><span class="se">\t</span><span class="s">Cels = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span><span class="o">*</span><span class="p">(</span><span class="n">fahr</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">14</span>   <span class="p">}</span>
+<span class="lineno">15</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall fahrenheit.c -o fahrenheit
+fahrenheit.c: In <span class="k">function</span> ‘main’:
+fahrenheit.c:17:5: warning: format ‘%d’ expects argument of <span class="nb">type</span> ‘int’, but argument <span class="m">3</span> has <span class="nb">type</span> ‘double’ <span class="o">[</span>-Wformat<span class="o">=]</span>
+     <span class="nb">printf</span><span class="o">(</span> <span class="s2">&quot;Fahr = %d,\tCels = %d\n&quot;</span>, fahr, 5./9.*<span class="o">(</span>fahr-32<span class="o">)</span> <span class="o">)</span><span class="p">;</span>
+     ^
+
+<span class="nv">$ </span>./fahrenheit 
+<span class="nv">Fahr</span> <span class="o">=</span> -100,	<span class="nv">Cels</span> <span class="o">=</span> 913552376
+<span class="nv">Fahr</span> <span class="o">=</span> 0,	<span class="nv">Cels</span> <span class="o">=</span> -722576928
+<span class="nv">Fahr</span> <span class="o">=</span> 100,	<span class="nv">Cels</span> <span class="o">=</span> -722576928
+<span class="nv">Fahr</span> <span class="o">=</span> 200,	<span class="nv">Cels</span> <span class="o">=</span> -722576928
+<span class="nv">Fahr</span> <span class="o">=</span> 300,	<span class="nv">Cels</span> <span class="o">=</span> -722576928
+<span class="nv">Fahr</span> <span class="o">=</span> 400,	<span class="nv">Cels</span> <span class="o">=</span> -722576928</code></pre></div>
+
+<p>Még mindig hibás a program. Most a Celsius értéket helyesen számoltuk ki, 
+a típusa <strong>double</strong>, de a kiíráskor egész számként próbáljuk kiírni a <em>%d</em> 
+formátummal. Egy pl. 8 bájtos lebegőpontos számot adunk át paraméterként
+és az első 4 bájtját próbáljuk egész számkét értelmezni. Ez értelemszerűen
+hibához vezet.</p>
+
+<p>A C nyelvben paraméterátadáskor csak akkor történik konverzió, ha a 
+hívott függvényt teljes paraméterlistával előzetesen deklaráljuk. A 
+printf esetében a paraméterek feloldása futási időben történik.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  UGLY VERSION</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="lineno">12</span>   <span class="p">{</span>
+<span class="lineno">13</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %d,</span><span class="se">\t</span><span class="s">Cels = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span><span class="o">*</span><span class="p">(</span><span class="n">fahr</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">14</span>   <span class="p">}</span>
+<span class="lineno">15</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall fahrenheit.c -o fahrenheit
+
+<span class="nv">$ </span>./fahrenheit 
+<span class="nv">Fahr</span> <span class="o">=</span> -100,	<span class="nv">Cels</span> <span class="o">=</span> -73.333333
+<span class="nv">Fahr</span> <span class="o">=</span> 0,	<span class="nv">Cels</span> <span class="o">=</span> -17.777778
+<span class="nv">Fahr</span> <span class="o">=</span> 100,	<span class="nv">Cels</span> <span class="o">=</span> 37.777778
+<span class="nv">Fahr</span> <span class="o">=</span> 200,	<span class="nv">Cels</span> <span class="o">=</span> 93.333333
+<span class="nv">Fahr</span> <span class="o">=</span> 300,	<span class="nv">Cels</span> <span class="o">=</span> 148.888889
+<span class="nv">Fahr</span> <span class="o">=</span> 400,	<span class="nv">Cels</span> <span class="o">=</span> 204.444444</code></pre></div>
+
+<p>Most már működik, de az input nem szépen formázott. Ráadásul a program 
+közepén van egy bonyolult képlet. Refaktoráljuk ki ezt a képletet egy 
+önálló függvénybe.</p>
+
+<p>Figyeljük meg, hogy a függvény <strong>szignatúrája</strong> (signature) 
+<strong>double fahr2cels(double)</strong>, ezért az <strong>int</strong> típusú <em>aktuális</em> paraméter
+lebegőpontossá konvertálva adódik át. A <strong>%7.2f</strong> formátum 7 karakter 
+szélességben, 2 tizedesre kerekítve írja ki az eredményt.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  OK</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="kt">double</span> <span class="nf">fahr2cels</span><span class="p">(</span> <span class="kt">double</span> <span class="n">f</span><span class="p">)</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="k">return</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="o">-</span><span class="mi">32</span><span class="p">);</span>
+<span class="lineno">10</span> <span class="p">}</span>
+<span class="lineno">11</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">12</span> <span class="p">{</span>
+<span class="lineno">13</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="mi">400</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="lineno">16</span>   <span class="p">{</span>
+<span class="lineno">17</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %4d,</span><span class="se">\t</span><span class="s">Cels = %7.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="n">fahr</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">18</span>   <span class="p">}</span>
+<span class="lineno">19</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -W -Wall fahrenheit.c -o fahrenheit
+
+<span class="nv">$ </span>./fahrenheit 
+<span class="nv">Fahr</span> <span class="o">=</span> -100,	<span class="nv">Cels</span> <span class="o">=</span>  -73.33
+<span class="nv">Fahr</span> <span class="o">=</span>    0,	<span class="nv">Cels</span> <span class="o">=</span>  -17.78
+<span class="nv">Fahr</span> <span class="o">=</span>  100,	<span class="nv">Cels</span> <span class="o">=</span>   37.78
+<span class="nv">Fahr</span> <span class="o">=</span>  200,	<span class="nv">Cels</span> <span class="o">=</span>   93.33
+<span class="nv">Fahr</span> <span class="o">=</span>  300,	<span class="nv">Cels</span> <span class="o">=</span>  148.89
+<span class="nv">Fahr</span> <span class="o">=</span>  400,	<span class="nv">Cels</span> <span class="o">=</span>  204.44</code></pre></div>
+
+<p>A programot még tovább javíthatjuk a kódban szereplő <em>mágikus konstansok</em>
+kiemelésével. Ebben a verzióban <strong>előfordító direktívákat</strong> (preprocessor 
+directive) alkalmazunk, hogy a program konstansait megadjuk.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  OK, with #define</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="cp">#define LOWER -100</span>
+<span class="lineno"> 8</span> <span class="cp">#define UPPER  400</span>
+<span class="lineno"> 9</span> <span class="cp">#define STEP   100</span>
+<span class="lineno">10</span> <span class="kt">double</span> <span class="nf">fahr2cels</span><span class="p">(</span> <span class="kt">double</span> <span class="n">f</span><span class="p">)</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="k">return</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="o">-</span><span class="mi">32</span><span class="p">);</span>
+<span class="lineno">13</span> <span class="p">}</span>
+<span class="lineno">14</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">15</span> <span class="p">{</span>
+<span class="lineno">16</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="n">LOWER</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="n">UPPER</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="n">STEP</span> <span class="p">)</span>
+<span class="lineno">19</span>   <span class="p">{</span>
+<span class="lineno">20</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %4d,</span><span class="se">\t</span><span class="s">Cels = %7.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="n">fahr</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">21</span>   <span class="p">}</span>
+<span class="lineno">22</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">23</span> <span class="p">}</span></code></pre></div>
+
+<p>A következő verzióban névvel ellátott konstansokat alkalmazunk ugyanerre.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> *  OK, with const</span>
+<span class="lineno"> 3</span> <span class="cm"> *  Convert Fahrenheit to Celsius</span>
+<span class="lineno"> 4</span> <span class="cm"> *  between -100F and +400F  by 100F  </span>
+<span class="lineno"> 5</span> <span class="cm"> */</span>
+<span class="lineno"> 6</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 7</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">lower</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+<span class="lineno"> 8</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">upper</span> <span class="o">=</span>  <span class="mi">400</span><span class="p">;</span>
+<span class="lineno"> 9</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">step</span>  <span class="o">=</span>  <span class="mi">100</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="kt">double</span> <span class="nf">fahr2cels</span><span class="p">(</span> <span class="kt">double</span> <span class="n">f</span><span class="p">)</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="k">return</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="o">-</span><span class="mi">32</span><span class="p">);</span>
+<span class="lineno">13</span> <span class="p">}</span>
+<span class="lineno">14</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">15</span> <span class="p">{</span>
+<span class="lineno">16</span>   <span class="kt">int</span> <span class="n">fahr</span><span class="p">;</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>   <span class="k">for</span> <span class="p">(</span> <span class="n">fahr</span> <span class="o">=</span> <span class="n">lower</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">+=</span> <span class="n">step</span> <span class="p">)</span>
+<span class="lineno">19</span>   <span class="p">{</span>
+<span class="lineno">20</span>     <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;Fahr = %4d,</span><span class="se">\t</span><span class="s">Cels = %7.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="n">fahr</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">21</span>   <span class="p">}</span>
+<span class="lineno">22</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">23</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="ajnlott-feladatok">Ajánlott feladatok:</h2>
+
+<ol>
+  <li>
+    <p>Hozzon létre egy programot, ami kiírja a nevét. Fordítsa le, szerkessze, 
+futtassa.</p>
+  </li>
+  <li>
+    <p>Vágja ketté az előző programot két forrásfájlra. Az egyik visszaadja a 
+nevét, a másik kiírja. Tipp: a nevet visszaadó függvény szignatúrája legyen<br />
+<strong>char *my_name(void)</strong>. A printf-ben használja a kiíráshoz a <strong>%s</strong> 
+formátumot.</p>
+  </li>
+</ol>
+
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

@@ -1,0 +1,43 @@
+Introduction:
+  - name
+  - e-mail
+  - some words about me
+
+Useful links:
+  - lambda.inf.elte.hu/fp
+  - bead.inf.elte.hu
+  - hoogle
+  - learn you a haskell for great good
+  - https://www.haskell.org/platform/ (for GHC installation)
+
+Requirements:
+  weekly homework:
+    - all excercises must be submitted
+    - at most 1 week delay
+    - can be substituted with an optional assignment
+  feedback test:
+    - no marks, just for feedback
+    - compulsory
+    - during practice
+  final test:
+    - 20 simple choice questions
+    - one longer programming exercise
+    - its grade will be your final grade
+
+Syllabus:
+  functional thinking:
+    - recursion
+    - higher-order functions
+    - introduction to ADTs
+  great features of Haskell:
+    - laziness
+    - purity
+    - composability
+    - strong, static type system
+    - has interpreter
+
+
+Setup:
+  - GHCi, Haskell Platform
+  - VSCode, syntax highlight
+  - creating our first module

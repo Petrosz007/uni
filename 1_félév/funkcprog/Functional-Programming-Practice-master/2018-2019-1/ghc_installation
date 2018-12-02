@@ -1,0 +1,14 @@
+A GHC fordítóprogram telepítése, és használata:
+
+- a https://www.haskell.org/platform/ honlapról töltsük le, és telepítsük a Haskell Platform(*)-ot
+- ezután a hs kiterjesztésű fájlokat elvileg fel fogja ismerni a rendszer
+- a ghci parancs elérhetővé válik command line-ból, amelyet shift + right-click-kel nyithatunk meg (Console window, Power Shell window)
+- ghci <fájlnév>-vel, vagy a modulunkra duplán kattintva betölthetjük azt az interpreterbe (GHCi)
+- a modulunkat a :r paranccsal tölhetjük újra
+
+Szövegszerkesztő:
+- ajánlott: https://code.visualstudio.com/
+- letöltése után: Extensions/Haskell Syntax Highlight
+- reload
+
+(*) A Haskell Platform a GHC-n túl tartalmaz egyéb programokat is. Ha kevés a hely, vagy egyéb okok miatt nem szeretnénk telepíteni a teljes Haskell Platform-ot, úgy elegendő csupán a GHC letöltése/telepítése.

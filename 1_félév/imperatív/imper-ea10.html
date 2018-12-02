@@ -1,0 +1,885 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-10/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-10">Imperatív programozás 10.</h1>
+
+<h1 id="tpusabsztrakci">Típusabsztrakció</h1>
+
+<h2 id="komponensek">Komponensek</h2>
+
+<p>Nagy programok esetében nem reális, hogy az elejétől a végéig minden részét 
+mi írjuk meg. Ez részben igen sok munkaóra lenne (ne csak a fejlesztési időt, 
+hanem a tesztelést, és a későbbi karbantartást is vegyük figyelembe), részben
+pedig felesleges is: nagy valószínűséggel számos komponensre másoknak is 
+szüksége volt már, és ezek a komponensek léteznek.</p>
+
+<p>A többszöri újrafelhasználásra szánt szoftverkomponenseket <strong>könyvtárak</strong>-nak
+(library) nevezzük. A legtöbb programozási nyelv rendelkezik egy olyan 
+<strong>szabványos könyvtárral</strong> (standard library), ami a legalapvetőbb 
+funkcionalitást biztosítja: input/output, stringműveletek, alapvető 
+matematikai műveletek, stb. Ezen felül egyes nyelvek számos további 
+szolgáltatást biztosíthatnak: a <strong>C++ STL</strong> szabványos adatszerkezeteket 
+és rajtuk végrehajtható általános algoritmusokat szolgáltat,
+a <strong>Java</strong> nagyszámoú könyvtára között pedig <em>grafikus interfészt</em>, 
+<em>adatbázis-</em> és <em>hálózatkezelést</em> és rengeteg más komponenst találunk.
+A C nyelv szabványos könyvtára a kisebbek közé tartozik.</p>
+
+<p>A könyvtárak megjelenési formája gyakran a nyelv által támogatott programozási
+paradigmától függ: Java-ban, C#-ban gyakran <em>osztálykönyvtárakként</em> valósulnak 
+meg, C++-ban sokszor <em>template</em> osztályok és függvények. A procedurális C-ben, 
+többnyire <em>függvénykönyvtárakat</em> találunk. Azt a kódot, amelyik felhasználja
+a könyvtárat, felhasználói, vagy <strong>kliens</strong> kódnak nevezzük.</p>
+
+<h2 id="interfsz-s-implementci">Interfész és implementáció</h2>
+
+<p>Egy (akár hardver- akár szoftver-) komponens pontosan meghatározott módon 
+kell kommunikáljon az őt használó többi komponenssel. Fontos, hogy ezen
+a felületen kívül ne lehessen elérni a komponens belsejét. Ezt a felületet
+a komponens <strong>interfészének</strong> (interface) nevezzük. Az interfész egyfajta
+<em>szerződés</em> a komponens (létrehozója) és az azt használók (szoftverek) 
+között: a komponens ezen keresztül garantál egy funkcionalitást, amire a
+felhasználók (szoftverek) építhetnek. Másrészről, mivel a kliensek <em>csak</em>
+ezen a felületen keresztül érhetik el a szolgáltatásokat, azok megvalósítása,
+azaz az <strong>implementáció</strong> (implementation) teljes egészében a komponens 
+megvalósítójának kezében van, azon szükség esetén (bizonyos kereteken belül)
+módosíthat is.</p>
+
+<p>Az interfész sokféle összetevőből állhat: <em>konstansok</em>, <em>adattípusok</em>, 
+<em>függvények</em>, <em>kivételek</em> akár még <em>változók</em> is. Az alábbi példában egy 
+<em>dátum</em> komponens látható.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">struct</span> <span class="n">date</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+<span class="lineno"> 5</span>   <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>   
+<span class="lineno"> 6</span> <span class="p">};</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="k">struct</span> <span class="n">date</span> <span class="n">exam</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">};</span> <span class="cm">/* mezőnkénti inicializálás  */</span>
+<span class="lineno">11</span>   <span class="o">++</span><span class="n">exam</span><span class="p">.</span><span class="n">day</span><span class="p">;</span>                         <span class="cm">/* egy nappal elhalasztva    */</span>
+<span class="lineno">12</span>   <span class="n">exam</span><span class="p">.</span><span class="n">day</span> <span class="o">+=</span> <span class="mi">40</span><span class="p">;</span>                     <span class="cm">/* valószínűleg hiba         */</span>
+<span class="lineno">13</span> <span class="p">}</span></code></pre></div>
+
+<p>Ha van valamilyen komponens szintű állandó, akkor azt nyugodtan definiálhatjuk
+<em>csak olvasható</em> (constant, immutable) változónak. Amennyiben aznban 
+írható/olvasható változóink vagy adattagjaink vannak, akkor nehéz 
+megakadályozni, hogy a kliens hibás adatot (január 42-e, vagy február
+30-a) állítson be. Ezért gyakoribb, hogy változók helyett <em>alprogramok</em>-at
+(<em>függvény</em>, <em>metódus</em>, <em>property</em>) használunk.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">struct</span> <span class="n">date</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+<span class="lineno"> 5</span>   <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>   
+<span class="lineno"> 6</span> <span class="p">};</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="k">struct</span> <span class="n">date</span> <span class="n">exam</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">};</span> <span class="cm">/* mezőnkénti inicializálás  */</span>
+<span class="lineno">11</span>   <span class="n">nextDate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exam</span><span class="p">);</span>                    <span class="cm">/* egy nappal elhalasztva    */</span>
+<span class="lineno">12</span>   <span class="n">addDate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exam</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span>                  <span class="cm">/* lekezeli a hónap végét    */</span>
+<span class="lineno">13</span> <span class="p">}</span></code></pre></div>
+
+<p>Egy eljárás, mint az <em>addDate()</em> ellenőrizni tudja a paramétereit, illetve 
+a dátum szemantikájának megfelelően hajtja végre a növelést, pl növeli a 
+hónap vagy év értékét is. A fent C példában azért adtuk át az interfész
+függvényeknek a dátum objektum <em>címét</em>, mert csak így tudjuk módosítani 
+magát az objektumot.</p>
+
+<p>A klienssel közölni kell, hogy milyen módon tudja használni a könyvtárat.
+Ez aalpján a fordítóprogram képes (valamilyen szinten) ellenőrizni ezt a 
+használatot és jelenzi, ha valamol eltértünk a megfelelő módtól.
+Ez java-ban az <strong>import</strong>, C#-ban a <strong>use</strong> utasításal történik. 
+C-ben és C++-ban a felhasználni kívánt könyvtár headerének include-ja
+segítségével tesszük meg.</p>
+
+<h3 id="megjegyzsek">Megjegyzések</h3>
+
+<ol>
+  <li>
+    <p>Példa az implementáció/interfész szétválasztására: A UNIX operációs 
+rendszert pl. csak a megfelelő rendszerhívásokon keresztül lehet elérni. Ez 
+egy hosszútávon stabil felület, akár 20+ évvelezelőtt megírt rendszerprogramok 
+is lefordulnak és futnak. Másrészt a rendszerhívások mögött a javítások, 
+fejlesztések folyamatosak lehetnek.</p>
+  </li>
+  <li>
+    <p>A C és C++ nyelvekben egy komoly korlát lehet a <em>bináris kmpatibilitás</em> 
+megőrzése, amire akkor van szükség, ha <em>dinamikus szerkesztésű</em> programok 
+esetén megváltoztatjuk a könyvtárat. Ennek az oka a C és C++ nyelvek <em>érték
+szemantikája</em>, azaz a kliensnek pl. tudnia kell, hány bájt méretű egy változó
+vagy függvényparaméter. ha pl. a fenti programban megváltozik a <em>struct date</em> 
+struktúra szerkezete, akkor nem csak a dátum komponenst, hanem a dátumot
+felhasználó kliens programokat is újra kell fordítani.</p>
+  </li>
+</ol>
+
+<h2 id="egysgbezrs">Egységbezárás</h2>
+
+<p>A fenti dátum példához megadhatunk egy teljes értékű interfészt, ami 
+alapján a kliens programok a teljes funkcionalitást fel tudják 
+használni. De hogyan tudjuk megakadályozni, hogy a kliens az interfészt
+megkerülve közvetlenül elérje az implementációt?</p>
+
+<p>Azokat a programnyelvi mehanizmusokat, amelyek az implementáció elérését
+megakadályozzák és rákényszeríti a klienst az interfész felhasználására 
+kényszeríti, <strong>egységbezárás</strong>-nak (enkapszuláció, encapsulation, information
+hiding) nevezzük.</p>
+
+<p>A különböző programozási paradigmák eltérő eszközöket adnak és az egyes 
+nyelvek is eltérő mélységben támogatják ezeket. Az objektum-orientált
+nyelvekben pl. az adattagok és metódusok elérési jogai (access modifiers)<br />
+(pl. public, protected, private) teszik lehetővé az információ elrejtését.
+A class <strong>private</strong> vagy <strong>protected</strong> neveit nem érhetjük el az osztályon 
+kívülről, az <em>fordítási időben</em> szintaktikus hibát okoz.</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">date</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span> <span class="k">public</span><span class="o">:</span>
+<span class="lineno"> 4</span>   <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">);</span>
+<span class="lineno"> 5</span>   <span class="kt">void</span> <span class="nf">next</span><span class="p">();</span>
+<span class="lineno"> 6</span>   <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+<span class="lineno"> 7</span>   <span class="kt">int</span>  <span class="n">getYear</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="lineno"> 8</span>   <span class="kt">int</span>  <span class="n">getMonth</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span>  <span class="n">getday</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="k">private</span><span class="o">:</span>
+<span class="lineno">11</span>   <span class="kt">int</span> <span class="n">year</span><span class="p">;</span>
+<span class="lineno">12</span>   <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>   
+<span class="lineno">14</span> <span class="p">};</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno">17</span> <span class="p">{</span>
+<span class="lineno">18</span>   <span class="n">date</span> <span class="n">exam</span><span class="p">;</span>
+<span class="lineno">19</span>   <span class="n">exam</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">);</span>        <span class="cm">/* inicializálás                */</span>
+<span class="lineno">20</span>   <span class="n">exam</span><span class="p">.</span><span class="n">next</span><span class="p">()</span>  <span class="p">;</span>               <span class="cm">/* egy nappal elhalasztva       */</span>
+<span class="lineno">21</span>   <span class="n">exam</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>                <span class="cm">/* lekezeli a hónap végét       */</span>
+<span class="lineno">22</span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">exam</span><span class="p">.</span><span class="n">getDay</span><span class="p">();</span>       <span class="cm">/* ok                           */</span>
+<span class="lineno">23</span>   <span class="n">exam</span><span class="p">.</span><span class="n">day</span> <span class="o">+=</span> <span class="mi">40</span><span class="p">;</span>              <span class="cm">/* syntax error: day is private */</span>
+<span class="lineno">24</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="enkapszulci-c-ben">Enkapszuláció C-ben</h2>
+
+<p>Az alábbi példa  egy dinamikusan növekvő vektor típus megvalósítása, hasonló, 
+mint ami a C++ standard könyvtár <strong>std::vector</strong> típusa. Az interfészt 
+jelentősen leegyszerűstettük az std::vector-hoz képest.</p>
+
+<ol>
+  <li>Létre tudunk hozni egy üres vektort (vectorCreate)</li>
+  <li>Be tudunk szúrni egy új elemet a vektor végére (vectorPushBack)</li>
+  <li>Törölhetjük a vektor utolsó elemét (vectorPopBack)</li>
+  <li>Írhatjuk a vekror i-edik elemét, ha i kisebb, mint a méret (vectorSet)</li>
+  <li>Olvashatjuk a vekror i-edik elemét, ha i kisebb, mint a méret (vectorGet)</li>
+  <li>Lekérdezhetjük a vektor elemeinek számát (vectorSize)</li>
+  <li>Lekérdezetjük az implementációs buffer méretét (vectorCapacity)</li>
+  <li>Törölhetjük a vektort, annak tartalmával együtt (vectorDestroy)</li>
+  <li>Átmásolhatjuk a vektor tartalmát egy másik vektorba (vectorCopy)</li>
+  <li>Átmozgathatjuk a vektor adatait, a régi vektor üres lesz (vectorMove)</li>
+</ol>
+
+<p>A hibaüzeneteket a <strong>vectorErrno</strong> globális változóból tudjuk kiolvasni.</p>
+
+<p>A felhasználó például így szeretné használni a vector könyvtárat:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="cp">#include &quot;vector.h&quot;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>                                        <span class="cm">/* így nézne ki C++-ban */</span>  
+<span class="lineno"> 7</span>   <span class="kt">vector_t</span> <span class="n">vec1</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">();</span>               <span class="cm">/*    vector_t vec1;    */</span>
+<span class="lineno"> 8</span>   <span class="kt">vector_t</span> <span class="n">vec2</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">();</span> 
+<span class="lineno"> 9</span>   <span class="kt">vector_t</span> <span class="n">vec3</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">();</span>   
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span><span class="n">vec1</span><span class="p">));</span>   <span class="cm">/* vec1.size()       */</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>   <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno">14</span>   <span class="p">{</span>
+<span class="lineno">15</span>     <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="n">vectorPushBack</span><span class="p">(</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">);</span>                    <span class="cm">/* vec1.push_back(i) */</span>
+<span class="lineno">17</span>   <span class="p">}</span>
+<span class="lineno">18</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 cap. = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorCapacity</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span> <span class="cm">/* vec1.capacity()*/</span>
+<span class="lineno">19</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>     <span class="cm">/* vec1.size()    */</span>
+<span class="lineno">20</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">vectorGet</span><span class="p">(</span> <span class="n">vec1</span><span class="p">,</span> <span class="mi">42</span><span class="p">));</span>    <span class="cm">/* vec1[42]       */</span>
+<span class="lineno">21</span>   
+<span class="lineno">22</span>   <span class="cm">/* vec2 = vectorCreate();   MEMORY LEAK!! */</span>
+<span class="lineno">23</span>   <span class="n">vectorCopy</span><span class="p">(</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">vec1</span><span class="p">);</span>                            <span class="cm">/* vec2 = vec2    */</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>   <span class="n">vectorSet</span><span class="p">(</span> <span class="n">vec2</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mf">99.99</span><span class="p">);</span>                     <span class="cm">/* vec2[42] = 99.99  */</span>
+<span class="lineno">26</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">vectorGet</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="mi">42</span><span class="p">));</span>  <span class="cm">/* vec1[42]  1764.00 */</span>
+<span class="lineno">27</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">vectorGet</span><span class="p">(</span><span class="n">vec2</span><span class="p">,</span> <span class="mi">42</span><span class="p">));</span>  <span class="cm">/* vec2[42]    99.99 */</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span>   <span class="n">vectorPopBack</span><span class="p">(</span> <span class="n">vec2</span><span class="p">);</span>                            <span class="cm">/* vec2.pop_back()   */</span>
+<span class="lineno">30</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2 cap. = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorCapacity</span><span class="p">(</span> <span class="n">vec2</span><span class="p">));</span> <span class="cm">/*vec2.capacity() */</span>
+<span class="lineno">31</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2 size = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec2</span><span class="p">));</span>     <span class="cm">/* vec2.size()    */</span>
+<span class="lineno">32</span>   
+<span class="lineno">33</span>   <span class="cm">/* vec3 = vectorCreate();   MEMORY LEAK!! */</span>
+<span class="lineno">34</span>   <span class="n">vectorMove</span><span class="p">(</span> <span class="n">vec3</span><span class="p">,</span> <span class="n">vec1</span><span class="p">);</span>                         <span class="cm">/* vec3 = move(vec1) */</span>
+<span class="lineno">35</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec3 size = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec3</span><span class="p">));</span>  <span class="cm">/* vec3.size()       */</span>
+<span class="lineno">36</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>  <span class="cm">/* vec1.size()       */</span>
+<span class="lineno">37</span> 
+<span class="lineno">38</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec1</span><span class="p">);</span>                            <span class="cm">/* destructor        */</span>
+<span class="lineno">39</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec2</span><span class="p">);</span>                            <span class="cm">/* destructor        */</span>
+<span class="lineno">40</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec3</span><span class="p">);</span>                            <span class="cm">/* destructor        */</span>
+<span class="lineno">41</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">42</span> <span class="p">}</span></code></pre></div>
+
+<p>A fenti program lefutása az alábbi eredményt kell szolgáltassa:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="nv">$ </span>gcc -ansi -pedantic -Wall -W vecmain.c vector.c
+<span class="lineno"> 2</span> <span class="nv">$ </span>./a.out
+<span class="lineno"> 3</span> vec1 <span class="nv">size</span> <span class="o">=</span> 0
+<span class="lineno"> 4</span> vec1 cap. <span class="o">=</span> 128
+<span class="lineno"> 5</span> vec1 <span class="nv">size</span> <span class="o">=</span> 100
+<span class="lineno"> 6</span> vec1<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 1764.000000
+<span class="lineno"> 7</span> vec1<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 1764.000000
+<span class="lineno"> 8</span> vec2<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 99.990000
+<span class="lineno"> 9</span> vec2 cap. <span class="o">=</span> 100
+<span class="lineno">10</span> vec2 <span class="nv">size</span> <span class="o">=</span> 99
+<span class="lineno">11</span> vec3 <span class="nv">size</span> <span class="o">=</span> 100
+<span class="lineno">12</span> vec1 <span class="nv">size</span> <span class="o">=</span> 0</code></pre></div>
+
+<p>A <em>vector.h</em> fogja tartalmazni az interfészt. Lényegében egy header fálj, ami az interfész
+függvények és a típusra specifikus konstansok deklarációja.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#ifndef VECTOR_H</span>
+<span class="lineno"> 2</span> <span class="cp">#define VECTOR_H</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="cp">#define VEC_EOK      0</span>
+<span class="lineno"> 5</span> <span class="cp">#define VEC_ENOMEM   1</span>
+<span class="lineno"> 6</span> <span class="cp">#define VEC_EINDEX   2</span>
+<span class="lineno"> 7</span> <span class="cp">#define VEC_EEMPTY   3</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="k">struct</span> <span class="n">VECTOR_S</span><span class="p">;</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="k">typedef</span> <span class="k">struct</span> <span class="n">VECTOR_S</span> <span class="o">*</span><span class="kt">vector_t</span><span class="p">;</span> 
+<span class="lineno">13</span> 
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">vectorErrno</span><span class="p">;</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorCreate</span><span class="p">();</span>
+<span class="lineno">19</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorDestroy</span><span class="p">(</span> <span class="kt">vector_t</span><span class="p">);</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="k">extern</span> <span class="kt">unsigned</span> <span class="nf">vectorSize</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">22</span> <span class="k">extern</span> <span class="kt">unsigned</span> <span class="nf">vectorCapacity</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorCopy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">);</span>
+<span class="lineno">25</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorMove</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">);</span>
+<span class="lineno">26</span> 
+<span class="lineno">27</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorSet</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">);</span>
+<span class="lineno">28</span> <span class="k">extern</span> <span class="kt">double</span>   <span class="nf">vectorGet</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">idx</span><span class="p">);</span>
+<span class="lineno">29</span> 
+<span class="lineno">30</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorPushBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">);</span>
+<span class="lineno">31</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorPopBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span> <span class="cp">#endif </span><span class="cm">/* VECTOR_H */</span><span class="cp"></span></code></pre></div>
+
+<p>Az implementációt a <em>vector1.c</em> forrásfájlban heykezzük el.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">  1</span> <span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="lineno">  2</span> <span class="cp">#include &quot;vector.h&quot;</span>
+<span class="lineno">  3</span> 
+<span class="lineno">  4</span> <span class="cp">#define INIT_CAPACITY 4</span>
+<span class="lineno">  5</span> 
+<span class="lineno">  6</span> <span class="k">struct</span> <span class="n">VECTOR_S</span>
+<span class="lineno">  7</span> <span class="p">{</span>
+<span class="lineno">  8</span>   <span class="kt">unsigned</span>  <span class="n">capacity_</span><span class="p">;</span>
+<span class="lineno">  9</span>   <span class="kt">unsigned</span>  <span class="n">size_</span><span class="p">;</span>
+<span class="lineno"> 10</span>   <span class="kt">double</span>   <span class="o">*</span><span class="n">ptr_</span><span class="p">;</span>
+<span class="lineno"> 11</span> <span class="p">};</span>
+<span class="lineno"> 12</span> 
+<span class="lineno"> 13</span> <span class="kt">int</span> <span class="n">vectorErrno</span><span class="p">;</span>
+<span class="lineno"> 14</span> 
+<span class="lineno"> 15</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">vectorGrowBuffer</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 16</span> <span class="p">{</span>
+<span class="lineno"> 17</span>   <span class="kt">unsigned</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 18</span>   <span class="kt">unsigned</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">?</span> <span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="nl">capacity_</span> <span class="p">:</span> <span class="n">INIT_CAPACITY</span><span class="p">;</span>
+<span class="lineno"> 19</span>  
+<span class="lineno"> 20</span>   <span class="kt">double</span> <span class="o">*</span><span class="n">oldPtr</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">;</span>
+<span class="lineno"> 21</span>   <span class="kt">double</span> <span class="o">*</span><span class="n">newPtr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">newCapacity</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+<span class="lineno"> 22</span> 
+<span class="lineno"> 23</span>   <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">newPtr</span> <span class="p">)</span>
+<span class="lineno"> 24</span>   <span class="p">{</span>
+<span class="lineno"> 25</span>      <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno"> 26</span>      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 27</span>   <span class="p">}</span>
+<span class="lineno"> 28</span>   <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno"> 29</span>     <span class="n">newPtr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">oldPtr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="lineno"> 30</span> 
+<span class="lineno"> 31</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">newCapacity</span><span class="p">;</span>
+<span class="lineno"> 32</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> <span class="n">newPtr</span><span class="p">;</span>
+<span class="lineno"> 33</span>   <span class="n">free</span><span class="p">(</span><span class="n">oldPtr</span><span class="p">);</span>
+<span class="lineno"> 34</span> 
+<span class="lineno"> 35</span>   <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno"> 36</span> <span class="p">}</span>
+<span class="lineno"> 37</span> 
+<span class="lineno"> 38</span> <span class="kt">vector_t</span> <span class="nf">vectorCreate</span><span class="p">()</span>
+<span class="lineno"> 39</span> <span class="p">{</span>
+<span class="lineno"> 40</span>   <span class="kt">vector_t</span> <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="kt">vector_t</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">));</span>
+<span class="lineno"> 41</span>   <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">v</span> <span class="p">)</span>
+<span class="lineno"> 42</span>   <span class="p">{</span>
+<span class="lineno"> 43</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno"> 44</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno"> 45</span>   <span class="p">}</span>
+<span class="lineno"> 46</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 47</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 48</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno"> 49</span> 
+<span class="lineno"> 50</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 51</span>   <span class="k">return</span> <span class="n">v</span><span class="p">;</span>
+<span class="lineno"> 52</span> <span class="p">}</span>
+<span class="lineno"> 53</span> 
+<span class="lineno"> 54</span> <span class="kt">void</span> <span class="nf">vectorDestroy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 55</span> <span class="p">{</span>
+<span class="lineno"> 56</span>   <span class="n">free</span><span class="p">(</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno"> 57</span>   <span class="n">free</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+<span class="lineno"> 58</span> 
+<span class="lineno"> 59</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 60</span>   <span class="k">return</span><span class="p">;</span>
+<span class="lineno"> 61</span> <span class="p">}</span>
+<span class="lineno"> 62</span> 
+<span class="lineno"> 63</span> <span class="kt">unsigned</span> <span class="nf">vectorCapacity</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 64</span> <span class="p">{</span>
+<span class="lineno"> 65</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 66</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span><span class="p">;</span>
+<span class="lineno"> 67</span> <span class="p">}</span>
+<span class="lineno"> 68</span> 
+<span class="lineno"> 69</span> <span class="kt">unsigned</span> <span class="nf">vectorSize</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 70</span> <span class="p">{</span>
+<span class="lineno"> 71</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 72</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno"> 73</span> <span class="p">}</span>
+<span class="lineno"> 74</span> 
+<span class="lineno"> 75</span> <span class="kt">vector_t</span> <span class="nf">vectorCopy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">)</span>
+<span class="lineno"> 76</span> <span class="p">{</span>
+<span class="lineno"> 77</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">target</span> <span class="o">!=</span> <span class="n">source</span> <span class="p">)</span>
+<span class="lineno"> 78</span>   <span class="p">{</span>
+<span class="lineno"> 79</span>     <span class="n">free</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno"> 80</span> 
+<span class="lineno"> 81</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  <span class="cm">/* possibly shrinking */</span>
+<span class="lineno"> 82</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  
+<span class="lineno"> 83</span> 
+<span class="lineno"> 84</span>     <span class="k">if</span> <span class="p">(</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno"> 85</span>     <span class="p">{</span>
+<span class="lineno"> 86</span>       <span class="kt">unsigned</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 87</span>       <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> 
+<span class="lineno"> 88</span>             <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+<span class="lineno"> 89</span>       <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="p">)</span>
+<span class="lineno"> 90</span>       <span class="p">{</span>
+<span class="lineno"> 91</span>         <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno"> 92</span>         <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno"> 93</span>       <span class="p">}</span>
+<span class="lineno"> 94</span>       <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno"> 95</span>         <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="lineno"> 96</span>     <span class="p">}</span>
+<span class="lineno"> 97</span>     <span class="k">else</span>
+<span class="lineno"> 98</span>     <span class="p">{</span>
+<span class="lineno"> 99</span>       <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">100</span>     <span class="p">}</span>
+<span class="lineno">101</span>   <span class="p">}</span>
+<span class="lineno">102</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">103</span>   <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+<span class="lineno">104</span> <span class="p">}</span>
+<span class="lineno">105</span> 
+<span class="lineno">106</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorMove</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">)</span>
+<span class="lineno">107</span> <span class="p">{</span>
+<span class="lineno">108</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">target</span> <span class="o">!=</span> <span class="n">source</span> <span class="p">)</span>
+<span class="lineno">109</span>   <span class="p">{</span>
+<span class="lineno">110</span>     <span class="n">free</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno">111</span> 
+<span class="lineno">112</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">capacity_</span><span class="p">;</span>  
+<span class="lineno">113</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  
+<span class="lineno">114</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">;</span>       <span class="cm">/* move */</span>
+<span class="lineno">115</span>  
+<span class="lineno">116</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">117</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">118</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">119</span>   <span class="p">}</span>
+<span class="lineno">120</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">121</span>   <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+<span class="lineno">122</span> <span class="p">}</span>
+<span class="lineno">123</span> 
+<span class="lineno">124</span> <span class="kt">void</span> <span class="nf">vectorSet</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">)</span>
+<span class="lineno">125</span> <span class="p">{</span>
+<span class="lineno">126</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="p">)</span>
+<span class="lineno">127</span>   <span class="p">{</span>
+<span class="lineno">128</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EINDEX</span><span class="p">;</span>
+<span class="lineno">129</span>     <span class="k">return</span><span class="p">;</span>
+<span class="lineno">130</span>   <span class="p">}</span>
+<span class="lineno">131</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="lineno">132</span> 
+<span class="lineno">133</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">134</span>   <span class="k">return</span><span class="p">;</span>
+<span class="lineno">135</span> <span class="p">}</span>
+<span class="lineno">136</span> 
+<span class="lineno">137</span> <span class="kt">double</span> <span class="nf">vectorGet</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">idx</span><span class="p">)</span>
+<span class="lineno">138</span> <span class="p">{</span>
+<span class="lineno">139</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="p">)</span>
+<span class="lineno">140</span>   <span class="p">{</span>
+<span class="lineno">141</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EINDEX</span><span class="p">;</span>
+<span class="lineno">142</span>     <span class="k">return</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="lineno">143</span>   <span class="p">}</span>
+<span class="lineno">144</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">145</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="lineno">146</span> <span class="p">}</span>
+<span class="lineno">147</span> 
+<span class="lineno">148</span> <span class="kt">void</span> <span class="nf">vectorPushBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">)</span>
+<span class="lineno">149</span> <span class="p">{</span>
+<span class="lineno">150</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">==</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="p">)</span>
+<span class="lineno">151</span>   <span class="p">{</span>
+<span class="lineno">152</span>     <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="n">vectorGrowBuffer</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">)</span>
+<span class="lineno">153</span>       <span class="k">return</span><span class="p">;</span>
+<span class="lineno">154</span>   <span class="p">}</span>
+<span class="lineno">155</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">[</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="lineno">156</span> 
+<span class="lineno">157</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">158</span>   <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">159</span> <span class="p">}</span>
+<span class="lineno">160</span> 
+<span class="lineno">161</span> <span class="kt">void</span> <span class="nf">vectorPopBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno">162</span> <span class="p">{</span>
+<span class="lineno">163</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno">164</span>   <span class="p">{</span>
+<span class="lineno">165</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EEMPTY</span><span class="p">;</span>
+<span class="lineno">166</span>     <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">167</span>   <span class="p">}</span>
+<span class="lineno">168</span>   <span class="o">--</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno">169</span> 
+<span class="lineno">170</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">171</span>   <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">172</span> <span class="p">}</span></code></pre></div>
+
+<p>A fenti megoldás a <strong>double</strong> vektorok egy megfelelő megvalósítása. Mi lesz azonban a
+többi típussal. Hogyan tudjuk álalánosítani a megoldásunkat?</p>
+
+<ol>
+  <li>
+    <p><strong>Példányosítás</strong>: Újabb típusok generálása. Így működnek a C++ <strong>template</strong>-ek, de erre nincsen jó 
+mehanizmus C-ben. Szimulálhatjuk preprocesszor varázslással.</p>
+  </li>
+  <li>
+    <p><strong>Típustörlés</strong>: Minden típust ugyanaz a kódpéldány szolgál ki. Így működik a Java <strong>Generic</strong>. Ezt
+közelítjük az alábbi C megoldással.</p>
+  </li>
+</ol>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="cp">#include &lt;string.h&gt;</span>
+<span class="lineno"> 3</span> <span class="cp">#include &quot;vector.h&quot;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="kt">void</span> <span class="nf">copyDouble</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">tgt</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">)</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="n">memcpy</span><span class="p">(</span><span class="n">tgt</span><span class="p">,</span><span class="n">src</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+<span class="lineno"> 8</span> <span class="p">}</span>	
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="kt">vector_t</span> <span class="n">vec1</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">),</span><span class="n">copyDouble</span><span class="p">);</span> <span class="cm">/* vector_t vec1; */</span>
+<span class="lineno">14</span>   <span class="kt">vector_t</span> <span class="n">vec2</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">),</span><span class="n">copyDouble</span><span class="p">);</span> <span class="cm">/* vector_t vec2; */</span>
+<span class="lineno">15</span>   <span class="kt">vector_t</span> <span class="n">vec3</span> <span class="o">=</span> <span class="n">vectorCreate</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">),</span><span class="n">copyDouble</span><span class="p">);</span> <span class="cm">/* vector_t vec3; */</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 cap. = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorCapacity</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>   <span class="cm">/* vec1.capacity()   */</span>
+<span class="lineno">18</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span><span class="n">vec1</span><span class="p">));</span>        <span class="cm">/* vec1.size()    */</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span>   <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno">21</span>   <span class="p">{</span>
+<span class="lineno">22</span>     <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>  
+<span class="lineno">23</span>     <span class="n">vectorPushBack</span><span class="p">(</span> <span class="n">vec1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>                          <span class="cm">/* vec1.push_back(i) */</span>
+<span class="lineno">24</span>   <span class="p">}</span>
+<span class="lineno">25</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 cap. = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorCapacity</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>  <span class="cm">/* vec1.capacity()   */</span>
+<span class="lineno">26</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>      <span class="cm">/* vec1.size()       */</span>
+<span class="lineno">27</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="n">vectorAt</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="mi">42</span><span class="p">));</span> <span class="cm">/* vec1[42]        */</span>
+<span class="lineno">28</span>   
+<span class="lineno">29</span>   <span class="n">vectorCopy</span><span class="p">(</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">vec1</span><span class="p">);</span>                              <span class="cm">/* vec2 = vec2       */</span>
+<span class="lineno">30</span> 
+<span class="lineno">31</span>   <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="n">vectorAt</span><span class="p">(</span> <span class="n">vec2</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span> <span class="o">=</span> <span class="mf">99.99</span><span class="p">;</span>                 <span class="cm">/* vec[2] = 99.99   */</span>
+<span class="lineno">32</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="n">vectorAt</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="mi">42</span><span class="p">));</span><span class="cm">/* vec1[42] 1764.00 */</span>
+<span class="lineno">33</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2[42] = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="n">vectorAt</span><span class="p">(</span><span class="n">vec2</span><span class="p">,</span><span class="mi">42</span><span class="p">));</span><span class="cm">/* vec2[42]   99.99 */</span>
+<span class="lineno">34</span> 
+<span class="lineno">35</span>   <span class="n">vectorPopBack</span><span class="p">(</span> <span class="n">vec2</span><span class="p">);</span>                                 <span class="cm">/* vec2.pop_back()   */</span>
+<span class="lineno">36</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2 cap. = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorCapacity</span><span class="p">(</span> <span class="n">vec2</span><span class="p">));</span>  <span class="cm">/* vec2.capacity()   */</span>
+<span class="lineno">37</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec2 size = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec2</span><span class="p">));</span>      <span class="cm">/* vec2.size()       */</span>
+<span class="lineno">38</span>   
+<span class="lineno">39</span>   <span class="n">vectorMove</span><span class="p">(</span> <span class="n">vec3</span><span class="p">,</span> <span class="n">vec1</span><span class="p">);</span>                              <span class="cm">/* vec3 = move(vec1) */</span>
+<span class="lineno">40</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec3 size = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec3</span><span class="p">));</span>      <span class="cm">/* vec3.size()       */</span>
+<span class="lineno">41</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;vec1 size = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">vectorSize</span><span class="p">(</span> <span class="n">vec1</span><span class="p">));</span>      <span class="cm">/* vec1.size()       */</span>
+<span class="lineno">42</span> 
+<span class="lineno">43</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec1</span><span class="p">);</span>                                 <span class="cm">/* destructor        */</span>
+<span class="lineno">44</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec2</span><span class="p">);</span>                                 <span class="cm">/* destructor        */</span>
+<span class="lineno">45</span>   <span class="n">vectorDestroy</span><span class="p">(</span> <span class="n">vec3</span><span class="p">);</span>                                 <span class="cm">/* destructor        */</span>
+<span class="lineno">46</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">47</span> <span class="p">}</span></code></pre></div>
+
+<p>A módosított interfész:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#ifndef VECTOR_H</span>
+<span class="lineno"> 2</span> <span class="cp">#define VECTOR_H</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stddef.h&gt;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="cp">#define VEC_EOK      0</span>
+<span class="lineno"> 7</span> <span class="cp">#define VEC_ENOMEM   1</span>
+<span class="lineno"> 8</span> <span class="cp">#define VEC_EINDEX   2</span>
+<span class="lineno"> 9</span> <span class="cp">#define VEC_EEMPTY   3</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="k">struct</span> <span class="n">VECTOR_S</span><span class="p">;</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="k">typedef</span> <span class="k">struct</span> <span class="n">VECTOR_S</span> <span class="o">*</span><span class="kt">vector_t</span><span class="p">;</span> 
+<span class="lineno">15</span> <span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="kt">elem_copy_t</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">tgt</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">);</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">vectorErrno</span><span class="p">;</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorCreate</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">elem_copy_t</span> <span class="n">cpyfunc</span><span class="p">);</span>
+<span class="lineno">20</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorDestroy</span><span class="p">(</span> <span class="kt">vector_t</span><span class="p">);</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span> <span class="k">extern</span> <span class="kt">size_t</span>   <span class="nf">vectorSize</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">23</span> <span class="k">extern</span> <span class="kt">size_t</span>   <span class="nf">vectorCapacity</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorCopy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">);</span>
+<span class="lineno">26</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorMove</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">);</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span> <span class="k">extern</span> <span class="kt">void</span>    <span class="o">*</span><span class="nf">vectorAt</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">idx</span><span class="p">);</span>
+<span class="lineno">29</span> 
+<span class="lineno">30</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorPushBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">);</span>
+<span class="lineno">31</span> <span class="k">extern</span> <span class="kt">void</span>     <span class="nf">vectorPopBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">);</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span> <span class="cp">#endif </span><span class="cm">/* VECTOR_H */</span><span class="cp"></span></code></pre></div>
+
+<p>A megvalósítás:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">  1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">  2</span> 
+<span class="lineno">  3</span> <span class="cp">#include &lt;stddef.h&gt;</span>
+<span class="lineno">  4</span> <span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="lineno">  5</span> <span class="cp">#include &quot;vector.h&quot;</span>
+<span class="lineno">  6</span> 
+<span class="lineno">  7</span> <span class="cp">#define INIT_CAPACITY 4</span>
+<span class="lineno">  8</span> 
+<span class="lineno">  9</span> <span class="k">struct</span> <span class="n">VECTOR_S</span>
+<span class="lineno"> 10</span> <span class="p">{</span>
+<span class="lineno"> 11</span>   <span class="kt">size_t</span>      <span class="n">capacity_</span><span class="p">;</span>
+<span class="lineno"> 12</span>   <span class="kt">size_t</span>      <span class="n">size_</span><span class="p">;</span>
+<span class="lineno"> 13</span>   <span class="kt">char</span>       <span class="o">*</span><span class="n">ptr_</span><span class="p">;</span>
+<span class="lineno"> 14</span>   <span class="kt">size_t</span>      <span class="n">esize_</span><span class="p">;</span>
+<span class="lineno"> 15</span>   <span class="kt">elem_copy_t</span> <span class="n">cpyfun_</span><span class="p">;</span>
+<span class="lineno"> 16</span> <span class="p">};</span>
+<span class="lineno"> 17</span> 
+<span class="lineno"> 18</span> <span class="kt">int</span> <span class="n">vectorErrno</span><span class="p">;</span>
+<span class="lineno"> 19</span> 
+<span class="lineno"> 20</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">vectorGrowBuffer</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 21</span> <span class="p">{</span>
+<span class="lineno"> 22</span>   <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 23</span>   <span class="kt">size_t</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">?</span> <span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="nl">capacity_</span> 
+<span class="lineno"> 24</span>                                     <span class="p">:</span> <span class="n">INIT_CAPACITY</span><span class="p">;</span>
+<span class="lineno"> 25</span>  
+<span class="lineno"> 26</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">oldPtr</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">;</span>
+<span class="lineno"> 27</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">newPtr</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">newCapacity</span> <span class="o">*</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="p">);</span>
+<span class="lineno"> 28</span> 
+<span class="lineno"> 29</span>   <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">newPtr</span> <span class="p">)</span>
+<span class="lineno"> 30</span>   <span class="p">{</span>
+<span class="lineno"> 31</span>      <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno"> 32</span>      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 33</span>   <span class="p">}</span>
+<span class="lineno"> 34</span>   <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno"> 35</span>   <span class="p">{</span>
+<span class="lineno"> 36</span>     <span class="n">v</span><span class="o">-&gt;</span><span class="n">cpyfun_</span><span class="p">(</span> <span class="n">newPtr</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="p">),</span> <span class="n">oldPtr</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="p">));</span>
+<span class="lineno"> 37</span>   <span class="p">}</span>
+<span class="lineno"> 38</span> 
+<span class="lineno"> 39</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">newCapacity</span><span class="p">;</span>
+<span class="lineno"> 40</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> <span class="n">newPtr</span><span class="p">;</span>
+<span class="lineno"> 41</span>   <span class="n">free</span><span class="p">(</span><span class="n">oldPtr</span><span class="p">);</span>
+<span class="lineno"> 42</span> 
+<span class="lineno"> 43</span>   <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno"> 44</span> <span class="p">}</span>
+<span class="lineno"> 45</span> 
+<span class="lineno"> 46</span> <span class="kt">vector_t</span> <span class="nf">vectorCreate</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">elem_copy_t</span> <span class="n">cpyfun</span><span class="p">)</span>
+<span class="lineno"> 47</span> <span class="p">{</span>
+<span class="lineno"> 48</span>   <span class="kt">vector_t</span> <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="kt">vector_t</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">));</span>
+<span class="lineno"> 49</span>   <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">v</span> <span class="p">)</span>
+<span class="lineno"> 50</span>   <span class="p">{</span>
+<span class="lineno"> 51</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno"> 52</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno"> 53</span>   <span class="p">}</span>
+<span class="lineno"> 54</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 55</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 56</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno"> 57</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span>    <span class="o">=</span> <span class="n">esize</span><span class="p">;</span>
+<span class="lineno"> 58</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">cpyfun_</span>   <span class="o">=</span> <span class="n">cpyfun</span><span class="p">;</span>
+<span class="lineno"> 59</span> 
+<span class="lineno"> 60</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 61</span>   <span class="k">return</span> <span class="n">v</span><span class="p">;</span>
+<span class="lineno"> 62</span> <span class="p">}</span>
+<span class="lineno"> 63</span> 
+<span class="lineno"> 64</span> <span class="kt">void</span> <span class="nf">vectorDestroy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 65</span> <span class="p">{</span>
+<span class="lineno"> 66</span>   <span class="n">free</span><span class="p">(</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno"> 67</span>   <span class="n">free</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+<span class="lineno"> 68</span> 
+<span class="lineno"> 69</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 70</span>   <span class="k">return</span><span class="p">;</span>
+<span class="lineno"> 71</span> <span class="p">}</span>
+<span class="lineno"> 72</span> 
+<span class="lineno"> 73</span> <span class="kt">size_t</span> <span class="nf">vectorCapacity</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 74</span> <span class="p">{</span>
+<span class="lineno"> 75</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 76</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span><span class="p">;</span>
+<span class="lineno"> 77</span> <span class="p">}</span>
+<span class="lineno"> 78</span> 
+<span class="lineno"> 79</span> <span class="kt">size_t</span> <span class="nf">vectorSize</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno"> 80</span> <span class="p">{</span>
+<span class="lineno"> 81</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno"> 82</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno"> 83</span> <span class="p">}</span>
+<span class="lineno"> 84</span> 
+<span class="lineno"> 85</span> <span class="kt">vector_t</span> <span class="nf">vectorCopy</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">)</span>
+<span class="lineno"> 86</span> <span class="p">{</span>
+<span class="lineno"> 87</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">target</span> <span class="o">!=</span> <span class="n">source</span> <span class="p">)</span>
+<span class="lineno"> 88</span>   <span class="p">{</span>
+<span class="lineno"> 89</span>     <span class="n">free</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno"> 90</span> 
+<span class="lineno"> 91</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  <span class="cm">/* possibly shrinking */</span>
+<span class="lineno"> 92</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  
+<span class="lineno"> 93</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">cpyfun_</span>   <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">cpyfun_</span><span class="p">;</span>
+<span class="lineno"> 94</span> 
+<span class="lineno"> 95</span>     <span class="k">if</span> <span class="p">(</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno"> 96</span>     <span class="p">{</span>
+<span class="lineno"> 97</span>       <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 98</span>       <span class="kt">size_t</span> <span class="n">esz</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="p">;</span>
+<span class="lineno"> 99</span>       <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">*</span> <span class="n">esz</span><span class="p">);</span>
+<span class="lineno">100</span>       <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="p">)</span>
+<span class="lineno">101</span>       <span class="p">{</span>
+<span class="lineno">102</span>         <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_ENOMEM</span><span class="p">;</span>
+<span class="lineno">103</span>         <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">104</span>       <span class="p">}</span>
+<span class="lineno">105</span>       <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno">106</span>         <span class="n">source</span><span class="o">-&gt;</span><span class="n">cpyfun_</span><span class="p">(</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">esz</span><span class="p">,</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">esz</span><span class="p">);</span>
+<span class="lineno">107</span>     <span class="p">}</span>
+<span class="lineno">108</span>     <span class="k">else</span>
+<span class="lineno">109</span>     <span class="p">{</span>
+<span class="lineno">110</span>       <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">111</span>     <span class="p">}</span>
+<span class="lineno">112</span>   <span class="p">}</span>
+<span class="lineno">113</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">114</span>   <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+<span class="lineno">115</span> <span class="p">}</span>
+<span class="lineno">116</span> 
+<span class="lineno">117</span> <span class="k">extern</span> <span class="kt">vector_t</span> <span class="nf">vectorMove</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">target</span><span class="p">,</span> <span class="kt">vector_t</span> <span class="n">source</span><span class="p">)</span>
+<span class="lineno">118</span> <span class="p">{</span>
+<span class="lineno">119</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">target</span> <span class="o">!=</span> <span class="n">source</span> <span class="p">)</span>
+<span class="lineno">120</span>   <span class="p">{</span>
+<span class="lineno">121</span>     <span class="n">free</span><span class="p">(</span><span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">);</span>
+<span class="lineno">122</span> 
+<span class="lineno">123</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">capacity_</span><span class="p">;</span>  
+<span class="lineno">124</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>  
+<span class="lineno">125</span>     <span class="n">target</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span><span class="p">;</span>       <span class="cm">/* move */</span>
+<span class="lineno">126</span>  
+<span class="lineno">127</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">128</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">size_</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">129</span>     <span class="n">source</span><span class="o">-&gt;</span><span class="n">ptr_</span>      <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">130</span>   <span class="p">}</span>
+<span class="lineno">131</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">132</span>   <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+<span class="lineno">133</span> <span class="p">}</span>
+<span class="lineno">134</span> 
+<span class="lineno">135</span> <span class="kt">void</span> <span class="o">*</span><span class="nf">vectorAt</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">idx</span><span class="p">)</span>
+<span class="lineno">136</span> <span class="p">{</span>
+<span class="lineno">137</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="p">)</span>
+<span class="lineno">138</span>   <span class="p">{</span>
+<span class="lineno">139</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EINDEX</span><span class="p">;</span>
+<span class="lineno">140</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="lineno">141</span>   <span class="p">}</span>
+<span class="lineno">142</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">143</span>   <span class="k">return</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">+</span> <span class="n">idx</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="p">;</span>
+<span class="lineno">144</span> <span class="p">}</span>
+<span class="lineno">145</span> 
+<span class="lineno">146</span> <span class="kt">void</span> <span class="nf">vectorPushBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">srcptr</span><span class="p">)</span>
+<span class="lineno">147</span> <span class="p">{</span>
+<span class="lineno">148</span>   <span class="kt">void</span> <span class="o">*</span><span class="n">tgtptr</span><span class="p">;</span>
+<span class="lineno">149</span> 
+<span class="lineno">150</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">==</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">capacity_</span> <span class="p">)</span>
+<span class="lineno">151</span>   <span class="p">{</span>
+<span class="lineno">152</span>     <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="n">vectorGrowBuffer</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="p">)</span>
+<span class="lineno">153</span>       <span class="k">return</span><span class="p">;</span>
+<span class="lineno">154</span>   <span class="p">}</span>
+<span class="lineno">155</span>   <span class="n">tgtptr</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">ptr_</span> <span class="o">+</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">esize_</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno">156</span>   <span class="n">v</span><span class="o">-&gt;</span><span class="n">cpyfun_</span><span class="p">(</span> <span class="n">tgtptr</span><span class="p">,</span> <span class="n">srcptr</span><span class="p">);</span>
+<span class="lineno">157</span>   <span class="o">++</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno">158</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">159</span>   <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">160</span> <span class="p">}</span>
+<span class="lineno">161</span> 
+<span class="lineno">162</span> <span class="kt">void</span> <span class="nf">vectorPopBack</span><span class="p">(</span> <span class="kt">vector_t</span> <span class="n">v</span><span class="p">)</span>
+<span class="lineno">163</span> <span class="p">{</span>
+<span class="lineno">164</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+<span class="lineno">165</span>   <span class="p">{</span>
+<span class="lineno">166</span>     <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EEMPTY</span><span class="p">;</span>
+<span class="lineno">167</span>     <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">168</span>   <span class="p">}</span>
+<span class="lineno">169</span>   <span class="o">--</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">size_</span><span class="p">;</span>
+<span class="lineno">170</span> 
+<span class="lineno">171</span>   <span class="n">vectorErrno</span> <span class="o">=</span> <span class="n">VEC_EOK</span><span class="p">;</span>
+<span class="lineno">172</span>   <span class="k">return</span><span class="p">;</span> 
+<span class="lineno">173</span> <span class="p">}</span></code></pre></div>
+
+<p>Fordítás, szerkesztés, futtatás:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="nv">$ </span>gcc -ansi -pedantic -Wall -W vecmain.c vector.c
+<span class="lineno"> 2</span> <span class="nv">$ </span>./a.out
+<span class="lineno"> 3</span> vec1 cap. <span class="o">=</span> 0
+<span class="lineno"> 4</span> vec1 <span class="nv">size</span> <span class="o">=</span> 0
+<span class="lineno"> 5</span> vec1 cap. <span class="o">=</span> 128
+<span class="lineno"> 6</span> vec1 <span class="nv">size</span> <span class="o">=</span> 100
+<span class="lineno"> 7</span> vec1<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 1764.000000
+<span class="lineno"> 8</span> vec1<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 1764.000000
+<span class="lineno"> 9</span> vec2<span class="o">[</span>42<span class="o">]</span> <span class="o">=</span> 99.990000
+<span class="lineno">10</span> vec2 cap. <span class="o">=</span> 100
+<span class="lineno">11</span> vec2 <span class="nv">size</span> <span class="o">=</span> 99
+<span class="lineno">12</span> vec3 <span class="nv">size</span> <span class="o">=</span> 100
+<span class="lineno">13</span> vec1 <span class="nv">size</span> <span class="o">=</span> 0</code></pre></div>
+
+<p>Ellenőrizzük a megoldásunk helyességét a memória-elszivárgás szempontjából:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">Memcheck</span><span class="p">,</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">error</span> <span class="n">detector</span>
+<span class="lineno"> 2</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2002</span><span class="o">-</span><span class="mi">2017</span><span class="p">,</span> <span class="n">and</span> <span class="n">GNU</span> <span class="n">GPL</span><span class="err">&#39;</span><span class="n">d</span><span class="p">,</span> <span class="n">by</span> <span class="n">Julian</span> <span class="n">Seward</span> <span class="n">et</span> <span class="n">al</span><span class="p">.</span>
+<span class="lineno"> 3</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">Using</span> <span class="n">Valgrind</span><span class="o">-</span><span class="mf">3.13.0</span> <span class="n">and</span> <span class="n">LibVEX</span><span class="p">;</span> <span class="n">rerun</span> <span class="n">with</span> <span class="o">-</span><span class="n">h</span> <span class="k">for</span> <span class="n">copyright</span> <span class="n">info</span>
+<span class="lineno"> 4</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="nl">Command</span><span class="p">:</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+<span class="lineno"> 5</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>
+<span class="lineno"> 6</span> <span class="n">vec1</span> <span class="n">cap</span><span class="p">.</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="lineno"> 7</span> <span class="n">vec1</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="lineno"> 8</span> <span class="n">vec1</span> <span class="n">cap</span><span class="p">.</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="lineno"> 9</span> <span class="n">vec1</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="lineno">10</span> <span class="n">vec1</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1764.000000</span>
+<span class="lineno">11</span> <span class="n">vec1</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1764.000000</span>
+<span class="lineno">12</span> <span class="n">vec2</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="o">=</span> <span class="mf">99.990000</span>
+<span class="lineno">13</span> <span class="n">vec2</span> <span class="n">cap</span><span class="p">.</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="lineno">14</span> <span class="n">vec2</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="lineno">15</span> <span class="n">vec3</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="lineno">16</span> <span class="n">vec1</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="lineno">17</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>
+<span class="lineno">18</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">HEAP</span> <span class="nl">SUMMARY</span><span class="p">:</span>
+<span class="lineno">19</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>     <span class="n">in</span> <span class="n">use</span> <span class="n">at</span> <span class="nl">exit</span><span class="p">:</span> <span class="mi">0</span> <span class="n">bytes</span> <span class="n">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="lineno">20</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="nl">usage</span><span class="p">:</span> <span class="mi">11</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">11</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">448</span> <span class="n">bytes</span> <span class="n">allocated</span>
+<span class="lineno">21</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>
+<span class="lineno">22</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">All</span> <span class="n">heap</span> <span class="n">blocks</span> <span class="n">were</span> <span class="n">freed</span> <span class="o">--</span> <span class="n">no</span> <span class="n">leaks</span> <span class="n">are</span> <span class="n">possible</span>
+<span class="lineno">23</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span>
+<span class="lineno">24</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">For</span> <span class="n">counts</span> <span class="n">of</span> <span class="n">detected</span> <span class="n">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="nl">with</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span>
+<span class="lineno">25</span> <span class="o">==</span><span class="mi">492</span><span class="o">==</span> <span class="n">ERROR</span> <span class="nl">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="n">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="nl">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="n">from</span> <span class="mi">0</span><span class="p">)</span></code></pre></div>
+
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

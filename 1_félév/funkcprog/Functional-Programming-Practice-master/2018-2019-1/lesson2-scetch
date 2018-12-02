@@ -1,0 +1,20 @@
+- check homework
+- square, distance
+- currying:
+  - in Haskell, all function are curried by default
+  - sometimes we say, a function is "partially applied"
+- operators:
+  - infixity, R L
+  - precedence
+  - unary operators: (-)
+- pattern matching:
+  - (&&), (||), not
+  - wildcard pattern
+  - divide (match on 0)
+- tuples:
+  - distance
+  - isOnSameLine
+  - canConstructTriangle
+where:
+  - reduce redundancy
+  - introduce helper functions

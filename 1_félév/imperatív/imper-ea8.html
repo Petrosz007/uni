@@ -1,0 +1,751 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-8/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-8">Imperatív programozás 8.</h1>
+
+<h1 id="fggvnyek-paramtertads">Függvények, paraméterátadás</h1>
+
+<p>A <em>függvények</em> és <em>eljárások</em>, gyakori összefoglaló nevükön <strong>alprogramok</strong>
+az imperatív nyelvek alapvető építőkövei. Levetővé teszik, hogy
+a nagyobb, komplex programokat kisebb, könnyebben karbantartható, egyszerűbb 
+részekre bontsuk fel, eltakarva az implementációs részleteket a külvilág elől.
+Segítségükkel újra fel tudjuk használni a már megírt algoritmusainkat, az
+esetleges különbségeket a paraméterekkel kifejezve.</p>
+
+<p>Függvények egy csoportját külön fordítási egységekbe szervezhetjük és 
+könyvtárakat is építhetünk belőlük.</p>
+
+<p>A C nyelvet úgy tervezték, hogy könnyen írhassunk függvényeket és azok 
+futási időben kis költséggel végrehajthatók legyenek.</p>
+
+<p>A függvények deklarációjában használt paraméter neveket szokás <strong>formális
+paraméternek</strong> nevezni, míg a függvény meghívásakor ténylegesen átadott 
+értékek az <strong>aktuális paraméter</strong>. A függvény nevét a teljes paraméterlistával
+a függvény <strong>prototípusának</strong> (signature) nevezzük.</p>
+
+<p>C-ben az összes alprogramot egységesen függvénynek nevezzük. Amennyiben 
+nem adnak vissza értéket (eljárás), akkor azt a <strong>void</strong> visszatérő típussal
+jelöljük.</p>
+
+<h2 id="fggvnydeklarci-c-ben">Függvénydeklaráció C-ben</h2>
+
+<p>A visszatérő érték és a paraméterlista típusa része a függvény típusának.
+Ahol a függvénynek nincsen visszatérő értéke a <strong>void</strong> típust használjuk.
+Tömbök nem használhatóak visszatérő típusként.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>    <span class="cm">/* függvény paraméter nélkül, int visszatérő típussal  */</span>
+<span class="kt">int</span> <span class="o">*</span><span class="nf">fp</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>  <span class="cm">/* függvény paraméter nélkül, int* visszatérő típussal */</span></code></pre></div>
+
+<p>A deklarációkban használt formális paraméternevek csak leíró szerepűek,
+ténylegesen nem használja fel a fordító, és el is hagyhatjuk őket.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">y</span><span class="p">);</span> <span class="cm">/* x és y neveknek nincsen szerepe, el is hagyható */</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="p">);</span>   <span class="cm">/* ekvivalens a fentivel */</span></code></pre></div>
+
+<p>A C nagyon régi, ANSI szabvány előtti verziójában nem használtunk 
+prototípusos deklarációkat. Az evvel való kompatibilitás miatt az ANSI C-ben
+is elhagyhatjuk a paraméterek specifikációját:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>      <span class="cm">/* függvény pontosan nulla paraméterrel */</span> 
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">g</span><span class="p">();</span>          <span class="cm">/* függvény paraméter-specifikáció nélkül */</span></code></pre></div>
+
+<p>Itt f() és g() különböznek. Tudjuk, hogy f() pontosan nulla paraméterrel 
+rendelkezik, de semmit sem tudunk g() paramétereinek számáról vagy típusáról. 
+A g() deklarációja reverz kompatibilis az ANSI előtti C-vel, de ilyet új kód
+írásakor ne használjunk.</p>
+
+<h4 id="megjegyzs">Megjegyzés</h4>
+
+<p>C++-ban <em>mindig</em> alkalmaznunk kell a prototípusos deklarációt. Ott a g() 
+jelölés ekvivalens a g(void) jelöléssel és a pontosan nulla paramétert jelenti.
+Abban az esetben, ha nem tudjuk a paraméterek számát, vagy típusát, mint 
+pl a <em>printf</em> esetében, használjuk az <em>ellipsis</em> jelölést:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">printf</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...);</span> 
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">fprintf</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...);</span></code></pre></div>
+
+<p>Ennek a jelölésnek az a jelentése, hogy <em>nulla vagy több további paraméter
+ismeretlen típussal</em>. Ilyen függvényeket nem egyszerű implementálni, az ilyen 
+változó paraméterlistájú (variadic parameter) függvényeket a 
+<em>&lt;stdarg.h&gt;</em> headerfájl <em>va_</em> makróival írhatunk.</p>
+
+<h2 id="fggvnyhvs-c-ben">Függvényhívás C-ben</h2>
+
+<p>Amikor egy <em>f</em> függvényt meghívunk, a hívásnak meg kell felelnie a deklaráció 
+prototípusával:</p>
+
+<ul>
+  <li>A paraméterek száma ugyanannyi.</li>
+  <li>A hívás minden aktuális paramétere olyan típusú, hogy értékül adható legyen 
+a deklaráció formális paraméter típusának.</li>
+</ul>
+
+<p>Ha a paraméterek száma nem felel meg a deklarációnak, akkor a viseledés
+nemdefiniált. Ha a deklaráció az <em>ellipsis</em> jelölést használja, vagy a típusok
+nem kompatiilisak, a viselkedés szintén nemdefiniált.</p>
+
+<p>Ha a deklaráció <em>nem prototípusos</em> (azaz üres nyitó-csukó zárójeles, pl. 
+void f() ), akkor a függvényhíváskor az ún. <em>default promóciók</em> történnek meg, 
+mint az egész típusok <strong>long</strong> vagy <strong>int</strong>-re és a lebegőpontos típusok <strong>long 
+double</strong> vagy <strong>double</strong> konverziója.</p>
+
+<p>Ha a deklaráció <em>prototípusos</em>, azaz felsoroltuk az egyes paramétereket és
+típusait, akkor az aktuális paraméter értékek pontosan úgy konvertálódnak 
+a formális paraméterekre, mint ha értékadás történne. Az <em>ellipsis</em>-től 
+kezdve ez a konverzió megáll, és onnan csak a default promóciók történnek 
+meg.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">double</span> <span class="nf">fahr2cels</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>  <span class="cm">/* prototípusos deklaráció */</span>
+<span class="lineno">2</span> <span class="kt">double</span> <span class="nf">cels2fahr</span><span class="p">();</span>        <span class="cm">/* nem prototípusos deklaráció */</span>
+<span class="lineno">3</span> <span class="cm">/* ... */</span>
+<span class="lineno">4</span> <span class="kt">float</span> <span class="n">f</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="lineno">5</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="mi">36</span><span class="p">));</span>  <span class="cm">/* ok, 36 double-ra konvertálódik */</span>
+<span class="lineno">6</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cels2fahr</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>   <span class="cm">/* ok, float -&gt; double promóció   */</span>
+<span class="lineno">7</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="mi">36</span><span class="p">));</span>  <span class="cm">/* hiba, int paraméter adódik át  */</span></code></pre></div>
+
+<p>Két további konverzió történhet még meg:</p>
+
+<ul>
+  <li>
+    <p><em>signed</em> – <em>unsigned</em> konverzió, ha az érték reprezentálható mindkét típusban</p>
+  </li>
+  <li>
+    <p><em>void *</em>  – <em>char *</em> konverzió.</p>
+  </li>
+</ul>
+
+<p>Egy függvényhívás <strong>szekvecia-pont</strong>, azaz először azaktuális paraméterek
+értékelődnek ki nemdefiniált sorrendben, és a függvény törzsének végrehajtása
+csak azután kezdőthet. A paraméterek kiértékelésének <em>egymás közötti</em> 
+sorrendje viszont definiálatlan. (A paramétereket elválasztó vessző <em>nem</em> 
+a vessző operátor.)</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">(</span> <span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">f1</span><span class="p">()]</span> <span class="p">)</span> <span class="p">(</span> <span class="n">f2</span><span class="p">(),</span> <span class="n">f3</span><span class="p">(),</span> <span class="n">f4</span><span class="p">()</span> <span class="p">);</span></code></pre></div>
+
+<p>Az <em>f1</em>, <em>f2</em>, <em>f3</em>, <em>f4</em> függvények akármilyen sorrendben meghívódhatnak.</p>
+
+<p>A rekurzív függvényhívások akár direkt akár indirek módon megtörténhetnek:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="k">if</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">n</span> <span class="p">)</span> 
+<span class="lineno">4</span>     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">5</span>   <span class="k">else</span> 
+<span class="lineno">6</span>     <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
+
+<p>Ha ezt a függvényt egynél kisebb paraméterrel hívjuk meg, akkor <em>végtelen 
+rekurzió</em> következik be, ami futási idejű hiba.</p>
+
+<h2 id="paramtertads">Paraméterátadás</h2>
+
+<p>A programozási nyelvek az idők során számos módszert dolgoztak ki a 
+paraméterek átadására.</p>
+
+<h3 id="cm-szerinti">Cím szerinti</h3>
+
+<p>A <em>cím szerinti</em> (call by address, call by reference) paraméterátadás 
+esetében az aktuális és formális paraméterek memória-lokációja megegyezik, 
+az alprogram paramétere lényegében a híváskor átadott tárterület (változó)
+szinonímája (álneve). Minden módosítás, amit az alprogramban a paraméteren 
+végzünk valójában az átadott aktuális paraméteren történik meg és azonnal
+látszik. Ez a legegyszerűbben implementálható és az egyik legrégibb 
+paraméterátadási módszer.</p>
+
+<p>Előnye, hogy az alprogram a paramétereken keresztük kétirányú kommunikációt
+folytathat a hívóval: onnan információkat kaphat és visszafelé is adhat.
+A paraméterek módosítása valójában a hívó változóinak módosítása. Ez néha 
+zavaró is lehet, különösen ha mind az aktuális és a formális paraméter is 
+látható/haszálható az alprogramban. Bár a cím szerinti paraméterátadás olcsón
+implementálható, hiszen nincsenek másolások, mint az érték szerintiben, az
+<em>aliasing</em> lehetősége miatt a fordítóprogram csak óvatosabban optimalizálhat.</p>
+
+<p>Ugyancsak problémát jelenthet, ha kifejezéseket vagy konstansokat (pl. 42)
+adunk át paraméterként, hiszen ezeknek eredetileg nincsen memóriaterületük.</p>
+
+<h3 id="rtk-szerint">Érték szerint</h3>
+
+<p>Az <em>érték szerinti</em> (call by value) paraméterátadás során a függvény formális 
+paramétereit úgy tekintjük, mintha azok a függvény lokális változói lennének. 
+A függvényhívás során ezeket a “lokális változókat” az aktuális paraméter
+értékekkel inicializáljuk: lényegében azok értékeit másoljuk a formális
+paraméterekbe. Mindez azt jelenti, hogy az alprogram végrehajtása során 
+az aktuális és formális paraméter jól elkülönül. Ennek nemcsak az az előnye,
+hogy könyebben érvelhetünk a program működéséről, de gyakran a fordítóprogram
+is hatékonyabb kódot fordíthat, ha nem lehetséges <em>alisaing</em>.</p>
+
+<p>A módszer előnye, hogy a paramétereket úgy kezelhetjük, mint a lokális 
+változókat. Hátránya, hogy az alprogramban a paraméterek módosítását nem 
+tudják továbbítani a hívó eljárás felé. Ezt gyakran úgy kerüljük meg, hogy 
+paraméterként eleve a módosítandó területre hivatkozó mutatót adjuk át.
+Pont így működik pl. a C <strong>scanf</strong> függvénye.</p>
+
+<h3 id="eredmny-szerinti">Eredmény szerinti</h3>
+
+<p>Az <em>eredmény szerinti</em> (call by result) paraméterátadás nagyon hasonló az
+érték szerintihez, de az alprogramból történő visszatérés pillanatában az 
+alprogramban létező másolat (a formális paraméter) értéke visszamásolódik 
+az aktuális paraméterbe. Így a függvény végrehajtása során külön-külön 
+tárterületet használ a formális és az aktuális paraméter, de az alprogram 
+általi módosítások a visszatérés pillanatában láthatóvá válnak a hívó számára. 
+Más mellett ilyen paraméterátadási módot is használ az ADA <em>output</em> és <em>inout</em> 
+paraméterek esetében.</p>
+
+<h3 id="nv-szerinti">Név szerinti</h3>
+
+<p>A <em>név szerinti</em> (call by name) paraméterátadást elsősorban az Algol 60 és a 
+Simula 67 alkalmazta. Ebben az esetben nem az aktuális paraméter memória 
+területét vagy pillanatnyi értékét használjuk fel a paraméterátadáskor, 
+hanem magát a kifejezést, amit a programozó beírt a függvényhíváskor. Amikor 
+az alprogram végrehajtása során hivatkozunk a formális paraméterre, akkor újra
+kiértékeljük az átadott kifejezés pillanatnyi értékét, és azt használjuk.</p>
+
+<p>Implemetációja gyakran úgy történt, hogy a kifejezést kiszámoló kis eljárást,
+ún. <em>closure</em>-t adtunk át, és ezt hajtódott végre a paraméter minden
+meghivatkozásakor. A mai nyelvekben ritkán alkalmazzuk, ha mégis valami 
+hasonlóra van szükségünk, akkor pl. C++-ban <em>lamdba kifejezést</em> adunk át 
+paraméterként.</p>
+
+<h3 id="az-egyes-programozsi-nyelvek-stratgii">Az egyes programozási nyelvek stratégiái</h3>
+
+<p>A FORTRAN és számos azt követő nyelv cím szerinti paraméterátadást 
+alkalmazott. Amikor nem változót, hanem egy kifejezést adtunk át, akkor azt 
+egy temporális tárterületen számoltuk ki és ennek a területnek címét adtuk át.
+A C programozási nyelv <em>érték szerinti</em> paraméretátadást használ. A C++ 
+alapértelmezésben ugyancsak érték szerinti, de a <em>referencia</em> típusú 
+paraméterek esetében lényegében a cím szerinti paraméterátadással dolgozik.
+Ugyanígy a Pascal is használja mindkét módszert: az alapértelmezés az 
+érték szerinti-nek felel meg, viszont a <strong>var</strong> kulcsszó alkalmazásával 
+lényegében cím szerint adhatunk át paramétereket.
+Az Algol 60 és Simula 67 érték és név szerinti paraméterátadást használt.
+Javaban a beépített típusok érték szerint adódnak át, de a <em>class</em> típusok 
+<em>referencia</em> szerint, ilyenkor lényegében olyan pointerek adódnak át, amik
+a tényleges objektumra mutatnak - hatásában ez leginkább a cím szerinti 
+paraméterátadásnak felel meg. Az ADA nyelv  érték és eredmény szerinti 
+paraméterátadást használ.</p>
+
+<h3 id="paramtertads-c-ben">Paraméterátadás C-ben</h3>
+
+<p>A C programozási nyelvben az aktuális paraméterek <strong>érték szerint</strong> adódnak át, 
+azaz a kifejezés értéke <strong>bemásolódik</strong> a formális paraméter területére,
+pont úgy, mintha a függvényben definiált lokális változó lenne, amit az
+aktuális paraméterből inicializálnánk.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="kt">void</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="lineno"> 5</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in increment() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno"> 6</span> <span class="p">}</span> 
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">10</span>   <span class="n">increment</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">11</span>   <span class="n">increment</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">12</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in main() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">13</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+<span class="lineno">14</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -Wall -W f.c 
+<span class="nv">$ </span>./a.out 
+i in increment<span class="o">()</span> <span class="o">=</span> 1
+i in increment<span class="o">()</span> <span class="o">=</span> 1
+i in main<span class="o">()</span> <span class="o">=</span> 0</code></pre></div>
+
+<p>A <em>cím szerinti</em> paraméterátadást szimulálhatjuk avval, ha a változó helyett
+annak címét adjuk áát paraméternek:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="kt">void</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">ip</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="o">++*</span><span class="n">ip</span><span class="p">;</span>
+<span class="lineno"> 5</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in increment() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="n">ip</span><span class="p">);</span>
+<span class="lineno"> 6</span> <span class="p">}</span> 
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">10</span>   <span class="n">increment</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">11</span>   <span class="n">increment</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">12</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in main() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">13</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+<span class="lineno">14</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -Wall -W f.c 
+<span class="nv">$ </span>./a.out 
+i in increment<span class="o">()</span> <span class="o">=</span> 1
+i in increment<span class="o">()</span> <span class="o">=</span> 2
+i in main<span class="o">()</span> <span class="o">=</span> 2</code></pre></div>
+
+<p>A tömb paramétereket az első elemre mutató pointer értékként adjuk át:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="lineno"> 5</span> <span class="p">}</span>
+<span class="lineno"> 6</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>   <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+<span class="lineno"> 9</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">));</span>
+<span class="lineno">11</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -std<span class="o">=</span>c99 -Wall -W a.c
+<span class="nv">$ </span>./a.out 
+2
+2</code></pre></div>
+
+<p>Ezért ezek a deklarációk ekvivalensek:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>   <span class="p">{</span> <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+<span class="lineno">3</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="cm">/* a tömbhatárokat nem ellenőrzi a fordító, ezért ez is lefordul: */</span>
+<span class="lineno">6</span> <span class="kt">int</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span> <span class="p">}</span>  <span class="cm">/* de lehet, hogy hibásan működik */</span></code></pre></div>
+
+<h3 id="a-visszatr-tpus">A visszatérő típus</h3>
+
+<p>A visszatérő értékek a függvény visszatérő típusára knvertálódik:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">double</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno">4</span>   <span class="c1">// ...</span>
+<span class="lineno">5</span>   <span class="k">return</span> <span class="n">i</span><span class="p">;</span>   <span class="c1">// converted to double</span>
+<span class="lineno">6</span> <span class="p">}</span></code></pre></div>
+
+<h3 id="a-main-fggvny-paramterei">A main függvény paraméterei</h3>
+
+<p>A main() függvényt az alábbi módokon lehet definiálni:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="cm">/* ha az operációs rendszer támogatja (pl. UNIX) */</span>
+<span class="lineno">5</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">envp</span><span class="p">[])</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span></code></pre></div>
+
+<p>Ha <strong>argc</strong> definiált, akkor  <strong>argv[argc]</strong> nullpointer. Ha <strong>argc</strong><br />
+nagyobb nullánál, akkor <strong>argv[0]</strong> a program <em>neve</em>, ahogy azt meghívták, 
+és <strong>argv[1] … argv[argc-1]</strong> a program operációs rendszertől kapott 
+paraméterei. Az <strong>argv[i]</strong> paraméterek NUL azaz ‘\0’ karakterrel terminált 
+karaktertömbök.</p>
+
+<p>Normális esetben az <strong>argc</strong> mindig nagyobb, mint 0.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;name of the program = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="lineno">5</span>   <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="lineno">6</span>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;argv[%d] = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="lineno">7</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+<span class="lineno">8</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -std<span class="o">=</span>c99 -Wall -W -o mainpars mainpars.c 
+<span class="nv">$ </span>./mainpars
+name of the <span class="nv">program</span> <span class="o">=</span> ./mainpars
+<span class="nv">$ </span>./mainpars first second third
+name of the <span class="nv">program</span> <span class="o">=</span> ./mainpars
+argv<span class="o">[</span>1<span class="o">]</span> <span class="o">=</span> first
+argv<span class="o">[</span>2<span class="o">]</span> <span class="o">=</span> second
+argv<span class="o">[</span>3<span class="o">]</span> <span class="o">=</span> third</code></pre></div>
+
+<h3 id="a-hvsi-verem-szerkezete">A hívási verem szerkezete</h3>
+
+<p><img src="/images/lectures/c-en/stack.png" alt="alt text" title="structure of stack frame" /></p>
+
+<h2 id="fggvnymutatk">Függvénymutatók</h2>
+
+<p>Függvényere is állíthatunk mutatókat, az ilyen pointerek típusához 
+hozzátartozik a teljes prototípus és a vissztérő érték típusa is.</p>
+
+<p>A függvénymutató értékeket a (deklarált) függvénynevekből képezzük:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">double</span> <span class="nf">sin</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span> <span class="cm">/* vagy #include &lt;math.h&gt; */</span>
+<span class="p">...</span>
+<span class="kt">double</span> <span class="n">f</span><span class="p">(</span><span class="kt">double</span> <span class="p">(</span><span class="o">*</span><span class="n">par</span><span class="p">)(</span><span class="kt">double</span><span class="p">))</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">double</span><span class="p">);</span>   <span class="cm">/* fp egy mutató double(double) függvényre */</span>
+  <span class="n">fp</span> <span class="o">=</span> <span class="n">par</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">!=</span> <span class="n">fp</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="mf">.5</span><span class="p">)</span>       <span class="cm">/* sin(.5) meghívása */</span>
+      <span class="n">fp</span> <span class="p">(</span><span class="mf">.5</span><span class="p">)</span>       <span class="cm">/* ekvivalens a fentivel */</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Az előző increment-es példa pointerrel:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 2</span> <span class="kt">void</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">ip</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="o">++*</span><span class="n">ip</span><span class="p">;</span>
+<span class="lineno"> 5</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in increment() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="n">ip</span><span class="p">);</span>
+<span class="lineno"> 6</span> <span class="p">}</span> 
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">int</span> <span class="o">*</span><span class="p">);</span> <span class="cm">/* mutató void (int*) függvényre */</span>
+<span class="lineno">10</span>   <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">gp</span><span class="p">)();</span>      <span class="cm">/* mutató ismeretlen paraméterlistájú függvényre */</span>
+<span class="lineno">11</span>   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span>   <span class="n">fp</span> <span class="o">=</span> <span class="n">increment</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="n">gp</span> <span class="o">=</span> <span class="n">fp</span><span class="p">;</span>
+<span class="lineno">14</span>   <span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>    <span class="cm">/* increment() meghívása */</span>
+<span class="lineno">15</span>     <span class="n">fp</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>    <span class="cm">/* ugyanaz egyszerűbben  */</span>
+<span class="lineno">16</span>     <span class="n">gp</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>    <span class="cm">/* increment() mghívása, de nem ellenőrzi a paramétereket */</span>
+<span class="lineno">17</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i in main() = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+<span class="lineno">18</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>    
+<span class="lineno">19</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gcc -ansi -pedantic -Wall -W f.c 
+<span class="nv">$ </span>./a.out 
+i in increment<span class="o">()</span> <span class="o">=</span> 1
+i in increment<span class="o">()</span> <span class="o">=</span> 2
+i in increment<span class="o">()</span> <span class="o">=</span> 3
+i in main<span class="o">()</span> <span class="o">=</span> 3</code></pre></div>
+
+<p>Egy függvénymutató:</p>
+
+<ul>
+  <li>mutathat a kompatibilis típusú függvényre</li>
+  <li>értékül adható egy kompatibilis függvénymutatónak</li>
+  <li>összehasonlítható a nullpointerrel</li>
+  <li>meghívható a mutatott függvény, ha nem nullpointer</li>
+</ul>
+
+<h1 id="tmbk-pointerek-pointer-aritmetika">Tömbök, pointerek, pointer aritmetika</h1>
+
+<h2 id="tmbk">Tömbök</h2>
+
+<p>A <strong>tömbök</strong> a memóriában <em>folytonosan</em> (azaz egymást követő bájtokon) 
+elhelyezkedő azonos típusú elemek véges sorozata. A tömb egyes elemeit
+a tömb elejétől számított pozíciójuk, az ún. <strong>tömbindex</strong> alapján 
+érhetjük el. A legtöbb programozási nyelvben, így a C, C++, Java, C# 
+esetében is az indexeket <em>nullától</em> kezdjük, azaz a tömb legelső eleme 
+a <strong>0</strong> indexű, de egyes nyelveknél, pl. FORTRAN-ban és Pascal-ban a 
+programozó adhatja meg az alsó és felső indexeket is. Alapértelmezésként
+FORTRAN-ban 1-től kezdődnek az indexek.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* C nyelv, 10 darab int, elemek: t[0] .. t[9] */</span>
+<span class="kt">int</span>  <span class="n">daysInMonth</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>
+<span class="n">daysInMonth</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span>  <span class="cm">/* marcius */</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span class="nv">c</span> <span class="nv">FORTRAN</span> <span class="nv">nyelv</span><span class="p">,</span> <span class="nv">MONTH</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="err">..</span> <span class="nv">MONTH</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> 
+      <span class="kt">INTEGER </span><span class="nv">DAYSINMONTH</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>  
+      <span class="nv">DAYSINMONTH</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c">! MARCIUS</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-pascal" data-lang="pascal"><span class="cm">(* pascal nyelv, elemek: month[-2] .. month[9] *)</span>
+<span class="k">type</span>
+ <span class="n">monthtype</span> <span class="o">=</span> <span class="k">array</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span> <span class="k">of</span> <span class="kt">integer</span><span class="o">;</span> 
+<span class="k">var</span>
+ <span class="n">month</span> <span class="o">:</span> <span class="n">monthtype</span><span class="o">;</span>
+<span class="k">begin</span>
+ <span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:=</span> <span class="mi">31</span>  <span class="cm">(* marcius *)</span>
+<span class="k">end</span><span class="o">;</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># Python</span></code></pre></div>
+
+<p>A tömbök egyes nyelvekben “tudják” a méretüket, ilyen pl. a Java és a C#.
+Ennek nyilván többletköltsége van, ezért a C és C++ futási időben nem 
+tartja számon ezt az információt. Fordítási időben azonban ezekben a 
+nyelvekben megtudhatjuk a tömbök méretét, a <strong>sizeof</strong> operátor segítségével. 
+A <strong>t</strong> tömb elemeinek számát pl. lekérdezhetjük a  <strong>sizeof(t)/sizeof(t[0])</strong> 
+kifejezéssel. Vigyázzunk azonban, hogy ez nem fog működni, ha <strong>t</strong> 
+függvényparaméter (lásd ott).</p>
+
+<p>A tömbök Javaban, C#-ban, Pascalban, és sok más nyelven lehetnek 
+<em>többdimenziósak</em> is. A C (és C++) nyelv ezt úgy oldja meg, hogy az 
+egydimenziós tömbök elemei maguk is lehetnek (fixméretű) tömbök:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* C nyelv, 4x2 darab short, elemek: s[0][0] .. s[0][1] .. s[3][1] */</span>
+<span class="kt">short</span>  <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1212</span><span class="p">;</span>  <span class="cm">/* a tömb elejétől (1x2+0) * sizeof(short) távolságra */</span></code></pre></div>
+
+<p>Láthatjuk, hogy a C ún. <em>sorfolytonos</em> ábrázolást alkalmaz, azaz a tömb 
+sorai egymás után tárolódnak. Ilyenkor egy <strong>t[I][J][K]</strong> többdimenziós tömb 
+<strong>(i, j, … ,k)</strong>-ik elemének eléréséhez elég a <strong>J…K</strong> dimenziókat tudni, 
+a legkülsőbb (azaz a “legbaloldalabbi”) <strong>I</strong> dimenzió méretére nincsen 
+szükségünk.</p>
+
+<p><img src="/images/lectures/imper/c2dimarray.jpg" alt="alt text" title="2 dimenziós tömb memóriaképe" /></p>
+
+<p>A tömbökkel C-ben nem lehet műveleteket végezni, kivéve az egyes tömbelemek
+elérését az <strong>index operátor</strong> segítségével. Ugyanakkor a kifejezésekben a 
+<strong>tömb neve automatikusan az első elemre mutató pointer értékre 
+konvertálódik</strong>.</p>
+
+<h3 id="az-index-opertor">Az index operátor</h3>
+
+<p>A C nyelvben egy <strong>t</strong> tömb <strong>i</strong>-edik elemének elérésére a <strong>t[i]</strong>
+<em>index operátor</em> használható. A C nyelv sem fordítási, sem futási időben
+nem ellenőrzi, hogy az index érvényes-e, azaz a tömb egy valós elemét címzi-e 
+meg. Ha hibát vétünk, a program viselkedése <em>nemdefiniált</em>, “szerencsés” 
+esetben elszáll a programunk, de az is lehet, hogy hibásan továbbműködik.</p>
+
+<p>C++-ban különösen a többdimenziós tömbök helyett érdemesebb az 
+<strong>std::vector</strong> vagy (C++11-től kezdve) az <strong>std::array</strong> osztályokat 
+használni.</p>
+
+<h2 id="mutatk">Mutatók</h2>
+
+<p>A <strong>mutató</strong> (pointer) egy olyan programkontrukció, ami egy memória-területet
+azonosít (pl. egy változó címét). A mutatót képzelhetjük úgy, mintha egy 
+memória-címet tartalmazna (valójában ennél lehetnek bonyolultabb, 
+platformfüggő megvalósítások).</p>
+
+<p>Vannak programozási nyelvek (pl. Pascal, Java), amelyek csak a <em>dimnamikus 
+memóriaterületre</em> (lásd <a href="/lectures/imper/imper-lecture-5">5-ik előadás</a>) 
+engednek mutatót állítani, a C (és a C++, ADA) viszont engedi, hogy 
+tetszőleges a program címterében levő memóriaterületre (így statikus
+élettartamú globális, vagy a veremben létrejött automatikus változókra)
+pointert állítsunk. Pointerekre is állíthatunk pointereket.</p>
+
+<p><img src="/images/lectures/c-en/pointers.png" alt="alt text" title="C mutatók" /></p>
+
+<p>A mutató <strong>típusa</strong> viszont fontos: hatással van arra, hogyan működnek
+a pointerek. Az általános, bármire mutató pointereket <strong>void *</strong> típussal
+hozzuk létre.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span>  <span class="o">*</span><span class="n">pi</span><span class="p">;</span>   <span class="cm">/* mutató int típusra                  */</span>
+<span class="kt">int</span> <span class="o">**</span><span class="n">ppi</span><span class="p">;</span>  <span class="cm">/* mutató int tpusra mutató pointerre  */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">pv</span><span class="p">;</span>   <span class="cm">/* általános mutató: &quot;pointer to void&quot; */</span></code></pre></div>
+
+<h2 id="mveletek-mutatkkal">Műveletek mutatókkal</h2>
+
+<p>Mutató értékeket a <strong>&amp;</strong> <em>cím (address) operátorral</em> hozhatunk létre. Van egy 
+speciális érték, a <strong>null pointer</strong>, ami azt jelzi, hogy a pointerünk éppen nem 
+mutat semmire. A null pointert a <strong>NULL</strong> makrónévvel jelöljük, a null pointer 
+elágazásokban, ciklusokban, stb. <em>hamis</em> értékre értékelődik ki, minden más
+pointer értéket <em>igaznak</em> tekintünk. Egyes függvények, mint pl. a <strong>malloc</strong>,
+null pointer visszaadásával jelzik, ha hibaesemény történt.</p>
+
+<p>A mutatóra a <strong>*</strong> <em>indirekció (dereference) operátort</em> alkalmazva azt a
+memóriaterületet kapjuk, amire a pointer mutat. Ezzel a memóriaterülettel 
+utána a típusának megfelelő műveleteket végezhetjük el. A null pointer 
+indirekciója nemdefiniált viselkedés - súlyos futási hibát eredményez.</p>
+
+<p>Egy adott típusra mutató pointert össze lehet hasonlítani egy <em>ugyanolyan 
+típusú</em> mutatóval vagy a null pointerrel az <strong>==</strong> egyenlőség és a <strong>!=</strong>
+nemegyenlő operátorokkal. Két null pointer érték mindig megegyezik és 
+sohasem egyenlő nem null pointer értékekkel.</p>
+
+<p>A <em>tömbökre mutató pointerek</em> speciálisan viselkednek. Ha két, ugyanolyan 
+típusú mutató ugyanazon tömb elemeire mutat, akkor használhatjuk a 
+<strong>&lt;</strong>, <strong>&lt;=</strong>, <strong>&gt;</strong>, <strong>&gt;=</strong> operátorokat is. Azt a pointert tekintjük 
+kisebbnek, amelyik a <em>kisebb indexű</em> tömbelemre mutat.</p>
+
+<p>A tömbökre mutató pointerekhez hozzáadhatunk egész számokat is, ezt hívjuk
+<strong>pointer aritmikának</strong>. Az összeadás (és kivonás) hatása függ a pointer 
+típusától: ha <strong>ptr</strong> egy <strong>T</strong> típusú tömbre mutat, akkor <strong>ptr + i</strong> az 
+<strong>i</strong> tömbelemmel, azaz <strong>i*sizeof(T)</strong> bájttal odébb mutat.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">double</span>   <span class="n">points</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>   <span class="cm">/* 10 elemű double tömb */</span>
+<span class="kt">double</span>  <span class="o">*</span><span class="n">curPoint</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">points</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>  <span class="cm">/* mutató az 5-ik elemre */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">pv</span><span class="p">;</span>   <span class="cm">/* általános mutató: &quot;pointer to void&quot; */</span></code></pre></div>
+
+<p><img src="/images/lectures/imper/ptrarithm.jpg" alt="alt text" title="mutató aritmetika" /></p>
+
+<p>Ha két mutató ugyanolyan típusú és ugyanarra a tömbre mutatnak, akkor 
+kivonhatjuk őket egymásból, és az eredmény egy (előjeles) egész, amelyik
+a mutatott elemek indexei közötti (előjeles) különbséget adja meg. Fontos
+tehát, hogy nem a köztes bájtok, hanem a köztes tömbelemek számát kapjuk 
+meg. Ezért is fontos, hogy a pointereinket helyes típusra deklaráljuk.
+Mivel egy <strong>void *</strong> pointer nem mutathat tömbre, ezért a pointer aritmetika 
+sem alkalmazható <strong>void *</strong> típusú pointerekre.</p>
+
+<h2 id="mutatk-s-tmbk-kapcsolata">Mutatók és tömbök kapcsolata</h2>
+
+<p>Minden tömb neve az első (azaz nullás indexű) elemre mutató pointer értékre 
+konvertálódik. Ezért a tömbök neveit is lehet pointerként használni. Ennek 
+egy speciális esete, amikor egy tömböt függvényparaméterként adunk át. 
+Ilyenkor valójában a függvény első elemére mutató pointer értékét adjuk át
+a hívott függvénynek. A függvény paraméter-deklarációjában egyaránt 
+használhatjuk a pointer vagy tömb deklarációs formát - a fordítóprogram 
+minden tömb formájú paramétert pointernek fog tekinteni.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">]);</span>   <span class="cm">/* ezek a deklarációk mind ugyanazt jelentik */</span>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[]);</span>     <span class="cm">/*                                           */</span>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">t</span><span class="p">);</span>      <span class="cm">/* és ennek a pointernek tekinti a fordító   */</span></code></pre></div>
+
+<h3 id="index-opertor-alkalmazsa-pointerekre">Index operátor alkalmazása pointerekre</h3>
+
+<p>Kényelmi okokból a nem void* mutatókra is alkalmazhatjuk az index 
+operátort. Ebben az esetben a <strong>ptr[i]</strong> kifejezés értéke megegyezik 
+a *(ptr+i) kifejezéssel. Az <strong>i</strong> értéke lehet nulla vagy negatív is.
+A fordítóprogram semmilyen ellenőrzést sem végez arra nézve, hogy az így 
+kapott memória pozíció érvényes ill. helyes-e. A legtöbb C fordító elfogadja
+a 2[“Hello”] kifejezést, amit ekvivalensnek tekint *(2+”Hello”)
+azaz *(“Hello”+2) azaz “Hello”[2]-vel, és az első ‘l’ karaktert
+fogja jelenteni.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">double</span>  <span class="n">tomb</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>        <span class="cm">/* 10 elemű double tömb */</span>
+<span class="lineno"> 2</span> <span class="kt">double</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tomb</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="cm">/* első elemre mutató pointer */</span>
+<span class="lineno"> 3</span> <span class="kt">double</span> <span class="o">*</span><span class="n">qtr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tomb</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>  <span class="cm">/* a hatodik elemre mutató pointer */</span>
+<span class="lineno"> 4</span> <span class="cm">/* ez itt mind igaz allitas */</span>
+<span class="lineno"> 5</span> <span class="n">assert</span><span class="p">(</span>  <span class="n">tomb</span>    <span class="o">==</span> <span class="o">&amp;</span><span class="n">tomb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+<span class="lineno"> 6</span> <span class="n">assert</span><span class="p">(</span>  <span class="n">tomb</span><span class="o">+</span><span class="mi">5</span>  <span class="o">==</span> <span class="o">&amp;</span><span class="n">tomb</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">);</span>
+<span class="lineno"> 7</span> <span class="n">assert</span><span class="p">(</span>  <span class="o">*</span><span class="n">ptr</span>    <span class="o">==</span>  <span class="n">ptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="p">);</span>
+<span class="lineno"> 8</span> <span class="n">assert</span><span class="p">(</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span>  <span class="n">ptr</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>  <span class="p">);</span>
+<span class="lineno"> 9</span> <span class="n">assert</span><span class="p">(</span>  <span class="n">tomb</span>    <span class="o">==</span>  <span class="n">ptr</span>     <span class="p">);</span>
+<span class="lineno">10</span> <span class="n">assert</span><span class="p">(</span>  <span class="n">tomb</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span>  <span class="n">ptr</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>  <span class="p">);</span>
+<span class="lineno">11</span> <span class="n">assert</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">tomb</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span>  <span class="n">qtr</span>     <span class="p">);</span>
+<span class="lineno">12</span> <span class="n">assert</span><span class="p">(</span>   <span class="n">ptr</span> <span class="o">-</span> <span class="n">qtr</span> <span class="o">==</span>  <span class="o">-</span><span class="mi">5</span>   <span class="p">);</span></code></pre></div>
+
+<p>Bár kényelmi okokból a C kifejezésekben a tömböket és pointereket hasonlóan 
+használhatjuk a <strong>tömbök és pointerek nem ekvivalensek</strong>. A pointer egy fix 
+méretű ojbektum, amely egy másik memóriaterületre történő hivatkozást (vagy 
+a nullpointer értéket) tartalmaz. A tömb pedig azonos típusú elemek véges
+sorozata. A fordító más kódot generál <strong>tomb[i]</strong>-ből, mint <strong>ptr[i]</strong>-ből.</p>
+
+<p>Az alábbi, két forrásfájlból álló példa jól mutatja a jelenséget:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/* source1.c */</span>
+<span class="lineno"> 2</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>   <span class="cm">/* három elemű int tömb */</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">extern</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">par</span><span class="p">);</span>
+<span class="lineno"> 7</span> <span class="k">extern</span> <span class="kt">void</span> <span class="nf">g</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">par</span><span class="p">);</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">10</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>          <span class="cm">/* p = &amp;t[0] */</span>
+<span class="lineno">12</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>   <span class="cm">/* 2 */</span>
+<span class="lineno">13</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>   <span class="cm">/* 2 */</span>
+<span class="lineno">14</span>   <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="lineno">15</span>   <span class="n">g</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">par</span><span class="p">)</span>
+<span class="lineno">18</span> <span class="p">{</span>
+<span class="lineno">19</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>   <span class="cm">/* 2 */</span>
+<span class="lineno">20</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>   <span class="cm">/* 2 */</span>
+<span class="lineno">21</span> <span class="p">}</span>
+<span class="lineno">22</span> 
+<span class="lineno">23</span> <span class="cm">/* ------------------------------- */</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span> <span class="cm">/* source2.c */</span>
+<span class="lineno">26</span> <span class="cp">#include &lt;stdio.h&gt; </span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span> <span class="k">extern</span>  <span class="kt">int</span> <span class="o">*</span><span class="n">t</span><span class="p">;</span>  <span class="cm">/* Ez a hiba! source1.c-ben a t név egy tömb, </span>
+<span class="lineno">29</span> <span class="cm">                    nem pedig pointer </span>
+<span class="lineno">30</span> <span class="cm">extern int t[];     -vel jól működne a program               */</span>              
+<span class="lineno">31</span> 
+<span class="lineno">32</span> <span class="kt">void</span> <span class="nf">g</span><span class="p">(</span> <span class="kt">int</span> <span class="o">*</span><span class="n">par</span><span class="p">)</span>
+<span class="lineno">33</span> <span class="p">{</span>
+<span class="lineno">34</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">par</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="cm">/* 2 */</span>
+<span class="lineno">35</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>   <span class="cm">/* itt a program valószínűleg elszáll */</span>
+<span class="lineno">36</span> <span class="p">}</span></code></pre></div>
+
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

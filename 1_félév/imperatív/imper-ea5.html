@@ -1,0 +1,652 @@
+<html>
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage of Dr. Zoltán Porkoláb</title>
+  <meta name="description" content="Dr. Zoltán Porkoláb is an Associate Professor of the Department of Programming Languages and Compilers at the Faculty of Informatics, Eötvös Loránd University (ELTE), Budapest, Hungary.  At the same time, he holds Principal C++ Developer position at Ericsson Hungary Ltd.">
+
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="canonical" href="http://gsd.web.elte.hu/lectures/imper/imper-lecture-5/">
+  <link rel="alternate" type="application/rss+xml" title="Homepage of Dr. Zoltán Porkoláb" href="http://gsd.web.elte.hu/feed.xml" />
+</head>
+
+
+  <body>
+    <div id='wrap'>
+
+      <!--<div id='header'>
+  <div class='tagline'>Homepage of Dr. Zoltán Porkoláb</div>
+</div>
+-->
+
+      <div id='pages'>
+  <ol class='toc'>
+    <li>Homepage of Dr. Zoltán Porkoláb
+      <ol class="toc"> 
+        <li><a href='/'>Home</a></li>
+        <li><a href='/archive'>Archive</a></li>
+      </ol>
+    <li>Teaching
+      <ol class="toc">
+        <li><a href='/timetable'>Timetable</a></li>
+        <li><a href='/imper'>Imperative programming (BSc)</a></li>
+        <li><a href='/multi'>Multiparadigm programming (MSc)</a></li>
+        <li><a href='/c-phys'>C programming (BSc for physicists)</a></li>
+        <li><a href='/tools'>Project tools (BSc)</a></li>
+        <li><a href='/bolyai'>Bolyai College</a></li>
+        <li><a href='/cpp-en'>C++ (for foreign studenst)</a></li>
+        <li><a href='/softtech'>Software technology lab</a></li>
+        <li><a href='/thesis'>BSc and MSc thesis</a></li>
+      </ol>
+    </li>
+    <li>Research
+      <ol class="toc">
+        <li><a href='http://plc.inf.elte.hu/templight'>Templight</a></li>
+        <li><a href='https://github.com/Ericsson/codechecker'>CodeChecker</a></li>
+        <li><a href='https://github.com/Ericsson/codecompass'>CodeCompass</a></li>
+        <li><a href='/projects'>Projects</a></li>
+        <li><a href='http://aszt.inf.elte.hu/~gsd/porkolab_publications_en_2011.pdf'>Publications (up to 2011)</a></li>
+        <li><a href='http://www.doktori.hu/index.php?menuid=192&sz_ID=2806&lang=EN'>PhD students</a></li>
+      </ol>
+    </li>
+    <li>Affiliations
+      <ol class="toc">
+        <li><a href='http://plcportal.inf.elte.hu/'>Dept. of Programming Languages and Compilers</a></li>
+        <li><a href='http://www.ericsson.com/hu'>Ericsson Hungary Ltd</a></li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+
+      <div id='content'>
+        <h1 id=''></h1>
+        <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+    <p class="post-meta"></p>
+  </header-->
+
+  <article class="post-content">
+    <div class="post">
+
+  <!--header class="post-header">
+    <h1 class="post-title"></h1>
+  </header-->
+
+  <article class="post-content">
+    <h1 id="imperatv-programozs-5">Imperatív programozás 5.</h1>
+
+<h1 id="deklarcik-lthatsg-lettartam">Deklarációk, láthatóság, élettartam</h1>
+
+<p>Az imperatív programozási nyelvekben két fontos szabályrendszer határozza
+meg a változók, függvények és típusok használatát: a <strong>láthatóság</strong> (scope)
+és az <strong>élettartam</strong> (life). A láthatóság helyett szokták a <em>hatókör</em> 
+elnevezést is használni. A láthatóságot és élettartamot - hasonlóan más 
+nyelvekhez - a C programozási nyelvben a <strong>deklarációk</strong> formája és helye
+határozza meg.</p>
+
+<h2 id="deklarci-definci">Deklaráció, definíció</h2>
+
+<p>Amikor egy <em>nevet</em> (azonosítót) bevezetünk egy programban, akkor a <em>statikus
+típusrendszerű</em> (lásd <a href="/lectures/imper/imper-lecture-1/">1. előadás</a>) nyelvek
+elvárják, hogy közöljük a fordítóprogrammal, hogy “mit gondoljon” erről az 
+azonosítóról: pl. mi a <strong>típusa</strong>, vagy hol és mennyi ideig kívánjuk
+használni.</p>
+
+<p>A deklarációk egy része konkrétan meg is határozza az illető objektumot:
+ezt nevezzük <strong>definíciónak</strong>. A <em>változók</em> esetén a definíció intézkedik 
+a tárterület tényleges lefoglalásáról, a <em>függvények</em> esetén a paraméter 
+lista és visszatérő érték típusa megadása mellett a konkrét függvénytörzs 
+meghatározása is megtörténik, <em>típusok</em> esetén pedig az adatszerkezetet kell 
+megadnunk.</p>
+
+<p>A <strong>deklaráció</strong> azonban gyakorta nem jár együtt a definícióval. Ha pl. egy 
+változót egy másik fordítási egységben (forrásfájlban) foglalnak le (azaz ott 
+definiálják), de ebben a fájlban is akarjuk használni (írni, olvasni), akkor 
+ebben a fordítási egységben is meg kell mondni a fordítóprogramnak, hogy mit 
+gondoljon felőle. Azaz deklarálni kell. Ilyenkor a változóknak meg kell adni 
+a típusát. A függvényeknél a visszatérő értékét és a paraméterlistáját (hogy
+pl. konverziók történjenek a paraméterátadáskor vagy visszatéréskor), de nem 
+kell megadni, hogy mely konkrét utasítások lesznek végrehajtva, hiszen a 
+függvény kódját a másik fordítási egység fordítja le.</p>
+
+<h2 id="deklarci-formja">Deklaráció formája</h2>
+
+<p>A deklarációk formája C nyelvben <em>tárolási-osztály típusnév deklarátor-lista</em>,
+ahol a <em>deklarátor-lista</em> egyszerűen vesszővel elválasztott <em>deklarátor</em>-ok 
+listája. A <strong>tárolási osztály</strong> (storage class) egy olyan kulcsszó, ami 
+a deklaráció jelentését befolyásolja, és az alábbi kulcsszavak egyike:</p>
+
+<p><strong>auto</strong>, <strong>register</strong>, <strong>static</strong>, <strong>extern</strong>, <strong>typedef</strong></p>
+
+<p>Mivel C-ben nem szükséges alkalmazásuk, ezért inkább kerüljük a <strong>register</strong> 
+és <strong>auto</strong> használatát. A <strong>register</strong> egy optimalizációs ajánlás, amit a
+modern fordítóprogramok enélkül is megtesznek. Az <strong>auto</strong> kulcsszó pedig 
+más jelentéssel bír C++-ban. A többi tárolási osztály használatára látunk
+majd példákat.</p>
+
+<p>A <em>deklaráror</em> rekurzív formában van megadva:</p>
+
+<ul>
+  <li>függvény esetében: <em>deklarátor ( paraméter-lista )</em></li>
+  <li>mutató esetében: <em>* deklarátor</em></li>
+  <li>tömb esetében:   <em>deklarátor [ n ]</em></li>
+  <li>egyébként egy azonosító: <em>azonosító</em></li>
+</ul>
+
+<p>Példák definíciókra:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span>  <span class="n">i</span><span class="p">;</span>             <span class="cm">/* egy egész (int) változó definiálása */</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span>            <span class="cm">/* egy egész típusra mutató pointer definiálása */</span>
+<span class="lineno">3</span> <span class="kt">int</span>  <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>         <span class="cm">/* egy 10 egészt tartalmazó tömb definiálása */</span>
+<span class="lineno">4</span> <span class="kt">int</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">){...}</span> <span class="cm">/* paraméter nélküli, int-el visszatérő fv def. */</span>
+<span class="lineno">5</span> <span class="kt">int</span> <span class="nf">func2</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">){...}</span> <span class="cm">/* ugyanaz int és double paraméterekkel */</span></code></pre></div>
+
+<p>Ezeket a deklarátorokat rekurzívan is lehet használni. A kivételek: függvények
+nem térhetnek vissza függvénnyel vagy tömbbel, és tömbök nem tartalmazhatnak
+függvényeket.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="o">**</span><span class="n">pi</span><span class="p">;</span>           <span class="cm">/* egy egészre mutató pointer-re mutató pointer */</span>
+<span class="lineno">2</span> <span class="kt">int</span>  <span class="n">tt</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>    <span class="cm">/* 10 darab 20 elemű egész tömböt tartalmazó tömb */</span>
+<span class="lineno">3</span> <span class="kt">int</span> <span class="o">*</span><span class="nf">func3</span><span class="p">(</span><span class="kt">void</span><span class="p">){...}</span> <span class="cm">/* paraméter nélküli, int pointerrel visszatérő fv */</span>
+<span class="lineno">4</span> <span class="kt">int</span> <span class="o">*</span><span class="nf">func4</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">){...}</span> <span class="cm">/* int- és double-mutató paraméterekkel */</span></code></pre></div>
+
+<p>Amennyiben kétértelműség állna fenn, akkor az operátorok precedenciája és
+a zárójelezés dönti el a deklaráció értelmét. Ugyancsak vigyázzunk arra,
+hogy pl. a mutató <strong>*</strong> jele a deklarátorhoz tartozik!</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span>  <span class="o">*</span><span class="n">ptr_arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>  <span class="cm">/* egy 10 elemű tömb int mutatókkal */</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">ptr_to</span><span class="p">)[</span><span class="mi">10</span><span class="p">];</span>  <span class="cm">/* mutató egy 10 egészet tartalmazó tömbre */</span>
+<span class="lineno">3</span> <span class="kt">int</span><span class="o">*</span>  <span class="n">ptr1</span><span class="p">,</span> <span class="n">ptr2</span><span class="p">;</span>   <span class="cm">/* ptr1 mutató egészre, ptr2 viszont int */</span></code></pre></div>
+
+<p>A változóknak a definiciójuknál kezdőértéket is adhatunk, azaz 
+<em>inicializálhatjuk</em> őket. Ez erősen ajánlott, hiszen így biztosan azt az 
+értéket tartalmazzák, amit mi adtunk nekik.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span>     <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno"> 2</span> <span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="kt">int</span>  <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span>    <span class="cm">/* pointer to int. i-re mutat */</span> 
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="kt">int</span> <span class="n">arr1</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>  <span class="cm">/* ok, de nem ajánlott */</span>
+<span class="lineno"> 6</span> <span class="kt">int</span> <span class="n">arr2</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>    <span class="cm">/* mert arr2[9] == 0 */</span> 
+<span class="lineno"> 7</span> <span class="kt">int</span> <span class="n">arr3</span><span class="p">[]</span>   <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>    <span class="cm">/* ajánlott: int arr3[9] */</span>
+<span class="lineno"> 8</span> <span class="kt">int</span>   <span class="n">t</span><span class="p">[][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span>  <span class="p">{</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span> <span class="p">};</span>  <span class="cm">/* int t[2][3] */</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kt">char</span> <span class="n">str1</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;H&#39;</span><span class="p">,</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="sc">&#39;\0&#39;</span><span class="p">};</span> <span class="cm">/* char str1[6] */</span>
+<span class="lineno">11</span> <span class="kt">char</span> <span class="n">str2</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>                    <span class="cm">/* char str2[6] */</span>
+<span class="lineno">12</span> <span class="kt">char</span>  <span class="o">*</span><span class="n">str3</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>                    <span class="cm">/* char * (pointer &#39;H&#39;-ra) */</span></code></pre></div>
+
+<p>A globális, statikus élettartamú tárterületek 0-ra inicializáltak 
+alapértelmezésben, más esetekben azonban a változók inicializálás nélküli
+tartalma valami memória-szennyeződés (ismeretlen érték) lehet.</p>
+
+<p>A fenti példák <em>definíciók</em> voltak, azaz változóknál rendelkeztünk a tárterület 
+lefoglalásáról ill. megadtunk a függvények törzsét. A következő példák 
+<em>deklarációk</em> lesznek:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>     <span class="cm">/* egész deklarációja, valahol máshol van definiálva */</span>
+<span class="lineno"> 2</span> <span class="k">extern</span> <span class="kt">int</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span>   <span class="cm">/* mutató deklarációja, valahol máshol van definiálva */</span>
+<span class="lineno"> 3</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span> <span class="cm">/* egész tömb dekl., a méretet nem vesszük figyelembe */</span>
+<span class="lineno"> 4</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[];</span>   <span class="cm">/* egész tömb deklarációja, ekvivalens a fentivel */</span>
+<span class="lineno"> 5</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">tt</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span> <span class="cm">/* tömb deklarációja, minden tömbelem 20 int */</span>
+<span class="lineno"> 6</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">tt</span><span class="p">[][</span><span class="mi">20</span><span class="p">];</span>   <span class="cm">/* tömb deklarációja, ekvivalens a fentivel */</span>  
+<span class="lineno"> 7</span> <span class="k">extern</span> <span class="kt">int</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="cm">/* paraméter nélküli függvény deklarációja */</span>
+<span class="lineno"> 8</span> <span class="k">extern</span> <span class="kt">int</span> <span class="nf">func2</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">d</span><span class="p">);</span> <span class="cm">/* Ugyanaz int, double paraméterekkel */</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="nf">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="cm">/* extern elhagyható */</span>
+<span class="lineno">10</span>   <span class="kt">int</span> <span class="nf">func2</span><span class="p">();</span> <span class="cm">/* csak deklarációkor: semmit sem tudunk a paraméterekről */</span></code></pre></div>
+
+<p>A forrásfájlunkat sikeresen lefordíthatjuk, ha a használt változókat, 
+függvényeket deklaráltuk. A futásra kész, összeszerkesztett programunknak
+azonban rendekleznie kell a deklarációkhoz tartozó pontosan egy definícióval. 
+A változót, amit több forrásfájlban is használunk, pontosan egy fordítási 
+egységben le kell foglalni. A függvényt, ami több forrásfájlból is hívható, 
+pontosan egy fordítási egységben definiálnunk kell: meg kell adni, milyen 
+utasításokat tartalmaz.</p>
+
+<p>Annak ellenőrzését, hogy egy <em>másik</em> forrásfájlban mit csináltunk, nem tudja
+ellenőrizni a fordító, ami csak a pillanatnyilag fordított fájlt látja. Ezért 
+az evvel kapcsolatos hibákat nem a fordító, hanem a <em>szerkesztő</em> (linker) 
+program fogja detektálni. Amennyiben nincsen egyetlen definíció sem, akkor a 
+linker <em>feloldatlan hivatkozás</em> (unresolved external) hibát fog jelezni, ha 
+pedig egynél több azonos nevű objektumot definiálunk, akkor <em>többértelmű 
+hivatkozás</em> (ambigous reference) hibát kapunk.</p>
+
+<h2 id="lthatsg">Láthatóság</h2>
+
+<p>A láthatóság (scope) szabályai határozzák meg, hogy egy <em>azonosítót</em> 
+(pl. változó-, függvény-, vagy típusnevet) a program mely részein 
+használhatunk az adott objektum azonosítására. A egy változó láthatóságát
+szokás a változónév <em>hatókörének</em> is nevezni.</p>
+
+<p>A C-ben egy deklaráció lehet <strong>lokális</strong>, ha valamely függvényen belüli 
+blokkban helyezkedik el, vagy <strong>globális</strong>, ha minden függvényen kívül.</p>
+
+<p>A lokális nevek a deklaráló blokkon belül láthatóak, beleértve a belső 
+blokkokat is, kivéve, ha ugyanezt a nevet egy belső blokkban újra deklarálják,
+azaz <em>eltakarják</em> (hide). A globális változók a deklaráció helyétől a 
+forrásfájl végéig látszódnak, hacsak egy blokkban el nem takarják őket.
+Függvényeket csak globálisként tudunk definiálni, azaz nem léteznek függvénybe
+beágyazott lokális függvények (mint léteznek pl. Pascal-ban).</p>
+
+<p>A lokális változók  <strong>belső szerkesztésű</strong>-ek (internal linkage), azaz a linker
+számára láthatatlanok. A globálisan deklarált nevek alapértelmezésben <strong>külső 
+szerkesztésűek</strong> (external linkage), a linker számára láthatóak. Globálisoknál 
+a <strong>static</strong> kulcsszó jelenti azt, hogy a név <em>belső szerkesztésű</em>. 
+Az ilyen neveket a linker nem látja, azaz ezek a nevek csak az adott 
+forrásfájlban használhatók. Ha ugyanazt a nevet több forrásfájlban belső
+szerkeszthetőségűnek definiálunk, akkor arra a linker nem jelez hibát.</p>
+
+<p>A C nyelvben a belső szerkesztésű változókat és függvényeket gyakran egy
+nagyobb kódmodul belső, <em>implementációs</em> céljaira használjuk, a külső 
+szerkesztésűeket pedig az illető modul <em>interfészének</em>. Íly módon, bár
+elég primitíven, szimulálni tudjuk az objektum-orientált nyelvek 
+<em>enkapszuációs</em> elveit. A <strong>main</strong> mindig külső szerkesztésű kell legyen.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>          <span class="cm">/* globális, külső szerkesztésű */</span>
+<span class="lineno"> 2</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>   <span class="cm">/* globális, belső szerkesztésű */</span>
+<span class="lineno"> 3</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>   <span class="cm">/* globális, valahol máshol definiált */</span>
+<span class="lineno"> 4</span> <span class="k">extern</span> <span class="kt">double</span> <span class="nf">fahr2cels</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span> <span class="cm">/* függvény deklaráció */</span>
+<span class="lineno"> 5</span>  
+<span class="lineno"> 6</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">()</span>  <span class="cm">/* külső szerkesztésű, hívható más forrásfájlból */</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>             <span class="cm">/* lokális i, eltakarja (1)-et */</span>
+<span class="lineno">10</span>   <span class="k">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>  <span class="cm">/* lokális k, statikus élettartam */</span>
+<span class="lineno">11</span>   <span class="p">{</span>
+<span class="lineno">12</span>     <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>  <span class="cm">/* lokális m, globális n (3)-nál deklarálva */</span>
+<span class="lineno">13</span>     <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>  <span class="cm">/* lokális i, eltakarja (8)-at */</span>
+<span class="lineno">14</span>   <span class="p">}</span>
+<span class="lineno">15</span>   <span class="n">i</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>    <span class="cm">/* ez ismét (8)-ban deklarált */</span>
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> <span class="k">static</span> <span class="kt">void</span> <span class="nf">g</span><span class="p">()</span>  <span class="cm">/* statikus függvény: belső szerkesztésű */</span>
+<span class="lineno">18</span> <span class="p">{</span>
+<span class="lineno">19</span>   <span class="k">extern</span> <span class="kt">double</span> <span class="n">aa</span><span class="p">;</span>   <span class="cm">/* deklaráció, máshol definiált aa */</span>
+<span class="lineno">20</span>   <span class="k">extern</span> <span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span> <span class="cm">/* deklaráció, máshol definiált f  */</span> 
+<span class="lineno">21</span>   <span class="n">aa</span> <span class="o">=</span> <span class="n">fahr2cels</span><span class="p">(</span><span class="mi">35</span><span class="p">);</span> <span class="cm">/* (4)-ben deklarált külső függvény hívása */</span>
+<span class="lineno">22</span>   <span class="n">f</span><span class="p">(</span><span class="n">aa</span><span class="p">);</span>              <span class="cm">/* (20)-ban deklarált külső függvény hívása */</span>
+<span class="lineno">23</span>   <span class="o">++</span><span class="n">i</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">;</span>           <span class="cm">/* globális i (1) és j (2) használata */</span>
+<span class="lineno">24</span> <span class="p">}</span></code></pre></div>
+
+<p>Az ANSI C-ben (C89) a deklarációk minden blokkban meg kell előzzék a 
+végrehajtható utasításokat. A C99 óta ez már nem szükséges, a C++-hoz hasonlóan
+tetszőleges helyen deklarálhatunk változókat. Ennek az az előnye, hogy csak
+akkor hozunk létre új változókat, amikor kezdőértéket tudunk nekik adni, így 
+kevesebb definiálatlan értékű változónk lesz.</p>
+
+<h2 id="lettartam">Élettartam</h2>
+
+<p>Az élettartam szabályok azt határozzák meg, hogy az egyes memóriaterületek
+melyeket a programunk használ, mettől meddig érvényesek a programunk futása 
+során. Ha olyan tárterületere hivatkozunk, ami már nem érvényes, súlyos 
+futási idejű hiba következhet be.</p>
+
+<h3 id="tipikus-lettartam-kategrik">Tipikus élettartam kategóriák</h3>
+
+<p>Az első programozási nyelvek az összes változó számára a program elején
+lefoglalták a tárterületet, amit a program végéig fent is tartottak. Ez a
+<strong>statikus élettartam</strong> egy “biztonságos” megközelítés, de rendkívül pazarló, 
+hiszen a változók jó részét csak a programunk kis területén (egy függvényen 
+belül, vagy akár csak egy blokkon belül) akarjuk csak használni. Ezen a 
+blokkon/függvényen kívül miért ne használhatnánk másra ugyanazt a 
+memória-területet?</p>
+
+<p>Az Algol 60 nyelvben vezették be a <em>blokk</em> fogalmát, ami nemcsak a vezérlés 
+szerkezetét határozta meg, hanem a lokális változók élettartamát is. A lokális
+változók a blokkba való belépéskor foglalódtak le, és léteztek a belső blokkok,
+vagy meghívott függvények végrehajtása alatt is (bár esetleg nem voltak névvel
+elérhetőek, ha a neveiket eltakarták). Ezek a memóriaterületek akkor 
+szabadultak fel, amikor a létrehozó blokkjuk végrehajtása befejeződött. 
+Ez az <strong>automatikus élettartam</strong> képes ugyanazt a memóriaterületet időben 
+máskor más és más változók számára kiosztani.</p>
+
+<p>Végül olyan eset is előfordul, amikor a tárterület létrehozása és megszünése 
+nem kapcsolható egy blokk végrehajtásához. Pl. az egyik függvényben foglaljuk 
+le a tárterületet és egy másikban kell megszüntetni azt. Ez a <strong>dinamikus 
+élettartam</strong>, amikor a programozó vezérli (függvényhívásokkal vagy más módon)
+a tárterület élettartamát.</p>
+
+<h3 id="statikus-lettartam">Statikus élettartam</h3>
+
+<p>A globális változók, ideértve a belső szerkesztésű, static globálisakat is
+<em>statikus élettartamúak</em>. Tárterületük a program elején létrejön és a program 
+végéig lefoglalva marad. A statikus tárterületek inicializálási sorrendje a
+forrásfájlon belül a definíciós sorrend, a fordítási egységek közötti 
+sorrendiség nem definiált. A nem inicilaizált statikus memóriaterületek 
+kezdőértéke nulla.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span> <span class="cm">/* statikus élettartam, kezdőértéke csupa &#39;\0&#39; */</span>
+<span class="lineno">2</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>      <span class="cm">/* statikus élettartam, kezdőértéke 42 */</span>
+<span class="lineno">3</span> <span class="k">static</span> <span class="kt">double</span> <span class="n">j</span><span class="p">;</span> <span class="cm">/* statikus élettartam, kezdőértéke 0.0 */</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">6</span> <span class="p">{</span>
+<span class="lineno">7</span>   <span class="cm">/* ... */</span>
+<span class="lineno">8</span> <span class="p">}</span>   
+<span class="lineno">9</span> <span class="cm">/* az élettartamok vége */</span></code></pre></div>
+
+<p>A statikus élettartam egy speciális esete, amikor egy lokális változót
+definiálunk <strong>static</strong> kulcsszóval. Ilyenkor a static nem a szerkesztést,
+hanem az élettartamot befolyásolja, az ilyen lokális változók statikus
+élettartamúak. A statikus lokális változók egyetlen egyszer inicalizálódnak.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno">1</span> <span class="kt">int</span> <span class="nf">count</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>   <span class="k">static</span> <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="cm">/* csak első alkalommal hajtódik végre */</span>
+<span class="lineno">4</span>   <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>               
+<span class="lineno">5</span>   <span class="cm">/* ... */</span>
+<span class="lineno">6</span>   <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>    <span class="cm">/* minden hiváskor egyel nagyobbat ad vissza */</span> 
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
+
+<p>A lokális statikusok a sima (automatikus) lokális változókhoz képest a
+blokkból kilépve is megőrzik a tartalmukat, és a legközelebbi belépéskor
+“emlékeznek” rá. Olyan globális változóknak gondolhatjuk őket, melyek
+láthatósága a blokkra korlátozott.</p>
+
+<h3 id="automatikus-lettartam">Automatikus élettartam</h3>
+
+<p>A (nem statikus) lokális változók a C programozási nyelvben a program 
+<strong>végrehajtási vermében</strong> (program stack) jönnek létre. A verem egyben 
+a függvényhívásoknál a <em>paraméterátadás</em> és a <em>visszatérő értékek</em> 
+közvetítésére is szolgál.</p>
+
+<p>Az ilyen változók a blokkba való belépéskor foglalódnak le és élettartamuk 
+megszűnik, amikor elhagyjuk a blokkot. Ha van inicializálásuk, akkor az 
+minden egyes alkalommal megtörténik, amikor belépünk a blokkba. Ellenkező
+esetben a változók értéke nem definiált (valami memóriaszemét, ami a verem
+korábbi használatából maradt ott). Amikor a blokk végrehajtása befejeződik,
+a verem állapota visszaáll a blokkba való belépés előttire, azaz az 
+automatikus változóink (és függvényparamétereink) tárterülete felszámolódik,
+más függvények, blokkok számára felhasználhatóvá válik.</p>
+
+<p><img src="/images/lectures/imper/stack.png" alt="alt text" /></p>
+
+<p>A <strong>bp</strong> az ún. <em>bázis-pointer</em>, ami egy adott függvényhívás során a verem
+által használt területet, az ún. <em>stack-frame</em>-et azonosítja. A lokális 
+változók (és az átadott függvényparaméterek) pozíciója a bátzispointerhez 
+képest relatív távolsággal kerül meghatározásra.</p>
+
+<p>Ha a blokk végrehajtása során egy függvényt hívunk, akkor annak a függvénynek 
+a számára újabb stack-frame foglalódik le, ezalatt a változóink értéke 
+megőrződik. Ez egyben azt is jelenti, hogy a függvények rekurzívan is 
+hívhatóak: minden hívás saját stack-frame-et hoz létre.</p>
+
+<h3 id="dinamikus-lettartam">Dinamikus élettartam</h3>
+
+<p>Vannak esetek, amikor a memóriaterület létrehozása és felszámolása nem 
+kapcsolható valamely függvény vagy blokk végrehajtásához. Ilyenkor a 
+programozó manuálisan intézkedik a tárterület lefoglalásáról az ún.
+<strong>szabad memóriából</strong> (free memory, heap). A tárterület lefoglalva marad,
+amíg a programozó azt manuálisan fel nem szabadítja. Amennyiben ezt 
+elmulasztja, akkor hosszan futó programok esetében (pl. egy szerver program 
+vagy maga az operációs rendszer) a rendszeres fel nem szabadított allokálások
+miatt a memória elfogyhat. Ezt a hibajelenséget nevezzük <em>memória 
+elszivárgásnak</em> (memory leak).</p>
+
+<p>Számos modern programozási nyelv figyeli, hogy létezik-e még hivatkozás a heap 
+területen lefoglalt memóriaterületekre. Ha az már “elérhetetlen”, akkor 
+“begyűjtésre” jelöli meg, és ha szabad memóriára lenne szükség, akkor 
+felszabadítja és újrahasználja azt. Ezt a bonyolult és nem olcsó mehanizmust
+nevezzük <strong>szemétgyűjtésnek</strong> (garbage collection), illetve az ezt elvégző 
+eszközt szemétgyűjtőnek (garbage collector).</p>
+
+<p>Azok a nyelvek, melyek valamely virtuális futtató környezetet használnak,
+mint a Smalltalk, Java, C# és Eiffel, alkalmazzák a szemétgyűjtést, más
+nyelvek, ahol a hardver közvetlen, hatékony elérésén van a hangsúly, mint 
+a C vagy a C++, azok nem. Ez utóbbi nyelveknél nagyon kell figyelnünk a 
+memória elszivárgás megelőzésére.</p>
+
+<p>C nyelvben a dinamikus memória lefoglalását a <strong>malloc</strong> függvénnyel végezzük,
+melynek paramétereként a lefoglalandó bájtok számát adjuk meg. Jó ötlet itt
+a <strong>sizeof</strong> operátor használata. A <em>malloc</em> egy <strong>void*</strong> pointert ad vissza, 
+amit a szükséges típusra kell konvertálnunk. Előfordulhat, hogy nincsen elég 
+memória, ilyenkor a malloc <strong>NULL</strong> pointert ad vissza, ezt <em>soha se felejtsük
+el ellenőrizni</em>!</p>
+
+<p>A memória felszabadítását a <strong>free</strong> függvény végzi, aminek a malloc által 
+adott mutatót kell megadnunk. A felszabadított tárterületet tilos tovább 
+használnunk, ez futási idejű hibát okoz. Különösen súlyos hiba a többszöri 
+felszabadítás. A <em>free</em> függvény kaphat NULL pointert, ekkor semmit sem
+csinál.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>  <span class="cm">/* 1024 char lefoglalása */</span>
+<span class="lineno"> 4</span>   <span class="kt">double</span> <span class="o">*</span><span class="n">dbls</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span> <span class="cm">/* 10 double */</span> 
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>   <span class="k">if</span> <span class="p">(</span> <span class="n">dbls</span> <span class="p">)</span>  <span class="cm">/* sikeres volt a lefoglalás */</span>
+<span class="lineno"> 7</span>   <span class="p">{</span>
+<span class="lineno"> 8</span>     <span class="n">g</span><span class="p">(</span><span class="n">dbls</span><span class="p">);</span>   <span class="cm">/* dbls használata */</span>
+<span class="lineno"> 9</span>   <span class="p">}</span>
+<span class="lineno">10</span>   <span class="cm">/* ... */</span>
+<span class="lineno">11</span>   <span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>  <span class="cm">/* az 1024 karakter felszbadítása */</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="kt">void</span> <span class="nf">g</span><span class="p">(</span> <span class="kt">double</span> <span class="o">*</span><span class="n">dptr</span><span class="p">)</span>
+<span class="lineno">15</span> <span class="p">{</span>
+<span class="lineno">16</span>   <span class="n">free</span><span class="p">(</span><span class="n">dptr</span><span class="p">);</span>   <span class="cm">/* a 10 double felszbadítása */</span>
+<span class="lineno">17</span> <span class="p">}</span></code></pre></div>
+
+<h2 id="lettartammal-kapcsolatos-hibk">Élettartammal kapcsolatos hibák</h2>
+
+<p>Az alábbiakban ezgy esettanulmányon keresztül megvizsgáljuk a láthatóság és
+élettartam kapcsolatát és azt, milyen hibákat kell elkerülnünk.</p>
+
+<p>Legyen feladatunk egy egyszerű <em>answer</em> függvény megírása, amelyik kiírja a
+paraméterként kapott kérdést, beolvassa a választ és azt visszaadja a 
+hívójának. A hívó program (<em>main</em>) kiírja a választ a standard outputra.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * Ez nagyon HIBÁS verzió </span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">);</span>
+<span class="lineno"> 6</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">(</span> <span class="s">&quot;How are you? &quot;</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno"> 9</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="p">}</span>
+<span class="lineno">11</span> <span class="cm">/* nagyon hibás !! */</span>
+<span class="lineno">12</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">)</span>
+<span class="lineno">13</span> <span class="p">{</span>
+<span class="lineno">14</span>   <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span> <span class="cm">/* lokális láthatóság, automatikus élettartam */</span>
+<span class="lineno">15</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">16</span>   <span class="n">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>  <span class="cm">/* ERR1: buffer-túlcímzés !! */</span>
+<span class="lineno">17</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span> <span class="cm">/* ERR2: automatikus élettartam vége, tilos használni! */</span>
+<span class="lineno">18</span> <span class="p">}</span></code></pre></div>
+
+<p>Két súlyos hibát követtünk el:</p>
+
+<ol>
+  <li>
+    <p>A <strong>gets(buffer)</strong> az első újsor karakterig olvassa a karaktereket, így 
+lehet, hogy többet olvasnánk, mint a bufferünk hossza. Ez súlyos hiba, mert
+felülírjuk a buffer mögötti memóriát. Ez a <em>buffer-túlcsordulás</em> hiba ez 
+egyik legkritikusabb C biztonsági hibák egyike.</p>
+  </li>
+  <li>
+    <p>A <strong>return buffer</strong> egy karakterre mutató pointert ad vissza a lefoglalt 
+automatikus élettartamú tömb elejére. Viszont amint visszatérünk a függvényből,
+a verem ezen része felszabadul és a mutatónk egy invalid területre fog mutatni.</p>
+  </li>
+</ol>
+
+<p>Javítási kísérlet, változtassuk meg a buffer élettartamát és cseréljük ki 
+a beolvasást biztonságosabbra:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * Működik, de nehezen karbantartható</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="cp">#define BUFSIZE 80</span>
+<span class="lineno"> 7</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span> <span class="cm">/* globális láthatóság, statikus élettartam */</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">);</span>
+<span class="lineno">10</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">(</span> <span class="s">&quot;How are you? &quot;</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">13</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">14</span> <span class="p">}</span>
+<span class="lineno">15</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">)</span>
+<span class="lineno">16</span> <span class="p">{</span>
+<span class="lineno">17</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">18</span>   <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span> <span class="cm">/* legfeljebb BUFSIZE-1 char olvasás */</span>
+<span class="lineno">19</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>   <span class="cm">/* ok, pointer globálisra */</span>
+<span class="lineno">20</span> <span class="p">}</span></code></pre></div>
+
+<p>Ez így működik, de nehezen karbantartható. A <em>buffer</em> feleslegesen globális,
+neve ütközhet más fordítási egységekkel. Túl sok helyről elérhető. Rejtsük
+el a függvényen kívüli világ elől.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * Működik, karbantarthatóbb, de nem szál-biztos</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="cp">#define BUFSIZE 80</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">);</span>
+<span class="lineno"> 8</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">(</span> <span class="s">&quot;How are you? &quot;</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">11</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">)</span>
+<span class="lineno">14</span> <span class="p">{</span>
+<span class="lineno">15</span>   <span class="k">static</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span> <span class="cm">/* lokális láthatóság,statikus élettartam */</span>
+<span class="lineno">16</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">17</span>   <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span> <span class="cm">/* legfeljebb BUFSIZE-1 char olvasás */</span>
+<span class="lineno">18</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>   <span class="cm">/* ok, pointer statikus élettartamúra */</span>
+<span class="lineno">19</span> <span class="p">}</span></code></pre></div>
+
+<p>Ebben a környezetben az <em>answer</em> függvény már jól működik, a buffer
+élettartama statikus, tehát a függvény visszatérése után is használható,
+láthatósága viszont lokális, így lényegében implementációs részletként 
+eltakartuk a külvilág elől.</p>
+
+<p>A statikus élettartamú változóknak is van azonban veszélye. Mivel <em>egyetlen</em>
+példányban léteznek, nem pedig minden egyes függvényhíváskor a veremben jönnek
+létre, mint az automatikusak, veszélyes, ha egy időben több helyről használjuk 
+őket. Az alábbi program mindig ugyanazt a (második) választ adja vissza:</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * Működik, karbantarthatóbb, de nem szál-biztos</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="cp">#define BUFSIZE 80</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">);</span>
+<span class="lineno"> 8</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">(</span> <span class="s">&quot;How are you?&quot;</span><span class="p">),</span> <span class="n">answer</span><span class="p">(</span><span class="s">&quot;Sure?&quot;</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">11</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">)</span>
+<span class="lineno">14</span> <span class="p">{</span>
+<span class="lineno">15</span>   <span class="k">static</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span> <span class="cm">/* lokális láthatóság,statikus élettartam */</span>
+<span class="lineno">16</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">17</span>   <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span> <span class="cm">/* legfeljebb BUFSIZE-1 char olvasás */</span>
+<span class="lineno">18</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>   <span class="cm">/* ugyanaz a mutató minden hivás esetén */</span>
+<span class="lineno">19</span> <span class="p">}</span></code></pre></div>
+
+<p>Minden egyes hívás esetén ugyanoda rakjuk a választ (evvel potenciálisan 
+felülírva a korábbi válaszokat). Ha több hívásunk is van, csak az utolsót 
+fogjuk tudni kiolvasni. Ez a probléma különösen veszélyesen jelentkezik 
+<em>többszálú</em> (multithreaded) programok esetében.</p>
+
+<p>Úgy tűnik, minden <em>függvényhívás</em> esetében új területre van szükségünk.
+Próbáljuk meg dinamikus élettartammal.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/*</span>
+<span class="lineno"> 2</span> <span class="cm"> * Egy ideig működik, de memória elszivárgást okoz</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span>
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="cp">#define BUFSIZE 80</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">);</span>
+<span class="lineno"> 8</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">(</span> <span class="s">&quot;How are you?&quot;</span><span class="p">),</span> <span class="n">answer</span><span class="p">(</span><span class="s">&quot;Sure?&quot;</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">11</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">)</span>
+<span class="lineno">14</span> <span class="p">{</span>
+<span class="lineno">15</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">BUFSIZE</span><span class="p">);</span> <span class="cm">/* új memória minden híváskor */</span>
+<span class="lineno">16</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">17</span>   <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span> 
+<span class="lineno">18</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>                
+<span class="lineno">19</span> <span class="p">}</span> <span class="cm">/* de ki fog felszabadítani? */</span></code></pre></div>
+
+<p>Ez a megoldás egy ideig működik, de közben <em>memória elszivárgást</em> okoz. Minden
+alkalommal újra és újra lefoglaljuk a memóriát, de sohasem szabadítjuk fel.<br />
+Nem is lenne egyszerű, hol szabadítsuk fel: az <em>answer</em> függvényben még korai,
+a <em>main</em>-ben meg nem igazán alkalmas.</p>
+
+<p>A helyes megoldáshoz azt kell eldönteni, hogy végül is, <em>kinek van szüksége
+a tárterületre</em>? Ki legyen a <em>tulajdonos</em> (owner), akinek a feladata a memória
+kezelése?</p>
+
+<p>Mivel a tárterületet a <em>main</em> akarja felhasználni, legyen ő a tulajdonos!</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cm">/* </span>
+<span class="lineno"> 2</span> <span class="cm"> * OK</span>
+<span class="lineno"> 3</span> <span class="cm"> */</span> 
+<span class="lineno"> 4</span> <span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="lineno"> 5</span> <span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="cp">#define BUFSIZE 80</span>
+<span class="lineno"> 8</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>   <span class="kt">char</span> <span class="n">buffer1</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">],</span> <span class="n">buffer2</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span> <span class="cm">/* lokális, automatikus */</span>
+<span class="lineno">13</span>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;answer = %s</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">answer</span><span class="p">(</span><span class="s">&quot;How are you?&quot;</span><span class="p">,</span> <span class="n">buffer1</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">),</span>
+<span class="lineno">14</span>                              <span class="n">answer</span><span class="p">(</span><span class="s">&quot;Sure?&quot;</span><span class="p">,</span> <span class="n">buffer2</span><span class="p">,</span> <span class="n">BUFSIZE</span><span class="p">)</span> <span class="p">);</span>
+<span class="lineno">15</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">answer</span><span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">question</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="lineno">18</span> <span class="p">{</span>
+<span class="lineno">19</span>   <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">);</span>
+<span class="lineno">20</span>   <span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span> <span class="cm">/* a kölcsönkapott területre írunk */</span>
+<span class="lineno">21</span>   <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>  <span class="cm">/* ok, a hívó függvényben van lefoglalva */</span>               
+<span class="lineno">22</span> <span class="p">}</span></code></pre></div>
+
+<p>A körülményekhez képest még ez a legstabilabb, karbantarthatóbb megoldás.</p>
+
+
+  </article>
+
+</div>
+
+  </article>
+
+</div>
+
+      </div>
+
+       <div id='footer'>Copyright &copy; 2015-2017 Zoltán Porkoláb</div>
+
+
+
+
+    </div>
+  </body>
+
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73707766-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>
