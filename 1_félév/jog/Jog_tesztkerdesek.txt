@@ -1260,6 +1260,85 @@ b) A szállítmányozási szerzõdés.
 c) A közvetítõi szerzõdés.
 d) A fuvarozási szerzõdés.
 -----------------------------------------------------------------
+11_Adatvédelem
+--------------
+
+176. 
+Az alábbiak közül melyik nem minõsül különleges személyes adatnak?
+a) Az érintett egészségi állapota.
+b) Az érintett vagyoni helyzete.
+c) Az érintett vallási meggyõzõdése.
+d) Az érintett politikai véleménye.
+
+177.
+Az alábbi mûveletek közül melyik nem minõsül adatkezelésnek?
+a) Az adatok gyûjtése.
+b) Az adatok tárolása.
+c) Az adatok lekérdezése.
+d) Mind a három fenti mûvelet adatkezelésnek minõsül.
+
+177/A.
+Az alábbi mûveletek közül melyik nem minõsül adatkezelésnek?
+a) Az adatok gyûjtése.
+b) Az adatkezelési mûveletekhez kapcsolódó technikai feladatok elvégzése.
+c) Az adatok lekérdezése.
+d) Mind a három fenti mûvelet adatkezelésnek minõsül.
+
+178. 
+Az alábbi 3 állítás (a,b,c) közül melyik hamis?
+a) Személyes adatok kezeléséhez elég ha az érintett szóban hozzájárult.
+b) Különleges adat csak törvényi elõírás alapján kezelhetõ.
+c) Bûnügyi személyes adatot csak állami vagy önkormányzati szerv kezelhet.
+d) Mind a három fenti állítás igaz.
+
+179.
+Az alábbiak közül melyik esetben nem tiltakozhat az érintett személyes adatának kezelése ellen?
+a) Közvetlen üzletszerzés céljára történõ felhasználás esetén.
+b) Közvélemény kutatási célú felhasználás esetén.
+c) Tudományos célú felhasználás esetén.
+d) Mindhárom fenti esetben tiltakozhat.
+
+179/A.
+Az alábbiak közül melyik esetben nem tiltakozhat az érintett személyes adatának kezelése ellen?
+a) Közvetlen üzletszerzés céljára történõ felhasználás esetén.
+b) Közvélemény kutatási célú felhasználás esetén.
+c) Ha az adatkezelést közérdekû célból törvény rendeli el.
+d) Mindhárom fenti esetben tiltakozhat.
+-----------------------------------------------------------------
+12_Szellemi_alkotas
+-------------------
+
+180. 
+Az alábbiak közül melyik alkotás nem áll a szerzõi jog védelme alatt?
+a) Ötlet, eljárás.
+b) Szoftver
+c) Adatbázis
+d) Térkép
+
+181. 
+Mennyi ideig védi a szerzõi jog a mûvet?
+a) 50 évig.
+b) A szerzõ élete végéig.
+c) A szerzõ életében és halála után 70 évig.
+d) 20 évig.
+
+182.
+Melyik állítás hamis?
+a) A felhasználási engedély korlátozható valamely területre.
+b) A felhasználási engedély korlátozható megadott idõtartamra.
+c) A felhasználási engedély korlátozható valamely felhasználási módra.
+d) A felhasználási engedély szóban is érvényes.
+
+183.
+Mennyi ideig védi a szabadalmi oltalom a találmányt?
+a) 10 évig.
+b) 20 évig.
+c) A szabadalmas élete végéig.
+d) A szabadalmas életében és halála után 20 évig.
+
+
+
+
 
 
 
