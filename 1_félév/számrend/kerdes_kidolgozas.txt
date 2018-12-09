@@ -234,7 +234,7 @@ Létezik, a fájlt megadott kódolásban (ASCII, Unicode) küldik el FTP-n keres
 Csövezéssel, pl.: Get-Content input.txt | .\program.exe
 
 73. Mi helyettesíti a "here input" funkciót PowerShellben?
-here-string-ek, amik olyan stringek amik "@ {string tartalma} "@ 
+here-string-ek, amik olyan stringek amik @" {string tartalma} @" 
 vagy '-el vannak
 
 74. Mire használható a profile.ps1 állomány? Van a UNIX-ban megfelelője?
