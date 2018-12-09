@@ -1,0 +1,354 @@
+Számítógépes rendszerek
+Elméleti kérdések
+
+
+1. Milyen jellemző paraméterei vannak egy mai asztali számítógépnek?
+CPU sebesség, cache méret, memória méret, háttértár kapacitás
+
+2. Mi a cache szerepe a mikroprocesszorban?
+Az, hogy a processzornak ne kelljen minden egyes alkalommal a memóriát elérnie, 
+hanem gyorsan el tudja érni az utasításokat, memóriából több utasítást is betölt a cache-be.
+
+3. Milyen a kettes komplemensű számábrázolás?
+A szám értékét kettes számrendszerben tárolja, és a negatív számok a bináris ábrázolás
+negáltja + 1-ként tárolódnak.
+
+4. Mit tud az UTF8 kódolásról? Mire jó?
+Majdnem minden írásjelet és karaktert tartalmaz, és a legtöbb modern rendszert ezt használja,
+ezért a gépek közötti kommunkáció egyszerűbb.
+
+5. Soroljon fel legalább 3 memóriatípust!
+ROM, PROM, EPROM 
+
+6. Soroljon fel olyan hétköznapi eszközöket, amelyekben "számítógép" található!
+Okos óra, mobil telefon, TV, számológép
+
+7. Mi a különbség egy szerver és egy kliensgép között?
+A kliensgépet felhasználókra tervezték, még a szervergépet a kliensgépek kiszolgálására, 
+adataik feldolgozására.
+
+8. Soroljon fel legalább 3 operációs rendszert!
+MacOS, Windows 10, GNU\Linux
+
+9. Mi a különbség az ssh és a telnet kapcsolat között?
+Az SSH-n titkosított az adatátvitel, még telneten nem.
+
+10. Milyen szolgáltatásai vannak egy mai operációs rendszernek?
+Grafikus interfész, beépített driver támogatás, hétköznapi szoftverek alapból telepítve vannak
+(Szövegszerkesztő, böngésző, zenelejátszó)
+
+11. Mit ért shell alatt? Nevezzen meg legalább kettőt!
+Az Operációsrendszer magjára épülő héj, a kiadott parancsokat elvégzi
+az operációsrendszer. PL.: Bash, Powershell
+
+12. Mi az az alias? Hol találkozott vele?
+Álnév, például powershellben a Write-Output parancs álneve az echo,
+az álnevet lehet helyettesíteni a parancs nevével
+
+13. Milyen UNIX fájlrendszer jellemzőket tud megemlíteni?
+Hierarchikus felépítés, könyvtárakból, fájlokból és linkekből áll
+
+14. Milyen fájlrendszereket ismer?
+Ext4, Fat32, NTFS
+
+15. Milyen fájlnév konvenciókat ismer a UNIX-ban?
+Kis és nagy betűk megkülönböztetődnek, nincsen kiterjesztése a fájloknak
+van pár speciális karakter amit nem tartalmazhat, pl.: /,*,%,?
+
+16. Milyen fájl jellemzőket ismer a UNIX-ban?
+név, méret, léterhozás dátuma, tulajdonos, jogosítványok
+
+17. Magyarázza el a UNIX-ban lévő alapvető hozzáférési jogosultsági rendszert!
+3x3-as, van tulajdonosi, csoporti, és mindenki által elérhető kategóriája,
+és minden kategóriának van olvasási, írási, és futtatási jogosulság kapcsolója
+
+18. Milyen kiegészítő jogokat ismer a UNIX-ban?
+chmod, setuid, setguid
+
+19. Milyen célt szolgál a UNIX-ban a folyamatok prioritása?
+Azt, hogy a rendszergazdák / nagyobb jogosulságú felhasználók programjai
+előbb fussanak le, mint az átlagos felhasznélóé
+
+20. Mit tud az idézőjelekről a Unix rendszerben?
+String kezdetét és végét jelzik shellben, ezért nem lehet fájl/könyvtár névnek használni.
+\" -el lehet 'tényleges' idézőjelként használni.
+
+21. Mit jelent az stdin, stdout?
+Standard Input, Standard Output, ez az alapértelmezett bemeneti
+és kimeneti fájlfolyam
+
+22. Hány szűrő kell egy csővezetékhez?
+Önmagában nem szűrő a szűrő, ezért kell egy program, aminek a kimenentét szűri,
+ekkor egy szűrő lesz a csővezetékben, de akármennyi lehet.
+
+23. Mondjon példát arra, hol használhat reguláris kifejezéseket?
+grep
+
+24. Mi az ASCII kódtábla?
+256 karaktert és parancsot tartalmazó tábla, ahol minden számhoz (0-255)
+egy parancs vagy karakter tartozik
+
+25. Mik azok a környezeti változók?
+Olyan változók, melyek a környezetben és a környezetből indított programokban is elérhetőek,
+pl.: $PATH
+
+26. Adja meg, hogy a UNIX-ban milyen típusú(ak) lehet(nek) a változó
+tartalma(k)?
+szöveg
+
+27. Mit jelent a parancsbehelyettesítés?
+$(parancs), itt ennek a helyére a parancs kimenete kerül
+
+28. Sorolja fel, hogy milyen műveletek léteznek a UNIX shellben?
+Szöveg összefűzés, de más programok használatával aritmetikai műveletek is végezhetők,
+pl.: bc, let
+
+29. Melyik shell utasításnak van befejezési eredménye?
+Mindegyiknek, a program befejezési eredményét jelenti, ha ez 0 akkor helyesen futott le,
+ha em 0 akkor a szám a hibaüzenet kódját jelöli
+
+30. Hogyan implementálják a logikai értékeket a UNIX shellben?
+test programmal, mely helyes esetén 0, hamis esetén 1-es értéket ad vissza
+
+31. Lehet-e paramétereket kezelő függvényeket defíniálni a UNIX alatt?
+lehet, a függvényen belül $ -al érjük el, pl.: $0 az első paraméter
+
+32. Tudja-e (és ha igen, hogyan) futtatni a végrehajtási jogosultság nélküli shell szkriptet?
+Ha a felhasználó a sudoers-hez tartozik, akkor sudo <parancs> -al
+
+33. Mi az az IFS?
+Internal Field Separator, melyik karakter választja el egymástól a string tagjait,
+p.: space, tab, ., #, ,
+
+34. Milyen feladatokat tud elvégezni a sed-del?
+Komplex szöveg behelyettesítést és cserét
+
+35. Írja le általánosan egy sed parancs szintakszisát!
+sed [parancs] [fájl cím] s/minta/új_minta/[jelző]
+
+36. Mi a különbség a sed használatában a " és a ' idézőjel használata között?
+"-ek közé helyezett shell változó értéke kerül behelyettesítésre pl.: $x helyett Fradi
+'-nél pedig konkrétan a $x jelenik meg, nem a változó értéke
+
+37. Jellemezze az awk lehetőségeit!
+Majdnem C nyelvi lehetőségek, soronkénti szövegszerkesztés,
+aritmetikai műveletek
+
+38. Adja meg hogy milyen parancsblokkok találhatók az awk-ban!
+BEGIN, LOOP, END
+
+39. Használható-e az awk aritmetikai feladatok megoldására?
+igen
+
+40. Mi az MBR és mi a feladata?
+Master Boot Record, a háttértároló azon egysége, ami megmondja a BIOS-nak,
+hogy hogyan töltse be az Operációs Rendszert
+
+41. Írja le a UNIX-LINUX boot folyamatot!
+Kernel betöltése, /etc/init process-ek indítása
+
+42. Írjon le legalább egy UNIX-LINUX management lehetőséget!
+Felhasználó kezelés, pl.: felhasználók jelszavának módosítása
+
+
+-----------------------------------------------------------
+43. Milyen hálózati kapcsolódási lehetőségeket ismer?
+Ethernet, Wifi, 4G/LTE, Bluetooth
+
+44. Mit ért csomagkapcsolt hálózat alatt?
+Csomagban van a küldő, címzett, adat, és csomag sorszám.
+
+45. Mit ír le az OSI modell?
+46. Nevezzen meg hálózati topológiákat!
+Csillag, fa, gyűrű, sín topológia
+
+47. Mi a feladata egy switch-nek?
+48. Mi a feladata a routernek?
+49. Hogyan jellemezné az IPv4 címeket?
+50. Hol találkozik a DNS-sel az informatikában??
+51. Mi az a DHCP?
+52. Milyen szerver elérési módozatokat ismer?
+53. Mire szolgál a HTTP protokoll?
+Fájlok átvitelére szolgáló protokoll
+
+54. Mi történik, ha a public_html könyvtárban nincs index.html fájl?
+a webszerver konfigurációjától függ, apache2-ben ilyenkor ha meglátogatjuk a weblapot
+akkor kilistázza a public_html-ben lévő fájlokat
+
+55. Hogyan lehet jelszóval védeni egy weben lévő könyvtárat?
+56. Mit ért virtuális host alatt?
+57. Mit jelent az SSI vagy CGI jog a webszervereken?
+--------------------------------------------------------
+
+
+58. Milyen Windows szkript lehetőségeket ismer? Van egyáltalán?
+Batch, Windows Script Host, Powershell
+
+59. Mi biztosítja PowerShell-ben az "autoexec.bat" szerepét?
+profile.ps1
+
+60. Hogyan biztosítják PowerShell alatt a biztonságos szkript futtatást?
+ExecutionPolicy-k, azt határozzák meg hogy egy szkript milyen parancsokat hívhat meg
+és milyen fájlokat érhet el
+
+61. Milyen a PowerShell parancsok felépítése?
+Ige-Főnév felépítés, paraméterek: -név
+Két fő típus, Get és Set parancsok
+
+62. Soroljon fel PowerShellben legalább két változó láthatósági formát?
+globális, az egész scriptben elérhető
+lokális, csak az adott blokkban elérhető
+
+63. Hogyan irányítjuk át PowerShellben az outputot? Lehet?
+Mint bash-ben, > és >> -al
+
+64. Hol és mire használható a dot sourcing?
+Lokális függvények definiálásakor
+
+65. Mit jelent a PowerShell függvények nevesített paraméterezési lehetősége?
+fggv($x, $y) esetén a paramétereket elérhetjük a paraméter nevén ($x $y),
+nem az argumentum száma alapján kell elérni ($args[0], $args[3])
+
+66. Mi a különbség a mikroprocesszor és mikrokontroller között?
+A mikrokontroller az egy "teljes" számítógép, van benne CPU, RAM,
+és tud programokat futtatni. A mikroprocesszor az csak egy CPU, nem tud önmagában
+programokat futtatni
+
+67. Mi a "Harvard architektúra" legfontosabb jellemzője?
+Az adat- és utasításmemória el van választva egymástól
+
+68. Mire használható a lebegőpontos számábrázolás?
+Nem egész számok ábrázolására és tárolására.
+
+69. Mit jelent az asszimetrikus kódolás?
+Azt, hogy a program nem lépésről lépésre hajtja végre a kódot, hanem
+párhuzamosan
+
+70. Mit jelent a bináris ftp lehetősége?
+Az FTP program a fájlokat bájt formátumban küldi át a vevőnek
+
+71. Mit jelent a szöveges ftp? Létezik egyáltalán?
+Létezik, a fájlt megadott kódolásban (ASCII, Unicode) küldik el FTP-n keresztül
+
+72. Hogyan irányíthatja át a szabványos bemenetet PowerShellben?
+Csövezéssel, pl.: Get-Content input.txt | .\program.exe
+
+73. Mi helyettesíti a "here input" funkciót PowerShellben?
+here-string-ek, amik olyan stringek amik "@ {string tartalma} "@ 
+vagy '-el vannak
+
+74. Mire használható a profile.ps1 állomány? Van a UNIX-ban megfelelője?
+Bejelentkezéskor lefuta a profile.ps1 script, Unix megfelelőle a ~/.profile
+
+75. Mit értünk PowerShell modulon?
+.psm1 fájl, ebben a scriptben definiált függvényeket a modullal be lehet importálni
+más scriptekbe, ahol használhatjuk ezeket a függvényeket
+
+76. Elég-e a core PowerShell modul a registry módosításához? Miért?
+Elég, mert tartalmazza a szükséges függvényeket a Core\Registry modul
+
+77. Hogyan használhatja PowerShellben a parancsbehelyettesítést?
+Mint Bash-ben, $(parancs) alakban is működik, de ha változónak akarjuk adni az értékét
+akkor simán a parancs neve is működik, pl.: $fajlok = dir
+
+78. Hogyan készíthet ciklust sed scriptben?
+sed scriptben nem lehet, de shell scriptes ciklusba beilleszthetjük a sed parancsunkat
+
+79. Jellemzően milyen állományokat talál az /etc könyvtárban?
+Konfigurációs fájlokat
+
+------------------------------------------
+80. Mire szolgál a hálózati csomagok TTL adata?
+81. Mit mutat meg a "Netmask"?
+82. Mit értünk "nem routolható" IP címen?
+83. Mire szolgál a "gateway"?
+84. Mi az "ARPANET" és milyen lehetőségeket teremtett?
+85. Mi az IPv6? Miért van rá szükségünk?
+A 32 bites IPV4-el ellentétben az IPV6 128 bites. Azért szükséges, 
+mert hamarosan el fogyni az összes szabad IPV4 cím.
+----------------------------------------------------
+
+
+86. Mondjon példát a "setuid" bit hasznosságára!
+A parancs ilyenkor a fájl jogaival fut, nem a futtató jogaival,
+pl.: a wifi beállításához nem kell rendszergazdai jog, 
+hanem a felhasználó is futtathatja a programot
+
+87. Milyen célt szolgál az ACL használata Unix-Linux rendszerben?
+A fájlok hozzáférési jogosultságát tárolja
+
+88. Létezik Windows rendszerben az ACL lehetősége?
+Létezik
+
+89. Mi az analóg- digitális jelek közti alapvető különbség?
+Az analóg jelek folytonosak, még a digitális jelek diszkrét értékek.
+
+90. Mi az adat, cím, vezérlő sín feladata?
+A számítógép komponensei között szállítják az adatokat, vezérlőjeleket.
+
+91. Hogyan készít szűrőt UNIX illetve Powershell alatt? Lehet?
+Csövezéssel. pl.: cat teszt.txt | sed 's/alma/korte/g' | wc
+
+92. Mi a lényegi különbség a UNIX ls és a PowerShell Get-ChildItem parancsának eredménye között?
+A Get-ChildItem azt írja ki mint az ls -la, viszont a sima ls-el annyiban különbözik, 
+hogy az ls csak a fájl és könyvtárneveket írja ki, mgé a Get-ChildItem sokkal több infót
+
+93. Melyik környezetben tud használni reguláris kifejezést a UNIX, a Windows PowerShell világában vagy mindkettőben:
+Unix alatt grep-el lehet használni, powershellben alapból be van építve
+
+94. Milyen speciális jelentése van annak, ha Unix rendszerben egy fájlnév .-tal kezdődik?
+Unix alatt azok rejtett fájlok, csak az ls -la mutatja meg őket, a sima ls nem
+
+95. Mikor használhatóak jól a reguláris kifejezésekben létrehozható csoportok és miért?
+Amikor több különböző információt akarunk kinyerni egy szövegből, 
+és utána külön akarjuk felhasználni azokat
+
+96. Mi a lényegi különbség a UNIX shell és a PowerShell csővezetéken áthaladó adatok között?
+Unixban stringek haladnak át, még Powershellben objektumok, adatstruktúrák
+
+97. Milyen eszköztárral rendelkezünk UNIX és PowerShell szkriptek írásához?
+Unixban szövegszerkesztő, Powershellnél a Powershell ISE
+
+98. Milyen kiterjesztésűnek kell lennie egy PowerShell és egy shell szkriptnek? Van egyáltalán előírás vagy szabadon megválasztható?
+Unixban szabadon választható, Powershellnél .ps1
+
+99. Lehet paramétere egy szűrőnek? Ha igen, adjon meg egy tetszőleges példát, ha nem, magyarázza meg, hogy miért nem lehetséges!
+Lehet, például a sed -n nem írja ki a kimenetet sdtout-ra, az -e -nél pedig több scriptet is írhatunk a parancssorba
+
+100. Mi a különbség az stdout, stderr csatorna között? Léteznek PowerShellben?
+Léteznek, az stderr az csak a képernyőre ír, ha átírányítjuk a kimenetet, vagy átcsövezzük
+másik programba, akkor csak at stdout tartalma megy át.
+
+101. Mi a "probléma" az egyes komplemensű számábrázolással?
+Kettő darab 0 van, a pozitív és a negatív 0, ami félreértésekhez vezethet.
+
+102. Hogy lehet az stdin csatornát átirányítani Powershellben?
+Csövezéssel, pl.: Get-Content input.txt | .\program.exe
+
+103. Mire jó a SED? Mi a leggyakrabban használt parancsa?
+Szöveg dolgoz fel és alakít át, leggyakrabban a helyettesítés parancsát használjuk.
+
+104. Lehet-e egy SED scriptben shell scriptet hívni? Miért?
+Nem lehet, mert a SED az egy szöveg manipuláló program, nem tud más programokat meghívni.
+
+105. Mi dönti el Unix rendszer alatt, hogy a script fájl milyen script?
+Az, hogy a fájl típusához tartozik a program ami futtatja, például a /bin/bash futtatja a
+bash scripteket, amég a python scripteket a python interpreter futtatja
+
+106. Mit értünk az alatt, hogy egy processzor például 10 nanométeres technológiájú?
+Azt, hogy a tranzisztorai 10nm méretűek. Minél kisebbek ezek a tranzisztorok, annál több
+fér el egy helyre, és e miatt több számíási kapacitása lehet a processzornak.
+
+107. Mit jelent, hogy egy processzor 32 vagy 64 bites?
+Az, hogy a 32bites CPU 32bites memóriacímeket és regisztereket használ, még a 64bites 64biteseket.
+
+108. Hogyan tud AWK scriptet készíteni? Tud egyáltalán?
+Nincsen külön awk script, shell scriptet lehet készíteni, ahol meghívjuk az awk-t.
+
+109. Mit értünk IoT eszközökön, lehetőségeken? Lehet ezeket az eszközöket programozni?
+Internetre kötött mikrokontrollerek, melyeket manapság sokféleképpen lehet programozni, fő felhasználásuk
+az adatgyűjtés és utána feldolgozásra küldés, vagy pedig egyszerű fizikai rendszerek működtetése.
+
+110. Mi az AWK program BEGIN és END blokkjának a szerepe?
+A BEGIN és az END blokk csak egyszer fut le, a BEGIN az input beolvasás előtt,
+az END pedig az input beolvasás után
