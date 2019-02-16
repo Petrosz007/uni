@@ -1,0 +1,1 @@
+http://lambda.inf.elte.hu/ElementaryCellularAutomaton.xml

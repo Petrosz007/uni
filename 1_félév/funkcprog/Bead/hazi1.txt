@@ -1,0 +1,32 @@
+Házi feladat
+
+A házi feladatot egy Homework1 nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartozó típus szignatúrát is! A feladatok után a zárójelben lévő név azt jelzi, milyen néven kell definiálni az adott függvényt, kifejezést.
+Alaptípusok
+
+Adjunk meg három különböző Int típusú kifejezést (intExpr1, intExpr2, intExpr3)!
+
+Adjunk meg három különböző Char típusú kifejezést (charExpr1, charExpr2, charExpr3)!
+
+Adjunk meg három különböző Bool típusú kifejezést (boolExpr1, boolExpr2, boolExpr3)!
+Kifejezések
+
+Katinak van 183 virágmagja, és 13 cserepe. Minden cserepébe 14 darab magot szeretne ültetni. Adjunk meg egy-egy olyan kifejezést , amely megválaszolja a következő két kérdést! Megjegyzés: Ne előre kiszámolt értékekkel definiáljuk a kifejezést, helyette használjuk a mod függvényt! A feladat megoldásához lehet általánosabb segédfüggvényeket is definiálni, de a megoldásoknak egyszerű Bool és Int értékeknek kell lenniük.
+
+    El tudja-e Kati ültetni az összes virágmagját (canPlantAll :: Bool)?
+    Hány fölösleges virágmagja marad (remainingSeeds :: Int)?
+
+Kizárólag az órán definiált plusOne és double függvényeket, valamint a 0 számliterált használva adjunk meg három különböző kifejezést, amely a 7-et állítja elő (seven1, seven2, seven3)! Megjegyzés: a plusOne és double függvényeket is definiáljuk újra, hiszen csak ekkor tudjuk őket használni.
+Egész számok
+
+Adjuk meg egy-egy olyan függvényt, amely eldönti, hogy:
+
+    egy szám osztható-e hárommal (isDivisibleBy3),
+    hárommal osztva 1 maradékot ad-e (isDiv3Rem1),
+    hárommal osztva 2 maradékot ad-e (isDiv3Rem2)!
+
+Adjuk meg azt a függvényt, amely eldönti, hogy egy szám 5-tel osztva több maradékot ad-e, mint 7-tel osztva (cmpRem5Rem7)!
+Függvénytípusok
+
+Adjunk meg egy olyan függvényt, amely a következő típus szignatúrával rendelkezik: foo :: Int -> Bool -> Bool!
+
+Az előző függvény használatával adjunk meg egy olyan függvényt, amely felahsználja foo-t, (tehát a definíciójában szerepel foo), és a típus szignatúrája megegyezik foo-éval: bar :: Int -> Bool -> Bool!

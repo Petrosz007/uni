@@ -1,0 +1,204 @@
+Próbavizsga
+Előzetes tudnivalók
+
+Használható segédanyagok:
+
+    Haskell könyvtárak dokumentációja,
+    Hoogle,
+    a tárgy honlapja, és a
+    Haskell szintaxis összefoglaló.
+
+Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelőknek kell jelezni, nem a diáktársaknak!
+
+A feladatok tetszőleges sorrendben megoldhatóak. A pontozás szabályai a következők:
+
+    Minden teszten átmenő megoldás ér teljes pontszámot.
+    Funkcionálisan hibás (csak 1-2 teszteseten megbukó) megoldás nem teljes pontszámot ér.
+    Fordítási hibás vagy hiányzó megoldás nem ér pontot.
+
+Tekintve, hogy a tesztesetek, bár odafigyelés mellett íródnak, nem fedik le minden esetben a függvény teljes működését, határozottan javasolt még külön próbálgatni a megoldásokat beadás előtt, vagy megkérdezni a felügyelőket!
+1. Kettő hatványai (1 pont)
+
+Definiáljuk az f1 függvényt, amely kiszámolja az n.n.n. kettőhatványt (ahol nnn nemnegatív szám)!
+
+f1 :: Int -> Int
+
+f1 0 == 1
+f1 1 == 2
+f1 2 == 4
+f1 4 == 16
+
+2. Logikai értékek (1 pont)
+
+Definiáljuk az f2 függvényt, amely akkor ad vissza True értéket, ha pontosan két paramétere True értékű!
+
+f2 :: Bool -> Bool -> Bool -> Bool 
+
+f2 True True True == False
+f2 False True True == True
+f2 True False True == True
+f2 True True False == True
+f2 False False True == False
+f2 True False False == False
+f2 False True False == False
+f2 False False False == False
+
+3. Rendezett hármas fordítása (1 pont)
+
+Definiáljuk az f3 függvényt, amely egy hármas (3 elemű tuple) elemeinek sorrendjét megfordítja!
+
+f3 :: (a, b, c) -> (c, b, a)
+
+f3 (4,'x',"abc") == ("abc",'x',4)
+f3 ('a',"xy",3) == (3,"xy",'a')
+
+4. Első három elem összege (1 pont)
+
+Definiáljuk az f4 függvényt, amely egy lista első 3 elemének összegét adja meg!
+
+f4 :: [Int] -> Int
+
+f4 [] == 0
+f4 [4] == 4
+f4 [4,2] == 6
+f4 [4,2,3] == 9
+f4 [4,2,3,5] == 9
+f4 [5,4,2,3,8,3,9,5,2] == 11
+
+5. Rendezettség (2 pont)
+
+Definiáljuk azt a függvényt, amely eldönti egy listáról, hogy az rendezett-e! Egy listát rendezettnek tekintünk, ha az elemei növekvő sorrendben vannak.
+
+f5 :: Ord a => [a] -> Bool
+
+f5 []       == True
+f5 [5]      == True
+f5 [1..10]  == True
+f5 [1,7,11] == True
+f5 [1,5,3]  == False
+
+6. Utolsó két elem (2 pont)
+
+Definiáljuk az f6 függvényt, amely a lista utolsó előtti elemét adja vissza!
+
+f6 :: [a] -> a
+
+f6 [4,2]       == 4
+f6 [4,2,3,1,7] == 1
+f6 "almafa"    == 'f'
+
+7. Leghosszabb szó (2 pont)
+
+Keressük meg a leghosszabb szót egy szövegben! Feltesszük, hogy van legalább egy szó a szövegben.
+
+f7 :: String -> String
+
+f7 "Alma fa"          == "Alma"
+f7 "Ez a leghosszabb" == "leghosszabb"
+
+8. Elem eltávolítása (3 pont)
+
+Definiáljuk az f8 függvényt, amely egy adott elemet keres a listában és eltávolítja az azt követő elemet (csak a legelső alkalommal)!
+
+f8 :: Eq a => a -> [a] -> [a]
+
+f8 1 [] == []
+f8 1 [1] == [1]
+f8 1 [3,1] == [3,1]
+f8 1 [1,2] == [1]
+f8 1 [2,3] == [2,3]
+f8 'a' "almafa" == "amafa"
+f8 'm' "almafa" == "almfa"
+
+9. Függvénykompozíció (3 pont)
+
+Készíts egy nagy függvénykompozíciót függvények listájából!
+
+Megjegyzés: A listában lévő utolsó függvényt alkalmazzuk először, tehát jobbról balra haladunk.
+
+f9 :: [(a -> a)] -> (a -> a)
+
+f9 [] 5                   == 5
+f9 [(+1)] 5               == 6
+f9 [(*2),(+1)] 5          == 12
+f9 [(+3),(*2),(+1)] 5     == 15
+f9 [init] [1..10]         == [1..9]
+f9 [drop 3, init] [1..10] == [4..9]
+
+10. Feltételes függvény (2 pont)
+
+Definiáljuk az f10 függvényt, amely 3 paramétert kap! Ha az első paraméter True, akkor alkalmazza a második paraméterként átadott függvényt a harmadik paraméterre. Egyébként változatlanul visszaadja a harmadik paramétert.
+
+f10 :: Bool -> (a -> a) -> a -> a
+
+f10 False (+1) 3 == 3
+f10 True (+1) 3 == 4
+f10 True (++ " World") "Hello" == "Hello World"
+
+11. Feltételes listatranszformáció (3 pont)
+
+Definiáljuk az f11 függvényt, amely 3 paramétert kap. Az első paraméter egy logikai értékű függvény, amely megadja, hogy hol kell alkalmazni a második függvényt. A harmadik paraméter a lista, amelynek az elemein a változtatás megtörténik.
+
+f11 :: (a -> Bool) -> (a -> a) -> [a] -> [a]
+
+f11 odd (+2) [1..10] == [3,2,5,4,7,6,9,8,11,10]
+f11 even (`div` 2) [1..10] == [1,1,3,2,5,3,7,4,9,5]
+f11 (/="a") ("x"++) ["a","b","aa","a","x"] == ["a","xb","xaa","a","xx"]
+
+12. Legkisebb elem (2 pont)
+
+Definiáljuk az f12 függvényt, amely egy lista legkisebb elemét adja vissza egy Maybe értékben. Ha a lista üres, akkor Nothing értéket ad vissza.
+
+f12 :: Ord a => [a] -> Maybe a
+
+f12 [7,2,9] == Just 2
+f12 "az" == Just 'a'
+f12 [] == Nothing
+
+13. Hétköznapok (2 pont)
+
+Hozz létre egy Day adattípust, mely a hét napjait ábrázolja Mon, Tue, Wed, Thu, Fri, Sat, Sun adatkonstruktorokkal. Írj deriving (Eq) záradékot hozzá.
+
+Írj egy f13 függvényt, mely eldönti, hogy egy nap hétköznap-e!
+
+f13 :: Day -> Bool
+
+f13 Tue == True
+f13 Fri == True
+f13 Sat == False
+f13 Sun == False
+
+14. Következő munkanap (1 pont)
+
+Írj egy f14 függvényt, amely megadja a következő munkanapot!
+
+f14 :: Day -> Day
+
+f14 Tue == Wed
+f14 Thu == Fri
+f14 Fri == Mon
+f14 Sat == Mon
+f14 Sun == Mon
+
+15. Kezdőbetűk (2 pont)
+
+Egy névnek adjuk meg a kezdőbetűit!
+
+f15 :: String -> String
+
+f15 "Jim Carrey"            == "J C"
+f15 "Ilosvai Selymes Péter" == "I S P"
+
+16. Négyzetszámok (2 pont)
+
+Adjuk meg azt a függvényt, amely eldönti egy számról, hogy az négyzetszám-e!
+
+f16 :: Int -> Bool
+
+f16 0 == True
+f16 1 == True
+f16 2 == False
+f16 3 == False
+f16 4 == True
+f16 100 == True
+f16 101 == False

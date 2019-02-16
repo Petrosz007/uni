@@ -1,0 +1,27 @@
+Házi feladat
+
+A házi feladatot egy Homework5 nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartozó típus szignatúrát is! A feladatok után a zárójelben lévő név azt jelzi, milyen néven kell definiálni az adott függvényt, kifejezést.
+
+A bónusz feladatokat nem kötelező megoldani, megoldásukhoz a gyakorlaton vett anyag továbbgondolása szükséges.
+
+FONTOS: Ez a feladatsor egyben gyakorlási lehetőség is kisZH-ra.
+Gyakorlás
+
+Definiáljuk azt a függvényt, amely eldönti egy listáról, hogy az rendezett-e! Egy listát rendezettnek tekintünk, ha az elemei növekvő sorrendben vannak.
+
+isSorted :: Ord a => [a] -> Bool
+
+Definiáljuk azt a függvényt, amely kiválasztja egy lista két index közötti elemeit! A listát nullától indexejük. Az indexek által meghatározott intervallum alulról zárt, felülről nyílt, tehát a második indexen szereplő elem már ne szerepeljen az eredményben! A függvény bemeneti indexei tetszőleges egész számok lehetnek, kezeljünk le minden esetet! Példa: fromTo 2 4 [0..9] == [2..3]. Segítség: Használjuk a take és drop függvényeket!
+
+fromTo :: Int -> Int -> [a] -> [a]
+
+Definiáljuk azt a függvényt, amely egy listát adott hosszúságú részlistákra bont! Példa: runs 3 [1..7] == [[1,2,3],[4,5,6],[7]]. Segítség: Használjuk a take és drop függvényeket!
+
+runs :: Int -> [a] -> [[a]]
+
+Bónusz
+
+Definiáljuk azt a függvényt, amely egy listából kiszűri az egymás melletti ismétlődő elemeket! Példa: uniques [1,1,1,0,0,1,0,0,0] == [1,0,1,0].
+
+uniques :: Eq a => [a] -> [a] 
+

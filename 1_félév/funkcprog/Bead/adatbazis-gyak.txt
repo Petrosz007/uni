@@ -1,0 +1,25 @@
+Adatbázisos feladathoz gyakorlás
+
+Néhány extra feladat azoknak, akik gyakorolni szeretnének (nem kötelező). Aki ezt beadja, az másolja át ide a Házi feladat 9-ben lévő típusdefiníciókat és tesztadatokat, valamint minden egyéb, számára szükséges függvényt.
+Szociális háló
+
+Adjuk meg azt a függvényt, amely kikeres egy felhasználót egy adatbázisból, majd visszaadja a barátait! Segítség: Használjuk a lookup és maybe függvényeket!
+
+getFriends :: Username -> Database -> [Username]
+
+Adjuk meg azt a függvényt, amely kikeres egy felhasználót egy adatbázisból, majd visszaadja a barátait és a felhasználót magát is! Ügyeljünk arra, hogy abban az esetben, ha a felhasználó eleve nem szerepelt az adatbázisban, akkor üres listát adjunk vissza!
+
+getFriendsRefl :: Username -> Database -> [Username]
+
+Adjuk meg azt a függvényt, amely kiszámolja egy függvény adott kezdőpontból indított fixpontját! Ez azt jelenti, hogy a függvényt addig alkalmazza az adott értékre, amíg az változik. Amint egymásután kétszer ugyanaz az érték következik, a függvény leáll, és visszaadja az aktuális értéket.
+
+fixPoint :: Eq a => (a -> a) -> a -> a
+
+Adjuk meg azt a függvényt, amely a követképpen kiválogatja egy listából az egyedi elemeket. Első lépésként lerendezi a listát, majd csoportosítja az egymás mellett lévő azonos elemeket, majd minden csoportból kiválasztja az első elemet. Az így kapott listában az eredeti listában lévő elemek fognak szerepelni, azonban mindegyik pontosan egyszer fog előfordulni, és rendezett sorrendben lesznek.
+
+sortUnique :: (Eq a, Ord a) => [a] -> [a]
+
+Az előző függvények segítségével adjuk meg azt a függvényt, amely meghatározza egy felhasználó szociális hálóját! Egy felhasználó szoicális hálója tartalmazza magát a felhasználót, az ő barátait, a barátai barátait, és így tovább. Azaz a felhasználóból, baráti reláción keresztül elérhető összes felhasználót (beleértve önmagát is).
+
+getSocialNetwork :: Username -> Database -> [Username]
+

@@ -1,0 +1,55 @@
+Házi feladat
+
+A házi feladatot egy Homework2 nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartozó típus szignatúrát is! A feladatok után a zárójelben lévő név azt jelzi, milyen néven kell definiálni az adott függvényt, kifejezést.
+
+A bónusz feladatokat nem kötelező megoldani, megoldásukhoz a gyakorlaton vett anyag továbbgondolása szükséges.
+Egyszerű mintaillesztés
+
+Adjuk meg azt a függvényt, amely eldönti egy számról, hogy az egy "kis" prím-e! Kis prím alatt az egyjegyű prímeket értjük (2,3,5,7). Ezekre a számokra igazat, minden egyéb számra hamisat adjon vissza!
+
+isSmallPrime :: Int -> Bool
+
+A következő két feladathoz az alábbi linkeken megtaláljátok a műveletek igazságtábláit: implikáció, ekvivalencia. Ezek alapján könnyedén megoldható a feladat.
+
+Adjuk meg azt a függvényt, amely eldönti két logikai változóról, hogy azok ekvivalensek-e!
+
+equivalent :: Bool -> Bool -> Bool
+
+Adjuk meg azt a függvényt, amely eldönti két logikai változóról, hogy az első implikálja-e a másodikat!
+
+implies :: Bool -> Bool -> Bool
+Koordináta-rendszer
+
+Reprezentáljuk a Descartes-féle koordináta-rendszer pontjait rendezett párokkal! A tuple első komponense legyen az x koordináta, a második az y koordináta.
+
+Adjuk meg azt a függvényt, amely középpontosan tükröz egy pontot az origo-ra!
+
+invertO :: (Int, Int) -> (Int, Int)
+
+Adjuk meg azt a függvényt, amely eldönti, hogy egy pont rajta van-e az y = -x egyenesen!
+
+isOnNegId :: (Int, Int) -> Bool
+Racionális számok
+
+Reprezentáljuk a racionális számokat rendezett párokkal! A pár első komponense legyen a számláló, a második pedig a nevező. A műveletek elvégzése után nem feltétlenül muszáj a legegyszerűbb formában megadni az eredményt (tehát nem kell egyszerűsíteni a törtet - bővíteni se bővítsük). Továbba feltehetjük, hogy egyik szám nevezője sem nulla.
+
+Definiáljuk a racionális összeadást!
+
+add :: (Int, Int) -> (Int, Int) -> (Int, Int)
+
+Definiáljuk a racionális szorzást!
+
+multiply :: (Int, Int) -> (Int, Int) -> (Int, Int)
+
+Definiáljuk a racionális osztást! Feltehetjük, hogy egyik szám számlálója sem nulla.
+
+divide :: (Int, Int) -> (Int, Int) -> (Int, Int)
+Bónusz
+
+Definiáljuk azokat a függvényeket, amelyek az alábbi típus szignatúrával rendelkeznek! A függvények definíciójában ne szerepeljen a függvény maga. Mit gondolunk, létezik több helyes definíciójuk is? A választ kommentben, a függvény definíciója elé írjátok, és röviden indokoljátok!
+
+f :: (a, b, c) -> c
+
+g :: (a, a -> b) -> b
+
+h :: (b -> c, a -> b) -> a -> c

@@ -1,0 +1,67 @@
+Házi feladat
+
+A házi feladatot egy Homework7 nevű modulként kell beadni. Minden definiálandó függvényhez adjuk meg a hozzá tartozó típus szignatúrát is! A feladatban egy szöveges fájl Haskelles reprezentációján kell különböző műveleteket implementálni.
+A feladatok megoldásában nem lehet explicit rekurziót használni!
+
+A teszteseteknél a következő példafájlon fognak futni a függvények:
+
+testFile0 :: File 
+testFile0 = ["asd  qwe", "-- Foo", "", "\thello world "]
+
+A fentebbi két sort is másoljátok be a beadott megoldásba.
+
+A feladat megoldásához használjuk a Data.Char modult.
+Reprezentáció
+
+Használjuk a következő típusszinonimákat.
+
+type Line = String
+type File = [Line]
+
+Számlaló függvények
+
+Adjuk meg azt a függvényt, amely megszámolja, hogy hány szó van egy sorban! Segítség: Használjuk a words függvényt!
+
+countWordsInLine :: Line -> Int
+
+Adjuk meg azt a függvényt, amely megszámolja, hogy hány szó van egy fájlban!
+
+countWords :: File -> Int
+
+Adjuk meg azt a függvényt, amely megszámolja, hogy hány karakter van egy fájlban!
+
+countChars :: File -> Int
+Nagybetűsítés
+
+Adjuk meg azt a függvényt, amely nagybetűsíti egy szó első karakterét! Segítség: Használjuk a toUpper függvényt!
+
+capitalizeWord :: String -> String
+
+Adjuk meg azt a függvényt, amely nagybetűsíti az összes szó első karakterét egy sorban! Segítség: Használjuk a words és unwords függvényeket!
+
+capitalizeWordsInLine :: Line -> Line
+Transzformációk
+
+Adjuk meg azt a függvényt, amely eldönti egy sorról, hogy az komment-e! Egy sor pontosan akkor számít kommentnek, ha a következő string-gel kezdődik: "--".
+
+isComment :: Line -> Bool
+
+Adjuk meg azt a függvényt, amely elhagyja egy fájlból a kommentezett sorokat!
+
+dropComments :: File -> File
+
+Adjuk meg azt a függvényt, amely egytől kezdődően megszámozza a sorokat! Tehát az n. sor a következő alakú lesz: "n: <sor tartalma>".
+
+numberLines :: File -> File
+
+Adjuk meg azt a függvényt, amely elhagyja a sorvégekről a felesleges whitespace karaktereket! Segítség: Használjuk az isSpace függvényt!
+
+dropTrailingWhitespaces :: Line -> Line
+
+Adjuk meg azt a függvényt, amely egy tabulátort valahány szóközre cserél, minden egyéb karaktert pedig helyben hagy! Segítség: A tabulátort, mint karaktert a következőképpen jelöljük: ''.
+
+replaceTab :: Int -> Char -> [Char]
+
+Adjuk meg azt a függvényt, amely a fájlban a tabulátorokat valahány szóközre cseréli!
+
+replaceTabs :: Int -> File -> File

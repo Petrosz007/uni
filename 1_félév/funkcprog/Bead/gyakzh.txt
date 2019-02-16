@@ -1,0 +1,67 @@
+http://lambda.inf.elte.hu/SimpleCoding.xml
+
+Gyakorló zárthelyi
+
+A feladatsor interaktív verziója elérhető itt.
+A feladat leírása
+
+Az informatikában gyakran előfordul, hogy az adatainkat valamilyen módon kódolni szeretnénk. Az adatok kódolása alatt azt értjük, hogy átalakítjuk azt másik reprezentációra, amiről később vissza tudjuk majd alakítani.
+
+Ennek több különböző célja is lehet, például titkosítás, vagy tömörítés. Ebben a feladatban egy egyszerű tömörítő kódolást kell megvalósítani. A kódolás lényege, hogy az egymás melletti azonos szimbólumokat összecsoporotsítja, így tömörítve az eredeti szimbólumsorozatot.
+Kódolás
+
+A következő függvények azt a célt szolgálják, hogy egy szimbólumsorozatot képesek legyünk a segítségükkel egy tömörebb reprezentációra átalakítani.
+Segédfüggvények
+
+Adjuk meg azt a függvényt, amely egy listának visszaadja azt a leghosszabb kezdőszeletét, amelyben kizárólag egy megadott elemmel egyező elemek találhatóak!
+
+takeWhileEq :: Eq a => a -> [a] -> [a]
+
+Adjuk meg azt a függvényt, amely elhagyja egy lista azon leghosszabb kezdőszeletét, amelyben kizárólag egy megadott elemmel egyező elemek találhatóak!
+
+dropWhileEq :: Eq a => a -> [a] -> [a]
+
+Elemek csoportosítása
+
+Adjuk meg azt a függvényt, amely csoportosítja egy lista egymás melletti azonos elemeit! Segítség: Használjuk az előbb definiált két függvényt!
+
+pack :: Eq a => [a] -> [[a]]
+
+Tömörítés
+
+Adjuk meg azt a függvényt, amely listák listáját tömöríti! Feltételezhetjük, hogy olyan listákat szeretnénk tömöríteni, amelyben a belső listák csupa azonos elemből állnak. Ekkor egy ilyen belső listát reprezentálhatunk a hosszával és egyetlen elemével. Az üres belső listákat ne tömörítsük, egyszerűen hagyjuk ki őket a végeredményből.
+
+compress :: [[a]] -> [(Int,a)]
+
+Szimbólumsorozat lekódolása
+
+Adjuk meg azt a függvényt, amely egy listát lekódol! Segítség: Használjuk a pack és compress függvényeket!
+
+encode :: Eq a => [a] -> [(Int,a)]
+
+Dekódolás
+
+A következő néhány függvény azt a célt szolgálja, hogy a kódolt adatot vissza tudjuk állítani eredeti formájába.
+Segédfüggvények
+
+Adjuk meg azt a függvényt, amely előállít egy n hosszú, azonos elemekből álló listát!
+
+generate :: Int -> a -> [a]
+
+Kitömörítés
+
+Adjuk meg azt a függvényt, amely kitömörít egy tömörített listát!
+
+decompress :: [(Int,a)] -> [[a]]
+
+Szimbólumsorozatok összefűzése
+
+Adjuk meg azt a függvényt, amely listák listájából egyetlen listát állít elő, úgy hogy egymás után fúzi a belső listákat!
+
+unpack :: [[a]] -> [a]
+
+Kódolt adat dekódolása
+
+Adjuk meg azt a függvényt, amely dekódol egy kódolt listát!
+
+decode :: [(Int,a)] -> [a]
