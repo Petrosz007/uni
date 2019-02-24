@@ -1,0 +1,342 @@
+# depslib dependency file v1.0
+1508531370 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\dynamic_set.cpp
+	"dynamic_set.h"
+	"set.h"
+
+1508535162 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\dynamic_set.h
+	<vector>
+	"setrepr.h"
+
+1509621130 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\setrepr.h
+	"enumerator.hpp"
+
+1508528062 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\enumerator.h
+
+1508530447 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\exceptions.h
+
+1508530389 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\enumerator.hpp
+
+1508528210 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\enumerator.hpp
+
+1508527770 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\linked_set.cpp
+	"linked_set.h"
+	"set.h"
+
+1508531562 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\linked_set.h
+	"setrepr.h"
+
+1508531729 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\main.cpp
+	<iostream>
+	"set.h"
+
+1508746463 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\set.h
+	"enumerator.hpp"
+	"array_set.h"
+	"sequence_set.h"
+	"linked_set.h"
+
+1508535026 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\static_set.h
+	<vector>
+	"setrepr.h"
+
+1508530548 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\static_set.cpp
+	"static_set.h"
+	"set.h"
+
+1508662144 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\array_set.h
+	<vector>
+	"setrepr.h"
+
+1508662144 c:\users\grego\documents\oktat\oop\eloadasok\programok\set\sequence_set.h
+	<vector>
+	"setrepr.h"
+
+1508662144 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\array_set.cpp
+	"array_set.h"
+	"set.h"
+
+1508662144 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\set\sequence_set.cpp
+	"sequence_set.h"
+	"set.h"
+
+1517646094 source:c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\array_set.cpp
+	"array_set.h"
+	"set.h"
+
+1517655977 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\array_set.h
+	<vector>
+	"setrepr.h"
+
+1517655782 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\setrepr.h
+	"enumerator.hpp"
+
+1518005871 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\enumerator.hpp
+	<iostream>
+
+1518006929 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\set.h
+	"enumerator.hpp"
+	"array_set.h"
+	"sequence_set.h"
+	"linked_set.h"
+
+1518006755 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\sequence_set.h
+	<vector>
+	"setrepr.h"
+
+1517654242 c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\linked_set.h
+	"setrepr.h"
+
+1518006253 source:c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\linked_set.cpp
+	"linked_set.h"
+	"set.h"
+	<iostream>
+
+1518005964 source:c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\main.cpp
+	<iostream>
+	"set.h"
+
+1508658544 source:c:\users\no\documents\elte\progalap, programozas\gyakorlat\set\sequence_set.cpp
+	"sequence_set.h"
+	"set.h"
+
+1517649694 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\set\array_set.cpp
+	"array_set.h"
+	"set.h"
+
+1517659577 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\array_set.h
+	<vector>
+	"setrepr.h"
+
+1517659382 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\setrepr.h
+	"enumerator.hpp"
+
+1518009471 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\enumerator.hpp
+	<iostream>
+
+1522403764 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\set.h
+	"enumerator.hpp"
+	"array_set.h"
+	"sequence_set.h"
+	"linked_set.h"
+
+1518010355 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\sequence_set.h
+	<vector>
+	"setrepr.h"
+
+1517657842 c:\users\grego\documents\oktat\oep\eloadasok\programok\set\linked_set.h
+	"setrepr.h"
+
+1518009853 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\set\linked_set.cpp
+	"linked_set.h"
+	"set.h"
+	<iostream>
+
+1518010781 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\set\main.cpp
+	<iostream>
+	"set.h"
+
+1508662144 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\set\sequence_set.cpp
+	"sequence_set.h"
+	"set.h"
+
+1529643945 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\main.cpp
+	<iostream>
+	"set.hpp"
+
+1529644112 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\set.hpp
+	"enumerator.hpp"
+	<typeinfo>
+	"setrepr.hpp"
+	"array_set.hpp"
+	"sequence_set.hpp"
+
+1528629054 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\enumerator.hpp
+
+1529180366 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\setrepr.hpp
+	"enumerator.hpp"
+
+1529180400 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\array_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1529483255 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set\sequence_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1535905763 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\main.cpp
+	"set.h"
+	<iostream>
+
+1531248844 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\set.hpp
+	"enumerator.hpp"
+	"setrepr.hpp"
+	"array_set.hpp"
+	"sequence_set.hpp"
+
+1529655570 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\enumerator.hpp
+
+1529655576 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\setrepr.hpp
+	"enumerator.hpp"
+
+1529655604 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\array_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1529655635 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\sequence_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1535908164 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\set.h
+	"enumerator.h"
+	"setrepr.h"
+	"array_set.h"
+	"sequence_set.h"
+
+1535908105 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\enumerator.h
+
+1535908164 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\setrepr.h
+	"enumerator.h"
+
+1535908164 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1535908073 c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1535908214 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+
+1535908214 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\08.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1535904616 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1535904566 c:\users\grego\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1544019505 c:\users\grego\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\setrepr.h
+	<exception>
+
+1535904616 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+
+1535908648 c:\users\grego\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1544020872 source:f:\oep\09.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1544028712 f:\oep\09.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1544028798 f:\oep\09.halmaz\set_enumerator\setrepr.h
+	<exception>
+	"enumerator.h"
+
+1535904506 f:\oep\09.halmaz\set_enumerator\enumerator.h
+
+1544020872 source:f:\oep\09.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+
+1544028712 f:\oep\09.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1544080474 source:g:\oep\09.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1535904566 g:\oep\09.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1544080288 g:\oep\09.halmaz\set_enumerator\setrepr.h
+	<exception>
+	"enumerator.h"
+
+1535904506 g:\oep\09.halmaz\set_enumerator\enumerator.h
+
+1544080410 source:g:\oep\09.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+
+1535908648 g:\oep\09.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1544080598 source:g:\oep\09.halmaz\set_enumerator\main.cpp
+	"set.h"
+	<iostream>
+
+1544028798 g:\oep\09.halmaz\set_enumerator\set.h
+	"enumerator.h"
+	"setrepr.h"
+	"array_set.h"
+	"sequence_set.h"
+
+1544704318 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\main.cpp
+	"set.h"
+	<iostream>
+
+1544704352 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\set.h
+	"enumerator.h"
+	"setrepr.h"
+	"array_set.h"
+	"sequence_set.h"
+
+1535904506 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\enumerator.h
+
+1544699378 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\setrepr.h
+	<exception>
+	<sstream>
+	"enumerator.h"
+
+1544703689 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1544703776 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1544704318 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+
+1544704339 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1544704340 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.cpp
+	"array_set.h"
+
+1544703690 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\array_set.h
+	"setrepr.h"
+	<vector>
+
+1545322142 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\setrepr.h
+	<exception>
+	<sstream>
+	"enumerator.h"
+
+1535904505 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\enumerator.h
+
+1544710302 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\main.cpp
+	"set.h"
+	<iostream>
+
+1544704354 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\set.h
+	"enumerator.h"
+	"setrepr.h"
+	"array_set.h"
+	"sequence_set.h"
+
+1544703778 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.h
+	"setrepr.h"
+	<vector>
+
+1544704320 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_enumerator\sequence_set.cpp
+	"sequence_set.h"
+

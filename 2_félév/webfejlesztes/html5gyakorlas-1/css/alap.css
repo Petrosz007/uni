@@ -1,0 +1,472 @@
+/* egyedi betûtípus */ 
+ @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
+
+ 
+/* kitöltendõ definíciók */
+
+/*============== szöveg igazítások ============= */
+h1, footer p, figcaption, figure, video {
+    /* szöveg középre igazítása */
+}
+
+p {
+   /* szöveg sorkizárt igazítása */
+ }
+
+figure pre, nav#fomenu {
+ 	  /* szöveg balra igazítása */
+}
+	
+/* ============= betûtípusok ============= */
+body { 
+ 		 /* legyen Aria, Verdana, sans-serif */
+}   
+
+figcaption  {
+		 /* legyen kurzív */
+		 /* válasszunk egy megfelelõ google betûtípust! */
+}
+
+/* ============= betûméretek ============= */
+
+h1 {
+		/* legyen háromszoros */
+}
+h2,h3,header nav#fomenu {
+		/* legyen másfélszeres */
+	}	
+ 
+ 
+/* ============= betû formázás ============= */
+aside h2, q {
+		/* legyen dõlt */
+	}
+ 
+ 
+ figcaption {
+		/* legyen félkövér */
+ }
+ 
+ h1 {
+	 		/* legyen kiskapitális */
+	 	    /* 2px-es ritkított betûköz legyen */
+ }
+
+
+ p {
+		/* másfeles sortávolság legyen */
+}
+
+ a {
+			/* legyen csupa nagybetûs */
+ }
+ 
+ h1 {
+ 	/* legyen szürke árnyék eltolva jobbra 5px, lefele 7px, elmosás legyen 3px */
+ }
+ 
+ p {
+	 	/* legyen egyszeres a behúzás */
+	 }
+	 
+ p:first-of-type {
+	 	/* ne legyen behúzás */
+	 }
+	 
+/* ============== színek =============== */
+
+h3 {
+			/* legyen a #786f61 színkód */
+  }
+ 
+pre {
+		/* háttérszín legyen fekete */
+		/* szövegszín legyen fehér */
+	}
+	
+figure, video {
+		/* háttérszín legyen fekete */
+
+
+}	
+
+figcaption {
+				/* legyen fehér a szöveg színe*/
+}
+
+ 
+ 
+ 
+/* html és oldal tulajdonságai */
+html {
+	background-color:darkgray;
+	background-image:url("../media/oldalhatter.jpg");
+}
+
+ body {
+	
+	background-color:white;
+	width:80%;
+	max-width:1000px;
+	min-width:500px;
+	padding:0 20px 20px 20px; 
+	margin:20px auto;
+	border:0px dotted  gray;
+	box-shadow:0 0 30px black;	
+	}
+ 
+body,header {border-radius:20px 20px 0 0; }
+
+
+/* címsorok beállítása */
+h1 {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+h1 {
+	color:white;
+	margin:10px 0 20px 0;
+	padding:3px 60px;
+	transform: rotate(-1deg);
+	background-color:black;
+	opacity:0.8;
+	background-image:url("../media/3csillag.png"),url("../media/3csillag.png");
+	background-repeat: no-repeat,no-repeat;
+	background-position:left center,right center;
+	}
+	
+	
+main>article>h2 {
+	
+	background-image:url("../media/csapo.png");
+	background-position:top left;
+	background-repeat:no-repeat;
+	padding:10px 20px 10px 60px;
+}
+
+main>article>h2:last-of-type {
+	background:none;
+	padding:10px;
+}
+
+
+h3 {
+	padding:10px;
+	margin:0;
+}
+
+aside h2 {
+	float:left;
+	margin:40px 5px 0 0;
+	transform:rotate(-90deg);
+	}
+
+/* linkek beállítása*/
+
+header nav#fomenu a, header nav#fomenu b {padding:0 30px 0 0;}
+
+header nav#fomenu a:link {
+	 color:white; 
+	 text-decoration:underline
+	 }
+
+header nav#fomenu a:visited {
+	color:white; 
+	text-decoration:underline;
+	}
+	
+nav#oldalmenu a {text-decoration:none; padding:3px;}	
+nav#oldalmenu a:link,header nav#oldalmenu a:visited {color:black}
+nav#oldalmenu a:hover, header nav#oldalmenu a:focus  {
+	background-color:#ddd;
+	transition: all 0.5s ease-in;
+	}
+
+/* blokkok elkerülése */
+nav#tartalomraugras a {position:absolute; left:-9999px}
+nav#tartalomraugras a:focus {position:static; background-color:white}
+
+
+/* listák */
+/* sorszámozott listák speciális átalakítása */
+ol {
+	break-before: always;
+    counter-reset:li; 
+    margin-left:0; 
+    padding-left:0; 
+	padding-top:10px;
+}
+ol > li {
+    position:relative; 
+    margin:0 0 6px 2em; 
+    padding:4px 8px; 
+    list-style:none; 
+}
+ol > li:before {
+    content:counter(li); 
+	text-decoration:underline;
+    counter-increment:li; 
+    position:absolute;
+    top:0px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    margin-right:8px;
+    padding:4px;
+    color:#fff;
+    background:#333;
+    font-weight:bold;
+    font-family: Arial, Verdana, sans-serif;
+    text-align:center;
+}
+li ol,
+li ul {margin-top:6px;}
+ol ol li:last-child {margin-bottom:0;}
+
+/* szövegelemek */
+
+
+details p {
+	line-height:1em;
+	font-size:0.8em;
+	}
+	
+summary {font-size:0.8em;}	
+
+
+
+pre {
+overflow:auto;
+}
+
+
+/* képek, videók, médiaelemek */
+
+
+
+img {
+	width:95%; 
+	height:auto;
+	border-radius:20px;
+	margin:0;
+	
+	}
+
+figure, video {
+	margin:10px auto;
+	border:2px solid gray;
+	padding:10px;
+	border-radius:20px;
+	width:90%;
+	max-width:700px;	
+	display:block;
+}
+
+figure {
+	break-inside: avoid;}
+
+
+
+
+.slideshare16x9 {
+    padding-bottom: calc(56.25% + 38px);
+    position: relative;
+    width: 80%;
+    height: 0;
+	margin:0 auto;
+}
+
+.slideshare16x9 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:1px solid #CCC; 
+}
+
+#canvas {float:right;}
+
+/* táblázat beállításai */
+
+table {border-collapse:collapse;}
+th {text-align:left}
+table {width:300px;}
+th,td {border:0}
+
+
+/* szerkezeti elemek */
+
+div#bevezeto  {
+padding:30px 40px;
+background-color:white;
+margin:5px 40px 40px auto;
+border-right:5px solid black;
+border-left:5px solid black;
+background-image: url("../media/filmszalag.png"), url("../media/filmszalag.png");
+background-position:top, bottom;
+background-repeat:repeat-x,repeat-x;
+transform:rotate(-3deg);
+background-origin: border-box; 
+background-size:30px 29px;
+width:70%;
+position:relative;
+min-height:150px;
+opacity:0.9;
+}
+
+.hasab {
+	 column-count:2;
+	 column-gap:30px;
+	 }
+
+aside {
+	float:right;
+	margin:0px 10px 10px 20px;
+	background-color:#e3e0d3;
+	border:4px solid black;
+	background-image: url("../media/filmszalag.png"), url("../media/filmszalag.png");
+	background-position:top, bottom;
+	background-repeat:repeat-x,repeat-x;
+	transform:rotate(3deg);
+	background-size:20px 19px;
+	padding:20px 10px 30px 10px;
+}
+
+section {width:100%}
+
+nav#fomenu 
+{
+	background-color: black;
+	width:400px;
+	opacity:0.8;
+}
+
+
+hr {
+	border:1px dashed #c5b59e;
+	margin:20px 0;
+}
+
+header {
+	background-image:url("../media/fejlechatter.jpg");
+	background-position:top left;
+	background-repeat:no-repeat;
+	background-size:cover;
+	margin:0 -20px -20px -20px;
+	padding:10px 0 0 0;
+	border-bottom:3px solid black;
+	}
+
+header nav#fomenu {
+	 color:#cac8bc;
+	 padding:10px;
+	 border-radius:0 10px 10px 0;
+	 margin:0;
+	 }	
+
+main {padding-top:20px;}	 
+
+.rejtett {position:absolute; left:-9999px;}
+	 
+/* ûrlap */
+
+
+fieldset {
+	border-radius: 5px;
+	width:70%;
+	min-width:450px;
+	background-color:#cac8bc;
+	margin-bottom:10px;
+}
+
+/* stílusok az 1. töréspontra */
+
+@media screen and (min-width: 992px) 
+{
+article {
+	 column-count:2;
+	 column-gap:30px;
+	 }
+
+aside h2 {
+	float:none;
+	margin:20px 5px 0 0;
+	transform:rotate(0deg);
+	}	 
+
+aside {float:none}	
+	 
+	 
+}
+
+/* stílusok a 2. töréspontra */
+
+@media screen and (max-width: 576px) 
+{
+.hasab {
+	 column-count:1;
+	 column-gap:0;
+	 }
+	 
+	 aside {
+		 float:none; 
+	 	 width:90%;
+		 margin:0px;
+		 }
+	 div#bevezeto, aside {transform:rotate(0);}
+	 body {width:100%;}
+	 
+	 div#bevezeto article h2 {
+			position:static;
+			transform:rotate(0deg);
+			 margin:10px 0;
+		}
+		
+	 div#bevezeto {
+		 padding-left:10px;
+		 margin:0;
+		 width:80%;
+		 min-width:initial;
+		 max-width:initial;
+		 
+		 
+	 }	
+}
+
+/* nyomtatási stíluslap */
+@media print {
+	
+	@page {
+		margin: 2cm;
+	 }
+	
+	html {
+	
+		background:white;
+		}
+	body  {
+		width:100%;
+		font-family:'Times New Roman', Times, serif; 
+		background:white;
+		min-width:initial;
+		max-width:initial;
+		box-shadow:initial;
+	}
+
+	nav {display:none}	/* ne jelenjen meg a nav elem */
+
+	a:after { content: " (" attr(href) ")";}  /* a linkek után jelenjen meg a href paraméter értéke*/		
+	
+	h2#temegen {page-break-before:always}
+	h2#deepweb {page-break-before:always}
+
+	
+}
+
+
+
+
+

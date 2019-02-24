@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1534956536 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\07.testek_lények\shapes\area.cpp
+	"area.h"
+
+1534956536 c:\users\tibi\documents\oktat\oep\eloadasok\programok\07.testek_lények\shapes\area.h
+
+1534957036 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\07.testek_lények\shapes\shapes.cpp
+	"shapes.h"
+
+1534957888 c:\users\tibi\documents\oktat\oep\eloadasok\programok\07.testek_lények\shapes\shapes.h
+	"area.h"
+
+1534957036 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\07.testek_lények\shapes\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	"shapes.h"
+

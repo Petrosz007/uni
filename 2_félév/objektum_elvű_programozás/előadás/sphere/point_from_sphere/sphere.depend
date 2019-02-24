@@ -1,0 +1,81 @@
+# depslib dependency file v1.0
+1318492006 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.cpp
+	"Sphere.h"
+
+1318492006 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.h
+	"Point.h"
+
+1318492159 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\point.h
+
+1319014484 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere1\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452088548 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere1\sphere.h
+	<cmath>
+
+1319177700 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere1\point.h
+	"Sphere.h"
+
+1319018084 source:c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere1\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1319181342 c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere1\sphere.h
+	<cmath>
+
+1319181299 c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere1\point.h
+	"Sphere.h"
+
+1452162296 source:f:\new\6\modellek\sphere3\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452162918 f:\new\6\modellek\sphere3\sphere.h
+	<cmath>
+
+1452162352 f:\new\6\modellek\sphere3\point.h
+	"Sphere.h"
+
+1452704107 source:c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere3\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452704262 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere3\sphere.h
+	<cmath>
+
+1452703266 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere3\point.h
+	"Sphere.h"
+
+1506286634 source:c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere3\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1506287153 c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere3\sphere.h
+	<cmath>
+
+1452706868 c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere3\point.h
+	"Sphere.h"
+
+1506287192 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\point_from_sphere\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1534437041 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\point_from_sphere\sphere.h
+	<cmath>
+
+1534437041 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\point_from_sphere\point.h
+	"Sphere.h"
+

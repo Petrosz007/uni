@@ -1,0 +1,134 @@
+# depslib dependency file v1.0
+1471449305 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\main.cpp
+	"menu.h"
+
+1471449305 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\menu.h
+	<fstream>
+	"polygon.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\polygon.h
+	"point.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\point.h
+
+1471447420 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\polygon.cpp
+	"polygon.h"
+
+1471449324 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonmenu\menu.cpp
+	"menu.h"
+	<iostream>
+
+1471449305 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonmenu\main.cpp
+	"menu.h"
+
+1471682437 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonmenu\menu.h
+	<fstream>
+	"polygon.h"
+
+1472208936 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonmenu\polygon.h
+	"point.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonmenu\point.h
+
+1471682448 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonmenu\menu.cpp
+	"menu.h"
+	<iostream>
+
+1471452906 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\main.cpp
+	"menu.h"
+
+1471686038 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\menu.h
+	<fstream>
+	"polygon.h"
+
+1472212538 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\polygon.h
+	"point.h"
+
+1505221477 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\point.h
+
+1471686050 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\menu.cpp
+	"menu.h"
+	<iostream>
+
+1472212538 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonmenu\polygon.cpp
+	"polygon.h"
+
+1517390717 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\menu.cpp
+	"menu.h"
+	<iostream>
+	<fstream>
+	<cstdlib>
+
+1517390222 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\menu.h
+	"polygon.h"
+	<fstream>
+
+1517385285 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.h
+	"point.h"
+
+1517385216 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\point.h
+
+1517386644 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\main.cpp
+	"menu.h"
+
+1517386127 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.cpp
+	"polygon.h"
+
+1535905668 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\main.cpp
+	"menu.h"
+
+1547268832 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\menu.h
+	"polygon.h"
+	<fstream>
+
+1550755866 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013244 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\point.h
+
+1547268832 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\menu.cpp
+	"menu.h"
+	"read.hpp"
+	<iostream>
+	<fstream>
+	<cstdlib>
+
+1549736488 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.cpp
+	"polygon.h"
+	<iostream>
+
+1535905666 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\main.cpp
+	"menu.h"
+
+1547268831 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\menu.h
+	"polygon.h"
+	<fstream>
+
+1547461420 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013244 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\point.h
+
+1547198442 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\polygon.cpp
+	"polygon.h"
+	<iostream>
+
+1547268831 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\menu.cpp
+	"menu.h"
+	"read.hpp"
+	<iostream>
+	<fstream>
+	<cstdlib>
+
+1535552732 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonmenu\read.hpp
+	<iostream>
+	<string>
+
+1535552732 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonmenu\read.hpp
+	<iostream>
+	<string>
+

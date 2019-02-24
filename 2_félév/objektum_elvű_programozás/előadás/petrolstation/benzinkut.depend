@@ -1,0 +1,530 @@
+# depslib dependency file v1.0
+1540924544 source:g:\oep\benzinkut\main.cpp
+	<iostream>
+	"petrol.h"
+	"car.h"
+
+1540915206 g:\oep\benzinkut\benzinkut.h
+	"tolto.h"
+	"penztar.h"
+	<vector>
+
+1540915412 g:\oep\benzinkut\tolto.h
+	<vector>
+
+1540915266 g:\oep\benzinkut\penztar.h
+
+1540915198 g:\oep\benzinkut\autos.h
+	"benzinkut.h"
+
+1540924544 g:\oep\benzinkut\petrol.h
+	"pump.h"
+	"cash.h"
+	<vector>
+
+1540923622 g:\oep\benzinkut\pump.h
+	<iostream>
+	<queue>
+
+1540924650 g:\oep\benzinkut\cash.h
+
+1540924706 g:\oep\benzinkut\car.h
+	<string>
+
+1540923622 source:g:\oep\benzinkut\pump.cpp
+	"pump.h"
+
+1540924242 source:g:\oep\benzinkut\car.cpp
+	"car.h"
+	"petrol.h"
+
+1540924386 source:g:\oep\benzinkut\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+
+1540924386 source:g:\oep\benzinkut\petrol.cpp
+	"petrol.h"
+	"pump.h"
+	"cash.h"
+
+1541046882 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+
+1540973857 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\cash.h
+
+1541138623 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\petrol.h
+	<mutex>
+	<condition_variable>
+	"pump.h"
+	"cash.h"
+	<vector>
+
+1541139127 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541138927 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\petrol.cpp
+	"petrol.h"
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<iostream>
+
+1540993819 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\pump.cpp
+	"pump.h"
+
+1541090488 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1541050254 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<iostream>
+
+1541138101 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\car.h
+	<thread>
+	<string>
+	<iostream>
+
+1541138737 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut\car.cpp
+	"car.h"
+	"petrol.h"
+	<thread>
+	<iostream>
+
+1541177225 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1541176102 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\car.h
+	<thread>
+	<string>
+	<iostream>
+
+1541175249 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1541178677 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1540973858 c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\cash.h
+
+1541173945 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+
+1541177254 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1541173938 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\07-10.gyakorlat\benzinkut2\petrol.cpp
+	"petrol.h"
+	<iostream>
+
+1541177226 source:g:\oep\benzinkut2\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1541176104 g:\oep\benzinkut2\car.h
+	<thread>
+	<string>
+	<iostream>
+
+1541175250 g:\oep\benzinkut2\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1541219340 g:\oep\benzinkut2\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1540973858 g:\oep\benzinkut2\cash.h
+
+1541173946 source:g:\oep\benzinkut2\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+
+1541178732 source:g:\oep\benzinkut2\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1541173940 source:g:\oep\benzinkut2\petrol.cpp
+	"petrol.h"
+	<iostream>
+
+1541330224 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1541328805 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541328465 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1541327701 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\pump.h
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541242702 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\car.h
+	<string>
+	<thread>
+
+1541329340 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1541328465 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\petrol.cpp
+	"petrol.h"
+
+1541326712 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1541328848 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut2\pump.cpp
+	"pump.h"
+
+1542085011 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1542085011 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1542026615 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1542083183 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541340396 c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\car.h
+	<string>
+	<thread>
+
+1541950488 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1541954619 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\pump.cpp
+	"pump.h"
+
+1541687564 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1542082176 source:c:\users\tibi\documents\oktat\oep\gyakorlatok\12-13.gyakorlat\benzinkut3\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1541687564 source:g:\oep\benzinkut3\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1542026616 g:\oep\benzinkut3\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1542176730 g:\oep\benzinkut3\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1542111452 g:\oep\benzinkut3\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541340396 g:\oep\benzinkut3\car.h
+	<string>
+	<thread>
+
+1542085024 source:g:\oep\benzinkut3\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1541950490 source:g:\oep\benzinkut3\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1542113312 source:g:\oep\benzinkut3\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1541351154 source:g:\oep\benzinkut3\pump.cpp
+	"pump.h"
+	"car.h"
+	<sstream>
+
+1541687266 source:f:\oep\benzinkut3\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1542205568 f:\oep\benzinkut3\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1542198524 f:\oep\benzinkut3\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1542205568 f:\oep\benzinkut3\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1541340396 f:\oep\benzinkut3\car.h
+	<string>
+	<thread>
+
+1541950490 source:f:\oep\benzinkut3\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1541687564 source:f:\oep\benzinkut3\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1542176738 source:f:\oep\benzinkut3\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1542198524 source:f:\oep\benzinkut3\pump.cpp
+	"pump.h"
+
+1543508334 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1543508334 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\car.h
+	<string>
+	<thread>
+
+1542198524 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1543529036 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1543163248 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1543508334 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1543155901 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1543484030 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\pump.cpp
+	"pump.h"
+
+1543484030 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11-12.viselkedés\petrolstation\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1543156154 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1543508332 c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\car.h
+	<string>
+	<thread>
+
+1542198524 c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1543163250 c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1543163250 c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1543164186 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1541687564 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+
+1543155902 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1543158830 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\11.viselkedés\petrolstation\pump.cpp
+	"pump.h"
+
+1543508334 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\car.cpp
+	"car.h"
+	"petrol.h"
+	<iostream>
+	<sstream>
+	<thread>
+
+1543508334 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\car.h
+	<string>
+	<thread>
+
+1542198524 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\petrol.h
+	"pump.h"
+	"cash.h"
+	"car.h"
+	<vector>
+
+1543529476 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\pump.h
+	<iostream>
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1543163248 c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\cash.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1549192962 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\cash.cpp
+	"cash.h"
+	"petrol.h"
+	"pump.h"
+	<iostream>
+	<sstream>
+
+1543155901 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\petrol.cpp
+	"petrol.h"
+	<iostream>
+	<sstream>
+
+1549193156 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\pump.cpp
+	"pump.h"
+	"car.h"
+	<sstream>
+
+1549191842 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\11.viselkedés\petrolstation\main.cpp
+	<iostream>
+	<sstream>
+	"petrol.h"
+	"car.h"
+

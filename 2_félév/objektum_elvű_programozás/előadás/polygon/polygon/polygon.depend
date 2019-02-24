@@ -1,0 +1,63 @@
+# depslib dependency file v1.0
+1538929880 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	"polygon.h"
+
+1547461419 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013244 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\point.h
+
+1547198442 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\polygon.cpp
+	"polygon.h"
+	<iostream>
+
+1533814773 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\sokszog.cpp
+	"Sokszog.h"
+	<iostream>
+
+1533814764 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\sokszog.h
+	"pont.h"
+	<vector>
+	<fstream>
+
+1530437331 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygon\pont.h
+
+1538929880 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	"polygon.h"
+
+1550755845 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013242 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon\point.h
+
+1549736488 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon\polygon.cpp
+	"polygon.h"
+	<iostream>
+
+1538929880 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon_new\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	"polygon.h"
+
+1547197527 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon_new\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013242 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon_new\point.h
+
+1544013467 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygon_new\polygon.cpp
+	"polygon.h"
+	<iostream>
+

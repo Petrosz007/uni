@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1535647097 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\students\inpfile.cpp
+	"inpfile.h"
+	<iostream>
+	<cstdlib>
+	<sstream>
+
+1535649887 c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\students\inpfile.h
+	<fstream>
+	<string>
+	<vector>
+
+1535646507 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\students\main.cpp
+	<iostream>
+	<string>
+	"inpfile.h"
+	"outfile.h"
+
+1535647170 c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\students\outfile.h
+	<fstream>
+	<string>
+	<iomanip>
+

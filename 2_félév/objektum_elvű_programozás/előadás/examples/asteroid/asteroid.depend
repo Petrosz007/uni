@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1545461012 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\asteroid\main.cpp
+	<iostream>
+	<sstream>
+	"../library/summation.hpp"
+	"../library/seqinfileenumerator.hpp"
+
+1542995774 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\summation.hpp
+	"procedure.hpp"
+	<iostream>
+
+1542978442 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502810830 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995979 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1545461014 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\asteroid\main.cpp
+	<iostream>
+	<sstream>
+	"../library/summation.hpp"
+	"../library/seqinfileenumerator.hpp"
+
+1547540201 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\summation.hpp
+	"procedure.hpp"
+	<iostream>
+
+1547564794 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+	<iostream>
+	<vector>
+
+1502810830 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995980 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+

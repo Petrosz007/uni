@@ -1,0 +1,91 @@
+# depslib dependency file v1.0
+1516531157 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\main.cpp
+	<iostream>
+	<fstream>
+	"library/maxsearch.hpp"
+	"library/seqinfileenumerator.hpp"
+
+1502814931 c:\users\grego\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\maxsearch.hpp
+	"procedure.hpp"
+
+1510737978 c:\users\grego\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502810829 c:\users\grego\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\enumerator.hpp
+
+1502814351 c:\users\grego\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	"enumerator.hpp"
+
+1535995127 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\main.cpp
+	<iostream>
+	"../library/maxsearch.hpp"
+	"../library/seqinfileenumerator.hpp"
+
+1522751822 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\maxsearch.hpp
+	"procedure.hpp"
+
+1522751994 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502814430 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\enumerator.hpp
+
+1526901198 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	"enumerator.hpp"
+
+1535991528 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\metro\main.cpp
+	<iostream>
+	"../library/maxsearch.hpp"
+	"../library/seqinfileenumerator.hpp"
+
+1522751822 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\maxsearch.hpp
+	"procedure.hpp"
+
+1522751994 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502814430 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\enumerator.hpp
+
+1530202942 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\metro\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	<iostream>
+	"enumerator.hpp"
+
+1539607305 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\maxsearch.hpp
+	"procedure.hpp"
+
+1539607492 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502814430 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535999579 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1547538398 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\maxsearch.hpp
+	"procedure.hpp"
+
+1542978442 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502810830 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995980 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+

@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1535558777 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\main.cpp
+	<fstream>
+	<string>
+	"stock.h"
+	"result.h"
+	"common.h"
+
+1535559230 c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\stock.h
+	"common.h"
+	<fstream>
+	<string>
+
+1535559230 c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\common.h
+	<string>
+
+1535559580 c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\result.h
+	"common.h"
+	<fstream>
+	<string>
+
+1535560184 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\stock.cpp
+	"stock.h"
+	<iostream>
+	<cstdlib>
+
+1535560371 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\04.inputfájl\library_with_class\result.cpp
+	"result.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+

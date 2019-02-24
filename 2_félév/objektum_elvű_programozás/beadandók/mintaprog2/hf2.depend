@@ -1,0 +1,178 @@
+# depslib dependency file v1.0
+1485709132 source:c:\users\greti\documents\oktatás\prog\beadandók\2abt\hf2\bekszo.cpp
+	<iostream>
+	"enor.h"
+
+1485709119 c:\users\greti\documents\oktatás\prog\beadandók\2abt\hf2\enor.h
+	<fstream>
+	<string>
+	<sstream>
+
+1327481228 source:c:\users\greti\documents\oktatás\prog\beadandók\2abt\hf2\enor.cpp
+	"enor.h"
+	<iostream>
+	<cstdlib>
+
+1485709134 source:c:\users\grego\documents\oktat\oep\beadandók\2ab\hf2\bekszo.cpp
+	<iostream>
+	"enor.h"
+
+1518371136 c:\users\grego\documents\oktat\oep\beadandók\2ab\hf2\enor.h
+	<fstream>
+	<string>
+	<sstream>
+
+1485709146 source:c:\users\grego\documents\oktat\oep\beadandók\2ab\hf2\enor.cpp
+	"enor.h"
+	<iostream>
+	<cstdlib>
+
+1537610900 source:c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\contest.cpp
+	"contest.h"
+
+1537610053 c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\contest.h
+	<fstream>
+	<sstream>
+	<string>
+
+1537610053 source:c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\angler.cpp
+	"angler.h"
+
+1537610053 c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\angler.h
+	"contest.h"
+	<string>
+
+1537617168 source:c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\main.cpp
+	<iostream>
+	"angler.h"
+	"catch.hpp"
+
+1475444842 c:\users\tibi\documents\oktat\oep\beadandók\2\hf2\catch.hpp
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<ostream>
+	<string>
+	<memory>
+	<vector>
+	<stdlib.h>
+	<vector>
+	<string>
+	<cstddef>
+	<sstream>
+	<iomanip>
+	<limits>
+	<vector>
+	<cstddef>
+	<tuple>
+	<type_traits>
+	<string>
+	<string>
+	<string>
+	<cstddef>
+	<stdint.h>
+	<string>
+	<iterator>
+	<vector>
+	<string>
+	<stdlib.h>
+	<string>
+	<vector>
+	<string>
+	<cmath>
+	<limits>
+	<string>
+	<string>
+	<set>
+	<string>
+	<string>
+	<vector>
+	<iostream>
+	<string>
+	<vector>
+	<streambuf>
+	<streambuf>
+	<ostream>
+	<fstream>
+	<memory>
+	<vector>
+	<string>
+	<iostream>
+	<ctime>
+	<string>
+	<vector>
+	<sstream>
+	<algorithm>
+	<map>
+	<stdexcept>
+	<memory>
+	<fstream>
+	<string>
+	<vector>
+	<sstream>
+	<string>
+	<ostream>
+	<map>
+	<assert.h>
+	<limits>
+	<algorithm>
+	<map>
+	<string>
+	<assert.h>
+	<vector>
+	<signal.h>
+	<set>
+	<string>
+	<fstream>
+	<stdlib.h>
+	<limits>
+	<vector>
+	<set>
+	<sstream>
+	<iostream>
+	<algorithm>
+	<random>
+	<map>
+	<ostream>
+	<stdexcept>
+	<cstdio>
+	<iostream>
+	<AfxWin.h>
+	<windows.h>
+	<unistd.h>
+	<vector>
+	<string>
+	<map>
+	<windows.h>
+	<sys/time.h>
+	<iostream>
+	<assert.h>
+	<stdbool.h>
+	<sys/types.h>
+	<unistd.h>
+	<sys/sysctl.h>
+	<map>
+	<map>
+	<iostream>
+	<cstring>
+	<sstream>
+	<string>
+	<vector>
+	<iomanip>
+	<assert.h>
+
+1537624208 source:c:\users\gt\documents\oktatás\oep\beadandók\2\angler.cpp
+	"angler.h"
+
+1537624208 c:\users\gt\documents\oktatás\oep\beadandók\2\angler.h
+	"contest.h"
+	<string>
+
+1537624208 c:\users\gt\documents\oktatás\oep\beadandók\2\contest.h
+	<fstream>
+	<sstream>
+	<string>
+
+1537624208 source:c:\users\gt\documents\oktatás\oep\beadandók\2\contest.cpp
+	"contest.h"
+

@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+$wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php 
+         --post-data='action=Search'";
+
+print "$wget\n";
+$page = ` $wget`;
+while ($page =~ m/compactshow\.php\?student_id=([0-9]+)/g) {
+	$id=$1
+	$wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php?student_id=$id";
+	print "$wget\n";
+}

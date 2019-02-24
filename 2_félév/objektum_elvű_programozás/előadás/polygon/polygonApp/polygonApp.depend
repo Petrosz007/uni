@@ -1,0 +1,136 @@
+# depslib dependency file v1.0
+1471448561 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+
+1471448525 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\application.h
+	<fstream>
+	"polygon.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\polygon.h
+	"point.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\point.h
+
+1471448578 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\main.cpp
+	<iostream>
+	"application.h"
+
+1471447420 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\1.pont\polygonapp\polygon.cpp
+	"polygon.h"
+
+1471448578 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\main.cpp
+	<iostream>
+	"application.h"
+
+1471682308 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\application.h
+	<fstream>
+	"polygon.h"
+
+1472208906 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\polygon.h
+	"point.h"
+
+1471447420 c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\point.h
+
+1471447420 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\polygon.cpp
+	"polygon.h"
+
+1471682316 source:c:\users\greti\documents\oktatás\oaf\elõadások\programok\2.polygon\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+
+1471685918 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+
+1471685910 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\application.h
+	<fstream>
+	"polygon.h"
+
+1472212508 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\polygon.h
+	"point.h"
+
+1505221477 c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\point.h
+
+1471452180 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\main.cpp
+	<iostream>
+	"application.h"
+
+1472212508 source:c:\users\gt\documents\oktatás\oaf\elõadások\programok\02.polygon\polygonapp\polygon.cpp
+	"polygon.h"
+
+1517390978 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+	<cstdlib>
+
+1517390996 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\application.h
+	"polygon.h"
+	<vector>
+	<fstream>
+
+1517385285 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\polygon.h
+	"point.h"
+
+1517385216 c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\point.h
+
+1517389511 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\main.cpp
+	<iostream>
+	<fstream>
+	"application.h"
+
+1517386127 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\polygon.cpp
+	"polygon.h"
+
+1538935982 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+	<cstdlib>
+
+1535905626 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\application.h
+	"polygon.h"
+	<vector>
+	<fstream>
+
+1550755866 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013244 c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\point.h
+
+1535905606 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\main.cpp
+	<iostream>
+	<fstream>
+	"application.h"
+
+1549736488 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\02.polygon\polygonapp\polygon.cpp
+	"polygon.h"
+	<iostream>
+
+1538935980 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\application.cpp
+	"application.h"
+	<iostream>
+	<cstdlib>
+
+1535905625 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\application.h
+	"polygon.h"
+	<vector>
+	<fstream>
+
+1547461420 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\polygon.h
+	<vector>
+	<fstream>
+	"point.h"
+
+1544013244 c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\point.h
+
+1535905605 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\main.cpp
+	<iostream>
+	<fstream>
+	"application.h"
+
+1538939013 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\02.polygon\polygonapp\polygon.cpp
+	"polygon.h"
+	<iostream>
+

@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1520804732 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\lenghtenumerator.cpp
+	"lenghtenumerator.h"
+
+1535281696 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\lenghtenumerator.h
+	"bitenumerator.h"
+
+1535281850 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\bitenumerator.h
+	<string>
+	<iostream>
+	<fstream>
+	<cstdlib>
+
+1535281910 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\lengthenumerator.cpp
+	"lengthenumerator.h"
+
+1535281788 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\lengthenumerator.h
+	"bitenumerator.h"
+
+1535281788 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\longestuphill\main.cpp
+	<iostream>
+	"lengthenumerator.h"
+

@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1318492006 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.cpp
+	"Sphere.h"
+
+1452088927 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.h
+	"Point.h"
+
+1452088927 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\point.h
+	<cmath>
+
+1319007590 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452156378 source:f:\new\6\modellek\sphere1\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452158992 f:\new\6\modellek\sphere1\sphere.h
+	"Point.h"
+
+1452156470 f:\new\6\modellek\sphere1\point.h
+	<cmath>
+
+1452284142 source:c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere1\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452680324 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere1\sphere.h
+	"Point.h"
+
+1452160570 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere1\point.h
+	<cmath>
+
+1454153690 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere0\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1530351903 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere0\sphere.h
+	"Point.h"
+
+1530351903 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere0\point.h
+	<cmath>
+
+1530725130 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\pointref_in_sphere\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1534436415 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\pointref_in_sphere\sphere.h
+	"Point.h"
+
+1534436415 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\pointref_in_sphere\point.h
+	<cmath>
+

@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1530257393 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\main.cpp
+	<iostream>
+	"library/maxsearch.hpp"
+	"library/seqinfileenumerator.hpp"
+
+1535993104 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\library\maxsearch.hpp
+	"procedure.hpp"
+
+1522751994 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502814430 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\library\enumerator.hpp
+
+1530257388 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1535991068 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\greatest_even\main.cpp
+	<iostream>
+	"../library/maxsearch.hpp"
+	"../library/seqinfileenumerator.hpp"
+
+1547538359 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\maxsearch.hpp
+	"procedure.hpp"
+
+1542978442 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502810830 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995980 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+

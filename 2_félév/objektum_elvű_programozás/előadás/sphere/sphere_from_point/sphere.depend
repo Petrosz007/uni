@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1318492006 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.cpp
+	"Sphere.h"
+
+1318492006 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\sphere.h
+	"Point.h"
+
+1318492159 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere\point.h
+
+1319018114 source:c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1319181560 c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere2\sphere.h
+	"Point.h"
+
+1319181504 c:\documents and settings\tibor\dokumentumok\oktatás\oaf\gyakorlat\sphere2\point.h
+	<cmath>
+
+1319014514 source:c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452089130 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere2\sphere.h
+	"Point.h"
+
+1452088817 c:\users\greti\documents\oktatás\oaf\gyakorlat\sphere2\point.h
+	<cmath>
+
+1452156536 source:f:\new\6\modellek\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1452160000 f:\new\6\modellek\sphere2\sphere.h
+	"Point.h"
+
+1452156536 f:\new\6\modellek\sphere2\point.h
+	<cmath>
+
+1454149232 source:c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1457374991 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere2\sphere.h
+	"Point.h"
+
+1454148016 c:\users\greti\documents\oktatás\prog\elõadások\5\modellek\sphere2\point.h
+	<cmath>
+
+1506289197 source:c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1506289591 c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere2\sphere.h
+	"Point.h"
+
+1506290737 c:\users\grego\documents\oktat\prog\eloadasok\13\modellek\sphere2\point.h
+	<cmath>
+
+1506426490 source:c:\users\gt\documents\oktatás\oaf\elõadások\oop_elõadás\programok\modellek\sphere2\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1506428187 c:\users\gt\documents\oktatás\oaf\elõadások\oop_elõadás\programok\modellek\sphere2\sphere.h
+	"Point.h"
+	<iostream>
+
+1506425244 c:\users\gt\documents\oktatás\oaf\elõadások\oop_elõadás\programok\modellek\sphere2\point.h
+	<cmath>
+
+1506426492 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere_from_point\main.cpp
+	<iostream>
+	<vector>
+	"Sphere.h"
+	"Point.h"
+
+1534437160 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere_from_point\sphere.h
+	"Point.h"
+	<iostream>
+
+1534437160 c:\users\tibi\documents\oktat\oep\eloadasok\programok\06.kapcsolat\sphere\sphere_from_point\point.h
+	<cmath>
+

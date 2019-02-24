@@ -1,0 +1,81 @@
+# depslib dependency file v1.0
+1544081648 source:g:\oep\09.halmaz\set_template\main.cpp
+	<iostream>
+	"set.hpp"
+
+1544081570 g:\oep\09.halmaz\set_template\set.hpp
+	"enumerator.hpp"
+	"setrepr.hpp"
+	"array_set.hpp"
+	"sequence_set.hpp"
+
+1535909444 g:\oep\09.halmaz\set_template\enumerator.hpp
+
+1544081700 g:\oep\09.halmaz\set_template\setrepr.hpp
+	<exception>
+	"enumerator.h"
+
+1535909444 g:\oep\09.halmaz\set_template\enumerator.h
+
+1544081720 g:\oep\09.halmaz\set_template\array_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1544081446 g:\oep\09.halmaz\set_template\sequence_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1544709986 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\main.cpp
+	<iostream>
+	"set.hpp"
+
+1544709868 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\set.hpp
+	"enumerator.h"
+	"setrepr.hpp"
+	"array_set.hpp"
+	"sequence_set.hpp"
+
+1535909444 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\enumerator.hpp
+
+1545322178 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\setrepr.hpp
+	<exception>
+	<sstream>
+	"enumerator.h"
+
+1544708530 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\array_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1544707916 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\sequence_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1544708551 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\main.cpp
+	<iostream>
+	"set.hpp"
+
+1544708529 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\set.hpp
+	"enumerator.h"
+	"setrepr.hpp"
+	"array_set.hpp"
+	"sequence_set.hpp"
+
+1535909444 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\enumerator.hpp
+
+1544707802 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\setrepr.hpp
+	<exception>
+	<sstream>
+	"enumerator.h"
+
+1544708529 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\array_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1544707915 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\sequence_set.hpp
+	"setrepr.hpp"
+	<vector>
+
+1535909444 c:\users\gt\documents\oktatás\oep\eloadasok\programok\09.halmaz\set_template\enumerator.h
+
+1535909444 c:\users\tibi\documents\oktat\oep\eloadasok\programok\09.halmaz\set_template\enumerator.h
+

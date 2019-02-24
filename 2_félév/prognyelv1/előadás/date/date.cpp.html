@@ -1,0 +1,76 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+
+<title>date.cpp.html</title>
+</head><body bgcolor="#e5e5e5" text="#000000">
+<pre><font color="#a020f0">#include </font><span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">&lt;iostream&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">&lt;string&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">&lt;sstream&gt;</font></span>
+
+<font color="#a020f0">#include </font><span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">"date.h"</font></span>
+
+<font color="#a52a2a"><b>using</b></font> <font color="#2e8b57"><b>namespace</b></font> std;
+
+<font color="#0000ff">/*</font><font color="#0000ff"> konstruktor */</font>
+date::date( string s )
+{
+    <font color="#a52a2a"><b>for</b></font> ( <font color="#2e8b57"><b>int</b></font> i = 0; i &lt; s.size(); ++i )
+    {
+         <font color="#a52a2a"><b>if</b></font> ( '.' == s[ i ] || '-' == s[ i ] )
+             s[ i ] = ' ';
+    }
+    <font color="#2e8b57"><b>int</b></font> y, m, d;
+    stringstream parser( s );
+    parser >> y >> m >> d;
+
+    set( y, m, d );
+}
+
+<font color="#0000ff">/*</font><font color="#0000ff"> módosítók */</font>
+<font color="#2e8b57"><b>void</b></font> date::next()
+{
+    <font color="#2e8b57"><b>static const int</b></font> days_in_months[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    ++day;
+
+    <font color="#0000ff">/*</font><font color="#0000ff"> </font><span style="background-color: rgb(255, 255, 0);"><font color="#0000ff">TODO</font></span><font color="#0000ff">: szökőév */</font>
+    <font color="#a52a2a"><b>if</b></font> ( day - <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">1</font></span> == days_in_months[month - 1] )
+    {
+        day = <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">1</font></span>;
+        ++month;
+    }
+    <font color="#a52a2a"><b>if</b></font> ( <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">13</font></span> == month )
+    {
+        month = <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">1</font></span>;
+        ++year;
+    }
+}
+
+<font color="#2e8b57"><b>void</b></font> date::add( <font color="#2e8b57"><b>int</b></font> n )
+{
+    <font color="#a52a2a"><b>for</b></font> ( <font color="#2e8b57"><b>int</b></font> i = <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">0</font></span>; i &lt; n; ++i )
+    {
+        next();
+    }
+}
+
+<font color="#0000ff">/*</font><font color="#0000ff"> input-output */</font>
+<font color="#2e8b57"><b>void</b></font> date::read()
+{
+    <font color="#0000ff">// nem lenne igazán jó:</font>
+    <font color="#0000ff">// std::cin &gt;&gt; year &gt;&gt; month &gt;&gt; day;</font>
+    <font color="#2e8b57"><b>int</b></font> y, m, d;
+    <font color="#a52a2a"><b>if</b></font> ( std::cin &gt;&gt; y &gt;&gt; m &gt;&gt; d )
+    {
+        set( y, m, d );
+    }
+}
+
+<font color="#2e8b57"><b>void</b></font> date::print() <font color="#2e8b57"><b>const</b></font>
+{
+    <font color="#0000ff">// nem lenne igazán jó: std::cout &lt;&lt; year &lt;&lt; month &lt;&lt; day;</font>
+    std::cout &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">"[ "</font></span> &lt;&lt; get_year() &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">","</font></span> &lt;&lt; get_month()
+                             &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">","</font></span> &lt;&lt; get_day() &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">" ]"</font></span>;
+}
+
+</pre>
+</body></html>

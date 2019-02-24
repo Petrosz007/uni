@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>datemain.cpp.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e5e5e5" text="#000000">
+<pre>
+
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;date.h&quot;</font></span>
+
+<font color="#a52a2a"><b>using</b></font> <font color="#2e8b57"><b>namespace</b></font> std;
+
+<font color="#0000ff">/*</font><font color="#0000ff"> program a date osztály tesztelésére */</font>
+<font color="#2e8b57"><b>int</b></font> main()
+{
+    date today( 2019, 2, 21 );
+    <font color="#0000ff">//</font><font color="#0000ff">date error( 2018, 09, 12 );</font>
+    date d;
+    d.read();
+    d += 32;
+    today.print();
+    d.next();
+    d.set_year( d.get_year() + 1 );
+    date s( "2017.3.12" );
+    s.add( 15 );
+    ++s;
+    <font color="#2e8b57"><b>const</b></font> date birth_day( 1975, 7, 14 );
+    birth_day.print();
+    <font color="#2e8b57"><b>if</b></font>( s == d )
+    {
+        d++;
+    }
+}
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1535556315 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\primedivisors\primdivisor.cpp
+	"primdivisor.h"
+
+1535556315 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\primedivisors\primdivisor.h
+
+1535556315 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\primedivisors\main.cpp
+	<iostream>
+	"primdivisor.h"
+	"read.hpp"
+
+1535556315 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\primedivisors\read.hpp
+	<iostream>
+	<string>
+

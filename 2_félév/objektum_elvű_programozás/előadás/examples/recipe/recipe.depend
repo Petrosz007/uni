@@ -1,0 +1,84 @@
+# depslib dependency file v1.0
+1536081957 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\recipe\main.cpp
+	<iostream>
+	<vector>
+	<sstream>
+	"../library/counting.hpp"
+	"../library/seqinfileenumerator.hpp"
+	"../library/stringstreamenumerator.hpp"
+	"../library/linsearch.hpp"
+	"../library/arrayenumerator.hpp"
+
+1537807749 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\counting.hpp
+	"summation.hpp"
+
+1539494640 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\summation.hpp
+	"procedure.hpp"
+	<iostream>
+
+1539606556 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+
+1502810830 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995979 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1536082565 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\stringstreamenumerator.hpp
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1539603553 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\linsearch.hpp
+	"procedure.hpp"
+
+1536082476 c:\users\tibi\documents\oktat\oep\eloadasok\programok\10.Újrefelhasznál\library\arrayenumerator.hpp
+	"enumerator.hpp"
+	<vector>
+
+1543046048 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\recipe\main.cpp
+	<iostream>
+	<vector>
+	<sstream>
+	"../library/counting.hpp"
+	"../library/seqinfileenumerator.hpp"
+	"../library/stringstreamenumerator.hpp"
+	"../library/linsearch.hpp"
+	"../library/arrayenumerator.hpp"
+
+1537807750 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\counting.hpp
+	"summation.hpp"
+
+1547540201 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\summation.hpp
+	"procedure.hpp"
+	<iostream>
+
+1547539802 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\procedure.hpp
+	<cstddef>
+	"enumerator.hpp"
+	<iostream>
+
+1502810830 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\enumerator.hpp
+
+1535995980 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\seqinfileenumerator.hpp
+	<fstream>
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1536082566 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\stringstreamenumerator.hpp
+	<typeinfo>
+	<sstream>
+	"enumerator.hpp"
+
+1539603554 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\linsearch.hpp
+	"procedure.hpp"
+
+1542982542 c:\users\gt\documents\oktatás\oep\eloadasok\programok\10.Újrefelhasznál\library\arrayenumerator.hpp
+	"enumerator.hpp"
+	<vector>
+

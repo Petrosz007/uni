@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1535556330 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\matrix\main.cpp
+	<iostream>
+	"read.hpp"
+
+1535556330 c:\users\tibi\documents\oktat\oep\eloadasok\programok\05.egyedi\matrix\read.hpp
+	<iostream>
+	<string>
+

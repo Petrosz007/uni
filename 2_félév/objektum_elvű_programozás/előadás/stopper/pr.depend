@@ -1,0 +1,389 @@
+# depslib dependency file v1.0
+1446671344 source:c:\users\grego\documents\oktat\prog\pr\main.cpp
+	<iostream>
+
+1473169844 source:c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1481200444 c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1497106236 source:c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1476725646 c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1479497684 c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\event.h
+
+1480496362 c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1480161636 c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1479847584 source:c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\stopper.cpp
+	"stopper.h"
+
+1480496626 source:c:\users\grego\documents\oktat\oaf\prezent\programok\11.stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1473169844 source:c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1481200444 c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506245874 source:c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1506245892 c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506246920 c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\event.h
+
+1480496362 c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506246846 c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1506245982 source:c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1506245973 source:c:\users\grego\documents\oktat\oaf\eloadas\oop\programok\stopper\stopper\stopper.cpp
+	"stopper.h"
+
+1473166244 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1481196844 c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506242274 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1506242292 c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506243320 c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\event.h
+
+1512902048 c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506243246 c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1506242373 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\stopper.cpp
+	"stopper.h"
+
+1506242382 source:c:\users\grego\documents\oktat\oop\eloadasok\programok\stopper\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1473169844 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1481200444 c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506245876 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1525469883 c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506246922 c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\event.h
+
+1512905650 c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506246848 c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1506245974 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\stopper.cpp
+	"stopper.h"
+
+1506245984 source:c:\users\grego\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1506245876 source:c:\users\greti\documents\oep\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1525469884 c:\users\greti\documents\oep\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1525976904 c:\users\greti\documents\oep\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506246922 c:\users\greti\documents\oep\stopper\event.h
+
+1512905650 c:\users\greti\documents\oep\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506246848 c:\users\greti\documents\oep\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1525469896 source:c:\users\greti\documents\oep\stopper\stopper.cpp
+	"stopper.h"
+
+1525975459 source:c:\users\greti\documents\oep\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1525976917 source:c:\users\greti\documents\oep\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1525976918 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1525976906 c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506245876 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1526483919 c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506246922 c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\event.h
+
+1526484400 c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506246848 c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1525975460 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1526483883 source:c:\users\gt\documents\oktatás\oep\eloadasok\programok\12.esemény\stopper\stopper.cpp
+	"stopper.h"
+
+1525976918 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1525976906 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1506245876 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1526483920 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506246922 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\event.h
+
+1526484402 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506246848 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1526483884 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\stopper.cpp
+	"stopper.h"
+
+1526544366 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.esemény\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1525973318 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1525973306 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1540995005 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1526480320 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506243322 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\event.h
+
+1526480802 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\timer.h
+	<atomic>
+	<chrono>
+	<thread>
+	"event.h"
+
+1506243248 c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+	<atomic>
+
+1526480284 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\stopper.cpp
+	"stopper.h"
+
+1526540992 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\12.eseménykezelés\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
+1525973318 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\lcdnumber.cpp
+	"lcdnumber.h"
+
+1525973306 c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\lcdnumber.h
+	<iostream>
+	<string>
+	<sstream>
+
+1540995005 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\main.cpp
+	<iostream>
+	"stopper.h"
+
+1543691491 c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\stopper.h
+	<thread>
+	<atomic>
+	"lcdnumber.h"
+	"event.h"
+	"timer.h"
+	"threadsafequeue.h"
+
+1506243322 c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\event.h
+
+1543689921 c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\timer.h
+	<chrono>
+	<thread>
+	"event.h"
+
+1543689912 c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\threadsafequeue.h
+	<queue>
+	<mutex>
+	<condition_variable>
+
+1543691353 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\stopper.cpp
+	"stopper.h"
+
+1526540992 source:c:\users\tibi\documents\oktat\oep\eloadasok\programok\13.eseménykezelés\stopper\timer.cpp
+	"timer.h"
+	"stopper.h"
+	<condition_variable>
+	<mutex>
+
