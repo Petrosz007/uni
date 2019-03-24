@@ -43,12 +43,13 @@
 
 ## -4. Komplementer tulajdonságai
 
+*A fenti bizonyításokhoz hasonlóan, csak fel kell írni kvantorokkal*
 $x$ az alaphalmaz / univerzum:
 
 - $ \overline{\emptyset} = x$
 - $\overline{x} = \emptyset$
 - $A \cup \overline{A} = x$
-- $A \cap \overline{A} = \emptyset$
+- $A \cap \overline{A} = \emptyset​$
 - $\overline{\overline{A}} = A$
 - $A \subseteq B \Leftrightarrow \overline{B} \subseteq \overline{A}$
 - $\overline{A \cap B} = \overline{A} \cup \overline{B}$
@@ -106,11 +107,11 @@ Ha $z,w \in \C$ és $z = a + b i, w = c + d i$, akkor:
 - $|z_1 \cdot z_2 | = |z_1| \cdot |z_2|$
 - $|z| = \overline{z}$
 - Háromszög egyenlőtlenség:
-  $|z_1 + z_2| \le |z_1| + |z_2|​$
+  $|z_1 + z_2| \le |z_1| + |z_2|$
 - $|z \cdot w| = |z| \cdot |w|$
 - Háromszög egyenlőtlenség:
   $|z + w| \le |z| + |w|$ 
-- ??
+- $\arg(z_1 \cdot z_2) = \arg z_1 + \arg z_2$
 - ??
 
 ## 10. Szorzásra vonatkozó Moivre-azonosság
@@ -122,12 +123,4 @@ $z_1 \cdot z_2 = r_1 \cdot r_2(\cos(\varphi_1 + \varphi_2) + i \sin(\varphi_1 + 
 $z_1 \cdot z_2 = r_1(\cos \varphi_1 + i\sin \varphi_1) \cdot r_2(\cos\varphi_2 + i\sin \varphi_2) \Leftrightarrow$
 $r_1 \cdot r_2 ((\cos\varphi_1 \cdot \cos \varphi_2 - \sin \varphi_1 \cdot \sin \varphi_2) + (\cos \varphi_1 \cdot \sin \varphi_2 + \cos \varphi_2 \cdot \sin \varphi_1)i) \Leftrightarrow$
 $\overset{\text{addíciós képletek}}{\Leftrightarrow} r_1 \cdot r_2 (\cos(\varphi_1 + \varphi_2) + i\sin(\varphi_1 + \varphi_2))$
-
-
-
-
-
-
-
-
 
