@@ -110,7 +110,7 @@ Ha $z,w \in \C$ és $z = a + b i, w = c + d i$, akkor:
 - $z \cdot \overline{z} = | z | ^2​$
 - Ha $z \ne 0: \dfrac{1}{z} = \dfrac{\overline{z}}{|z|^2} = \dfrac{a - b i}{a^2 + b^2}​$
 - $|z_1 \cdot z_2 | = |z_1| \cdot |z_2|​$
-- $|z| = \overline{z}$
+- $|z| = |\overline{z}|$
 - Háromszög egyenlőtlenség:
   $|z_1 + z_2| \le |z_1| + |z_2|$
 - $|0| = 0, és z \ne 0$ esetén $|z| > 0$
