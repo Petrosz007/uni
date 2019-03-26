@@ -1,5 +1,8 @@
 ## Milyen állítást ismer a monoton sorozatok határértékéről?
 
+Ha divergens, akkor hatérértéke $+/- \infty$
+Ha $(a_n)$ konvergens, akkor határértéke $\lim(a_n)$
+
 ## Hogyan szól a Bolzano-Weierstrass-féle kiválasztási tétel?
 
 Minden korlátos sorozatnak van konvergens részsorozata.
