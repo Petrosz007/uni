@@ -41,7 +41,7 @@
 - $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
   *az előző alapján*
 
-## -4. Komplementer tulajdonságai
+## 4. Komplementer tulajdonságai
 
 *A fenti bizonyításokhoz hasonlóan, csak fel kell írni kvantorokkal*
 $x$ az alaphalmaz / univerzum:
@@ -74,9 +74,13 @@ $x$ az alaphalmaz / univerzum:
 
   $S^{-1} \circ R^{-1}$
 
-## ---6. Állítás, amely kimondja, hogy függvények kompozíciója is függvény
+## 6. Állítás, amely kimondja, hogy függvények kompozíciója is függvény
 
+Ha $f$ és $g$ függvény, akkor $g \circ f$ is függvény.
 
+**Bizonyítás:**
+Legyen $(x, y) \in g \circ f, (x, y') \in g \circ f: \\ \exists z : (x, z) \in f, (z, y) \in g, \exists z' : (x, z') \in f, (z', y') \in g$
+Mivel $f$ függvény: $z = z'$, mivel $g$ függvény: $y = y'$  
 
 ## 7. Állítás, amely kimondja, hogy injektív függvények kompozíciója is injektív
 
@@ -96,23 +100,22 @@ Ha $z, w \in \C$ és $z = a + bi, w = c + di$ akkor $\dfrac{z}{w} = \dfrac{ac + 
 $\dfrac{z}{w} \Leftrightarrow \dfrac{a + bi}{c + di} \Leftrightarrow \dfrac{a + bi}{c + di} \cdot \dfrac{c - di}{c - di} \Leftrightarrow \dfrac{(a + bi) \cdot (c - di)}{c^2 - d^2 \cdot i^2} \Leftrightarrow \dfrac{ac - adi + bci - adi^2}{c^2 + d^2} \Leftrightarrow$
 $\dfrac{ac + bd + i(bc - ad)}{c^2 + d^2} \Leftrightarrow \dfrac{ac + bd}{c^2 + d^2} + \dfrac{bc - ad}{c^2 + d^2}i​$
 
-## ---9. A konjugálás és abszolút érték tulajdonságai
+## 9. A konjugálás és abszolút érték tulajdonságai
 
 Ha $z,w \in \C$ és $z = a + b i, w = c + d i$, akkor:
 
-- $z \cdot \overline{z} = | z | ^2$
-- $\dfrac{1}{z} = \dfrac{\overline{z}}{|z|^2} = \dfrac{a - b i}{a^2 + b^2}$
-- $\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}​$
+- $\overline{\overline{z}} = z​$
 - $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}$
-- $|z_1 \cdot z_2 | = |z_1| \cdot |z_2|$
+- $\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}​$
+- $z \cdot \overline{z} = | z | ^2​$
+- Ha $z \ne 0: \dfrac{1}{z} = \dfrac{\overline{z}}{|z|^2} = \dfrac{a - b i}{a^2 + b^2}​$
+- $|z_1 \cdot z_2 | = |z_1| \cdot |z_2|​$
 - $|z| = \overline{z}$
 - Háromszög egyenlőtlenség:
   $|z_1 + z_2| \le |z_1| + |z_2|$
-- $|z \cdot w| = |z| \cdot |w|$
-- Háromszög egyenlőtlenség:
-  $|z + w| \le |z| + |w|$ 
-- $\arg(z_1 \cdot z_2) = \arg z_1 + \arg z_2$
-- ??
+- $|0| = 0, és z \ne 0$ esetén $|z| > 0$
+- $z + \overline{z} = 2 \cdot Re(z)$
+- $z - \overline{z} = 2 \cdot Im(z)$
 
 ## 10. Szorzásra vonatkozó Moivre-azonosság
 
@@ -120,7 +123,7 @@ Ha $r_1, r_2 \ne 0​$ és $z_1 = r_1(\cos \varphi_1 + i\sin \varphi_1), z_2 = r
 $z_1 \cdot z_2 = r_1 \cdot r_2(\cos(\varphi_1 + \varphi_2) + i \sin(\varphi_1 + \varphi_2))​$
 
 **Bizonyítás:**
-$z_1 \cdot z_2 = r_1(\cos \varphi_1 + i\sin \varphi_1) \cdot r_2(\cos\varphi_2 + i\sin \varphi_2) \Leftrightarrow$
-$r_1 \cdot r_2 ((\cos\varphi_1 \cdot \cos \varphi_2 - \sin \varphi_1 \cdot \sin \varphi_2) + (\cos \varphi_1 \cdot \sin \varphi_2 + \cos \varphi_2 \cdot \sin \varphi_1)i) \Leftrightarrow$
-$\overset{\text{addíciós képletek}}{\Leftrightarrow} r_1 \cdot r_2 (\cos(\varphi_1 + \varphi_2) + i\sin(\varphi_1 + \varphi_2))$
+$z_1 \cdot z_2 = r_1(\cos \varphi_1 + i\sin \varphi_1) \cdot r_2(\cos\varphi_2 + i\sin \varphi_2) \Leftrightarrow​$
+$r_1 \cdot r_2 ((\cos\varphi_1 \cdot \cos \varphi_2 - \sin \varphi_1 \cdot \sin \varphi_2) + (\cos \varphi_1 \cdot \sin \varphi_2 + \cos \varphi_2 \cdot \sin \varphi_1)i) \Leftrightarrow​$
+$\overset{\text{addíciós képletek}}{\Leftrightarrow} r_1 \cdot r_2 (\cos(\varphi_1 + \varphi_2) + i\sin(\varphi_1 + \varphi_2))​$
 
