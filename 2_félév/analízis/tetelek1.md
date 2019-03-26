@@ -194,4 +194,11 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
    $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr$
    $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \le a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty$
 
-   
+## 12. A Cauchy-féle konvergencia kritérium sorozatokra
+
+## 13. A geometriai sorozat határértékére vonatkozó tétel
+
+## 14. Az $(\root{n}\of{a})$ és az $(\root{n}\of{n})$ sorozat határértéke
+
+## 15. Pozitív szám $m$-edik gyökének előállítása rekurzív módon megadott sorozatok határértékével
+
