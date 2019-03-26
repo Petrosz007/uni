@@ -141,9 +141,57 @@ Legyen $(a_n), (b_n)$ nullsorozat. Ekkor:
 ## 8. Konvergens sorozatok szorzatára vonatkozó tétel
 
 **Tétel:**
-Legyen $(a_n), (b_n)$ konvergens és $A := \lim(a_n), B := \lim(b_n)$. Ekkor:
-$(a_n \cdot b_n)$ konvergens és $\lim(a_n \cdot b_n) = A \cdot B$
+Legyen $(a_n), (b_n)​$ konvergens és $A := \lim(a_n), B := \lim(b_n)​$. Ekkor:
+$(a_n \cdot b_n)​$ konvergens és $\lim(a_n \cdot b_n) = A \cdot B​$
+
+**Bizonyítás:**
+$|a_n \cdot b_n - A \cdot B| = |a_nb_n - A \cdot b_n + A \cdot b_n - AB| \le \\ \le|a_n b_n - A b_n| + |A b_n - AB| = \underset{nullsor}{\underset{nullsor}{\underset{konvergens\\korlátos}{|b_n|} \cdot \underset{nullsor}{|a_n - A|}} + \underset{nullsor}{\underset{korlátos}{|A|} \cdot \underset{nullsor}{|b_n - B|}}}$
+
+## 9. Konvergens sorozatok hányadosára vonatkozó tétel
+
+**Tétel:**
+Legyen $(a_n), (b_n)​$ konvergens, $b_n \ne 0​$ és $A := \lim(a_n), B := \lim(b_n)​$ és $B \ne 0​$. Ekkor:
+$\left(\dfrac{a_n}{b_n}\right)​$ konvergens és $\lim\left(\dfrac{a_n}{b_n}\right) = \dfrac{A}{B}​$
+
+**Bizonyítás:**
+$\left|\dfrac{a_n}{b_n} - \dfrac{A}{B}\right| = \left|\dfrac{a_nB - Ab_n}{b_nB}\right| = \dfrac{|a_nB - AB + AB - Ab_n|}{|b_nB} \le \\ \le \underset{nullsor}{\underset{korlátos}{\dfrac{|B|}{|b_n||B|}} \cdot \underset{nullsor}{|a_n - A|} + \underset{korlátos}{\dfrac{|A|}{|b_n||B|}} \cdot \underset{nullsor}{|b_n - B|}}$
+$\Rarr  \left(\dfrac{a_n}{b_n} - \dfrac{A}{B}\right) nullsor \Rarr \lim\left(\dfrac{a_n}{b_n}\right) = \dfrac{A}{B}$
+
+## 10. A közrefogási elv
+
+**Tétel:**
+Tfh: $\exists N \in \N, \forall n \ge N : a_n \le b_n \le c_n$
+Ha $\lim a_n = \lim c_n$, akkor $\lim b_n = \lim a_n$
+
+**Bizonyítás:**
+$\lim a_n = A \in \overset{\_\_}{\R}$
+
+1. $A \in \R \Rarr \forall \epsilon > 0, \exists n_1, \forall n \ge n_1: A - \epsilon < a_n < A + \epsilon$
+   	     $\Rarr \forall \epsilon > 0, \exists n_2, \forall n \ge n_2: A - \epsilon < c_n < A + \epsilon$
+
+   Legyen $n_0 = \max(n_1, n_2, N) \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n_0 : A - \epsilon < a_n \le b_n \le c_n < A + \epsilon$
+   $\Rarr \lim b_n = A$
+
+2. $A = \infty : lim a_n = \infty \Rarr \forall P \in \R, \exists n_1, \forall n \ge n_1 : a_n > P$
+   De $b_n \ge a_n, \forall n \ge N \Rarr \\ \forall P \in \R, \exists n_0 = \max(n_1, N), \forall n \ge n_0 : b_n \ge a_n \ge P$
+   $\Rarr \lim b_n = \infty$
+
+## 11. Monoton növő sorozatok határértéke (véges és végtelen eset)
+
+**Tétel:**
+
+1. Ha $(a_n)$ monoton nő és korlátos, akkor konvergens és $\lim a_n = \sup\{a_n : n \in \N \}$
+2. Ha $(a_n)$ mon nő és nem korlátos, akkor ​$\lim a_n = \infty$
 
 **Bizonyítás:**
 
+1. $(a_n)$ korlátos $\Rarr  \exists \xi = \sup\{a_n : n \in \N \} < \infty$
+   $\Rarr a_n \le \xi, \forall n$ és $\forall \epsilon > 0, \exists n_0 : \xi - \epsilon < a_{n_0} \le \xi \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n_0 : \xi -  \epsilon < a_{n_0} \le a_n \le \xi$
+   										$= | a - \xi| < \epsilon$
+   $\Rarr \lim a_n = \xi​$
 
+   $(a_n)$ nem korlátos $\Rarr (a_n)$ felülről nem korlátos
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr$
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \le a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty$
+
+   
