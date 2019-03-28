@@ -271,3 +271,22 @@ Tfh: $0 < a < 1$, akkor $\dfrac{1}{a} > 1 \Rarr \root{n}\of{\frac{1}{a}} \rarr 1
 
 ## 15. Pozitív szám $m$-edik gyökének előállítása rekurzív módon megadott sorozatok határértékével
 
+**Tétel:**
+Legyen $2 \le m \in \N$, Ekkor:
+
+1. $\forall A > 0, \exists! \alpha > 0 : \alpha^n = A$
+2. $\forall a_0 > 0, a_{n+1} := \dfrac{1}{m}\left(\dfrac{A}{a_n^{m-1}} + (m-1)a_n\right)\ \ (n \in \N)​$
+
+Az így definiált sorozat konvergens és $\lim(a_n) = \alpha$
+
+**Bizonyítás:**
+$a_n > 0\ \ (n \in \N)​$, (ld:: Teljes indukció)
+$\Rarr (a_n)​$ alulról korlátos, ill.:
+$\dfrac{m}{a_{n+1}} = \left(\dfrac{\dfrac{A}{a_n^{m-1}}+(m-1)a_n}{m}\right) \overset{\text{számtani-mértani}}{\ge} \dfrac{A}{a_n^{m-1}}\cdot \underset{(m-1) db}{a_n \cdot a_n \cdot ... \cdot a_n} = A\ \ (n \in \N)​$
+Azaz: $a_1 \ge A, a_2 \ge A, a_3 \ge A, ...​$
+Mutassuk meg, hogy az $(a_{n+1})​$ elshiftelt sorozat monoton fogyó, azaz $\forall n \in \N : \dfrac{a_{n+2}}{a_{n+1}} \le 1​$
+$\dfrac{a_{n+2}}{a_{n+1}} = \dfrac{1}{a_{n+1}} \cdot \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m-1}} + (m-1)a_{n+1}\right) = \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m}} + (m-1)\right) =​$
+
+$= \dfrac{1}{m}\left(\dfrac{A - a_{n+1}^m}{a_{n+1}^{m}} + m\right) = \dfrac{\overset{\le 0}{A - a_{n+1}^m}}{\underset{\le 0}{m \cdot a_{n+1}^{m}}} + 1 \Rarr \le 1$, monoton fogyó
+$\Rarr (a_{n+1})$ korlátos és monoton fogyó $\Rarr$ konvergens $\Rarr \exists \alpha \in \R : \lim(a_{n+1}) = \alpha$
+
