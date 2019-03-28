@@ -6,10 +6,10 @@
 Legyen $\emptyset \ne A \subset \R$, felülről korlátos. Ekkor $A$-nak van legkisebb felső korlátja, azaz $\exists \min B$
 
 **Bizonyítás:**
-Világos, hogy  $\forall a \in A, \forall b \in B : a \le K$
-$\Rarr $ (Teljességi axióma) $\exists \xi \in \R : a \le \xi \le K\ (a \in A, K \in B)$
-Vagyis, $\forall a \in A : a \le \xi \rarr \xi$ felső korlátja $A$-nak $\Rarr \xi \in B$
-Ugyanakkor: $\forall K \in B : \xi \le K \Rarr \xi$ a legkisebb felső korlát
+Világos, hogy  $\forall a \in A, \forall b \in B : a \le K​$
+$\Rarr​$ (Teljességi axióma) $\exists \xi \in \R : a \le \xi \le K\ (a \in A, K \in B)​$
+Vagyis, $\forall a \in A : a \le \xi \rarr \xi​$ felső korlátja $A​$-nak $\Rarr \xi \in B​$
+Ugyanakkor: $\forall K \in B : \xi \le K \Rarr \xi​$ a legkisebb felső korlát
 $\Rarr \xi = \min B​$
 
 ## 2. Az Archimedes-tétel
@@ -20,21 +20,28 @@ $\forall a \gt 0, \forall b \in \R, \exists n \in N : a \cdot n \gt b$
 **Bizonyítás:**
 
 1. Ha $b \le 0$, akkor világos, hogy $b \le 0 \lt a = a \cdot 1$, ha $n := 1$
+
      $\Rarr n = 1$ jó választás
 
 2. Feltehető, hogy $b \gt 0$
+
    Áll: $\forall b \gt 0, \forall a \gt 0, \exists n \in N: a \cdot n \gt b$
-   Indirekt: $\exists b \gt 0, \exists a \gt 0, \forall n \in N : a \cdot n \le b$
+
+   Indirekt: $\exists b \gt 0, \exists a \gt 0, \forall n \in N : a \cdot n \le b​$
 
    $A := \{a \cdot n \in \R : n \in \N\}$
+
    $\Rarr b$ egy felső korlátja $A$-nak $\Rarr \xi = sup A$
+
    $\Rarr \xi - a$ már nem felső korlát, azaz $\exists n_0 \in N : a \cdot n_0 \gt \xi$
+
    $\Rarr \exists n_0 \in \N : a \cdot n_0 + a \gt \xi \Leftrightarrow a (n_0 + 1) \gt \xi$
 
    Mivel $n_0 \in \N$ és $\N$ induktív $\Rarr n_0 + 1 \in \N$
+
    $\Rarr a(n_0 + 1) \in A \Rarr \xi$ nem felső korlát
 
-   Ellentmondás $\Rightarrow\Leftarrow$
+   Ellentmondás $\Rightarrow\Leftarrow​$
 
 ## 3. A Cantor-féle közösrész-tétel
 
@@ -269,6 +276,15 @@ Tfh: $a > 1 \Rarr \forall n \in \N, n \ge 2 : \root{n}\of{a} \gt 1$
 Tfh: $0 < a < 1$, akkor $\dfrac{1}{a} > 1 \Rarr \root{n}\of{\frac{1}{a}} \rarr 1$
 	$\Rarr \lim(\root{n}\of{a}) = \lim(\dfrac{1}{\root{n}\of{\frac{1}{a}}}) \rarr \dfrac{1}{1} = 1 \checkmark$
 
+**Tétel:**
+$\lim(\root{n}\of{n}) = 1$
+
+**Bizonyítás:**
+$\forall n \in \N, n \ge 2: \root{n}\of {n} > 1 \Rarr \root{n}\of{n} = 1 + h_n, \text{ahol} h_n > 0, (n \in \N)$
+$\Rarr n = (1 + h_n)^n \overset{binomiális}{=} \underset{j = 0}{\sum}{n\choose j} h_n^j \overset{j\ge2}{\ge} {n \choose 2} h_n^2 = \dfrac{n(n-1)}{2}\cdot h_n^2$
+$\Rarr 0 < h_n \le \root{}\of{\dfrac{2}{n-1}}\ \ (2 \le n \in \N)$
+$\Rarr \lim(h_n) = 0 \Rarr \lim(\root{n}\of{n}) = \lim(1 + h_n) = 1 \checkmark$
+
 ## 15. Pozitív szám $m$-edik gyökének előállítása rekurzív módon megadott sorozatok határértékével
 
 **Tétel:**
@@ -280,12 +296,12 @@ Legyen $2 \le m \in \N$, Ekkor:
 Az így definiált sorozat konvergens és $\lim(a_n) = \alpha$
 
 **Bizonyítás:**
-$a_n > 0\ \ (n \in \N)​$, (ld:: Teljes indukció)
-$\Rarr (a_n)​$ alulról korlátos, ill.:
-$\dfrac{m}{a_{n+1}} = \left(\dfrac{\dfrac{A}{a_n^{m-1}}+(m-1)a_n}{m}\right) \overset{\text{számtani-mértani}}{\ge} \dfrac{A}{a_n^{m-1}}\cdot \underset{(m-1) db}{a_n \cdot a_n \cdot ... \cdot a_n} = A\ \ (n \in \N)​$
-Azaz: $a_1 \ge A, a_2 \ge A, a_3 \ge A, ...​$
-Mutassuk meg, hogy az $(a_{n+1})​$ elshiftelt sorozat monoton fogyó, azaz $\forall n \in \N : \dfrac{a_{n+2}}{a_{n+1}} \le 1​$
-$\dfrac{a_{n+2}}{a_{n+1}} = \dfrac{1}{a_{n+1}} \cdot \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m-1}} + (m-1)a_{n+1}\right) = \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m}} + (m-1)\right) =​$
+$a_n > 0\ \ (n \in \N)$, (ld:: Teljes indukció)
+$\Rarr (a_n)$ alulról korlátos, ill.:
+$a_{n+1} = \left(\dfrac{\dfrac{A}{a_n^{m-1}}+(m-1)a_n}{m}\right)^m \overset{\text{számtani-mértani}}{\ge} \dfrac{A}{a_n^{m-1}}\cdot \underset{(m-1) db}{a_n \cdot a_n \cdot ... \cdot a_n} = A\ \ (n \in \N)$
+Azaz: $a_1 \ge A, a_2 \ge A, a_3 \ge A, ...$
+Mutassuk meg, hogy az $(a_{n+1})$ elshiftelt sorozat monoton fogyó, azaz $\forall n \in \N : \dfrac{a_{n+2}}{a_{n+1}} \le 1$
+$\dfrac{a_{n+2}}{a_{n+1}} = \dfrac{1}{a_{n+1}} \cdot \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m-1}} + (m-1)a_{n+1}\right) = \dfrac{1}{m}\left(\dfrac{A}{a_{n+1}^{m}} + (m-1)\right) =$
 
 $= \dfrac{1}{m}\left(\dfrac{A - a_{n+1}^m}{a_{n+1}^{m}} + m\right) = \dfrac{\overset{\le 0}{A - a_{n+1}^m}}{\underset{\le 0}{m \cdot a_{n+1}^{m}}} + 1 \Rarr \le 1$, monoton fogyó
 $\Rarr (a_{n+1})$ korlátos és monoton fogyó $\Rarr$ konvergens $\Rarr \exists \alpha \in \R : \lim(a_{n+1}) = \alpha$
