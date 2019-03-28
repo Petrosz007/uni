@@ -196,12 +196,68 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
 
 ## 12. A Cauchy-féle konvergencia kritérium sorozatokra
 
+ **Tétel:**
+$(a_n)$ konvergens $\Leftrightarrow$ $(a_n)$ Cauchy
+
+**Bizonyítás:**
+$(\Rarr)$ bizonyítása:
+Tfh: $(a_n)$ konvergens. Megmutatjuk, hogy $(a_n)$ Cauchy 
+$A := \lim(a_n),\ \ \forall \epsilon > 0, \exists N \in \N, \forall n \in \N, n \ge \N : |a_n - A| < \epsilon$
+	Legyen $m, n \in \N, m, n \ge N $ Ekkor:
+		$| a_n - a_m| = |a_n - A + A - a_m| \le \underset{\rarr \epsilon}{|a_n - A|} + \underset{\rarr \epsilon}{|a_m - A|} < 2 \epsilon$
+	Tehát $\forall \epsilon > 0, \exists N \in \N, \forall n, m \in \N, m, n \ge \N : |a_n - a_m| < 2\epsilon$
+		$\Rarr (a_n)$ Cauchy
+
+$(\Larr) bizonyítása:$
+Tfh: $(a_n)$ Cauchy. Megmutatjuk, hogy $(a_n)$ korlátos.
+	Mivel $(a_n)$ Cauchy, ezért $\exists N \in \N, \forall n, m \in \N, m, n \ge N : |a_n - a_m | < 1$
+	$\Rarr \forall n \in \N, n \ge N : |a_n| = |a_n - a_N + a_N| \le \underset{= a_n - a_m}{|a_n - a_N|} + |a_N| < 1 + |a_N|$
+	$\Rarr \forall n \in \N, n \ge N : | a_n| \le K := \max\{|a_0|, |a_1|, ..., |a_{N-1}|, |a_N| + 1\}$
+	$\Rarr (a_n)$ korlátos
+	$\Rarr$ (ld.: Bolzano - Weierstrass): $\exists(a_{n_k})$ konvergens részsorozat és 
+													$A := \lim(a_{n_k})$
+Megmutatjuk, hogy $(a_{n})$ is konvergens és $\lim(a_n) = A$
+	$|a_n - A| = |a_n - a_{n_k} + a_{n_k} - A| \le |a_n - a_{n_k}| + |a_{n_k} - A|$
+Mivel $(a_n)$ Cauchy : $\exists N \in \N, \forall n, n_k \in \N, n, n_k \ge N_0 : |a_n - a_{n_k}| < \epsilon$
+Mivel $\lim(a_{n_k}) = A$ ezért $\forall \epsilon > 0, \exists N_1 \in \N, \forall n \in \N, n \ge N_1: | a_{n_k} - A| < \epsilon$
+
+Tehát: $\forall \epsilon > 0, \exists N := \max\{N_0, N_1\} \in \N, \forall n \in \N, n \ge N: |a_n - A | < 2 \cdot \epsilon$
+	$\Rarr (a_n)$ konvergens és $\lim(a_n) = A $
+
 ## 13. A geometriai sorozat határértékére vonatkozó tétel
+
+**Tétel:**
+Legyen $q \in \R$. Ekkor:
+$lim(q^n) = \left\{\begin{array}{ll}
++\infty, & ha\ q > 1 \\
+1, & ha\ q = 1 \\
+0, & ha\ |q| < 1 \\
+\nexists, & ha\ q \le -1 \end{array}\right\}$
+
+**Bizonyítás:**
+Ha $q = 1,\ q = 0,\ q = -1$ akkor triviális.
+Tfh: $q > 1$. Ekkor $\exists h \in \R, h > 0 : q = 1 + h$
+	$\Rarr q^n = (1 + h)^n \ge 1 + nh \ge n\cdot h \rarr + \infty$
+	
+Tfh: $q \in (-1, 1)\text{\\} \{0\}, \text{azaz } 0 < |q| < 1$
+	$\Rarr \dfrac{1}{|q|} > 1 \Rarr \dfrac{1}{|q|} = 1 + h \Rarr \left(\dfrac{1}{|q|}\right)^n = (1 + h)^n \ge$
+	$\ge 1 + nh \ge n \cdot h \Rarr 0 \le |q|^n \le \dfrac{1}{nh} \rarr 1$
+	$\Rarr \lim(|q|^n) = 0$ és $\lim(q^n) = 0$
+
+Tfh: $q < -1​$, akkor $q^2 > 1​$. Ekkor:
+
+- $q^{2n} = (q^2)^n \rarr + \infty$
+
+- $q^{2n+1} = q(q^2)^n \rarr -\infty$
+
+
+  $\Rarr \not\exists \lim(q^n)$
+
 
 ## 14. Az $(\root{n}\of{a})$ és az $(\root{n}\of{n})$ sorozat határértéke
 
 **Tétel:**
-$\forall a \in \R, a > 0, : \lim(\root{n}\of{a}) = 1$
+$\forall a \in \R, a > 0, : \lim(\root{n}\of{a}) = 1​$
 
 **Bizonyítás:**
 Ha $a = 1 \checkmark$
