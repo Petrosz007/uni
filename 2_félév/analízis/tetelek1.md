@@ -10,7 +10,7 @@ Világos, hogy  $\forall a \in A, \forall b \in B : a \le K$
 $\Rarr $ (Teljességi axióma) $\exists \xi \in \R : a \le \xi \le K\ (a \in A, K \in B)$
 Vagyis, $\forall a \in A : a \le \xi \rarr \xi$ felső korlátja $A$-nak $\Rarr \xi \in B$
 Ugyanakkor: $\forall K \in B : \xi \le K \Rarr \xi$ a legkisebb felső korlát
-$\Rarr \xi = \min B$
+$\Rarr \xi = \min B​$
 
 ## 2. Az Archimedes-tétel
 
@@ -145,7 +145,7 @@ Legyen $(a_n), (b_n)​$ konvergens és $A := \lim(a_n), B := \lim(b_n)​$. Ekk
 $(a_n \cdot b_n)​$ konvergens és $\lim(a_n \cdot b_n) = A \cdot B​$
 
 **Bizonyítás:**
-$|a_n \cdot b_n - A \cdot B| = |a_nb_n - A \cdot b_n + A \cdot b_n - AB| \le \\ \le|a_n b_n - A b_n| + |A b_n - AB| = \underset{nullsor}{\underset{nullsor}{\underset{konvergens\\korlátos}{|b_n|} \cdot \underset{nullsor}{|a_n - A|}} + \underset{nullsor}{\underset{korlátos}{|A|} \cdot \underset{nullsor}{|b_n - B|}}}$
+$|a_n \cdot b_n - A \cdot B| = |a_nb_n - A \cdot b_n + A \cdot b_n - AB| \le \\ \le|a_n b_n - A b_n| + |A b_n - AB| = \underset{nullsor}{\underset{nullsor}{\underset{konvergens\\korlátos}{|b_n|} \cdot \underset{nullsor}{|a_n - A|}} + \underset{nullsor}{\underset{korlátos}{|A|} \cdot \underset{nullsor}{|b_n - B|}}}​$
 
 ## 9. Konvergens sorozatok hányadosára vonatkozó tétel
 
@@ -190,15 +190,28 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
    										$= | a - \xi| < \epsilon$
    $\Rarr \lim a_n = \xi​$
 
-   $(a_n)$ nem korlátos $\Rarr (a_n)$ felülről nem korlátos
-   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr$
-   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \le a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty$
+   $(a_n)​$ nem korlátos $\Rarr (a_n)​$ felülről nem korlátos
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr​$
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \le a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty​$
 
 ## 12. A Cauchy-féle konvergencia kritérium sorozatokra
 
 ## 13. A geometriai sorozat határértékére vonatkozó tétel
 
 ## 14. Az $(\root{n}\of{a})$ és az $(\root{n}\of{n})$ sorozat határértéke
+
+**Tétel:**
+$\forall a \in \R, a > 0, : \lim(\root{n}\of{a}) = 1$
+
+**Bizonyítás:**
+Ha $a = 1 \checkmark$
+Tfh: $a > 1 \Rarr \forall n \in \N, n \ge 2 : \root{n}\of{a} \gt 1$
+	$\Rarr \exists h_n > 0 : \root{n}\of{a} = 1 + h_n$
+	$\Rarr a = (1 + h_n)^n \ge 1 + nh_n \Rarr 0 < h_n \le \dfrac{a - 1}{n} \rarr 0$
+	$\Rarr \lim(h_n) = 0$
+	$\Rarr  \lim(\root{n}\of{a}) = \lim(1 + h_n) = \lim(1) + \underset{nullsor}{\lim(h_n)} = 1 \checkmark$
+Tfh: $0 < a < 1$, akkor $\dfrac{1}{a} > 1 \Rarr \root{n}\of{\frac{1}{a}} \rarr 1$
+	$\Rarr \lim(\root{n}\of{a}) = \lim(\dfrac{1}{\root{n}\of{\frac{1}{a}}}) \rarr \dfrac{1}{1} = 1 \checkmark$
 
 ## 15. Pozitív szám $m$-edik gyökének előállítása rekurzív módon megadott sorozatok határértékével
 
