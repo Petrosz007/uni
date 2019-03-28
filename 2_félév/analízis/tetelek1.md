@@ -174,7 +174,7 @@ Ha $\lim a_n = \lim c_n$, akkor $\lim b_n = \lim a_n$
 $\lim a_n = A \in \overset{\_\_}{\R}$
 
 1. $A \in \R \Rarr \forall \epsilon > 0, \exists n_1, \forall n \ge n_1: A - \epsilon < a_n < A + \epsilon$
-   	     $\Rarr \forall \epsilon > 0, \exists n_2, \forall n \ge n_2: A - \epsilon < c_n < A + \epsilon$
+       $\Rarr \forall \epsilon > 0, \exists n_2, \forall n \ge n_2: A - \epsilon < c_n < A + \epsilon$
 
    Legyen $n_0 = \max(n_1, n_2, N) \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n_0 : A - \epsilon < a_n \le b_n \le c_n < A + \epsilon$
    $\Rarr \lim b_n = A$
@@ -182,6 +182,9 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
 2. $A = \infty : lim a_n = \infty \Rarr \forall P \in \R, \exists n_1, \forall n \ge n_1 : a_n > P$
    De $b_n \ge a_n, \forall n \ge N \Rarr \\ \forall P \in \R, \exists n_0 = \max(n_1, N), \forall n \ge n_0 : b_n \ge a_n \ge P$
    $\Rarr \lim b_n = \infty$
+
+3. $A = - \infty$
+   *Ugyan úgy mint a $+ \infty$, csak $p$-vel és $a_n \ge P$ helyett $c_n \le p$*
 
 ## 11. Monoton növő sorozatok határértéke (véges és végtelen eset)
 
@@ -290,7 +293,7 @@ $\Rarr \lim(h_n) = 0 \Rarr \lim(\root{n}\of{n}) = \lim(1 + h_n) = 1 \checkmark$
 **Tétel:**
 Legyen $2 \le m \in \N$, Ekkor:
 
-1. $\forall A > 0, \exists! \alpha > 0 : \alpha^n = A$
+1. $\forall A > 0, \exists! \alpha > 0 : \alpha^n = A​$
 2. $\forall a_0 > 0, a_{n+1} := \dfrac{1}{m}\left(\dfrac{A}{a_n^{m-1}} + (m-1)a_n\right)\ \ (n \in \N)​$
 
 Az így definiált sorozat konvergens és $\lim(a_n) = \alpha$
