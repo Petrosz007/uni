@@ -6,7 +6,7 @@
 Legyen $\emptyset \ne A \subset \R$, felülről korlátos. Ekkor $A$-nak van legkisebb felső korlátja, azaz $\exists \min B$
 
 **Bizonyítás:**
-Világos, hogy  $\forall a \in A, \forall b \in B : a \le K​$
+Világos, hogy  $\forall a \in A, \forall K \in B : a \le K​$
 $\Rarr​$ (Teljességi axióma) $\exists \xi \in \R : a \le \xi \le K\ (a \in A, K \in B)​$
 Vagyis, $\forall a \in A : a \le \xi \rarr \xi​$ felső korlátja $A​$-nak $\Rarr \xi \in B​$
 Ugyanakkor: $\forall K \in B : \xi \le K \Rarr \xi​$ a legkisebb felső korlát
@@ -33,11 +33,11 @@ $\forall a \gt 0, \forall b \in \R, \exists n \in N : a \cdot n \gt b$
 
    $\Rarr b$ egy felső korlátja $A$-nak $\Rarr \xi = sup A$
 
-   $\Rarr \xi - a$ már nem felső korlát, azaz $\exists n_0 \in N : a \cdot n_0 \gt \xi$
+   $\Rarr \xi - a$ már nem felső korlát, azaz $\exists n_0 \in N : a \cdot n_0 \gt \xi - a $
 
-   $\Rarr \exists n_0 \in \N : a \cdot n_0 + a \gt \xi \Leftrightarrow a (n_0 + 1) \gt \xi$
+   $\Rarr \exists n_0 \in \N : a \cdot n_0 + a \gt \xi \Leftrightarrow a (n_0 + 1) \gt \xi​$
 
-   Mivel $n_0 \in \N$ és $\N$ induktív $\Rarr n_0 + 1 \in \N$
+   Mivel $n_0 \in \N​$ és $\N​$ induktív $\Rarr n_0 + 1 \in \N​$
 
    $\Rarr a(n_0 + 1) \in A \Rarr \xi$ nem felső korlát
 
@@ -49,15 +49,15 @@ $\forall a \gt 0, \forall b \in \R, \exists n \in N : a \cdot n \gt b$
 Legyen $[a_n, b_n]$ korlátos és zárt intervallum, melyre:
 $[a_{n+1}, b_{n+1}] \subset [a_n, b_n]\ (n \in \N)$
 
-Ekkor: $\underset{n\in \N}{\cap} [q_n, b_n] \ne \emptyset​$
+Ekkor: $\underset{n\in \N}{\cap} [a_n, b_n] \ne \emptyset​$
 
 **Bizonyítás:**
 $A := \{a_n \in \R : n \in \N\}$
 $B := \{b_n \in \R : n \in \N\}$
 
-Ekkor: $\forall n, m \in \N: a_n \le b_m$
-Ha $n \le m : q_n \le a_m \le b_m$
-Ha $m \lt n : a_n \le b_n \le b_m$
+Ekkor: $\forall n, m \in \N: a_n \le b_m​$
+Ha $n \le m : a_n \le a_m \le b_m​$
+Ha $m \lt n : a_n \le b_n \le b_m​$
 
 $\Rarr$ (Teljességi axióma) $\exists \xi \in \R, \forall n, m \in \N : a_n \le \xi \le b_m$
 Spec: $n = m$, ekkor:
@@ -74,12 +74,12 @@ Minden sorozatnak van monoton részsorozata
 
 1. A sorozatnak végtelen sok csúcsa van
 
-   $\exists a_{n_0}$ csúcs $\Rarr \forall n \ge n_0 : a_{n_0} \ge a_n$
-   $\Rarr  \exists n_1 \gt n_0$ és $a_{n_1} $ csúcs $\Rarr a_{n_0} \ge q_{n_1}$ 
-   $\Rarr  \forall n \ge n_1 : a_{n_1} \ge a_n$
-   $\Rarr  \exists n_2 \gt n_1$ és $a_{n_2} $ csúcs $\Rarr a_{n_1} \ge q_{n_2}$
+   $\exists a_{n_0}​$ csúcs $\Rarr \forall n \ge n_0 : a_{n_0} \ge a_n​$
+   $\Rarr  \exists n_1 \gt n_0​$ és $a_{n_1} ​$ csúcs $\Rarr a_{n_0} \ge a_{n_1}​$ 
+   $\Rarr  \forall n \ge n_1 : a_{n_1} \ge a_n​$
+   $\Rarr  \exists n_2 \gt n_1​$ és $a_{n_2} ​$ csúcs $\Rarr a_{n_1} \ge a_{n_2}​$
 
-   $\Rarr \exists a_{n_0} \ge a_{n_1} \ge a_{n_2} \ge ...$
+   $\Rarr \exists a_{n_0} \ge a_{n_1} \ge a_{n_2} \ge ...​$
 
 2. A sorozatnak véges sok csúcsa van
 
@@ -87,7 +87,7 @@ Minden sorozatnak van monoton részsorozata
    Legyen $n_0 = N \Rarr a_{n_0}$ nem csúcs $\Rarr$
    $\Rarr \exists n_1 \ge n_0 : a_{n_0} \lt a_{n_1} \Rarr a_{n_1}$ nem csúcs $\Rarr$
 
-   $\Rarr n_2 \ge n_1 : a_{n_1} \lt a_{n_2} ... $
+   $\Rarr \exists n_2 \ge n_1 : a_{n_1} \lt a_{n_2} ... ​$
 
    $\exists a_{n_0} \lt a_{n_1} \lt a_{n_2} \lt ...$
 
@@ -106,9 +106,9 @@ Legyen $n_0 = \max(n_1, n_2) :$
 								$|a_n - A_2 | < \epsilon$
 
 Legyen $\epsilon < \dfrac{|A_1 - A_2|}{2} \Rarr$
-$|A_1 - A_2| = |A_1 - a_n + a_n - A_2| \le |A_1 - a_n| + |A_n - A_2| < 2\epsilon < |A_1 - A_2|$
+$|A_1 - A_2| = |A_1 - a_n + a_n - A_2| \le |A_1 - a_n| + |a_n - A_2| < 2\epsilon < |A_1 - A_2|$
 
-Ellentmondás, $|A_1 - A_2| \not\lt |A_1 - A_2 |$
+Ellentmondás, $|A_1 - A_2| \not\lt |A_1 - A_2 |​$
 
 ## 6. A konvergencia és a korlátosság kapcsolata
 
@@ -118,8 +118,8 @@ Ha $a_n$ konvergens, akkor korlátos.
 **Bizonyítás:**
 Legyen $\lim a_n = A \in \R$
 $\Rarr \epsilon = 1$-re is $\exists n_1 \in \N, \forall n \ge n_1 : |a_n - A| < 1$
-$\Rarr |a_n| = |a_n - A + A| \le |a_n - A| + |A| \lt 1 + |A|,\ \ \forall n \in \N$
-$\Rarr |a_n|  \le max(|a_0|, |a_1|, |a_2|,...,|a_{n_0-1}|, |a_{n_0}|, a + |A|), \ \ (n \in \N)$
+$\Rarr |a_n| = |a_n - A + A| \le |a_n - A| + |A| \lt 1 + |A|,\ \ \forall n \ge n_0$
+$\Rarr |a_n|  \le max(|a_0|, |a_1|, |a_2|,...,|a_{n_0-1}|, 1 + |A|), \ \ (n \in \N)$
 
 ## 7. Műveletek nullsorozatokkal
 
@@ -132,18 +132,18 @@ Legyen $(a_n), (b_n)$ nullsorozat. Ekkor:
 
 **Bizonyítás:**
 
-1. $(a_n) nullsor \Leftrightarrow \forall \frac{\epsilon}{2} > 0, \exists n_1 \in \N, \forall n \ge n_1 : |a_n| < \frac{\epsilon}{2}$
-   $(b_n) nullsor \Leftrightarrow \forall \frac{\epsilon}{2} > 0, \exists n_2 \in \N, \forall n \ge n_2 : |b_n| < \frac{\epsilon}{2}$
+1. $(a_n) nullsor \Leftrightarrow \forall \frac{\epsilon}{2} > 0, \exists n_1 \in \N, \forall n \ge n_1 : |a_n| < \frac{\epsilon}{2}​$
+   $(b_n) nullsor \Leftrightarrow \forall \frac{\epsilon}{2} > 0, \exists n_2 \in \N, \forall n \ge n_2 : |b_n| < \frac{\epsilon}{2}​$
 
    $\Rarr \forall \epsilon > 0, \exists n_0 = max(n_1, n_2), \forall n \ge n_0 : \\ |a_n + b_n| \le |a_n| + |b_n| < \frac{\epsilon}{2}+ \frac{\epsilon}{2} < \epsilon $
    $\Rarr (a_n + b_n)$ nullsor
 
 2. $(c_n)$ korlátos $\Rarr \exists K \in \R, \forall n : |c_n| \le K$
-   $(a_n)$ nullsor $\Rarr \forall \epsilon > 0, \exists n_0 \in \N, \forall n \in \N, n \ge n_0 : |a_n| < \frac{\epsilon}{K} $
+   $(a_n)$ nullsor $\Rarr \forall \frac{\epsilon}{K} > 0, \exists n_0 \in \N, \forall n \in \N, n \ge n_0 : |a_n| < \frac{\epsilon}{K} $
    $\Rarr \forall \epsilon > 0, \exists n_0 \in \N, \forall n \in \N, n \ge n_0 : \\ |a_n \cdot c_n| < \frac{\epsilon}{K} \cdot K = \epsilon$
 
 3. $(b_n)$ nullsor $\Rarr (b_n)$ konvergens $\Rarr (b_n)$ korlátos
-   $(a_n)$ nullsor $\overset{2. miatt}{\Rarr} (a_n \cdot c_n)$ nullsor
+   $(a_n)$ nullsor $\overset{2. miatt}{\Rarr} (a_n \cdot b_n)$ nullsor
 
 ## 8. Konvergens sorozatok szorzatára vonatkozó tétel
 
@@ -161,8 +161,8 @@ Legyen $(a_n), (b_n)​$ konvergens, $b_n \ne 0​$ és $A := \lim(a_n), B := \l
 $\left(\dfrac{a_n}{b_n}\right)​$ konvergens és $\lim\left(\dfrac{a_n}{b_n}\right) = \dfrac{A}{B}​$
 
 **Bizonyítás:**
-$\left|\dfrac{a_n}{b_n} - \dfrac{A}{B}\right| = \left|\dfrac{a_nB - Ab_n}{b_nB}\right| = \dfrac{|a_nB - AB + AB - Ab_n|}{|b_nB} \le \\ \le \underset{nullsor}{\underset{korlátos}{\dfrac{|B|}{|b_n||B|}} \cdot \underset{nullsor}{|a_n - A|} + \underset{korlátos}{\dfrac{|A|}{|b_n||B|}} \cdot \underset{nullsor}{|b_n - B|}}$
-$\Rarr  \left(\dfrac{a_n}{b_n} - \dfrac{A}{B}\right) nullsor \Rarr \lim\left(\dfrac{a_n}{b_n}\right) = \dfrac{A}{B}$
+$\left|\dfrac{a_n}{b_n} - \dfrac{A}{B}\right| = \left|\dfrac{a_nB - Ab_n}{b_nB}\right| = \dfrac{|a_nB - AB + AB - Ab_n|}{|b_nB|} \le \\ \le \underset{nullsor}{\underset{korlátos}{\dfrac{|B|}{|b_n||B|}} \cdot \underset{nullsor}{|a_n - A|} + \underset{korlátos}{\dfrac{|A|}{|b_n||B|}} \cdot \underset{nullsor}{|b_n - B|}}​$
+$\Rarr  \left(\dfrac{a_n}{b_n} - \dfrac{A}{B}\right) nullsor \Rarr \lim\left(\dfrac{a_n}{b_n}\right) = \dfrac{A}{B}​$
 
 ## 10. A közrefogási elv
 
@@ -171,7 +171,7 @@ Tfh: $\exists N \in \N, \forall n \ge N : a_n \le b_n \le c_n$
 Ha $\lim a_n = \lim c_n$, akkor $\lim b_n = \lim a_n$
 
 **Bizonyítás:**
-$\lim a_n = A \in \overset{\_\_}{\R}$
+$\lim a_n = A \in \overset{\_\_}{\R}​$
 
 1. $A \in \R \Rarr \forall \epsilon > 0, \exists n_1, \forall n \ge n_1: A - \epsilon < a_n < A + \epsilon$
        $\Rarr \forall \epsilon > 0, \exists n_2, \forall n \ge n_2: A - \epsilon < c_n < A + \epsilon$
@@ -179,7 +179,7 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
    Legyen $n_0 = \max(n_1, n_2, N) \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n_0 : A - \epsilon < a_n \le b_n \le c_n < A + \epsilon$
    $\Rarr \lim b_n = A$
 
-2. $A = \infty : lim a_n = \infty \Rarr \forall P \in \R, \exists n_1, \forall n \ge n_1 : a_n > P$
+2. $A = \infty : \lim a_n = \infty \Rarr \forall P \in \R, \exists n_1, \forall n \ge n_1 : a_n > P$
    De $b_n \ge a_n, \forall n \ge N \Rarr \\ \forall P \in \R, \exists n_0 = \max(n_1, N), \forall n \ge n_0 : b_n \ge a_n \ge P$
    $\Rarr \lim b_n = \infty$
 
@@ -196,13 +196,12 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
 **Bizonyítás:**
 
 1. $(a_n)$ korlátos $\Rarr  \exists \xi = \sup\{a_n : n \in \N \} < \infty$
-   $\Rarr a_n \le \xi, \forall n$ és $\forall \epsilon > 0, \exists n_0 : \xi - \epsilon < a_{n_0} \le \xi \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n_0 : \xi -  \epsilon < a_{n_0} \le a_n \le \xi$
-   										$= | a - \xi| < \epsilon$
-   $\Rarr \lim a_n = \xi​$
-
-   $(a_n)$ nem korlátos $\Rarr (a_n)$ felülről nem korlátos
+   $\Rarr a_n \le \xi, \forall n$ és $\forall \epsilon > 0, \exists n_0 : \xi - \epsilon < a_{n_0} \le \xi \Rarr \\ \Rarr \forall \epsilon > 0, \exists n_0, \forall n \ge n : \xi -  \epsilon < a_{n_0} \le a_n \le \xi$
+   										$= | a_n - \xi| < \epsilon$
+   $\Rarr \lim a_n = \xi$
+2. $(a_n)$ nem korlátos $\Rarr (a_n)$ felülről nem korlátos
    $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr$
-   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \ge a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty​$
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \ge a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty$
 
 ## 12. A Cauchy-féle konvergencia kritérium sorozatokra
 
@@ -212,24 +211,25 @@ $(a_n)$ konvergens $\Leftrightarrow$ $(a_n)$ Cauchy
 **Bizonyítás:**
 $(\Rarr)$ bizonyítása:
 Tfh: $(a_n)$ konvergens. Megmutatjuk, hogy $(a_n)$ Cauchy 
-$A := \lim(a_n),\ \ \forall \epsilon > 0, \exists N \in \N, \forall n \in \N, n \ge \N : |a_n - A| < \epsilon$
+$A := \lim(a_n),\ \ \forall \epsilon > 0, \exists N \in \N, \forall n \in \N, n \ge N : |a_n - A| < \epsilon$
 	Legyen $m, n \in \N, m, n \ge N $ Ekkor:
 		$| a_n - a_m| = |a_n - A + A - a_m| \le \underset{\rarr \epsilon}{|a_n - A|} + \underset{\rarr \epsilon}{|a_m - A|} < 2 \epsilon$
 	Tehát $\forall \epsilon > 0, \exists N \in \N, \forall n, m \in \N, m, n \ge \N : |a_n - a_m| < 2\epsilon$
 		$\Rarr (a_n)$ Cauchy
 
-$(\Larr) bizonyítása:$
-Tfh: $(a_n)$ Cauchy. Megmutatjuk, hogy $(a_n)$ korlátos.
-	Mivel $(a_n)$ Cauchy, ezért $\exists N \in \N, \forall n, m \in \N, m, n \ge N : |a_n - a_m | < 1$
-	$\Rarr \forall n \in \N, n \ge N : |a_n| = |a_n - a_N + a_N| \le \underset{= a_n - a_m}{|a_n - a_N|} + |a_N| < 1 + |a_N|$
-	$\Rarr \forall n \in \N, n \ge N : | a_n| \le K := \max\{|a_0|, |a_1|, ..., |a_{N-1}|, |a_N| + 1\}$
-	$\Rarr (a_n)$ korlátos
-	$\Rarr$ (ld.: Bolzano - Weierstrass): $\exists(a_{n_k})$ konvergens részsorozat és 
-													$A := \lim(a_{n_k})$
-Megmutatjuk, hogy $(a_{n})$ is konvergens és $\lim(a_n) = A$
-	$|a_n - A| = |a_n - a_{n_k} + a_{n_k} - A| \le |a_n - a_{n_k}| + |a_{n_k} - A|$
-Mivel $(a_n)$ Cauchy : $\exists N_0 \in \N, \forall n, n_k \in \N, n, n_k \ge N_0 : |a_n - a_{n_k}| < \epsilon$
-Mivel $\lim(a_{n_k}) = A$ ezért $\forall \epsilon > 0, \exists N_1 \in \N, \forall n_k \in \N, n_k \ge N_1: | a_{n_k} - A| < \epsilon$
+$(\Larr) bizonyítása:​$
+Tfh: $(a_n)​$ Cauchy. Megmutatjuk, hogy $(a_n)​$ korlátos.
+	Mivel $(a_n)​$ Cauchy, ezértmár $\epsilon = 1​$-re
+		$\exists N \in \N, \forall n, m \in \N, m, n \ge N : |a_n - a_m | < 1​$
+	$\Rarr \forall n \in \N, n \ge N : |a_n| = |a_n - a_N + a_N| \le \underset{= a_n - a_m}{|a_n - a_N|} + |a_N| < 1 + |a_N|​$
+	$\Rarr \forall n \in \N, n \ge N : | a_n| \le K := \max\{|a_0|, |a_1|, ..., |a_{N-1}|, |a_N| + 1\}​$
+	$\Rarr (a_n)​$ korlátos
+	$\Rarr​$ (ld.: Bolzano - Weierstrass): $\exists(a_{n_k})​$ konvergens részsorozat és 
+													$A := \lim(a_{n_k})​$
+Megmutatjuk, hogy $(a_{n})​$ is konvergens és $\lim(a_n) = A​$
+	$|a_n - A| = |a_n - a_{n_k} + a_{n_k} - A| \le |a_n - a_{n_k}| + |a_{n_k} - A|​$
+Mivel $(a_n)​$ Cauchy : $\exists N_0 \in \N, \forall n, n_k \in \N, n, n_k \ge N_0 : |a_n - a_{n_k}| < \epsilon​$
+Mivel $\lim(a_{n_k}) = A​$ ezért $\forall \epsilon > 0, \exists N_1 \in \N, \forall n_k \in \N, n_k \ge N_1: | a_{n_k} - A| < \epsilon​$
 
 Tehát: $\forall \epsilon > 0, \exists N := \max\{N_0, N_1\} \in \N, \forall n \in \N, n \ge N: |a_n - A | < 2 \cdot \epsilon​$
 	$\Rarr (a_n)​$ konvergens és $\lim(a_n) = A ​$
@@ -251,7 +251,7 @@ Tfh: $q > 1$. Ekkor $\exists h \in \R, h > 0 : q = 1 + h$
 	
 Tfh: $q \in (-1, 1)\text{\\} \{0\}, \text{azaz } 0 < |q| < 1$
 	$\Rarr \dfrac{1}{|q|} > 1 \Rarr \dfrac{1}{|q|} = 1 + h \Rarr \left(\dfrac{1}{|q|}\right)^n = (1 + h)^n \ge$
-	$\ge 1 + nh \ge n \cdot h \Rarr 0 \le |q|^n \le \dfrac{1}{nh} \rarr 1$
+	$\ge 1 + nh \ge n \cdot h \Rarr 0 \le |q|^n \le \dfrac{1}{nh} \rarr0 $
 	$\Rarr \lim(|q|^n) = 0$ és $\lim(q^n) = 0$
 
 Tfh: $q < -1​$, akkor $q^2 > 1​$. Ekkor:
