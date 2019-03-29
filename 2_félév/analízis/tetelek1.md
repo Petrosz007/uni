@@ -200,9 +200,9 @@ $\lim a_n = A \in \overset{\_\_}{\R}$
    										$= | a - \xi| < \epsilon$
    $\Rarr \lim a_n = \xi​$
 
-   $(a_n)​$ nem korlátos $\Rarr (a_n)​$ felülről nem korlátos
-   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr​$
-   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \le a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty​$
+   $(a_n)$ nem korlátos $\Rarr (a_n)$ felülről nem korlátos
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n > P \Rarr$
+   $\Rarr \forall P \in \R, \exists n_0, \forall n \ge n_0: a_n \ge a_{n_0}> P \Rarr \\ \Rarr \lim a_n = \infty​$
 
 ## 12. A Cauchy-féle konvergencia kritérium sorozatokra
 
@@ -228,11 +228,11 @@ Tfh: $(a_n)$ Cauchy. Megmutatjuk, hogy $(a_n)$ korlátos.
 													$A := \lim(a_{n_k})$
 Megmutatjuk, hogy $(a_{n})$ is konvergens és $\lim(a_n) = A$
 	$|a_n - A| = |a_n - a_{n_k} + a_{n_k} - A| \le |a_n - a_{n_k}| + |a_{n_k} - A|$
-Mivel $(a_n)$ Cauchy : $\exists N \in \N, \forall n, n_k \in \N, n, n_k \ge N_0 : |a_n - a_{n_k}| < \epsilon$
-Mivel $\lim(a_{n_k}) = A$ ezért $\forall \epsilon > 0, \exists N_1 \in \N, \forall n \in \N, n \ge N_1: | a_{n_k} - A| < \epsilon$
+Mivel $(a_n)$ Cauchy : $\exists N_0 \in \N, \forall n, n_k \in \N, n, n_k \ge N_0 : |a_n - a_{n_k}| < \epsilon$
+Mivel $\lim(a_{n_k}) = A$ ezért $\forall \epsilon > 0, \exists N_1 \in \N, \forall n_k \in \N, n_k \ge N_1: | a_{n_k} - A| < \epsilon$
 
-Tehát: $\forall \epsilon > 0, \exists N := \max\{N_0, N_1\} \in \N, \forall n \in \N, n \ge N: |a_n - A | < 2 \cdot \epsilon$
-	$\Rarr (a_n)$ konvergens és $\lim(a_n) = A $
+Tehát: $\forall \epsilon > 0, \exists N := \max\{N_0, N_1\} \in \N, \forall n \in \N, n \ge N: |a_n - A | < 2 \cdot \epsilon​$
+	$\Rarr (a_n)​$ konvergens és $\lim(a_n) = A ​$
 
 ## 13. A geometriai sorozat határértékére vonatkozó tétel
 
