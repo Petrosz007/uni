@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+ <html lang="hu">
+	<head>
+		<meta charset="utf-8">
+		<title>A legjobb internetes/webes témájú filmek - Kezdőlap</title>
+		<link href="css/alap.css" rel="stylesheet" type="text/css">
+		<link rel="icon" href="media/favicon.ico">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+	
+<header>
+	<nav id="tartalomraugras">
+		<h2 class="rejtett">Ugrás az oldalon belül</h2>
+		<a href="#tartalom">Ugrás a tartalomra</a>
+	</nav>
+	<h1>A legjobb &lt;internetes/webes&gt; témájú filmek</h1>
+	<nav id="fomenu">
+		<h2 class="rejtett">Főmenü</h2>
+		<b>Kezdőlap</b> <a href="urlap.html" title="Ugrás az űrlapra, ahol saját kedvenc filmet lehet beküldeni">Új film beküldése</a></nav>
+<div id="bevezeto" class="hasab">
+<article>
+<h2>Bevezető</h2>
+<p><cite>Krasznahorkai László</cite> a következőt írta: <q>Az internet (...) az eddigi legbiztosabb út az örökkévalóságba.</q>. 
+<br>Hogy ez igaz-e, mindenki döntse el maga, miután megnézte a listámban szereplő filmeket.<br><strong>Figyelem!</strong> <em>A lista erősen szubjektív.</em></p>
+</article>
+	<nav id="oldalmenu">
+	<h2 class="rejtett">Oldalmenü</h2>
+
+		<ol>
+			<li><a href="#kozossegihalo" accesskey="1"><span lang="en">Social Network</span> - A közösségi háló </a></li>
+			<li><a href="#ano" accesskey="2">A nő</a></li>
+			<li><a href="#temegen" accesskey="3">Te meg én és minden ismerősünk </a></li>
+			<li><a href="#deepweb" accesskey="4">Deep Web</a></li>
+		</ol>
+	</nav>	
+</div>	
+</header>	
+<main id="tartalom">
+<article>
+<h2 id="kozossegihalo"><cite><span lang="en">Social Network</span> - A közösségi háló </cite></h2>
+	<aside>
+	<h2>Adatlap</h2>
+		<table>
+		<caption>
+		<strong>A film adatai</strong>
+		  <details>
+		   <summary>Súgó</summary>
+		   <p>A táblázatban a filmre vonatkozó adatokat (bemutató, angol cím, imdb pontszám tüntetjük fel.)</p>
+		  </details>
+		</caption>
+		<tr>
+			<th scope="row">Bemutató</th><td> <time datetime="2010-10-01">2010. október 1.</time></td>
+		</tr>
+		<tr>
+			<th scope="row">Angol cím</th><td lang="en"><cite>The Social Network</cite></td>
+		</tr>
+		<tr>
+			<th scope="row"><abbr title="Internet Movie Database">IMDb</abbr> értékelés</th><td><meter max="10" min="0" value="7.7"> </meter> 7.7/10</td>
+		</tr>
+		</table>
+	</aside>
+<p>
+<cite>Mark Zuckerberg</cite> jobban ért a számítógépekhez, mint a csajozáshoz. A Harvard egyetem diákja ideje nagy részét a gépe előtt tölti. 2003-ban új ötlettel áll elő: egy olyan <b>oldalt indít </b>a világhálón, ahol a haverok <b>közösségi életet</b> élhetnek. 
+
+A kollégiumi szobából indult Facebook valóságos <b>kommunikációs forradalmat</b> hozott, és alapjaiban változtatta meg a világot, az emberi kapcsolatokat - és megváltoztatta az alkotóját is. Hat esztendővel és ötszázmillió ismerőssel később Zuckerberg a világ legfiatalabb milliárdosa. 
+
+Egykor békés, nyugodt életről álmodott, a siker azonban felkavarta mind a szakmai, mind a magánéletét. 
+</p>
+<p><i>A Social Network - A közösségi háló a korszellemet grabancon ragadó, aktuális, de időtálló munka, ami nem csak, hogy sokkal jobb móka, mint két óra facebookozás, de biztos, hogy évek-évtizedek távlatából is élvezhető lesz.</i></p>
+<figure>
+	<img src="media/TheSocialNetwork.jpg" alt="Jelenet a Social Network - A közösségi háló című filmből">
+	<figcaption>Jelenet a <cite>Social Network - A közösségi háló</cite> című filmből</figcaption>
+</figure>
+
+<section>
+<h3>Forráskód a filmben</h3>
+<p>A filmben nagy figyelmet fordítottak arra is, hogy a megjelenő forráskódok a témához kapcsolódjanak. Íme egy példa:</p>
+
+<figure>
+<pre>
+<code>
+#!/usr/bin/perl
+$wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php 
+         --post-data='action=Search'";
+
+print "$wget\n";
+$page = ` $wget`;
+while ($page =~ m/compactshow\.php\?student_id=([0-9]+)/g) {
+	$id=$1
+	$wget = "wget -q0- http://leverett.harvard.edu/facebook/compactshow.php?student_id=$id";
+	print "$wget\n";
+}
+</code>
+</pre>
+<figcaption>A filmben szereplő forráskód részlete</figcaption>
+
+</figure>
+</section>
+<section>
+	<h3>Filmzene</h3>
+<p lang="en">A filmzenéből <cite>Trent Reznor and Atticus Ross: A Familiar Taste</cite> című száma a kedvencem.</p>
+ <audio controls>
+ <source src="media/socialnetwork.mp3" type="audio/mpeg">
+ <!-- Régebbi böngészőben történő lejátszást támogató fallback ide kerülne -->
+ <p>A böngészője nem támogatja a hangállomány HTML5 szerinti beágyazott lejátszását.</p>
+ <p><a href="media/socialnetwork.mp3">A socialnetwork állományt letöltheti mp3 formátumban.</a></p>
+</audio>
+
+</section>
+</article>
+<hr>
+<article>
+<h2 id="ano"><cite>A nő</cite> </h2>
+	<aside>
+	<h2>Adatlap</h2>
+		<table>
+		<caption>
+		<strong>A film adatai</strong>
+		  <details>
+		   <summary>Súgó</summary>
+		   <p>A táblázatban a filmre vonatkozó adatokat (bemutató, angol cím, imdb pontszám tüntetjük fel.)</p>
+		  </details>
+		</caption>
+		<tr>
+			<th scope="row">Bemutató</th><td> <time datetime="2014-01-10">2014. január 10.</time></td>
+		</tr>
+		<tr>
+			<th scope="row">Angol cím</th><td lang="en"><cite>Her</cite></td>
+		</tr>
+		<tr>
+			<th scope="row"><abbr title="Internet Movie Database">IMDb</abbr> értékelés</th><td><meter max="10" min="0" value="8"> </meter> 8/10</td>
+		</tr>
+		</table>
+	</aside>
+<p>
+Los Angelesben, a közeli jövőben él Theodore Twombly író, aki abból él, hogy <b>megható, személyes leveleket ír</b> mások számára. A férfi rossz passzban van, próbálja kiheverni, hogy tönkrement egy hosszú kapcsolata. A számítógépein dolgozik és játszik. 
+Egy nap unalmában letölt egy új, <b>intelligens operációs programot</b>. Így találkozik Samantha-val, pontosabban a hangjával, amely valósággal megigézi. Kiderül, hogy Samantha okos és éleslátó, érzékeny és meglepően vicces. A kezdeti barátságuk egyre jobban elmélyül.
+</p>
+<p><i>Spike Jonze A nővel gyakorlatilag megalkotta a tökéletes szerelmesfilmet, amelyből egyszerre derül ki, hogy ez az egész felhajtás mekkora baromság, és hogy nem érdemes élni nélküle.</i></p>
+
+<section>
+	<h3>A film előzetese</h3>
+		<video controls poster="media/her.jpg" width="750">
+			<source src="media/her_elozetes.mp4" type="video/mp4">
+			 <p>A böngészője nem támogatja a videóállomány beágyazott lejátszását.</p>
+ <p><a href="media/her_elozetes.mp4">A her_elozetes.mp4 állományt letöltheti mp4 formátumban.</a></p>
+		</video>
+</section>
+
+</article>
+<hr>
+<article>
+<h2 id="temegen"><cite>Te meg én és minden ismerősünk</cite>  </h2>
+	<aside>
+	<h2>Adatlap</h2>
+		<table>
+		<caption>
+		<strong>A film adatai</strong>
+		  <details>
+		   <summary>Súgó</summary>
+		   <p>A táblázatban a filmre vonatkozó adatokat (bemutató, angol cím, imdb pontszám tüntetjük fel.)</p>
+		  </details>
+		</caption>
+		<tr>
+			<th scope="row">Bemutató</th><td> <time datetime="2005-08-05">2005. augusztus 5.</time></td>
+		</tr>
+		<tr>
+			<th scope="row">Angol cím</th><td lang="en"><cite>Me And You And Everyone We Know</cite></td>
+		</tr>
+		<tr>
+			<th scope="row"><abbr title="Internet Movie Database">IMDb</abbr> értékelés</th><td><meter max="10" min="0" value="7.4"> </meter> 7,4/10</td>
+		</tr>
+		</table>
+	</aside>
+<p>
+Miranda July, multimédia-performer és zenész éleslátó és rendkívül szórakoztató filmet készített olyan <b>magányos emberekről</b>, akik megpróbálnak <b>kapcsolatot teremteni</b> környezetükkel. Azokat a külső és belső gátakat mutatja meg, amik magányos, modern világunkban gyakran meghiúsítják az egymással való kapcsolatteremtést. July szerint <q>a történet elérhetetlen vágyakat tápláló gyerekekről és felnőttekről szól, akik olyan korban élnek, mikor a felnőtté válás digitális folyamat és a valóság esztétikai döntésünk függvénye</q>. </p>
+<p>
+<i>A  Miranda July korábbi műveiben felvetett témák folytatásának tekinthető Te meg én és minden ismerősünk leleplezi az emberek titkolt érzéseit, vágyait és motivációit. Az eredmény egy gyönyörű, egyedi film, amely észrevétlenül ejti rabul az ember szívét. </i>
+</p>
+<figure>
+	<img src="media/meandyou.jpg" alt="Jelenet a Te meg én és minden ismerősünk című filmből">
+	<figcaption>Jelenet a <cite>"Te meg én és minden ismerősünk"</cite> című filmből</figcaption>
+</figure>
+</article>
+<hr>
+<article>
+<h2 id="deepweb" lang="en"><cite>Deep web</cite></h2>
+	<aside>
+	<h2>Adatlap</h2>
+		<table>
+		<caption>
+		<strong>A film adatai</strong>
+		  <details>
+		   <summary>Súgó</summary>
+		   <p>A táblázatban a filmre vonatkozó adatokat (bemutató, angol cím, imdb pontszám tüntetjük fel.)</p>
+		  </details>
+		</caption>
+		<tr>
+			<th scope="row">Bemutató</th><td> <time datetime="2015-11-21">2015. november 21.</time></td>
+		</tr>
+		<tr>
+			<th scope="row">Angol cím</th><td lang="en"><cite>Deep web</cite></td>
+		</tr>
+		<tr>
+			<th scope="row"><abbr title="Internet Movie Database">IMDb</abbr> értékelés</th><td><meter max="10" min="0" value="7.1"> </meter> 7,1/10</td>
+		</tr>
+		</table>
+	</aside>
+<p>
+Az internet nem csak hírportálokból, közösségi oldalakból és cuki állatos videókból áll. A keresőmotoroktól elzárva ott húzódik a felszín alatt az úgynevezett <dfn>deep web</dfn>, vagy más néven dark web, a <b>világháló sötét oldala</b>. Anonimitásba burkolózott felhasználók szörföznek az internet sötét hullámain, ahol burjánzik a drog- és fegyverkereskedelem, és mindenre van kereslet, ami <b>illegális</b>. </p>
+<p><i>Alex Winter dokumentumfilmje mélyen elmerül a deep web titkaiban. Kiderül, hogy az igazságszolgáltatásnak nem csupán az utcán kell üldöznie a bűnözőket, hanem a virtális világban nyüzsgő arctalan törvényszegőkkel is kénytelen megküzdeni. Mi, átlagfelhasználók nem is sejtjük, micsoda üzelmek folynak az internet rejtett bugyraiban. Egészen addig, amíg meg nem nézzük a Deep Web dokumentumfilmet.</i></p>
+<figure>
+	<img src="media/deepweb.jpg" alt="Jelenet a Deep web című filmből">
+	<figcaption>Jelenet a <cite>Deep Web</cite> című filmből</figcaption>
+	</figure>
+<section>
+<h3>Mi is az a deep web?</h3>
+<p>Az alábbi angol nyelvű prezentáció bemutatja, hogy mi is az a deep web</p>
+
+<div class="slideshare16x9">
+<iframe src="http://www.slideshare.net/slideshow/embed_code/key/19oozb2TPXXn14" width="595" height="485"  allowfullscreen> </iframe> 
+</div>
+</section>
+</article>
+<hr>
+<article>
+<h2>Források</h2>
+<ul>
+	<li><a href="http://www.techtimes.com/articles/10259/20140711/the-best-movies-about-the-internet.htm" target="_blank">Techtimes.com</a></li> 
+	<li>
+	<a href="http://librarius.hu/2015/07/14/a-deep-web-megmutatja-a-virtualis-pokol-legmelyet/" target="_blank">Librarius</a></li> 
+</ul>
+</article>
+
+</main>
+<hr>
+<footer>
+<address>
+<p>Készítette: Gipsz Jakab <br>(<a href="mailto:gipszjakab@mailinator.com">gipszjakab@mailinator.com</a>)<br>
+1117 Budapest, Nevenincs u. 17</p></address>
+</footer>
+
+	</body>
+</html>

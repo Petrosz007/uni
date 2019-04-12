@@ -1,0 +1,42 @@
+/* nagybetûs stílus */
+
+@import url('alapstilus.css');
+/* importáljuk az alapstílust, és felüldefiniáljuk a megfelelõ értékeket az új szabályokkal */
+body {
+	font-size:2em;		/* kétszeres betûméret legyen az alapbeállítás*/
+	
+}
+
+a#nagybetu {display: none;}		/* a Negybetûs változat ne jelenjen meg, hiszen most azt látjuk */
+a#normalbetu {display: block;}	/* A Normál változat jelenjen meg a menüben*/
+
+header, main, footer {
+	width:90%;			/* megnöveljük a blokkok szélességét 90%-ra*/
+	max-width:1200px;	/* a max szélesség 1200px legyen*/
+	}
+	
+nav#gyengenlato { width:400px;}		/* felülírjuk a navigációs elem szélességét, hogy kiférjen a nagyobb szöveg*/
+
+nav#gyengenlato span {  /* beállítjuk, hogy melyik ikon látszódjon*/
+	background-image:url("../kepek/ikonkeszlet.png");
+	background-position:-330px 0px;
+	
+		
+}
+
+article#kirakas   {
+	column-count: 1;				/* csak 1 hasáb jelenjen meg*/
+	-webkit-column-count: 1;
+    -moz-column-count: 1;
+			}
+			
+article#leiras  aside {
+	float:none;				/* ne legyen lebegtetve az elem */
+	width:90%;				/* 90%-os szélesség legyen */
+	margin:0;				/* margó 0*/
+}
+article#valtozatai figure {
+	position:static;		/* statikus pozícionálás az abszolút helyett. Így egymás alá kerülnek a képek.*/
+	margin-left:100px;		/* bal margó beállítása*/
+	width:300px;			/* szélesség beállítása */
+	}
