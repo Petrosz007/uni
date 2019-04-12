@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>~/work/egyetem/lang/prny2/src/pod/dstackmain1.cpp.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e5e5e5" text="#000000">
+<pre>
+<font color="#0000ff">// dstack kliens program</font>
+
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&lt;iostream&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;dstack1.h&quot;</font></span>
+
+<font color="#a52a2a"><b>using</b></font> <font color="#2e8b57"><b>namespace</b></font> std;
+
+<font color="#2e8b57"><b>int</b></font> main()
+{
+    dstack d1(<span style="background-color: #f2f2f2"><font color="#ff00ff">10</font></span>);
+    d1.push(<span style="background-color: #f2f2f2"><font color="#ff00ff">3.14</font></span>);    d1.push(<span style="background-color: #f2f2f2"><font color="#ff00ff">4.14</font></span>);    d1.push(<span style="background-color: #f2f2f2"><font color="#ff00ff">5.14</font></span>);
+    cout &lt;&lt; d1 &lt;&lt; endl;
+    dstack d2(d1); <font color="#0000ff">// ugyanaz, mint: dstack d2 = d1;</font>
+
+    <font color="#a52a2a"><b>while</b></font> ( ! d1.is_empty() )
+        cout &lt;&lt; <span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;pop: &quot;</font></span> &lt;&lt; d1.pop() &lt;&lt; endl;
+
+    cout &lt;&lt; d1 &lt;&lt; endl;
+    cout &lt;&lt; d2 &lt;&lt; endl;
+    <font color="#a52a2a"><b>return</b></font> <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span>;
+}
+
+<font color="#0000ff">/*</font><font color="#0000ff"> output:</font>
+
+<font color="#0000ff">[ </font><span style="background-color: #f2f2f2"><font color="#ff00ff">3.14</font></span><font color="#0000ff">, </font><span style="background-color: #f2f2f2"><font color="#ff00ff">4.14</font></span><font color="#0000ff">, </font><span style="background-color: #f2f2f2"><font color="#ff00ff">5.14</font></span><font color="#0000ff"> ]</font>
+<font color="#0000ff">pop: </font><span style="background-color: #f2f2f2"><font color="#ff00ff">5.14</font></span>
+<font color="#0000ff">pop: </font><span style="background-color: #f2f2f2"><font color="#ff00ff">4.14</font></span>
+<font color="#0000ff">pop: </font><span style="background-color: #f2f2f2"><font color="#ff00ff">3.14</font></span>
+<font color="#0000ff">[  ]</font>
+<font color="#0000ff">[ </font><span style="background-color: #f2f2f2"><font color="#ff00ff">3.14</font></span><font color="#0000ff">, </font><span style="background-color: #f2f2f2"><font color="#ff00ff">4.14</font></span><font color="#0000ff">, </font><span style="background-color: #f2f2f2"><font color="#ff00ff">5.14</font></span><font color="#0000ff"> ]</font>
+
+<font color="#0000ff">*/</font>
+
+</pre>
+</body>
+</html>

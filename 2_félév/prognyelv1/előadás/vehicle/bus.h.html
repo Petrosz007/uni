@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>~/work/egyetem/langs/vehicle/bus.h.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e0e4e0" text="#000000">
+<pre>
+<font color="#a020f0">#ifndef BUS_H</font>
+<font color="#a020f0">#define BUS_H</font>
+
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;string&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;vehicle.h&quot;</font></span>
+
+<font color="#288850"><b>class</b></font> bus : <font color="#a02828"><b>public</b></font> vehicle
+{
+<font color="#a02828"><b>public</b></font>:
+  bus( <font color="#288850"><b>const</b></font> std::string&amp; s, <font color="#288850"><b>int</b></font> per ) : vehicle( s ), persons( per ) { }
+
+  <font color="#0000f8">/*</font><font color="#0000f8"> virtual */</font> <font color="#288850"><b>bool</b></font> mv() { <font color="#a02828"><b>return</b></font> persons &lt; <span style="background-color: #f0f0f0"><font color="#f800f8">50</font></span>; }
+<font color="#a02828"><b>private</b></font>:
+  <font color="#288850"><b>int</b></font> persons;
+};
+
+<font color="#a020f0">#endif</font> <font color="#0000f8">/*</font><font color="#0000f8"> BUS_H */</font>
+</pre>
+</body>
+</html>

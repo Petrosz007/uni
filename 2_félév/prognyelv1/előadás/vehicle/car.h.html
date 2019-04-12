@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>~/work/egyetem/langs/vehicle/car.h.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e0e4e0" text="#000000">
+<pre>
+<font color="#a020f0">#ifndef CAR_H</font>
+<font color="#a020f0">#define CAR_H</font>
+
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;string&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;vehicle.h&quot;</font></span>
+
+<font color="#288850"><b>struct</b></font> car : vehicle
+{
+  car( <font color="#288850"><b>const</b></font> std::string&amp; s ) : vehicle( s ) { }
+  <font color="#0000f8">// virtual ~car() {}  automatikusan létrejön</font>
+
+  <font color="#0000f8">/*</font><font color="#0000f8"> virtual */</font> <font color="#288850"><b>bool</b></font> mv() { <font color="#a02828"><b>return</b></font> get_reg().length() &gt; <span style="background-color: #f0f0f0"><font color="#f800f8">5</font></span>; }
+};
+
+<font color="#a020f0">#endif</font> <font color="#0000f8">/*</font><font color="#0000f8"> CAR_H */</font>
+</pre>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>~/work/egyetem/lang/prny2/src/pod/dstack2.cpp.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e5e5e5" text="#000000">
+<pre>
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&lt;iostream&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;dstack2.h&quot;</font></span>
+
+dstack::dstack( <font color="#2e8b57"><b>int</b></font> size)
+{
+    v = <font color="#a52a2a"><b>new</b></font> <font color="#2e8b57"><b>double</b></font>[capacity = size];
+    sp = <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span>;
+}
+dstack::dstack( <font color="#2e8b57"><b>const</b></font> dstack &amp;other)    <font color="#0000ff">/*</font><font color="#0000ff"> ver2 */</font>
+{
+    copy(other);
+}
+dstack::~dstack()                       <font color="#0000ff">/*</font><font color="#0000ff"> ver2 */</font>
+{
+    <font color="#a52a2a"><b>delete</b></font> [] v;
+}
+dstack&amp; dstack::<font color="#a52a2a"><b>operator</b></font>=( <font color="#2e8b57"><b>const</b></font> dstack &amp;other) <font color="#0000ff">/*</font><font color="#0000ff"> ver2 */</font>
+{
+    <font color="#a52a2a"><b>if</b></font> ( <font color="#a52a2a"><b>this</b></font> != &amp;other )   <font color="#0000ff">// x = x</font>
+    {
+        <font color="#0000ff">// nem igazán kivétel-biztos</font>
+        <font color="#a52a2a"><b>delete</b></font> [] v;
+        copy(other);
+    }
+    <font color="#a52a2a"><b>return</b></font> *<font color="#a52a2a"><b>this</b></font>;
+}
+<font color="#2e8b57"><b>void</b></font> dstack::copy( <font color="#2e8b57"><b>const</b></font> dstack &amp;other)
+{
+    v = <font color="#a52a2a"><b>new</b></font> <font color="#2e8b57"><b>double</b></font>[capacity = other.capacity];
+    sp = other.sp;
+
+    <font color="#a52a2a"><b>for</b></font> ( <font color="#2e8b57"><b>int</b></font> i = <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span> ; i &lt; sp; ++i)
+        v[i] = other.v[i];
+}
+<font color="#2e8b57"><b>void</b></font> dstack::push( <font color="#2e8b57"><b>double</b></font> d)
+{
+    <font color="#0000ff">// </font><span style="background-color: #ffff00"><font color="#0000ff">TODO</font></span><font color="#0000ff">?: hibakezelés</font>
+    <font color="#a52a2a"><b>if</b></font> ( ! is_full() )
+        v[sp++] = d;
+}
+<font color="#2e8b57"><b>double</b></font> dstack::pop()
+{
+    <font color="#0000ff">// </font><span style="background-color: #ffff00"><font color="#0000ff">TODO</font></span><font color="#0000ff">?: hibakezelés</font>
+    <font color="#a52a2a"><b>return</b></font> is_empty() ? <span style="background-color: #f2f2f2"><font color="#ff00ff">0.0</font></span> : v[--sp];
+}
+<font color="#2e8b57"><b>bool</b></font> dstack::is_empty() <font color="#2e8b57"><b>const</b></font>
+{
+    <font color="#a52a2a"><b>return</b></font> <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span> == sp;
+}
+<font color="#2e8b57"><b>bool</b></font> dstack::is_full() <font color="#2e8b57"><b>const</b></font>
+{
+    <font color="#a52a2a"><b>return</b></font> capacity == sp;
+}
+std::ostream &amp;<font color="#a52a2a"><b>operator</b></font>&lt;&lt;( std::ostream &amp;os, dstack ds)
+{
+    os &lt;&lt; <span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;[ &quot;</font></span>;
+    <font color="#a52a2a"><b>for</b></font> ( <font color="#2e8b57"><b>int</b></font> i = <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span>; i &lt; ds.sp-<span style="background-color: #f2f2f2"><font color="#ff00ff">1</font></span>; ++i )
+        os &lt;&lt; ds.v[i] &lt;&lt; <span style="background-color: #f2f2f2"><font color="#ff00ff">&quot;, &quot;</font></span>;
+    <font color="#a52a2a"><b>if</b></font> ( ds.sp &gt; <span style="background-color: #f2f2f2"><font color="#ff00ff">0</font></span> )
+        os &lt;&lt; ds.v[ds.sp-<span style="background-color: #f2f2f2"><font color="#ff00ff">1</font></span>];
+    os &lt;&lt; <span style="background-color: #f2f2f2"><font color="#ff00ff">&quot; ]&quot;</font></span>;
+
+    <font color="#a52a2a"><b>return</b></font> os;
+}
+
+</pre>
+</body>
+</html>

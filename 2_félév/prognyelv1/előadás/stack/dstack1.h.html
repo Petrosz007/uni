@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>~/work/egyetem/lang/prny2/src/pod/dstack1.h.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e5e5e5" text="#000000">
+<pre>
+<font color="#0000ff">//</font>
+<font color="#0000ff">// _naive_ dstack osztály</font>
+<font color="#0000ff">// vigyázat! hibás kód</font>
+<font color="#0000ff">//</font>
+<font color="#a020f0">#ifndef DSTACK_H</font>
+<font color="#a020f0">#define DSTACK_H</font>
+
+<font color="#a020f0">#include </font><span style="background-color: #f2f2f2"><font color="#ff00ff">&lt;iostream&gt;</font></span>
+
+<font color="#2e8b57"><b>class</b></font> dstack
+{
+    <font color="#0000ff">/*</font><font color="#0000ff"> friend deklaráció: nem helyettesíti a függvény deklarációt */</font>
+    <font color="#a52a2a"><b>friend</b></font> std::ostream &amp;<font color="#a52a2a"><b>operator</b></font>&lt;&lt;( std::ostream &amp;os, dstack ds);
+<font color="#a52a2a"><b>public</b></font>:
+        <font color="#0000ff">/*</font><font color="#0000ff"> konstruktor */</font>
+        dstack( <font color="#2e8b57"><b>int</b></font> size = <span style="background-color: #f2f2f2"><font color="#ff00ff">128</font></span>);
+
+    <font color="#2e8b57"><b>void</b></font>   push( <font color="#2e8b57"><b>double</b></font> d);
+    <font color="#0000ff">/*</font><font color="#0000ff"> a legtöbb könyvtárban: void pop() */</font>
+    <font color="#2e8b57"><b>double</b></font> pop();
+    <font color="#0000ff">/*</font><font color="#0000ff"> a legtöbb könyvtárban lenne még:</font>
+<font color="#0000ff">    double&amp; top();</font>
+<font color="#0000ff">    double  top() const;</font>
+<font color="#0000ff">    */</font>
+    <font color="#2e8b57"><b>bool</b></font> is_empty() <font color="#2e8b57"><b>const</b></font>;
+    <font color="#2e8b57"><b>bool</b></font> is_full() <font color="#2e8b57"><b>const</b></font>;
+<font color="#a52a2a"><b>private</b></font>:
+    <font color="#2e8b57"><b>int</b></font>    capacity;    <font color="#0000ff">// lefoglalt tárterület mérete</font>
+    <font color="#2e8b57"><b>int</b></font>    sp;          <font color="#0000ff">// aktuális elemek száma</font>
+    <font color="#2e8b57"><b>double</b></font> *v;          <font color="#0000ff">// pointer a tárterületre</font>
+};
+<font color="#0000ff">/*</font><font color="#0000ff"> a kiíró mûvelet deklarációja (friend nem elég) */</font>
+std::ostream &amp;<font color="#a52a2a"><b>operator</b></font>&lt;&lt;( std::ostream &amp;os, dstack ds);
+
+<font color="#a020f0">#endif</font> <font color="#0000ff">/*</font><font color="#0000ff"> DSTACK_H */</font>
+
+</pre>
+</body>
+</html>

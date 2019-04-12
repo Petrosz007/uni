@@ -54,23 +54,24 @@ date::date( string s )
 }
 
 <font color="#0000ff">/*</font><font color="#0000ff"> input-output */</font>
-<font color="#2e8b57"><b>void</b></font> date::read()
+<font color="#2e8b57"><b>void</b></font> date::read( std::istream& is )
 {
     <font color="#0000ff">// nem lenne igazán jó:</font>
-    <font color="#0000ff">// std::cin &gt;&gt; year &gt;&gt; month &gt;&gt; day;</font>
+    <font color="#0000ff">// is &gt;&gt; year &gt;&gt; month &gt;&gt; day;</font>
     <font color="#2e8b57"><b>int</b></font> y, m, d;
-    <font color="#a52a2a"><b>if</b></font> ( std::cin &gt;&gt; y &gt;&gt; m &gt;&gt; d )
+    <font color="#a52a2a"><b>if</b></font> ( is &gt;&gt; y &gt;&gt; m &gt;&gt; d )
     {
         set( y, m, d );
     }
 }
 
-<font color="#2e8b57"><b>void</b></font> date::print() <font color="#2e8b57"><b>const</b></font>
+<font color="#2e8b57"><b>void</b></font> date::print( std::ostream& os ) <font color="#2e8b57"><b>const</b></font>
 {
-    <font color="#0000ff">// nem lenne igazán jó: std::cout &lt;&lt; year &lt;&lt; month &lt;&lt; day;</font>
-    std::cout &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">"[ "</font></span> &lt;&lt; get_year() &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">","</font></span> &lt;&lt; get_month()
+    <font color="#0000ff">// nem lenne igazán jó: os &lt;&lt; year &lt;&lt; month &lt;&lt; day;</font>
+    os &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">"[ "</font></span> &lt;&lt; get_year() &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">","</font></span> &lt;&lt; get_month()
                              &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">","</font></span> &lt;&lt; get_day() &lt;&lt; <span style="background-color: rgb(242, 242, 242);"><font color="#ff00ff">" ]"</font></span>;
 }
 
 </pre>
-</body></html>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>~/work/egyetem/langs/vehicle/vehiclemain.cpp.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e0e4e0" text="#000000">
+<pre>
+
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;iostream&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;list&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;algorithm&gt;</font></span>
+
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;vehicle.h&quot;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;car.h&quot;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;bus.h&quot;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&quot;truck.h&quot;</font></span>
+
+<font color="#a02828"><b>using</b></font> <font color="#288850"><b>namespace</b></font> std;
+
+<font color="#288850"><b>void</b></font> global_print( vehicle *vp )
+{
+  vp-&gt;print();
+}
+
+<font color="#288850"><b>struct</b></font> dealloc
+{
+  <font color="#288850"><b>void operator</b></font>()( vehicle *vp )
+  {
+    <font color="#288850"><b>delete</b></font> vp;
+  }
+};
+
+<font color="#288850"><b>int</b></font> main()
+{
+  list&lt;vehicle*&gt; vl;
+  vl.push_back( <font color="#a02828"><b>new</b></font> car( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;abc123&quot; </font></span>) );
+  vl.push_back( <font color="#a02828"><b>new</b></font> bus( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;bbb123&quot;</font></span>, <span style="background-color: #f0f0f0"><font color="#f800f8">45 </font></span>) );
+  vl.push_back( <font color="#a02828"><b>new</b></font> truck( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;eee765&quot;</font></span>, <span style="background-color: #f0f0f0"><font color="#f800f8">4.5 </font></span>) );
+  vl.push_back( <font color="#a02828"><b>new</b></font> truck( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;fff098&quot;</font></span>, <span style="background-color: #f0f0f0"><font color="#f800f8">3.5 </font></span>) );
+  vl.push_back( <font color="#a02828"><b>new</b></font> bus( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;ccc456&quot;</font></span>, <span style="background-color: #f0f0f0"><font color="#f800f8">55 </font></span>) );
+  vl.push_back( <font color="#a02828"><b>new</b></font> car( <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;bcd2&quot; </font></span>) );
+
+<font color="#0000f8">/*</font><font color="#0000f8">for ( list&lt;vehicle*&gt;::iterator vi = vl.begin(); vi != vl.end(); ++vi)</font>
+<font color="#0000f8">  {</font>
+<font color="#0000f8">    global_print(*vi);</font>
+<font color="#0000f8">  }</font>
+<font color="#0000f8"> */</font>
+  for_each( vl.begin(), vl.end(), global_print );
+  for_each( vl.begin(), vl.end(), dealloc() );
+  <font color="#a02828"><b>return</b></font> <span style="background-color: #f0f0f0"><font color="#f800f8">0</font></span>;
+}
+
+</pre>
+</body>
+</html>

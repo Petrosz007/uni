@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>~/work/egyetem/langs/vehicle/vehicle.h.html</title>
+<meta name="Generator" content="Vim/6.1">
+</head>
+<body bgcolor="#e0e4e0" text="#000000">
+<pre>
+<font color="#a020f0">#ifndef VEHICLE_H</font>
+<font color="#a020f0">#define VEHICLE_H</font>
+
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;string&gt;</font></span>
+<font color="#a020f0">#include </font><span style="background-color: #f0f0f0"><font color="#f800f8">&lt;typeinfo&gt;</font></span>
+
+
+<font color="#0000f8">// polimorfikus osztály, mert van virtuális függvénye,</font>
+<font color="#0000f8">// és absztrakt osztály, mert van legalább egy </font>
+<font color="#0000f8">// pure virtual függvénye</font>
+<font color="#288850"><b>class</b></font> vehicle
+{
+<font color="#a02828"><b>public</b></font>:
+  vehicle( <font color="#288850"><b>const</b></font> std::string&amp; s ) : reg( s ) {}
+  <font color="#288850"><b>virtual</b></font> ~vehicle() { }  <font color="#0000f8">// virtuális destruktor!</font>
+
+  <font color="#0000f8">// ez nem virtual</font>
+  <font color="#288850"><b>bool</b></font> print()
+  {
+    std::cout &lt;&lt; <font color="#a02828"><b>typeid</b></font>( *<font color="#a02828"><b>this</b></font> ).name &lt;&lt; <span style="background-color: #f0f0f0"><font color="#f800f8">&quot; with reg = &quot;</font></span>
+              &lt;&lt; get_reg() &lt;&lt; <span style="background-color: #f0f0f0"><font color="#f800f8">&quot; : &quot;</font></span> &lt;&lt; mv() &lt;&lt; std::endl;
+    <font color="#a02828"><b>return</b></font> mv();
+  }
+
+  std::string get_reg() <font color="#288850"><b>const</b></font> { <font color="#a02828"><b>return</b></font> reg; }
+
+  <font color="#0000f8">// pure virtual</font>
+  <font color="#288850"><b>virtual</b></font> <font color="#288850"><b>bool</b></font> mv() = <span style="background-color: #f0f0f0"><font color="#f800f8">0</font></span>;
+<font color="#a02828"><b>private</b></font>:
+  std::string reg;
+};
+
+<font color="#288850"><b>inline</b></font> <font color="#288850"><b>bool</b></font> vehicle::mv() { <font color="#a02828"><b>return</b></font> reg != <span style="background-color: #f0f0f0"><font color="#f800f8">&quot;&quot;</font></span>; }
+
+<font color="#a020f0">#endif</font> <font color="#0000f8">/*</font><font color="#0000f8"> VEHICLE_H */</font>
+</pre>
+</body>
+</html>
