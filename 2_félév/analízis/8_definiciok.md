@@ -39,8 +39,8 @@ Ekkor:
 
 ## Fogalmazza meg a végtelen sorokra vonatkozó D'Alembert-féle hányadoskritériumot.
 
-Tekintsük a $\sum a_n$ sort, ahol $a_n \ne 0\ \ (n \in \N)$
-Tfh: $\left(\dfrac{|a_{n+1}|}{|a_n|}\right)$ sorozat konvergens és $A := \lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right)$
+Tekintsük a $\sum a_n​$ sort, ahol $a_n \ne 0\ \ (n \in \N)​$
+Tfh: $\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$ sorozat konvergens és $A := \lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$
 Ekkor, ha:
 
 1. $0 \le A < 1$, akkor $\sum a_n$ sor abszolút konvergens, tehát konvergens is.
@@ -52,5 +52,5 @@ Ekkor, ha:
 Legyen $(a_n) : \N \rarr[0, \infty), $ monoton fogyó sorozat (azaz $0 \le a_{n+1} \le a_n\ \ (n \in \N)$)
 Ekkor a $\sum (-1)^{n+1} \cdot a_n$ sort Leibniz-típusú sornak nevezzük.
 Ezek akkor és csak akkor konvergensek, ha $lim(a_n) = 0$. 
-Ha $A := \overset{+\infty}{\underset{n = 0}{\sum}} (-1)^{n+1} \cdot a_n$, $s_n := A := \overset{n}{\underset{k = 0}{\sum}} (-1)^{k+1} \cdot a_k$, akkor: $| s_n - A| \le a_n$
+Ha $A := \overset{+\infty}{\underset{n = 0}{\sum}} (-1)^{n+1} \cdot a_n$, $s_n := \overset{n}{\underset{k = 0}{\sum}} (-1)^{k+1} \cdot a_k$, akkor: $| s_n - A| \le a_n$
 
