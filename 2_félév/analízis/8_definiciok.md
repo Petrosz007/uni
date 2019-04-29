@@ -1,6 +1,6 @@
 ## Mit jelent az, hogy a $\sum a_n$ végtelen sor konvergens, és hogyan értelmezzük az összegét?
 
-A $\sum a_n​$ sor konvergens, ha részletösszegeinek az $s_n = a_1 + ... + a_n\ \ (n \in \N)​$ sorozata konvergens. A $\lim(s_n)​$ számot nevezzük a sor összegének, jele: $\overset{+\infty}{\underset{n=0}{\sum}} a_n​$
+A $\sum a_n$ sor konvergens, ha részletösszegeinek az $s_n = a_1 + ... + a_n\ \ (n \in \N)$ sorozata konvergens. A $\lim(s_n)$ számot nevezzük a sor összegének, jele: $\overset{+\infty}{\underset{n=0}{\sum}} a_n$
 
 ## Milyen tételt ismer a $q \in \R$ esetén a $\underset{n=0}{\sum} q^n$ geometriai sor konvergenciájáról?
 
@@ -18,7 +18,7 @@ A sor $1 < \alpha \in \R$ esetén konvergens, ha $\R \ni \alpha \le 1$ akkor ped
 
 ## Mondjon szükséges feltételt arra nézve, hogy a $\sum a_n$ végtelen sor konvergens legyen.
 
-$\sum a_n$ konvergens $\Leftrightarrow \sum a_n​$ Cauchy 
+Ha $\sum a_n$ végtelen sor konvergens, akkor $\lim(a_n) = 0$
 
 ## Fogalmazza meg a végtelen sorokra vonatkozó összehasonlító kritériumokat.
 
@@ -39,8 +39,8 @@ Ekkor:
 
 ## Fogalmazza meg a végtelen sorokra vonatkozó D'Alembert-féle hányadoskritériumot.
 
-Tekintsük a $\sum a_n​$ sort, ahol $a_n \ne 0\ \ (n \in \N)​$
-Tfh: $\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$ sorozat konvergens és $A := \lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$
+Tekintsük a $\sum a_n$ sort, ahol $a_n \ne 0\ \ (n \in \N)$
+Tfh: $\left(\dfrac{|a_{n+1}|}{|a_n|}\right)$ sorozat konvergens és $A := \lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right)$
 Ekkor, ha:
 
 1. $0 \le A < 1$, akkor $\sum a_n$ sor abszolút konvergens, tehát konvergens is.
