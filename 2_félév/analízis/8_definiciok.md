@@ -18,7 +18,7 @@ A sor $1 < \alpha \in \R$ esetén konvergens, ha $\R \ni \alpha \le 1$ akkor ped
 
 ## Mondjon szükséges feltételt arra nézve, hogy a $\sum a_n$ végtelen sor konvergens legyen.
 
-Ha $\sum a_n$ végtelen sor konvergens, akkor $\lim(a_n) = 0$
+Ha $\lim(a_n) = 0$ , akkor $\sum a_n $ végtelen sor konvergens.
 
 ## Fogalmazza meg a végtelen sorokra vonatkozó összehasonlító kritériumokat.
 
