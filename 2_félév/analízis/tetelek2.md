@@ -68,7 +68,87 @@ Mivel $\forall n \in \N, n \ge N: a_n \le b_n$, ezért $\forall n \in \N, n \ge 
 
 ## 4. A Cauchy-féle gyökkritérium
 
+**Tétel:**
+
+Tekintsük a $\sum a_n​$ sort és tfh.: $\root{n}\of{|a_n|}​$ sorozat konvergens és $A := \lim(\root{n}\of{|a_n|})​$
+Ekkor:
+
+1. Ha $0 \le A \lt 1$, akkor $\sum a_n$ abszolút konvergens, tehát konvergens is
+2. Ha $1 < A$, akkor $\sum a_n$ divergens
+3. Ha $A = 1$, akkor lehet konvergens és divergens is
+
+**Bizonyítás:**
+
+**1,**
+ $0 \le A < 1​$ esetén $\exists q \in \R​$, hogy $A < q < 1​$ 
+Mivel $\lim(\root{n}\of{|a_n|}) = A​$, ezért:
+
+​	$\exists N \in \N, \forall n \in \N, n \ge N: \root{n}\of{|a_n|} < q < 1​$
+$\Rarr\forall n \in \N, n \ge N: |a_n| < q^n​$
+
+Mivel $0 \le A < q < 1$, ezért $\sum q^n$ konvergens $\Rarr \underset{n=N}{\sum} q^n$ konvergens
+De: $\underset{n=N}{\sum} q^n$ majorálja a $\underset{n=N}{\sum} |a_n|$ sort
+$\Rarr$ (ld.: Majoráló kritérium) $\underset{n=N}{\sum} |a_n|$ konvergens $\Rarr \sum |a_n|$ konvergens
+$\Rarr \sum a_n$ abszolút konvergens
+
+**2,**
+Tfh.: $A > 1$. Ekkor $\exists q \in \R : 1 < q < A$
+$\lim(\root{n}\of{|a_n|}) = A$ miatt:
+
+​	$\exists N \in \N, \forall n \in \N, n \ge N: \root{n}\of{|a_n|} > q​$
+$\Rarr \forall n \in \N, n \ge N : |a_n| > q^n > 1​$
+$\Rarr \lim(a_n) \ne 0 \Rarr \sum a_n​$ divergens
+
+**3,**
+Tekintsük a $\underset{n = 1}{\sum} \dfrac{1}{n^2}​$ konvergens sort és a $\underset{n = 1}{\sum} \dfrac{1}{n}​$ divergens sort.
+Ekkor:
+
+​	$\root{n}\of{\left| \dfrac{1}{n^2} \right|} = \left(\dfrac{1}{\root{n}\of{n}}\right)^2 \rarr 1$    $(n \rarr \infty)$
+
+​	$\root{n}\of{\left| \dfrac{1}{n} \right|} = \dfrac{1}{\root{n}\of{n}} \rarr 1​$    $(n \rarr \infty)​$
+
 ## 5. A D'Alembert-féle hányados-kritérium
+
+**Tétel:**
+
+Tekintsük a $\sum a_n​$ sort, ahol $a_n \ne 0\ \ (n\in \N)​$ és tfh.: $\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$ sorozat konvergens és $A := \lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right)​$
+Ekkor:
+
+1. Ha $0 \le A \lt 1$, akkor $\sum a_n$ abszolút konvergens, tehát konvergens is
+2. Ha $1 < A$, akkor $\sum a_n$ divergens
+3. Ha $A = 1​$, akkor lehet konvergens és divergens is
+
+**Bizonyítás:**
+
+**1,**
+Tfh.: $A < 1 \Rarr \exists q \in \R : A < q < 1​$
+$\lim\left(\dfrac{|a_{n+1}|}{|a_n|}\right) = A​$ miatt:
+
+​	$\exists N \in \N, \forall n \in \N, n \ge N:\dfrac{|a_{n+1}|}{|a_n|} < q​$
+Tehát: $|a_{n+1}| < q|a_n|​$
+​		$|a_n| < q|a_{n-1}|​$
+​		$|a_{n-1}| < q|a_{n-2}|​$
+​			...
+​		$|a_{n_0+1}| < q|a_{n_0}|​$
+$\Rarr \forall n \in \N, n \ge n_0 : |a_{n+1}| < \underset{< q|a_{n+1}|}{\underbrace{q|a_n|}} < q^2|a_{n+1}| < ...  < q^{n+1-n_0}\cdot |a_{n_0}| =​$
+$= \underset{= K > 0}{\underbrace{q^{1-n_0} \cdot |a_{n_0}|}} \cdot q^n​$
+
+$\Rarr q \in (0,1) $ miatt $\sum q^n$ konvergens $\Rarr \underset{n=n_0}{\sum} q^n$ konvergens
+De! $\underset{n=n_0}{\sum} q^n$ majorálja a $\sum |a_{n+1}|$ sort $\Rarr \underset{n=n_0}{\sum}|a_{n+1}|$ konvergens $\Rarr$
+	$\Rarr \sum |a_{n+1}|$ konvergens $\Rarr \sum |a_n|$ konvergens $\Rarr \sum a_n$ abszolút konvergens
+
+**2,**
+Tfh.: $A > 1$. Ekkor: $\exists q \in \R : A > q > 1$
+$\Rarr \sum n_0 \in \N, \forall n \in \N, n \ge n_0 : \dfrac{|a_{n+1}|}{|a_n|} > q$
+$\Rarr |a_{n+1}| > K \cdot q^n > K > 0$    $(n \ge n_0)$
+$\Rarr \lim(a_{n+1}) \ne 0 \Rarr \lim(a_n) \ne 0 \Rarr\sum a_n$ divergens
+
+**3,**Tekintsük a $\underset{n = 1}{\sum} \dfrac{1}{n^2}$ konvergens sort és a $\underset{n = 1}{\sum} \dfrac{1}{n}$ divergens sort.
+Ekkor:
+
+​	$\dfrac{\left|\dfrac{1}{(n+1)^2}\right|}{\left|\dfrac{1}{n^2}\right|} = \dfrac{n^2}{(n+1)^2} \rarr 1​$    $(n \rarr \infty)​$
+
+​	$\dfrac{\left|\dfrac{1}{n+1}\right|}{\left|\dfrac{1}{n}\right|} = \dfrac{n}{n+1} \rarr 1$    $(n \rarr \infty)​$
 
 ## 6. Leibniz-típusú sorok konvergenciája
 

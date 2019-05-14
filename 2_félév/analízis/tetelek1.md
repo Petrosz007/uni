@@ -309,3 +309,11 @@ $\dfrac{a_{n+2}}{a_{n+1}} = \dfrac{1}{a_{n+1}} \cdot \dfrac{1}{m}\left(\dfrac{A}
 $= \dfrac{1}{m}\left(\dfrac{A - a_{n+1}^m}{a_{n+1}^{m}} + m\right) = \dfrac{\overset{\le 0}{A - a_{n+1}^m}}{\underset{\le 0}{m \cdot a_{n+1}^{m}}} + 1 \Rarr \le 1$, monoton fogyó
 $\Rarr (a_{n+1})$ korlátos és monoton fogyó $\Rarr$ konvergens $\Rarr \exists \alpha \in \R : \lim(a_{n+1}) = \alpha$
 
+
+
+
+
+
+
+
+
