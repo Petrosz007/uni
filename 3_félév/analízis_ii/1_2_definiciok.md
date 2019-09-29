@@ -4,7 +4,7 @@ Ha $A\in \R$, akkor: $K_r(A) := (A-r, A+r)$
 Ha $A = +\infty$, akkor $K_r(A) := (\dfrac{1}{r}, + \infty)$
 Ha $A = -\infty$, akkor $K_r(A) := (-\infty, \dfrac{1}{r})$
 
-## Mikor mondja azt, hogy egy $f \in \R \rarr \R$ függvénynek valamely $a \in \overset{\_\_}{\R}​$ helyen van határértéke?
+## Mikor mondja azt, hogy egy $f \in \R \rarr \R$ függvénynek valamely $a \in \overset{\_\_}{\R}$ helyen van határértéke?
 
 $f \in \R \rarr \R$-nek $a \in \overset{\_\_}{\R}$-ban van határértéke, ha $\exists A \in \overset{\_\_}{\R}, \forall \epsilon > 0, \exists \delta > 0, \forall x \in K_\delta(a) \backslash \{a\} \cap D_f : $
 								$f(x) \in K_\epsilon(A)$
@@ -19,7 +19,7 @@ $ \forall \epsilon > 0, \exists \delta > 0, \forall x \in D_f, 0 < |x - a| < \de
 ## Adja meg egyenlőtlenségek segítségével a *plusz végtelenben vett plusz végtelen* hatérérték definícióját.
 
 Legyen $f \in \R \rarr \R, +\infty \in D'_f$. Ekkor:
-$\underset{+\infty}{\lim} f \Leftrightarrow$
+$\underset{+\infty}{\lim} f = +\infty\Leftrightarrow$
 $\forall P > 0, \exists x_0 > 0, \forall x \in D_f, x > x_0 : f(x) > P$
 
 ## Írja le a *hatványsor* definícióját.

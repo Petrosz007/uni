@@ -40,9 +40,49 @@ Ha $f : [a,b] \rarr \R$ folytonos, akkor $\exists$ abszolút maximuma és $\exis
 ## Mit mond ki a *Bolzano-tétel*?
 
 Legyen $f : [a,b] \rarr \R$ folytonos.
-Ha $f(a) - f(b) < 0$, akkor $\exists \xi \in [a,b] : f(\xi) = 0$
+Ha $f(a) \cdot f(b) < 0$, akkor $\exists \xi \in [a,b] : f(\xi) = 0$
 
 
+
+
+
+## Fogalmazza meg a *Bolzano Darboux-tételt*.
+
+Tfh.: $f : [a,b] \rarr \R$ folytonos
+Ha $f(a) < f(b)$, akkor $\forall c \in (f(a), f(b)) : \exists \xi \in [a,b] : f(\xi) = c$
+
+## Mit jelent az, hogy egy függvény *Darboux-tulajdonságú*?
+
+Az $f : [a,b] \rarr \R$ függvény Darboux-tulajdonságú, ha $\forall x_1 < x_2$-re $(x_1,x_2 \in [a,b])$
+amelyre $f(x_1) \ne f(x_2)$ és $\forall c \in \underset{vagy\ (f(x_2), f(x_1))}{(f(x_1), f(x_2))}, \exists \xi \in(x_1, x_2) : f(\xi) = c$
+
+## Mi a kapcsolat a Darboux-tulajdonság és a folytonosság között?
+
+Ha egy $ f : [a,b] \rarr \R$ függvény folytonos, akkor Darboux tulajdonságú.
+
+## Mit tud mondani az $f : [a,b] \rarr \R (a < b, a,  \in \R)$ inverz függvényének folytonosságáról?
+
+Ha $f : [a,b] \rarr \R, a,b \in \R, a < b​$ függvény folytonos és injektív, akkor $f^{-1}​$  folytonos a $D_{f^{-1}} = R_f​$ intervallumon.
+
+## Milyen állítást ismer *tetszőleges intervallumon* értelmezett függvény inverzének a folytonosságáról?
+
+Legyen $I\subset \R$ tetszőleges intervallum, $f : I \rarr \R$ folytonos $I$-n és injektív.
+Ekkor $R_f$ intervallum és $f^{-1}$ folytonos rajta.
+
+## Definiálja a *megszüntethető szakadási hely* fogalmát.
+
+Az $f \in \R \rarr \R$ függvénynek az $a \in D_f$ egy megszüntethető szakadási helye, ha 
+$\exists \underset{a}{\lim} f \in \R$, de $\underset{a}{\lim} f \ne f(a)$
+
+## Definiálja az *elsőfajú szakadási hely* fogalmát.
+
+Az $f \in \R \rarr \R$ függvénynek $a \in D_f$ pontban elsőfajú szakadási helye van, ha
+$\exists \underset{a+0}{\lim} f \in \R, \exists \underset{a-0}{\lim} f \in \R$, de $\underset{a+0}{\lim} f \ne \underset{a-0}{\lim} f$
+
+## Mit tud mondani *monoton* függvény szakadási helyeiről? 
+
+Legyen $\alpha, \beta \in \R : \alpha < \beta, f : (\alpha, \beta) \rarr \R$ monoton, $a \in (\alpha, \beta)$
+Ekkor vagy $f \in C(a)$ vagy $f$-nek $a$-ban elsőfajú szakadása van.
 
 
 
