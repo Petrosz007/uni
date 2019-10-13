@@ -31,3 +31,43 @@ Legyen $f \in \R \rarr \R, a \in int(D_f)$
 ​										i, $\omega \in C[a] \and \omega(a) = 0$
 ​										ii, $\forall x \in D_f : f(x) - f(a) = (A + \omega(x))(x-a)$
 
+
+
+
+
+
+
+
+
+## Mi az érintő definíciója?
+
+Legyen $f \in \R \rarr  \R, a \in int(D_f)$
+Ekkor az $f$ függvény grafikonjának az $(a, f(a))$ pontban van érintője, ha $f \in D[a]$, és ez az érintő alatt a következő egyenletű egyenest értjük:
+				$y = f'(a)(x-a) + f(a)$
+
+## Milyen tételt ismer két függvény szorzatának valamely pontbeli differenciálhatóságáról és a deriváltjáról?
+
+Legyen $f,g \in \R \rarr \R, a \in int(D_f \cap D_g)$
+Ekkor ha $f,g \in D[a]$, akkor:
+		 $f \cdot g \in D[a] \and (f \cdot g)'(a) = f'(a)\cdot g(a) + f(a) \cdot g'(a)$
+
+## Milyen tételt ismer két függvény hányadosának valamely pontbeli differenciálhatóságáról és deriváltjáról?
+
+Legyen $f,g \in \R \rarr \R, a \in int(D_f \cap D_g)$
+Ekkor ha $f,g \in D[a]$, akkor:
+		$\left(\dfrac{f}{g}\right) \in D[a] \and \left(\dfrac{f}{g}\right)'(a) = \dfrac{f'(a) \cdot g(a) - f(a) \cdot g'(a)}{(g(a))^2}$
+
+## Milyen tételt ismer két függvény kompozíciójának valamely pontbeli differenciálhatóságáról és deriváltjáról?
+
+Legyen $f,g \in \R \rarr \R, a \in int(D_f \cap D_g)$
+Ekkor ha $f,g \in D[a]$, akkor:
+		$f \circ g \in D[a] \and (f \circ g)'(a) = f'(g(a)) \cdot g'(a)$
+
+## Írja fel az $\exp_a (a \in \R, a > 0)$ függvény deriváltját valamely helyen.
+
+$\exp_a'(x) = a^x \cdot \ln(a)$
+
+## Írja fel a $\log_a (a \in \R, 0 < a \ne 1)$ függvény deriváltját valamely helyen.
+
+$\log_a'(x) = \dfrac{1}{x \cdot \ln(a)}$
+
