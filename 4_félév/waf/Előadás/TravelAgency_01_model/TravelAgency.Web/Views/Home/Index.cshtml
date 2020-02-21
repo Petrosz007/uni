@@ -1,0 +1,73 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using ELTE.TravelAgency.Web.Models
+
+@model IEnumerable<Building>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Az utazási iroda honlapja</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="headerText">
+            <h1>
+                Az utazási iroda
+            </h1>
+            <h3>
+                A legjobb szállásfoglaló
+            </h3>
+        </div>
+    </div>
+    <div class="content">
+        <div class="leftColumn">
+            <h3>Keresés városok szerint</h3>
+            @* amennyiben nincsenek megadva a városok *@
+            @if (ViewBag.Cities == null || ViewBag.Cities.Length == 0)
+            {
+                <span>Nincs hirdetés.</span>                
+            }
+            else
+            {
+                <ul>
+                    @* felsoroljuk a városokat *@
+                    @foreach (City city in ViewBag.Cities)
+                    {
+                        <li>
+                            @* létrehozunk egy linket minden városra az Index akcióra az azonosító paraméterrel *@
+                            <a asp-controller="Home" asp-action="List" asp-route-cityId="@city.Id">@city.Name</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="rightColumn">
+            @* amennyiben nem töltöttünk semmilyen adatot *@
+            @if (Model == null || Model.Count() == 0)
+            {
+                <div class="contentText">Jelenleg nincs elérhető szálláshely.</div>
+            }
+            else
+            {
+                // felsoroljuk az épületeket
+                foreach (Building building in Model)
+                {
+                    <div class="buildingItem">
+                        <div class="buildingItemHead">
+                            <a asp-controller="Home" asp-action="Details" asp-route-buildingId="@building.Id">@building.Name</a>
+                        </div>
+                        <div class="buildingItemContent">
+                            <strong>Város: </strong>@building.City.Name<br />
+                            <strong>Leírás: </strong>@building.Comment.Substring(0, building.Comment.IndexOf(".") + 1)
+                        </div>
+                    </div><br />
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

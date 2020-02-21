@@ -1,0 +1,157 @@
+﻿@using System
+@using ELTE.TravelAgency.Web.Models
+
+@model Building
+
+@{
+    // megadunk pár segédfüggvényt lambda-kifejezésként
+    Func<DayOfWeek, String> dayName = value =>
+    {
+        switch (value)
+        {
+            case DayOfWeek.Monday: return "hétfő";
+            case DayOfWeek.Tuesday: return "kedd";
+            case DayOfWeek.Wednesday: return "szerda";
+            case DayOfWeek.Thursday: return "csütörtök";
+            case DayOfWeek.Friday: return "péntek";
+            case DayOfWeek.Saturday: return "szombat";
+            case DayOfWeek.Sunday: return "vasárnap";
+            default: return "?";
+        }
+    };
+
+    Func<ShoreType, String> shoreDisplayName = shoreType =>
+    {
+        switch (shoreType)
+        {
+            case ShoreType.Sandy: return "homokos";
+            case ShoreType.Gravelly: return "kavicsos";
+            case ShoreType.Rocky: return "sziklás";
+            default: return "?";
+        };
+    };
+    Func<Feature, String> featureDisplayName = features =>
+    {
+        var featureTexts = new List<string>();
+        if ((features & Feature.MainRoad) > 0)
+            featureTexts.Add("főút");
+        if ((features & Feature.CoastService) > 0)
+            featureTexts.Add("parti szolgálat");
+        if ((features & Feature.SwimmingPool) > 0)
+            featureTexts.Add("úszómedence");
+        if ((features & Feature.Garden) > 0)
+            featureTexts.Add("kert");
+        if ((features & Feature.PrivateParking) > 0)
+            featureTexts.Add("saját parkoló");
+        return string.Join( ", ", featureTexts);
+    };
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="headerText">
+            <h1>
+                Az utazási iroda
+            </h1>
+            <h3>
+                A legjobb szállásfoglaló
+            </h3>
+        </div>
+    </div>
+    <div class="content">
+        <div class="leftColumn">
+            <h3>Keresés városok szerint</h3>
+            @* amennyiben nincsenek megadva a városok *@
+            @if (ViewBag.Cities == null || ViewBag.Cities.Length == 0)
+            {
+                <span>Nincs hirdetés.</span>
+            }
+            else
+            {
+
+                <ul>
+                    @* felsoroljuk a városokat *@
+                    @foreach (City city in ViewBag.Cities)
+                    {
+                        <li>
+                            @* létrehozunk egy linket minden városra az Index akcióra az azonosító paraméterrel *@
+                            <a asp-controller="Home" asp-action="List" asp-route-cityId="@city.Id">@city.Name</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="rightColumn">
+            @* amennyiben nem töltöttünk semmilyen adatot *@
+            @if (Model == null)
+            {
+                <div class="contentText">Jelenleg nincs elérhető szálláshely.</div>
+            }
+            else
+            {
+                <div class="contentHead">@Model.Name</div>
+                <div class="contentBody">
+                    <table width="600">
+                        <tr>
+                            <td>
+                                <strong>Város:</strong> @Model.City.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Tengerpart távolság:</strong> @Model.SeaDistance méter
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Tengerpart típus: </strong> @shoreDisplayName(Model.Shore) @* lambda-kifejezés meghívása *@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Jellemzők: </strong> @featureDisplayName(Model.Features) @* lambda-kifejezés meghívása *@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="contentComment">
+                                    <strong>Leírás:</strong> @Model.Comment
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <table width="600">
+                    @foreach (Apartment apartment in Model.Apartments)
+                    {
+                        <tr>
+                            <td>
+                                <div class="contentComment">
+                                    <strong>
+                                        @apartment.Room.
+                                    </strong> @apartment.Comment
+                                </div>
+                                <div class="contentDay">
+                                    <strong>Fordulónap:</strong> @dayName(apartment.Turnday)
+                                </div>
+                                <div class="contentPrice">
+                                    <strong>Ár:</strong> @apartment.Price EUR/éjszaka
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</body>
+</html>
