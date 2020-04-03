@@ -1,0 +1,164 @@
+﻿@using System
+@using System.Globalization
+@using ELTE.TravelAgency.Web.Models
+
+@model Building
+
+@{
+    // megadunk pár segédfüggvényt lambda-kifejezésként
+    Func<DayOfWeek, String> dayName = value =>
+    {
+        switch (value)
+        {
+            case DayOfWeek.Monday: return "hétfő";
+            case DayOfWeek.Tuesday: return "kedd";
+            case DayOfWeek.Wednesday: return "szerda";
+            case DayOfWeek.Thursday: return "csütörtök";
+            case DayOfWeek.Friday: return "péntek";
+            case DayOfWeek.Saturday: return "szombat";
+            case DayOfWeek.Sunday: return "vasárnap";
+            default: return "?";
+        }
+    };
+
+    Func<ShoreType, String> shoreDisplayName = shoreType =>
+    {
+        switch (shoreType)
+        {
+            case ShoreType.Sandy: return "homokos";
+            case ShoreType.Gravelly: return "kavicsos";
+            case ShoreType.Rocky: return "sziklás";
+            default: return "?";
+        };
+    };
+    Func<Feature, String> featureDisplayName = features =>
+    {
+        var featureTexts = new List<string>();
+        if ((features & Feature.MainRoad) > 0)
+            featureTexts.Add("főút");
+        if ((features & Feature.CoastService) > 0)
+            featureTexts.Add("parti szolgálat");
+        if ((features & Feature.SwimmingPool) > 0)
+            featureTexts.Add("úszómedence");
+        if ((features & Feature.Garden) > 0)
+            featureTexts.Add("kert");
+        if ((features & Feature.PrivateParking) > 0)
+            featureTexts.Add("saját parkoló");
+        return string.Join(", ", featureTexts);
+    };
+}
+
+
+@* csak a törzset adjuk meg *@
+
+@* amennyiben nem töltöttünk semmilyen adatot *@
+@if (Model == null)
+{
+    <div class="contentText">Jelenleg nincs elérhető szálláshely.</div>
+}
+else
+{
+    <div class="contentHead">@Model.Name</div>
+    <div class="contentBody">
+        <table width="600">
+            <tr>
+                <td>
+                    <strong>Város:</strong> @Model.City.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Tengerpart távolság:</strong> @Model.SeaDistance méter
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Tengerpart típus: </strong> @shoreDisplayName(Model.Shore) @* lambda-kifejezés meghívása *@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Jellemzők: </strong> @featureDisplayName(Model.Features) @* lambda-kifejezés meghívása *@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="contentComment">
+                        <strong>Elhelyezkedés:</strong> <br /><br />
+                        <div id="map"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="contentComment">
+                        <strong>Leírás:</strong> @Model.Comment
+                    </div>
+                </td>
+            </tr>
+            @if (ViewBag.Images != null && ViewBag.Images.Count > 0) // ha van kép az épülethez
+            {
+                <tr>
+                    <td>
+                        <div class="contentComment">
+                            <strong>Képek:</strong><br />
+                            @foreach (Int32 id in ViewBag.Images) // a képek azonosítóit a nézet adataihoz töltöttük be
+                            {
+                                <a asp-action="Image" asp-route-imageId="@id" asp-route-large="true" target="_blank">
+                                    @* képként betöltjük a kis méretű képet, a nagy méretűre pedig elhelyezünk egy hivatkozást *@
+                                    <img src="@Url.Action("Image", new { imageId = id })" class="contentImage" />
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <table width="600">
+        @foreach (Apartment apartment in Model.Apartments)
+        {
+            <tr>
+                <td>
+                    <div class="contentComment">
+                        <strong>
+                            @apartment.Room.
+                        </strong> @apartment.Comment
+                    </div>
+                    <div class="contentDay">
+                        <strong>Fordulónap:</strong> @dayName(apartment.Turnday)
+                    </div>
+                    <div class="contentPrice">
+                        <strong>Ár:</strong> @apartment.Price EUR/éjszaka
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@section Scripts
+{
+    <script>
+        @* betöltjük a Google térképet, és megjelöljük benne az épület elhelyezkedését *@
+        function initMap() {
+            var location = {
+                lat: @Model.LocationX.ToString("F6", CultureInfo.CreateSpecificCulture("en-US")),
+                lng: @Model.LocationY.ToString("F6", CultureInfo.CreateSpecificCulture("en-US"))
+            };
+            console.log(location)
+            @* a számot az angol szabványnak megfelelően (ponttal elválasztva) kell szöveggé konvertálnunk *@
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: location
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapsApiKey&callback=initMap">
+    </script>
+}

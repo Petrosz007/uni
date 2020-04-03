@@ -1,0 +1,51 @@
+﻿@model TodoList.Web.Models.List
+
+@{
+    ViewData["Title"] = "List Items";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th> <a asp-action="Details" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a> </th>
+            <th>Description</th>
+            <th> <a asp-action="Details" asp-route-sortOrder="@ViewData["DeadlineSortParm"]">Deadline</a> </th> 
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @if (item.Image != null)
+                        {
+                            <img src="@Url.Action("DisplayImage", "Items", new { id = item.Id })" class="item"/>
+                        }
+                    </td>
+                    <td>
+                        <b>@Html.DisplayFor(model => item.Name)</b>
+                    </td>
+                    <td style="white-space: pre-line">
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Deadline)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-controller="Items" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="CreateItem" asp-route-id="@Model.Id">Add item</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Rename list</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

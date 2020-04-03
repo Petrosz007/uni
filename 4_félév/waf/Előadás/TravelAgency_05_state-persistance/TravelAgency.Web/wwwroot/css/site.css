@@ -1,0 +1,237 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    color: #000000;
+    background-color: #ffffff;
+    text-align: center;
+    margin: 0pt;
+    padding: 0pt;
+}
+
+div.header {
+    color: #ffffff;
+    text-align: left;
+    background-color: #2266aa;
+    border-bottom: 1pt solid #000000;
+    height: 50pt;
+    width: 100%;
+    padding: 0pt;
+    margin: 0pt;
+}
+
+div.headerText {
+    float: left;
+}
+
+div.headerText h1 {
+    font-size: x-large;
+    padding: 8pt 0pt 2pt 8pt;
+    margin: 0em;
+}
+
+div.headerText h3 {
+    font-size: small;
+    text-decoration: none;
+    padding: 0pt;
+    padding-left: 8pt;
+    margin: 0em;
+}
+
+div.headerAdmin {
+    font-weight: bold;
+    position: relative;
+    float: right;
+    padding: 5pt;
+}
+
+div.headerAdmin td {
+    padding: 2pt 5pt 2pt 5pt;
+}
+
+div.headerAdmin a {
+    color: #aaccff;
+    text-decoration: underline;
+}
+
+div.headerAdmin a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+div.content {
+    padding-top: 1em;
+}
+
+div.contentText {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 14pt;
+    vertical-align: top;
+}
+
+div.content h3 {
+    font-size: medium;
+    text-decoration: none;
+    padding: 5pt 0pt 5pt 0pt;
+    margin: 0em;
+}
+
+div.leftColumn {
+    position: relative;
+    text-align: left;
+    float: left;
+    width: 160pt;
+    padding: 5pt;
+    height: 100%;
+}
+
+div.leftColumn h3 {
+    text-align: left;
+    font-size: medium;
+    color: #ffffff;
+    border: 1pt solid #000000;
+    border-bottom: none;
+    background-color: #2266aa;
+    padding: 5pt;
+}
+
+div.leftColumn ul {
+    background-color: #aaccff;
+    border: 1pt solid #000000;
+    padding: 0pt;
+    margin: 0pt;
+    list-style: none;
+}
+
+div.leftColumn ul li {
+    font-weight: bold;
+    border: 1pt solid #2266aa;
+    border-left: 10pt solid #2266aa;
+    border-right: 5pt solid #2266aa;
+    padding: 2pt 5pt 2pt 5pt;
+    margin: 0pt;
+}
+
+div.leftColumn ul li:hover {
+    font-weight: bold;
+    background-color: #ffffff;
+    border: 1pt solid #000000;
+    border-left: 10pt solid #000000;
+    border-right: 5pt solid #000000;
+    padding: 2pt 5pt 2pt 5pt;
+    margin: 0pt;
+}
+
+div.leftColumn ul li a {
+    text-decoration: none;
+    color: #000000;
+}
+
+div.rightColumn {
+    position: absolute;
+    margin-left: 180pt;
+    text-align: left;
+    padding-bottom: 20pt;
+}
+
+tr.buildingItem {
+    vertical-align: top;
+}
+
+div.buildingItemHead {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 14pt;
+    vertical-align: top;
+    text-decoration: underline;
+    padding-bottom: 5pt;
+}
+
+div.buildingItemHead a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000000;
+}
+
+div.buildingItemHead a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #2266aa;
+}
+
+div.buildingItemContent {
+    font-size: 10pt;
+}
+
+div.contentHead {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 14pt;
+    vertical-align: top;
+    text-decoration: none;
+    padding-bottom: 5pt;
+    padding-top: 10pt;
+}
+
+div.contentBody {
+    font-size: 10pt;
+    margin-bottom: 1em;
+}
+
+div.contentComment {
+    text-align: left;
+    border-top: 2pt solid #2266aa;
+    padding-top: 4pt;
+    margin-top: 10pt;
+}
+
+div.contentComment a {
+    text-decoration: none;
+}
+
+div.contentPrice {
+    text-align: right;
+}
+
+img.contentImage {
+    border: 1pt solid #000000;
+    margin: 5pt;
+}
+
+a.contentLink {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000000;
+}
+
+a.contentLink:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #2266aa;
+}
+
+input.button {
+    border: 1pt solid #000000;
+    background-color: #2266aa;
+    padding: 2pt 4pt 2pt 4pt;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.failureNotification {
+    align-content: center;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 14pt;
+    color: Red;
+    line-height: 14pt;
+    vertical-align: top;
+    text-decoration: none;
+    padding-bottom: 5pt;
+    padding-top: 10pt;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}

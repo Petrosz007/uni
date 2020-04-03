@@ -1,0 +1,20 @@
+﻿@using ELTE.TravelAgency.Web.Models
+
+@model ShoreType
+
+@* megadjuk, hogyan jelenjen meg a tengerpart típus *@
+
+@{
+    Func<ShoreType, String> shoreDisplayName = shoreType =>
+    {
+        switch (shoreType)
+        {
+            case ShoreType.Sandy: return "homokos";
+            case ShoreType.Gravelly: return "kavicsos";
+            case ShoreType.Rocky: return "sziklás";
+            default: return "?";
+        };
+    };
+}
+
+<span>@shoreDisplayName(Model)</span>

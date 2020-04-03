@@ -1,0 +1,7 @@
+﻿@using System.Globalization
+
+@model DayOfWeek
+
+@* megadjuk, hogyan jelenjen meg a hét napja *@
+
+@CultureInfo.CurrentCulture.DateTimeFormat.DayNames[(Int32)Model]

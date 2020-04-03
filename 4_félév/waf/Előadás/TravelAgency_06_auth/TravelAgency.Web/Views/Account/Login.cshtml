@@ -1,0 +1,58 @@
+﻿@using ELTE.TravelAgency.Web.Models;
+
+@model LoginViewModel
+@* majd bekérjük/megjelenítjük a foglalás adatait *@
+<form asp-controller="Account" asp-action="Login">
+    @* Automatikus védelem XSRF támadás ellen *@
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <div asp-validation-summary="ModelOnly" class="failureNotification"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="contentHead">
+                    Bejelentkezési adatok:
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Felhasználónév:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="UserName" />
+                <span asp-validation-for="UserName"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Jelszó:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="UserPassword" />
+                <span asp-validation-for="UserPassword"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120"></td>
+            <td>
+                <input asp-for="RememberLogin" />
+                Bejelentkezés megjegyzése
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height="50">
+                <input type="submit" value="Bejelentkezés" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+}

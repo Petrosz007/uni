@@ -1,0 +1,65 @@
+﻿@using ELTE.TravelAgency.Web.Models;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Az utazási iroda honlapja</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+    </environment>
+</head>
+<body>
+    <div class="header">
+        <div class="headerText">
+            <h1>
+                Az utazási iroda
+            </h1>
+            <h3>
+                A legjobb szállásfoglaló
+            </h3>
+        </div>
+    </div>
+    <div class="content">
+        <div class="leftColumn">
+            <h3>Keresés városok szerint</h3>
+            @* amennyiben nincsenek megadva a városok *@
+            @if (ViewBag.Cities == null || ViewBag.Cities.Length == 0)
+            {
+                <span>Nincs hirdetés.</span>
+            }
+            else
+            {
+                <ul>
+                    @* felsoroljuk a városokat *@
+                    @foreach (City city in ViewBag.Cities)
+                    {
+                        <li>
+                            @* létrehozunk egy linket minden városra az Index akcióra az azonosító paraméterrel *@
+                            <a asp-controller="Home" asp-action="List" asp-route-cityId="@city.Id">@city.Name</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="rightColumn">
+            @RenderBody()
+            @* betöltjük a tényleges oldal törzsét *@
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
