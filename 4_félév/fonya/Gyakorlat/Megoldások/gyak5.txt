@@ -1,0 +1,44 @@
+S → a{A,C} | bB| ε
+B → b{S,C}| ε
+C → a{S,C}  | bB
+{A,C} -> b{S,C,B} | a{S,C}
+{S,C} -> bB| ε | a{S,C,B}
+{S,C,B} -> ε | a{S,C,B} | b{S,C,B}
+
+1.
+S -> nEc
+E -> epsz | evF | e
+F -> evF | e
+
+2.
+S -> epsz | aanPcpS
+P -> epsz | aavF | aa
+F -> aavF | aa
+
+3.
+skip
+begin end
+S -> bSeS | sS | epsz
+
+szimbolumok: h, a, pr, prt, 
+e, sz, v, o("+"), k("-"), w(while), d(do), end(en)
+4.
+S -> US | epsz
+U -> E | H | W
+E -> veK
+K -> v | sz | KoK | KkK
+H -> hvPaUS
+P -> pr | prt
+W -> wvPdSen
+!x1 = 2 + !x3
+while !x2 paros do
+!x1 := 5
+..
+end
+5.a(azonosító: változók nevei),
+i(igaz:↑),h(hamis:↓),n(nyitó),c(csukó),
+g(negáció:¬),
+k(konjunkció:∧),d(diszjunkció:∨),
+m(implikáció:→),e(ekvivalencia:↔)
+
+S -> i | h | a | nSc | gS | SkS | SdS | SmS | SeS 

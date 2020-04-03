@@ -1,0 +1,19 @@
+4.
+S -> epszilon | aAb 
+A -> epszilon | aA | bA
+
+5.
+S -> aSb | ab
+
+6.
+S -> epsz | aSa | bSb | a | b
+
+7. abaabbba
+S -> epsz | aSbS | bSaS | 
+
+8.
+S -> epsz | (S)S
+
+9.
+S -> abc | aSBc
+..
