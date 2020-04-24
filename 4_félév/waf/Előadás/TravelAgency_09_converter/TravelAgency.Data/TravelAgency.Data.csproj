@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>ELTE.TravelAgency.Data</RootNamespace>
+    <Authors>Cserép Máté, Roberto Giachetta</Authors>
+    <Company>Eötvös Loránd University (ELTE), Faculty of Informatics</Company>
+  </PropertyGroup>
+
+</Project>

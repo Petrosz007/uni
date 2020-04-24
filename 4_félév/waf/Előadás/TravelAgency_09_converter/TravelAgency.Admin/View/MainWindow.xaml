@@ -1,0 +1,113 @@
+﻿<Window x:Class="ELTE.TravelAgency.Admin.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ELTE.TravelAgency.Admin"
+        xmlns:viewModel="clr-namespace:ELTE.TravelAgency.Admin.ViewModel"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="Utazási ügynökség - Épületek karbantartása" Height="450" Width="650" MinHeight="450" MinWidth="650">
+    <Window.Resources>
+        <!-- erőforrások -->
+        <x:Array Type="system:String" x:Key="shoreTypeArray">
+            <system:String>homokos</system:String>
+            <system:String>sziklás</system:String>
+            <system:String>kavicsos</system:String>
+            <system:String>aprókavicsos</system:String>
+        </x:Array>
+        <!-- szöveg elemeket tartalmazó tömb -->
+        <x:Array Type="system:String" x:Key="featureNameArray">
+            <system:String>főút</system:String>
+            <system:String>parti szolgálat</system:String>
+            <system:String>úszómedence</system:String>
+            <system:String>kert</system:String>
+            <system:String>saját parkoló</system:String>
+        </x:Array>
+        <!-- átalakítók -->
+        <viewModel:ShoreTypeConverter x:Key="shoreTypeConverter" />
+        <viewModel:SeaDistanceConverter x:Key="seaDistanceConverter" />
+        <viewModel:FeatureDisplayConverter x:Key="featureDisplayConverter"/>
+        <viewModel:FeatureConverter x:Key="featureConverter" />
+    </Window.Resources>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Adatbázis">
+                <MenuItem Header="Épületek lekérdezése" Command="{Binding LoadCommand}"/>
+                <MenuItem Header="Épületek mentése" Command="{Binding SaveCommand}" IsEnabled="{Binding IsLoaded}"/>
+                <Separator />
+                <MenuItem Header="Kilépés" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Buildings}" SelectedIndex="{Binding SelectedIndex}" CanUserSortColumns="False">
+            <!-- adatrács, amelynek megadjuk az oszlopait -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Város" Binding="{Binding City}"  />
+                <DataGridTextColumn Header="Tengerpart távolság" Binding="{Binding SeaDistance, Converter={StaticResource seaDistanceConverter}}" />
+                <!-- konverziót használunk a tengerpart távolságra -->
+                <DataGridTextColumn Header="Tengerpart" Binding="{Binding Shore, Converter={StaticResource shoreTypeConverter}, ConverterParameter={StaticResource shoreTypeArray}}" />
+                <!-- paraméterben adjuk meg a tengerpart típusokat -->
+                <DataGridTextColumn Header="Jellemzők" Binding="{Binding Features, Converter={StaticResource featureDisplayConverter}, ConverterParameter={StaticResource featureNameArray}}" />
+                <DataGridTextColumn Header="Hosszúság" Binding="{Binding LocationX}" />
+                <DataGridTextColumn Header="Szélesség" Binding="{Binding LocationY}" />
+                <DataGridTextColumn Header="Megjegyzés" Binding="{Binding Comment}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Text="Név:" Margin="5" />
+            <TextBox Width="150" Text="{Binding CurrentBuilding.Name}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+            <TextBlock Text="Város:" Margin="5" />
+            <ComboBox Width="157" ItemsSource="{Binding Cities}" SelectedItem="{Binding CurrentBuilding.City}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Orientation="Vertical">
+            <TextBlock Text="Jellemzők:" Margin="5,5,5,0" />
+            <ListBox Margin="5" IsEnabled="{Binding IsLoaded}" ItemsSource="{Binding CurrentBuilding.Features}">
+                <!-- a jellemzők listája -->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!-- amelynek minden eleme egy kijelölőmező -->
+                        <CheckBox IsChecked="{Binding IsAvailable}" Content="{Binding Id, Converter={StaticResource featureConverter}, ConverterParameter={StaticResource featureNameArray}}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Text="Tengerpart távolság:" Margin="5" />
+            <TextBox Width="65" Text="{Binding CurrentBuilding.SeaDistance, Converter={StaticResource seaDistanceConverter}}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+            <TextBlock Text="Tengerpart típus:" Margin="5" />
+            <ComboBox Width="100" SelectedItem="{Binding CurrentBuilding.Shore, Converter={StaticResource shoreTypeConverter}, ConverterParameter={StaticResource shoreTypeArray}}" ItemsSource="{StaticResource shoreTypeArray}" Margin="5" IsEnabled="{Binding IsLoaded}" />            
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <TextBlock Text="Hosszúság:" Margin="5" />
+            <TextBox Width="60" Text="{Binding CurrentBuilding.LocationX}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+            <TextBlock Text="Szélesség:" Margin="5" />
+            <TextBox Width="60" Text="{Binding CurrentBuilding.LocationY}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <TextBlock Text="Megjegyzés:" Margin="5" />
+            <TextBox Width="315" Text="{Binding CurrentBuilding.Comment}" Margin="5" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
+            <Button Content="Új hozzáadása" Margin="6,5,0,5" Command="{Binding CreateBuildingCommand}" Width="114" />
+            <Button Content="Kijelölt módosítása" Margin="6,5,0,5" Command="{Binding UpdateBuildingCommand}" Width="114" />
+            <Button Content="Kijelölt törlése" Margin="6,5,6,5" Command="{Binding DeleteBuildingCommand}" Width="114" />
+        </StackPanel>
+    </Grid>
+</Window>

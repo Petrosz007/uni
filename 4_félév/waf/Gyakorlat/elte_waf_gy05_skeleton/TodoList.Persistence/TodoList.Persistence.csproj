@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+	<Authors>Fekete Anett, Cserép Máté, Kis Dávid</Authors>
+	<Product>TodoList3</Product>
+	<Company>ELTE, Faculty of Informatics</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TravelAgency.Service</name>
+    </assembly>
+    <members>
+        <member name="T:ELTE.TravelAgency.Service.Controllers.BuildingsController">
+            <summary>
+            Épületek lekérdezését és módosítását biztosító vezérlő.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.#ctor(ELTE.TravelAgency.Service.Models.TravelAgencyContext)">
+            <summary>
+            Vezérlő példányosítása.
+            </summary>
+            <param name="context">Entitásmodell.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuildings">
+            <summary>
+            Épületek lekérdezése.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuilding(System.Int32)">
+            <summary>
+            Épület lekérdezése.
+            </summary>
+            <param name="id">Épület azonosító.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuildingForCity(System.Int32)">
+            <summary>
+            Épületek lekérdezése.
+            </summary>
+            <param name="id">Város azonosító.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.PostBuilding(ELTE.TravelAgency.Data.BuildingDTO)">
+            <summary>
+            Új épület létrehozása.
+            </summary>
+            <param name="buildingDTO">Épület.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.PutBuilding(ELTE.TravelAgency.Data.BuildingDTO)">
+            <summary>
+            Épület módosítása.
+            </summary>
+            <param name="buildingDTO">Épület.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.DeleteBuilding(System.Int32)">
+            <summary>
+            Épület törlése.
+            </summary>
+            <param name="id">Épület azonosító.</param>
+        </member>
+        <member name="T:ELTE.TravelAgency.Service.Models.Guest">
+            <summary>
+            Vendég.
+            </summary>
+        </member>
+        <member name="P:ELTE.TravelAgency.Service.Models.Guest.Name">
+            <summary>
+            Teljes név.
+            </summary>
+        </member>
+        <member name="P:ELTE.TravelAgency.Service.Models.Guest.Address">
+            <summary>
+            Cím.
+            </summary>
+        </member>
+        <member name="P:ELTE.TravelAgency.Service.Models.Guest.Rents">
+            <summary>
+            Foglalások.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Models.Rent.IsConflicting(System.DateTime,System.DateTime)">
+            <summary>
+            Ütközik-e egy másik foglalással.
+            </summary>
+            <param name="startDate">A foglalás kezdete.</param>
+            <param name="endDate">A foglalás vége.</param>
+            <returns>Igaz, ha ütközik, egyébként hamis.</returns>
+        </member>
+    </members>
+</doc>
