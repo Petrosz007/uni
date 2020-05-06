@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /nagyandras95/fonya_ford/fordprog/3-szemantikus</title>
+ </head>
+ <body>
+<h1>Index of /nagyandras95/fonya_ford/fordprog/3-szemantikus</h1>
+  <table>
+   <tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=A">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=D">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+   <tr><th colspan="5"><hr></th></tr>
+<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/nagyandras95/fonya_ford/fordprog/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="test/">test/</a></td><td align="right">2020-04-21 13:27  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test.ok">test.ok</a></td><td align="right">2020-04-22 14:24  </td><td align="right">261 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="Makefile">Makefile</a></td><td align="right">2020-04-21 13:20  </td><td align="right">345 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="implementation.hh">implementation.hh</a></td><td align="right">2020-04-22 14:10  </td><td align="right">663 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="while.cc">while.cc</a></td><td align="right">2020-04-21 13:20  </td><td align="right">1.0K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="implementation.cc">implementation.cc</a></td><td align="right">2020-04-22 14:25  </td><td align="right">1.6K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="while.l">while.l</a></td><td align="right">2020-04-21 15:37  </td><td align="right">3.0K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="stack.hh">stack.hh</a></td><td align="right">2020-04-22 14:25  </td><td align="right">3.4K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="while.y">while.y</a></td><td align="right">2020-04-22 14:24  </td><td align="right">3.9K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="position.hh">position.hh</a></td><td align="right">2020-04-22 14:25  </td><td align="right">4.7K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="location.hh">location.hh</a></td><td align="right">2020-04-22 14:25  </td><td align="right">5.1K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="while.tab.hh">while.tab.hh</a></td><td align="right">2020-04-22 14:25  </td><td align="right"> 22K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="while.tab.cc">while.tab.cc</a></td><td align="right">2020-04-22 14:25  </td><td align="right"> 43K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="lex.yy.cc">lex.yy.cc</a></td><td align="right">2020-04-22 11:40  </td><td align="right"> 52K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="while">while</a></td><td align="right">2020-04-22 14:25  </td><td align="right">107K</td><td>&nbsp;</td></tr>
+   <tr><th colspan="5"><hr></th></tr>
+</table>
+</body></html>

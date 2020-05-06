@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /nagyandras95/fonya_ford/fordprog/3-szemantikus/test</title>
+ </head>
+ <body>
+<h1>Index of /nagyandras95/fonya_ford/fordprog/3-szemantikus/test</h1>
+  <table>
+   <tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=A">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=D">Description</a></th></tr>
+   <tr><th colspan="5"><hr></th></tr>
+<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/nagyandras95/fonya_ford/fordprog/3-szemantikus/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="01.lexical_error">01.lexical_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 25 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="01.semantic_error">01.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">301 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="01.syntax_error">01.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">456 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="02.semantic_error">02.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">300 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="02.syntax_error">02.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">456 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="03.semantic_error">03.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">300 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="03.syntax_error">03.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="04.semantic_error">04.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">302 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="04.syntax_error">04.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="05.semantic_error">05.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">282 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="05.syntax_error">05.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="06.semantic_error">06.semantic_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">296 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="06.syntax_error">06.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="07.syntax_error">07.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="08.syntax_error">08.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="09.syntax_error">09.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="10.syntax_error">10.syntax_error</a></td><td align="right">2020-04-21 13:20  </td><td align="right">455 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_arithmetic.ok">test_arithmetic.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">337 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_arithmetic.out">test_arithmetic.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 77 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_assignment.ok">test_assignment.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">258 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_assignment.out">test_assignment.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 15 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_branching.ok">test_branching.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">318 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_branching.out">test_branching.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right">  6 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_divisor.in">test_divisor.in</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 26 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_divisor.ok">test_divisor.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">454 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_divisor.out">test_divisor.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 42 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_logic.ok">test_logic.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">312 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_logic.out">test_logic.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 60 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_looping.in">test_looping.in</a></td><td align="right">2020-04-21 13:20  </td><td align="right">  6 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_looping.ok">test_looping.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">220 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_looping.out">test_looping.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 12 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_read.ok">test_read.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right">148 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_read.out">test_read.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 14 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_write_boolean.ok">test_write_boolean.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 70 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_write_boolean.out">test_write_boolean.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 11 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_write_natural.ok">test_write_natural.ok</a></td><td align="right">2020-04-21 13:20  </td><td align="right"> 51 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="test_write_natural.out">test_write_natural.out</a></td><td align="right">2020-04-21 13:20  </td><td align="right">  3 </td><td>&nbsp;</td></tr>
+   <tr><th colspan="5"><hr></th></tr>
+</table>
+</body></html>

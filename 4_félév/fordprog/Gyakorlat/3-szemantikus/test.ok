@@ -1,0 +1,14 @@
+program test
+  natural a
+  boolean b
+  boolean c
+  date d
+begin
+  #b := a > 5 ? b : c
+  #repeat a := a + 1 until a < 10
+  #for i from 1 upto 10 do write(i) done
+  #for i from 10+2 downto 2-1 do write(i) done
+  d := 1995-01-01
+  d := d + 11
+  a := getYear(d)
+end
