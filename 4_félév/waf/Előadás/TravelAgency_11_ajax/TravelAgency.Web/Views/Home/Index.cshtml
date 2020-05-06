@@ -1,0 +1,44 @@
+﻿@using ELTE.TravelAgency.Model
+
+@model IList<Building>
+@* csak a törzset adjuk meg *@
+
+@* amennyiben nem töltöttünk semmilyen adatot *@
+@if (Model == null || !Model.Any())
+{
+    <div class="contentText">Jelenleg nincs elérhető szálláshely.</div>
+}
+else
+{
+    <table>
+        @* felsoroljuk az épületeket (egy sorban kettőt) *@
+        @for (Int32 i = 0; i < (Model.Count + 1) / 2; i++)
+        {
+            <tr>
+                @for (Int32 j = i * 2; j < i * 2 + 2 && j < Model.Count; j++)
+                {
+                    <td>
+                        <table border="0" width="300">
+                            <tr class="buildingItem">
+                                <td>
+                                    <img src="@Url.Action("ImageForBuilding", new {buildingId = Model[j].Id})" class="contentImage" />
+                                    @* betöltjük az épület képét is *@
+                                </td>
+                                <td>
+                                    <div class="buildingItemHead">
+                                        <a asp-action="Details" asp-route-buildingId="@Model[j].Id">@Model[j].Name</a>
+                                    </div>
+                                    <div class="buildingItemContent">
+                                        <strong>Város: </strong>@Model[j].City.Name<br />
+                                        <strong>Leírás: </strong>@Model[j].Comment.Substring(0, Model[j].Comment.IndexOf(".") + 1)
+                                        @* a kommentnek csak az első mondatát írjuk ki *@
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}

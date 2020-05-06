@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TravelAgency.Service</name>
+    </assembly>
+    <members>
+        <member name="T:ELTE.TravelAgency.Service.Controllers.AccountController">
+            <summary>
+            Felhasználókezelést biztosító vezérlő.
+            </summary>
+        </member>
+        <member name="F:ELTE.TravelAgency.Service.Controllers.AccountController._signInManager">
+            <summary>
+            Authentikációs szolgáltatás.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.SignInManager{ELTE.TravelAgency.Model.Guest})">
+            <summary>
+            Vezérlő példányosítása.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.AccountController.Login(System.String,System.String)">
+            <summary>
+            Bejelentkezés.
+            </summary>
+            <param name="userName">Felhasználónév.</param>
+            <param name="userPassword">Jelszó.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.AccountController.Logout">
+            <summary>
+            Kijelentkezés.
+            </summary>
+        </member>
+        <member name="T:ELTE.TravelAgency.Service.Controllers.BuildingImagesController">
+            <summary>
+            Épületek képeinek kezelését biztosító vezérlő.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingImagesController.#ctor(ELTE.TravelAgency.Model.TravelAgencyContext)">
+            <summary>
+            Vezérlő példányosítása.
+            </summary>
+            <param name="context">Entitásmodell.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingImagesController.GetImages(System.Int32)">
+            <summary>
+            Egy épület képeinek lekérdezése.
+            </summary>
+            <param name="buildingId">Épület azonosító.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingImagesController.GetImage(System.Int32)">
+            <summary>
+            Egy kép lekérdezése.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingImagesController.PostImage(ELTE.TravelAgency.Data.ImageDTO)">
+            <summary>
+            Kép feltöltése.
+            </summary>
+            <param name="image">Kép.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingImagesController.DeleteImage(System.Int32)">
+            <summary>
+            Kép törlése.
+            </summary>
+            <param name="id">A kép azonosítója.</param>
+        </member>
+        <member name="T:ELTE.TravelAgency.Service.Controllers.BuildingsController">
+            <summary>
+            Épületek lekérdezését és módosítását biztosító vezérlő.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.#ctor(ELTE.TravelAgency.Model.TravelAgencyContext)">
+            <summary>
+            Vezérlő példányosítása.
+            </summary>
+            <param name="context">Entitásmodell.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuildings">
+            <summary>
+            Épületek lekérdezése.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuilding(System.Int32)">
+            <summary>
+            Épület lekérdezése.
+            </summary>
+            <param name="id">Épület azonosító.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.GetBuildingForCity(System.Int32)">
+            <summary>
+            Épületek lekérdezése.
+            </summary>
+            <param name="id">Város azonosító.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.PostBuilding(ELTE.TravelAgency.Data.BuildingDTO)">
+            <summary>
+            Új épület létrehozása.
+            </summary>
+            <param name="buildingDTO">Épület.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.PutBuilding(ELTE.TravelAgency.Data.BuildingDTO)">
+            <summary>
+            Épület módosítása.
+            </summary>
+            <param name="buildingDTO">Épület.</param>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.BuildingsController.DeleteBuilding(System.Int32)">
+            <summary>
+            Épület törlése.
+            </summary>
+            <param name="id">Épület azonosító.</param>
+        </member>
+        <member name="T:ELTE.TravelAgency.Service.Controllers.CitiesController">
+            <summary>
+            Városok lekérdezését biztosító vezérlő.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.CitiesController.#ctor(ELTE.TravelAgency.Model.TravelAgencyContext)">
+            <summary>
+            Vezérlő példányosítása.
+            </summary>
+        </member>
+        <member name="M:ELTE.TravelAgency.Service.Controllers.CitiesController.GetCities">
+            <summary>
+            Városok lekérdezése.
+            </summary>
+        </member>
+    </members>
+</doc>

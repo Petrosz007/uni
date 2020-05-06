@@ -1,0 +1,9 @@
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\bin\Debug\netstandard2.0\TravelAgency.Data.deps.json
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\bin\Debug\netstandard2.0\TravelAgency.Data.dll
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\bin\Debug\netstandard2.0\TravelAgency.Data.pdb
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.csprojAssemblyReference.cache
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.csproj.CoreCompileInputs.cache
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.AssemblyInfoInputs.cache
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.AssemblyInfo.cs
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.dll
+F:\Anyagok\4_félév\waf\Előadás\TravelAgency_10_auth\TravelAgency.Data\obj\Debug\netstandard2.0\TravelAgency.Data.pdb

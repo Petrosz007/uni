@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "S1Gb3I4b5rx1UxhBfpp+3vqE3UlaWDq9trn8FKJLTEjXOwD0SivST1oqoEqIKq73m8vigoKhnK6eM5IhqXPkBw==",
+  "success": true,
+  "projectFilePath": "F:\\Anyagok\\4_félév\\waf\\Előadás\\TravelAgency_10_auth\\TravelAgency.Data\\TravelAgency.Data.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Petrosz\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Petrosz\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,25 @@
+﻿@using ELTE.TravelAgency.Data
+
+@model Feature
+
+@* megadjuk, hogyan jelenjen meg a tengerpart típus *@
+
+@{
+    Func<Feature, String> featureDisplayName = features =>
+    {
+        var featureTexts = new List<string>();
+        if ((features & Feature.MainRoad) > 0)
+            featureTexts.Add("főút");
+        if ((features & Feature.CoastService) > 0)
+            featureTexts.Add("parti szolgálat");
+        if ((features & Feature.SwimmingPool) > 0)
+            featureTexts.Add("úszómedence");
+        if ((features & Feature.Garden) > 0)
+            featureTexts.Add("kert");
+        if ((features & Feature.PrivateParking) > 0)
+            featureTexts.Add("saját parkoló");
+        return string.Join(", ", featureTexts);
+    };
+}
+
+<span>@featureDisplayName(Model)</span>

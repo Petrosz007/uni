@@ -1,0 +1,97 @@
+﻿<Window x:Class="ELTE.TravelAgency.Admin.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:ELTE.TravelAgency.Admin.ViewModel"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="Utazási ügynökség - Épületek karbantartása" Height="450" Width="650" MinHeight="450" MinWidth="650">
+    <Window.Resources>
+        <!-- erőforrások -->
+        <x:Array Type="system:String" x:Key="shoreTypeArray">
+          <system:String>homokos</system:String>
+          <system:String>sziklás</system:String>
+          <system:String>kavicsos</system:String>
+          <system:String>aprókavicsos</system:String>
+        </x:Array>
+        <!-- szöveg elemeket tartalmazó tömb -->
+        <x:Array Type="system:String" x:Key="featureNameArray">
+          <system:String>főút</system:String>
+          <system:String>parti szolgálat</system:String>
+          <system:String>úszómedence</system:String>
+          <system:String>kert</system:String>
+          <system:String>saját parkoló</system:String>
+        </x:Array>
+        <!-- átalakítók -->
+        <viewModel:ShoreTypeConverter x:Key="shoreTypeConverter" />
+        <viewModel:SeaDistanceConverter x:Key="seaDistanceConverter" />
+        <viewModel:FeatureDisplayConverter x:Key="featureDisplayConverter"/>
+        <viewModel:BuildingImageConverter x:Key="buildingImageConverter"/>
+    </Window.Resources>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Adatbázis">
+                <MenuItem Header="Épületek lekérdezése" Command="{Binding LoadCommand}"/>
+                <MenuItem Header="Épületek mentése" Command="{Binding SaveCommand}" IsEnabled="{Binding IsLoaded}"/>
+                <Separator />
+                <MenuItem Header="Kilépés" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Name="buildingGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Buildings}" SelectedItem="{Binding SelectedBuilding}">
+            <!-- adatrács, amelynek megadjuk az oszlopait -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Város" Binding="{Binding City}"  />
+              <DataGridTextColumn Header="Tengerpart távolság" Binding="{Binding SeaDistance, Converter={StaticResource seaDistanceConverter}}" />
+                <!-- konverziót használunk a tengerpart távolságra -->
+                <DataGridTextColumn Header="Tengerpart" Binding="{Binding Shore, Converter={StaticResource shoreTypeConverter}, ConverterParameter={StaticResource shoreTypeArray}}" />
+                <!-- paraméterben adjuk meg a tengerpart típusokat -->
+                <DataGridTextColumn Header="Jellemzők" Binding="{Binding Features, Converter={StaticResource featureDisplayConverter}, ConverterParameter={StaticResource featureNameArray}}" />
+                <DataGridTextColumn Header="Hosszúság" Binding="{Binding LocationX}" />
+                <DataGridTextColumn Header="Szélesség" Binding="{Binding LocationY}" />
+                <DataGridTextColumn Header="Megjegyzés" Binding="{Binding Comment}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+            <Button Content="Új hozzáadása" Margin="6,5,0,5" Command="{Binding CreateBuildingCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Kijelölt módosítása" Margin="6,5,0,5" Command="{Binding UpdateBuildingCommand}" CommandParameter="{Binding SelectedBuilding}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Kijelölt törlése" Margin="6,5,6,5" Command="{Binding DeleteBuildingCommand}" CommandParameter="{Binding SelectedBuilding}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="imageListBox" ItemsSource="{Binding ElementName=buildingGrid, Path=SelectedItem.Images}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <!-- az épülethez tartozó képeket egy listába helyezzük, amely vízszintesen görgethető -->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                    <!-- megadjuk, hogy az elemeket vízszintesen helyezze el -->
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="100" Width="Auto" Source="{Binding ImageSmall, Converter={StaticResource buildingImageConverter}}" />
+                    <!-- képmegjelenítőt használunk konverzióval -->
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Content="Új kép hozzáadása" Margin="6,5,0,5" Command="{Binding CreateImageCommand}" CommandParameter="{Binding SelectedBuilding}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Kijelölt kép törlése" Margin="0,5,6,5" Command="{Binding DeleteImageCommand}" CommandParameter="{Binding ElementName=imageListBox, Path=SelectedItem}" HorizontalAlignment="Right" Width="120" IsEnabled="{Binding IsLoaded}" />
+        </Grid>        
+    </Grid>
+</Window>

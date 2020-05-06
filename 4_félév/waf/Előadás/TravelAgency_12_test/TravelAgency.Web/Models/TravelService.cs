@@ -1,0 +1,286 @@
+﻿using ELTE.TravelAgency.Model;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace ELTE.TravelAgency.Web.Models
+{
+    /// <summary>
+    /// Az utazással kapcsolatos szolgáltatások típusa.
+    /// </summary>
+    public class TravelService : ITravelService
+    {
+        private readonly TravelAgencyContext _context;
+        private readonly UserManager<Guest> _userManager;
+        private readonly RentDateValidator _rentDateValidator;
+
+        public TravelService(TravelAgencyContext context, UserManager<Guest> userManager)
+        {
+	        _context = context;
+            _userManager = userManager;
+            _rentDateValidator = new RentDateValidator(_context);
+        }
+
+		/// <summary>
+		/// Városok lekérdezése.
+		/// 
+		/// Betöltjük az épületek mellett a városok adatait is.
+		/// </summary>
+		public IEnumerable<Building> Buildings => _context.Buildings.Include(b => b.City);
+
+		/// <summary>
+		/// Épületek lekérdezése.
+		/// </summary>
+		public IEnumerable<City> Cities => _context.Cities;
+
+		/// <summary>
+		/// Épület lekérdezése.
+		/// 
+		/// Betöltjük az épület mellett a város és az apartmanjai adatait is.
+		/// </summary>
+		/// <param name="buildingId">Épület azonosítója.</param>
+		public Building GetBuilding(Int32? buildingId)
+        {
+            if (buildingId == null)
+                return null;
+
+            return _context.Buildings
+	            .Include(b => b.City)
+	            .Include(b => b.Apartments)
+	            .FirstOrDefault(building => building.Id == buildingId);
+        }
+
+        /// <summary>
+        /// Épületek lekérdezése.
+        /// </summary>
+        /// <param name="cityId">Város azonosítója.</param>
+        public IEnumerable<Building> GetBuildings(Int32? cityId)
+        {
+            if (cityId == null || !_context.Buildings.Any(building => building.CityId == cityId))
+                return null;
+
+            return _context.Buildings.Where(building => building.CityId == cityId);
+        }
+
+        /// <summary>
+        /// Épület lekérdezése apartmanokkal.
+        /// </summary>
+        /// <param name="buildingId">Épület azonosítója.</param>
+        public Building GetBuildingWithApartments(Int32? buildingId)
+        {
+            if (buildingId == null)
+                return null;
+
+            return _context.Buildings
+	            .Include(b => b.City)
+	            .Include(b => b.Apartments)
+	            .FirstOrDefault(b => b.Id == buildingId);
+        }
+
+        /// <summary>
+        /// Épület képek azonosítóinak lekérdezése.
+        /// </summary>
+        /// <param name="buildingId">Épület azonosítója.</param>
+        public IEnumerable<Int32> GetBuildingImageIds(Int32? buildingId)
+        {
+            if (buildingId == null)
+                return null;
+
+            return _context.BuildingImages
+	            .Where(image => image.BuildingId == buildingId)
+	            .Select(image => image.Id);
+        }
+
+        /// <summary>
+        /// Épület főképének lekérdezése.
+        /// </summary>
+        /// <param name="buildingId">Épület azonosítója.</param>
+        public Byte[] GetBuildingMainImage(Int32? buildingId)
+        {
+            if (buildingId == null)
+                return null;
+
+            // lekérjük az épület első tárolt képjét (kicsiben)
+            return _context.BuildingImages
+	            .Where(image => image.BuildingId == buildingId)
+	            .Select(image => image.ImageSmall)
+	            .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Épület képének lekérdezése.
+        /// </summary>
+        /// <param name="imageId">Kép azonosítója.</param>
+        /// <param name="large">Nagy kép letöltése.</param>
+        public Byte[] GetBuildingImage(Int32? imageId, Boolean large)
+        {
+            if (imageId == null)
+                return null;
+
+			// lekérjük a képet a kért méretben (kicsi, nagy)
+	        Byte[] imageContent = _context.BuildingImages
+				.Where(image => image.Id == imageId)
+	            .Select(image => large ? image.ImageLarge : image.ImageSmall)
+	            .FirstOrDefault();
+
+			// Amennyiben a kép a megadott azonosítóval nem létezett, null-lal térünk vissza
+	        return imageContent;
+        }
+
+        /// <summary>
+        /// Apartman lekérdezése.
+        /// </summary>
+        /// <param name="apartmentId">Apartman azonosítója.</param>
+        public Apartment GetApartment(Int32? apartmentId)
+        {
+            if (apartmentId == null)
+                return null;
+
+            return _context.Apartments
+				.Include(a => a.Building) // betöltjük az apartmanhoz az épületeket
+	            .ThenInclude(b => b.City) // az épülethez pedig a várost
+				.FirstOrDefault(apartment => apartment.Id == apartmentId);
+
+		}
+
+        /// <summary>
+        /// Foglalás létrehozása.
+        /// </summary>
+        /// <param name="apartmentId">Apartman azonosítója.</param>
+        public RentViewModel NewRent(Int32? apartmentId)
+        {
+            if (apartmentId == null)
+                return null;
+
+            Apartment apartment = _context.Apartments
+	            .Include(a => a.Building) // betöltjük az apartmanokhoz az épületeket
+				.ThenInclude(b => b.City) // az épületekhez pedig a városokat
+	            .FirstOrDefault(ap => ap.Id == apartmentId);
+
+            RentViewModel rent = new RentViewModel { Apartment = apartment }; // létrehozunk egy új foglalást, amelynek megadjuk az apartmant
+
+            // beállítunk egy foglalást, amely a következő megfelelő fordulónappal (minimum 1 héttel később), és egy hetes időtartammal rendelkezik
+            rent.RentStartDate = DateTime.Today + TimeSpan.FromDays(7);
+            while (rent.RentStartDate.DayOfWeek != apartment.Turnday)
+                rent.RentStartDate += TimeSpan.FromDays(1);
+
+            rent.RentEndDate = rent.RentStartDate + TimeSpan.FromDays(7);
+
+            return rent;
+        }
+
+		/// <summary>
+		/// Foglalás mentése.
+		/// </summary>
+		/// <param name="apartmentId">Apartman azonosítója.</param> 
+		/// <param name="userName">Felhasználónév.</param>
+		/// <param name="rent">Foglalás adatai.</param>
+		/// <returns>Sikeres volt-e a foglalás.</returns>
+		public async Task<Boolean> SaveRentAsync(Int32? apartmentId, String userName, RentViewModel rent)
+        {
+            if (apartmentId == null || rent == null)
+                return false;
+
+            // ellenőrizzük az annotációkat
+            if (!Validator.TryValidateObject(rent, new ValidationContext(rent, null, null), null))
+                return false;
+
+            // ellenőrizzük a dátumot
+            if (_rentDateValidator.Validate(rent.RentStartDate, rent.RentEndDate, apartmentId.Value) != RentDateError.None)
+                return false;
+
+			// a felhasználót a név alapján betöltjük
+            Guest guest = await _userManager.FindByNameAsync(userName);
+
+	        if (guest == null)
+		        return false;
+
+			_context.Rents.Add(new Rent
+            {
+                ApartmentId = rent.Apartment.Id,
+                UserId = guest.Id,
+                StartDate = rent.RentStartDate,
+                EndDate = rent.RentEndDate
+            });
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch(Exception)
+            {
+                // mentéskor lehet hiba
+                return false;
+            }
+
+            // ha idáig eljutottunk, minden sikeres volt
+            return true;
+        }
+
+	    /// <summary>
+	    /// Foglalás dátumainak ellenőrzése.
+	    /// </summary>
+	    /// <param name="start">Foglalás kezdete.</param>
+	    /// <param name="end">Foglalás vége.</param>
+	    /// <param name="apartmentId">Apartman azonosítója.</param>
+		public RentDateError ValidateRent(DateTime start, DateTime end, int? apartmentId)
+	    {
+		    if (apartmentId == null)
+			    return RentDateError.None;
+
+		    return _rentDateValidator.Validate(start, end, apartmentId.Value);
+	    }
+
+	    /// <summary>
+	    /// Foglalás árának lekérdezése.
+	    /// </summary>
+	    /// <param name="apartmentId">Apartman azonosítója.</param>
+	    /// <param name="rent">Foglalás adatai.</param>
+	    public Int32 GetPrice(Int32? apartmentId, RentViewModel rent)
+	    {
+		    if (apartmentId == null || rent == null || rent.Apartment == null)
+			    return 0;
+
+		    return rent.Apartment.Price * Convert.ToInt32((rent.RentEndDate - rent.RentStartDate).TotalDays);
+	    }
+
+        /// <summary>
+        /// Adott adott hónap szabad napjainak lekérdezése.
+        /// </summary>
+        /// <param name="apartmentId">Apartman azonosító.</param>
+        /// <param name="year">Az év.</param>
+        /// <param name="month">A hónap.</param>
+        /// <returns>Az adott hónap szabad napjai egy gyűjteményben.</returns>
+        public IEnumerable<DateTime> GetRentDates(Int32 apartmentId, Int32 year, Int32 month)
+        {
+            List<DateTime> isAvailable = new List<DateTime>();
+
+            // veszünk egy kellően nagy intervallumot
+            DateTime start = new DateTime(year, month, 1) - TimeSpan.FromDays(50);
+            DateTime end = new DateTime(year, month, 1) + TimeSpan.FromDays(80);
+
+            // ha a mainál korábbi dátum van megadva, üres listát adunk vissza
+            if (end < DateTime.Today)
+                return isAvailable;
+
+            // lehetséges ütközések lekérdezése
+            List<Rent> possibleConflicts = _context.Rents.Where(r => r.ApartmentId == apartmentId && r.StartDate <= end && r.EndDate >= start).ToList();
+
+            // végignézzük az összes napot
+            for (DateTime date = start; date < end; date += TimeSpan.FromDays(1))
+            {
+                if (date > DateTime.Today &&
+                    possibleConflicts.All(r => !r.IsConflicting(date)))
+                {
+                    isAvailable.Add(date);
+                }
+            }
+
+            return isAvailable;
+        }
+    }
+}

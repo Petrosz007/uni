@@ -1,0 +1,106 @@
+﻿@using ELTE.TravelAgency.Model;
+
+@model RegistrationViewModel
+@* majd bekérjük/megjelenítjük a foglalás adatait *@
+<form asp-controller="Account" asp-action="Register">
+    @* Automatikus védelem XSRF támadás ellen *@
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <div class="failureNotification">@Html.ValidationSummary(true, "A regisztráció sikertelen!")</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="contentHead">
+                    Személyes adatok:
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Név:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestName" size="40" />
+                <span asp-validation-for="GuestName"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="120">
+                Számlázási cím:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestAddress" size="40" />
+                <span asp-validation-for="GuestAddress"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                E-mail cím:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestEmail" size="40" />
+                <span asp-validation-for="GuestEmail"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="120">
+                Telefonszám:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestPhoneNumber" size="40" />
+                <span asp-validation-for="GuestPhoneNumber"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="contentHead">
+                    Bejelentkezési adatok:
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Felhasználónév:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="UserName" />
+                <span asp-validation-for="UserName"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Jelszó:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="UserPassword" />
+                <span asp-validation-for="UserPassword"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Jelszó megismétlése:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="UserConfirmPassword" />
+                <span asp-validation-for="UserConfirmPassword"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" height="70">
+                <br />A felhasználónév és a jelszó minimum 5, maximum 40 karakter hosszú lehet. Csak betűt, számot és kötőjelet tartalmathat.<br /><br />
+                <input type="submit" value="Regisztráció" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+}

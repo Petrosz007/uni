@@ -1,0 +1,229 @@
+﻿@using ELTE.TravelAgency.Model;
+
+@model RentViewModel
+@* a dátum beállítását egy dátumkiválasztóval segítjük elő, amely a szervertől (webszolgáltatástól) kérdezi le a megfelelő dátumokat *@
+<environment include="Development">
+    <script src="@Url.Content("~/lib/glDatePicker/glDatePicker.js")"></script>
+</environment>
+<environment exclude="Development">
+    <script src="@Url.Content("~/lib/glDatePicker/glDatePicker.min.js")"></script>
+</environment>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        var today = new Date("@Model.RentStartDate.ToString("yyyy-MM-dd")");
+
+        @* segédfüggény a webszolgáltatás válaszának konvertálására *@
+        var parseDates = function (data)
+        {
+            var dates = new Array(data.length);
+
+            for (var index = 0; index < data.length; ++index) {
+                dates[index] =
+                {
+                    date: new Date(data[index])
+                };
+            }
+
+            return dates;
+        };
+
+        @* dátumkiválaszó elemek konfigurációja *@
+        var startDatePickerConfiguration =
+        {
+            cssName: "flatwhite",
+            monthNames: ["január", "február", "március", "április", "május", "június", "július", "augusztus", "szeptember", "október", "november", "december"],
+            dowNames: ["V", "H", "K", "Sz", "Cs", "P", "Sz"],
+            selectedDate: today,
+            dowOffset: 1,
+            onUpdate: function (options)
+            {
+                @* ha nem lenne érvényes dátum *@
+                if (options.firstDate == null)
+                    return;
+
+                var year = options.firstDate.getFullYear();
+                var month = options.firstDate.getMonth() + 1;
+
+                @* meghívjuk a webszolgáltatást, és az adatok alapján frissítjük a kiválasztható dátumokat *@
+                jQuery.getJSON("api/rentdate/" + @Model.Apartment.Id + "/" + year + "/" + month,
+                     function (data)
+                     {
+                         options.selectableDates = parseDates(data);
+                     });
+            },
+            onClick: function(el, cell, date, data)
+            {
+                el.val(date.toISOString().substr(0, 10));
+
+                var defaultEndDate = new Date();
+                defaultEndDate.setDate(date.getDate() + 1);
+
+                @* ha változott a kezdődátum, akkor újraállítjuk a vége dátumot is, amennyiben szükséges *@
+                if (new Date($('#RentEndDate').value) < defaultEndDate)
+                    $('#RentEndDate').value = defaultEndDate.toLocaleDateString();
+            }
+        };
+
+        var endDatePickerConfiguration = jQuery.extend(true,
+        {
+            selectedDate: new Date("@Model.RentEndDate.ToString("yyyy-MM-dd")"),
+            onClick: function (el, cell, date, data)
+            {
+                el.val(date.toISOString().substr(0, 10));
+            }
+        }, startDatePickerConfiguration);
+
+        @* létrehozzuk a dátumkiválasztókat *@
+        var startDatePicker = $('#RentStartDate').glDatePicker(startDatePickerConfiguration).glDatePicker(true);
+        var endDatePicker = $('#RentEndDate').glDatePicker(endDatePickerConfiguration).glDatePicker(true);
+
+        @* beállítjuk a kezdetben kiválasztható dátumokat *@
+
+        jQuery.getJSON("api/rentdate/" + @Model.Apartment.Id + "/" + today.getFullYear() + "/" + today.getMonth(),
+            function (data)
+            {
+                startDatePicker.options.selectableDates = parseDates(data);
+                endDatePicker.options.selectableDates = parseDates(data);
+
+                startDatePicker.render();
+                endDatePicker.render();
+            });
+    });
+</script>
+
+@* megjelenítjük az apartman adatait *@
+
+<div class="contentHead">@Model.Apartment.Building.Name</div>
+<div class="contentBody">
+    <table width="600">
+        <tr>
+            <td>
+                <strong>Város:</strong> @Model.Apartment.Building.City.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Tengerpart távolság:</strong> @Model.Apartment.Building.SeaDistance méter
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Tengerpart típus: </strong> @Html.DisplayFor(r => r.Apartment.Building.Shore) @* meghívjuk az egyedi megjelenítőnket *@
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Jellemzők: </strong> @Html.DisplayFor(r => r.Apartment.Building.Features) @* meghívjuk az egyedi megjelenítőnket *@
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="contentComment">
+                    <strong>
+                        @Model.Apartment.Room.
+                    </strong> @Model.Apartment.Comment
+                </div>
+                <div class="contentDay">
+                    <strong>Fordulónap:</strong> @Html.DisplayFor(r => r.Apartment.Turnday) @* meghívjuk az egyedi megjelenítőnket *@
+                </div>
+                <div class="contentPrice">
+                    <strong>Ár:</strong> @Model.Apartment.Price EUR/éjszaka
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    @* majd bekérjük/megjelenítjük a foglalás adatait *@
+    <form asp-controller="Rent" asp-action="Index" asp-route-apartmentId="@Model.Apartment.Id">
+        @* Automatikus védelem XSRF támadás ellen *@
+
+        <table>
+            <tr>
+                <td colspan="2" valign="middle">
+                    @* globális modellhibák megjelenítése *@
+                    <div asp-validation-summary="ModelOnly" class="failureNotification"></div>
+
+                    <div class="contentHead">
+                        Személyes adatok:
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="120">
+                    Név:
+                </td>
+                <td class="failureNotification">
+                    <input asp-for="GuestName" size="40" />
+                    @* szövegbeviteli mezőt generálunk, amelynek megadjuk a méretét is *@
+                    <span asp-validation-for="GuestName"></span>
+                    @* hibaüzenet megjelenítése *@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Számlázási cím:
+                </td>
+                <td class="failureNotification">
+                    <input asp-for="GuestAddress" size="40" />
+                    <span asp-validation-for="GuestAddress"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail cím:
+                </td>
+                <td class="failureNotification">
+                    <input asp-for="GuestEmail" size="40" />
+                    @* a szerkesztőelemet a modell szabja meg, de így befolyásolhatjuka méretét *@
+                    <span asp-validation-for="GuestEmail"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telefonszám:
+                </td>
+                <td class="failureNotification">
+                    <input asp-for="GuestPhoneNumber" size="40" />
+                    <span asp-validation-for="GuestPhoneNumber"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" valign="middle">
+                    <div class="contentHead">
+                        Foglalási adatok:
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Foglalás kezdete:
+                </td>
+                <td class="failureNotification">
+                    <input type="text" asp-for="RentStartDate" asp-format="{0:yyyy-MM-dd}" />
+                    <span asp-validation-for="RentStartDate"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Foglalás vége:
+                </td>
+                <td class="failureNotification">
+                    <input type="text" asp-for="RentEndDate" asp-format="{0:yyyy-MM-dd}" />
+                    <span asp-validation-for="RentEndDate"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    <input type="submit" value="Foglalás" class="button" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+}
