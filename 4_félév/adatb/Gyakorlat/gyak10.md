@@ -3,15 +3,15 @@
 Hanyszor fordul elő egy szövegben egy másik string
 
     create or replace FUNCTION hanyszor(p1 VARCHAR2, p2 VARCHAR2) RETURN integer IS
-    i int;
-    res int := 0;
+        i int;
+        res int := 0;
     begin
-    for i in 1..length(p1)-length(p2)+1 loop
-        if substr(p1, i, length(p2)) = p2 then
-        res:=res+1;
-        end if;
-    end loop;
-    return res;
+        for i in 1..length(p1)-length(p2)+1 loop
+            if substr(p1, i, length(p2)) = p2 then
+                res:=res+1;
+            end if;
+        end loop;
+        return res;
     end;
 
     SELECT hanyszor ('ab c ab ab de ab fg a', 'ab') FROM dual;
@@ -19,20 +19,20 @@ Hanyszor fordul elő egy szövegben egy másik string
 Szövegből összeg
 
     create or replace FUNCTION osszeg(p_char VARCHAR2) RETURN number IS
-    res int := 0;
-    i int;
-    subs varchar(10);
+        res int := 0;
+        i int;
+        subs varchar(10);
     begin
-    for i in 1..length(p_char) loop
-        if substr(p_char,i,1) != '+' then
-        subs := subs || substr(p_char,i,1);
-        else
+        for i in 1..length(p_char) loop
+            if substr(p_char,i,1) != '+' then
+                subs := subs || substr(p_char,i,1);
+            else
+                res := res + TO_NUMBER(subs);
+                subs := '';
+            end if;
+        end loop;
         res := res + TO_NUMBER(subs);
-        subs := '';
-        end if;
-    end loop;
-    res := res + TO_NUMBER(subs);
-    return res;
+        return res;
     end;
 
 

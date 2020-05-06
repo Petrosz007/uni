@@ -1,30 +1,30 @@
 # 7. gyakorlat megoldva
 ## TÁBLA LÉTREHOZÁS
 
-CREATE TABLE proba123(
-u_id INT NOT NULL,
---oszlopnév típus megszorítás
-nev VARCHAR(10) DEFAULT 'Joe' NOT NULL
---...
-);
+    CREATE TABLE proba123(
+        u_id INT NOT NULL,
+        --oszlopnév típus megszorítás
+        nev VARCHAR(10) DEFAULT 'Joe' NOT NULL
+        --...
+    );
 
 IDEGEN KULCS
 
-CREATE TABLE supplier(
-  supplier_id numeric(10) not null,
-  supplier_name varchar2(50) not null,
-  contact_name varchar2(50),
-  CONSTRAINT supplier_pk PRIMARY KEY (supplier_id)
-);
+    CREATE TABLE supplier(
+        supplier_id numeric(10) not null,
+        supplier_name varchar2(50) not null,
+        contact_name varchar2(50),
+        CONSTRAINT supplier_pk PRIMARY KEY (supplier_id)
+    );
 
 
-CREATE TABLE products(
-  product_id numeric(10) not null,
-  supplier_id numeric(10) not null,
-  CONSTRAINT fk_supplier
-  FOREIGN KEY (supplier_id)
-  REFERENCES supplier(supplier_id)
-);
+    CREATE TABLE products(
+        product_id numeric(10) not null,
+        supplier_id numeric(10) not null,
+        CONSTRAINT fk_supplier
+        FOREIGN KEY (supplier_id)
+        REFERENCES supplier(supplier_id)
+    );
 
 NÉZETTÁBLA LÉTREHOZÁS
 
@@ -65,20 +65,20 @@ SOROK TÖRLÉSE
 ## CREATE
 Készítsünk két táblát az egyikben legyenek sportcsapatok csapat_id, név. A másikban a játékosok, id, név, mezszám, csapat_id. A csapat azonosító legyen idegen kulcs.
 
-CREATE TABLE sportcs(
-  csapat_id numeric(10) not null,
-  nev varchar(50) not null,
-  CONSTRAINT sportcs_pk PRIMARY KEY (csapat_id)
-);
+    CREATE TABLE sportcs(
+        csapat_id numeric(10) not null,
+        nev varchar(50) not null,
+        CONSTRAINT sportcs_pk PRIMARY KEY (csapat_id)
+    );
 
 
-CREATE TABLE jatekosok(
-  j_id numeric(10) not null PRIMARY KEY,
-  nev varchar(50) not null,
-  mezszam numeric(2) not null,
-  csapat_id numeric(10) not null,
-  CONSTRAINT jatekosok_fk FOREIGN KEY (csapat_id) REFERENCES sportcs(csapat_id)
-);
+    CREATE TABLE jatekosok(
+        j_id numeric(10) not null PRIMARY KEY,
+        nev varchar(50) not null,
+        mezszam numeric(2) not null,
+        csapat_id numeric(10) not null,
+        CONSTRAINT jatekosok_fk FOREIGN KEY (csapat_id) REFERENCES sportcs(csapat_id)
+    );
 
 A módosítást egy másodpéldányon végezzük, hogy a tábla eredeti tartalma megmaradjon
 
