@@ -1,0 +1,119 @@
+﻿<Window x:Class="TodoList.Desktop.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:TodoList.Desktop.View"
+        xmlns:viewModel="clr-namespace:TodoList.Desktop.ViewModel"
+        mc:Ignorable="d"
+        Title="TodoList" Height="500" Width="800">
+    <Window.Resources>
+        <viewModel:SelectedListConverter x:Key="selectListConverter" />
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Database">
+                <MenuItem Header="_Refresh lists" Command="{Binding RefreshListsCommand}" />
+                <MenuItem Header="_Logout" Command="{Binding LogoutCommand}" />
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Lists:" />
+                </GroupBox.Header>
+                <DataGrid ItemsSource="{Binding Lists}"
+                          SelectedItem="{Binding SelectedList, Converter={StaticResource selectListConverter}}"
+                          VerticalContentAlignment="Stretch" SelectionMode="Single" SelectionUnit="FullRow"
+                          CanUserAddRows="True" CanUserDeleteRows="True"
+                          AutoGenerateColumns="False" HeadersVisibility="Row">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding SelectListCommand}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="AddingNewItem">
+                            <i:InvokeCommandAction
+                                PassEventArgsToCommand="True"
+                                Command="{Binding AddingNewListCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.RowValidationRules>
+                        <viewModel:ListValidationRule ValidationStep="UpdatedValue"/>
+                    </DataGrid.RowValidationRules>
+                    <DataGrid.RowValidationErrorTemplate>
+                        <ControlTemplate>
+                            <Grid Margin="0,-2,0,-2"
+                                  ToolTip="{Binding
+                                    RelativeSource={RelativeSource FindAncestor,
+                                        AncestorType={x:Type DataGridRow}},
+                                        Path=(Validation.Errors)[0].ErrorContent}">
+                                <Ellipse StrokeThickness="0" Fill="Red" 
+                                         Width="{TemplateBinding FontSize}" 
+                                         Height="{TemplateBinding FontSize}" />
+                                <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
+                                           FontWeight="Bold" Foreground="White" 
+                                           HorizontalAlignment="Center"  />
+                            </Grid>
+                        </ControlTemplate>
+                    </DataGrid.RowValidationErrorTemplate>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"
+                                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox Grid.Row="1">
+                <GroupBox.Header>
+                    <Label Content="Items:" />
+                </GroupBox.Header>
+                <DataGrid ItemsSource="{Binding Items}"
+                          SelectedItem="{Binding SelectedItem}"
+                          IsReadOnly="True" AutoGenerateColumns="False"
+                          VerticalContentAlignment="Stretch" SelectionMode="Single">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction
+                                PassEventArgsToCommand="True"
+                                Command="{Binding EditItemCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Image">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image, TargetNullValue={x:Null}}" MaxHeight="48" MaxWidth="48" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" />
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Button Width="73"  Height="21" Margin="5" Content="Add Item" Command="{Binding AddItemCommand}" />
+                <Button Width="73"  Height="21" Margin="5" Content="Edit Item" Command="{Binding EditItemCommand}" />
+                <Button Width="73"  Height="21" Margin="5" Content="Delete Item" Command="{Binding DeleteItemCommand}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
