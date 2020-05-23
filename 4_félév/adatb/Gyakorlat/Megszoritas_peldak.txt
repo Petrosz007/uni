@@ -1,0 +1,55 @@
+-- Néhány példa megszorítások (Constraint) létrehozására
+
+CREATE TABLE emp1   AS SELECT * FROM sila.emp;
+CREATE TABLE dept1  AS SELECT * FROM sila.dept;
+
+-- Az emp1 és dept1 táblák elsõdleges kulcsainak megadása
+ALTER TABLE emp1   ADD CONSTRAINT emp1_empno_pk   PRIMARY KEY (empno);
+ALTER TABLE dept1  ADD CONSTRAINT dept1_deptno_pk PRIMARY KEY (deptno);
+
+-- Az emp1 tábla idegen kulcsának megadása
+ALTER TABLE emp1   ADD CONSTRAINT emp1_deptno_fk FOREIGN KEY (deptno) REFERENCES dept1 (deptno);
+
+-- Új oszlop hozzáadása a táblához
+ALTER TABLE emp1  ADD (mgr1 NUMBER(4));
+
+-- Új oszlop hozzáadása megszorítással
+ALTER TABLE emp1  ADD (mgr2 NUMBER(4) CONSTRAINT emp1_mgr2_fk REFERENCES emp1 (empno));
+
+-- A meglévõ sal oszlop kiegészítése NOT NULL megszorítással
+ALTER TABLE emp1  MODIFY (sal CONSTRAINT emp1_sal_nn NOT NULL);
+
+-- A meglévõ ename oszlop kiegészítése UNIQUE megszorítással
+ALTER TABLE emp1  ADD CONSTRAINT emp1_ename_u UNIQUE (ename);
+
+-- A meglévõ sal oszlop kiegészítése CHECK megszorításokkal
+ALTER TABLE emp1  ADD CONSTRAINT emp1_c1 CHECK (sal <= 9999);
+ALTER TABLE emp1  ADD CONSTRAINT emp1_c2 CHECK (sal >=  500);
+
+-- Oszlop átnevezése
+ALTER TABLE emp1  RENAME COLUMN sal TO sal2;
+
+
+-- Egy megszorítás törlése
+ALTER TABLE emp1   DROP CONSTRAINT emp1_c1;
+
+-- A megszorítások lekérdezése
+SET LINESIZE 150
+COLUMN Tabla       FORMAT A15
+COLUMN Oszlop      FORMAT A15
+COLUMN Megszoritas FORMAT A15
+
+SELECT cons.table_name Tabla,  SUBSTR(col.column_name,1,10)   Oszlop,
+       cons.constraint_name  Megszoritas, cons.constraint_type  Tipusa, 
+       cons.search_condition Feltetel
+FROM user_constraints cons, user_cons_columns col
+WHERE cons.constraint_name = col.constraint_name  
+AND   LOWER(cons.table_name) IN ('emp1','dept1')
+ORDER BY 1, 2;
+
+
+-- A táblák eldobása. A sorrend nem mindegy !!!!!
+
+DROP TABLE dept1; 
+DROP TABLE emp1;
+DROP TABLE dept1;

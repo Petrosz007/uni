@@ -1,0 +1,153 @@
+-- Néhány egyszerû példa a pl/sql függvények
+-- és procedúrák használatára vonatkozóan
+
+-- Az alábbi blokk alprogramjai nem tároltak, azok csak a blokk utasításaiban hívhatók 
+DECLARE
+  szam number(6);
+
+  FUNCTION fv_plusz_1(szam number) RETURN number IS
+    lokalis_valtozo NUMBER(6);
+  BEGIN
+    lokalis_valtozo := szam + 1;
+    return(lokalis_valtozo);
+  END;
+
+  PROCEDURE pr_plusz_1(szam number) is
+    lokalis_valtozo NUMBER(6);
+  BEGIN
+    lokalis_valtozo := szam + 1;
+    dbms_output.put_line(TO_CHAR(lokalis_valtozo));
+  END;
+
+BEGIN
+  szam := fv_plusz_1(100);
+  pr_plusz_1(szam);
+END;
+/
+
+-- Az alábbi alprogramok viszont tárolt alprogramok, azok az adatbázisban
+-- tárolódnak és a késobbiekben bármikor meghívhatók.
+-- A fv SQL utasitasban is hasznalhato (a procedura csak PL/SQL-ben).
+
+CREATE OR REPLACE FUNCTION fv_plusz_2(szam number) RETURN number IS
+  lokalis_valtozo NUMBER(6);
+BEGIN
+  lokalis_valtozo := szam + 2;
+  return(lokalis_valtozo);
+END;
+/      
+SELECT fv_plusz_2(1000) FROM dual;
+
+CREATE OR REPLACE PROCEDURE pr_plusz_2(szam number) is
+  lokalis_valtozo NUMBER(6);
+BEGIN
+  lokalis_valtozo := szam + 2;
+  dbms_output.put_line(TO_CHAR(lokalis_valtozo));
+END;
+/
+
+BEGIN
+  pr_plusz_2(2000);
+END;
+/
+
+-- Vagy a fentivel ekvivalens meghívási mód SQLPLUS-ból
+
+CALL pr_plusz_2(2000);
+
+
+-- paraméter nélküli alprogram
+set serveroutput on
+DECLARE
+  szam number(6) := 1;
+  PROCEDURE pr1 is           -- nem szabad zárójelet írni: pr1()
+    lokalis_valtozo NUMBER(6);
+  BEGIN
+    lokalis_valtozo := szam + 1;
+    dbms_output.put_line(TO_CHAR(lokalis_valtozo));
+  END;
+BEGIN
+  pr1();    -- itt lehet zárójelet írni, de nem kötelezõ: pr1 is jó lenne
+END;
+/
+
+/****************** túlterhelés ****************/
+set serveroutput on
+DECLARE
+  PROCEDURE elj(p IN NUMBER) IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('number param');
+  END elj;
+
+  PROCEDURE elj(p IN VARCHAR2) IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('varchar2 param');
+  END elj;
+BEGIN
+  elj(100);
+  elj('100');
+END;
+/
+EREDMÉNY:
+---------
+number param
+varchar2 param
+
+
+/****************** elõre deklaráció ****************/
+set serveroutput on
+DECLARE
+  PROCEDURE elj2(p IN NUMBER);
+
+  PROCEDURE elj1(p IN NUMBER) IS
+  BEGIN
+    IF p < 10 THEN  DBMS_OUTPUT.PUT_LINE(p); elj2(p+1);  END IF;
+  END elj1;
+
+  PROCEDURE elj2(p IN NUMBER) IS
+  BEGIN
+    IF p < 10 THEN  DBMS_OUTPUT.PUT_LINE(p); elj1(p*2);  END IF;
+  END elj2;
+BEGIN
+  elj1(0);
+END;
+/
+EREDMÉNY:
+---------
+0; 1; 2; 3; 6; 7;
+
+
+-- A formális paraméter egy kifejezés értékét kapja meg kezdeti értékül
+DECLARE
+  cnt pls_integer := 0;
+
+  FUNCTION dflt RETURN pls_integer IS
+  BEGIN
+    cnt := cnt + 1;
+    RETURN 42;
+  END dflt;
+
+  PROCEDURE p (i IN pls_integer := dflt() ) IS    -- mellékhatása is van
+  BEGIN
+    DBMS_Output.Put_Line(i);
+  END p;
+
+BEGIN
+  FOR j IN 1..5 LOOP
+   p(j); -- Actual parameter is provided
+  END loop;
+  DBMS_Output.Put_Line('cnt: '||cnt);
+  p(); -- Actual parameter is not provided
+  DBMS_Output.Put_Line('cnt: '||cnt);
+END;
+/
+EREDMÉNY:
+---------
+1
+2
+3
+4
+5
+Cnt: 0
+42
+Cnt: 1

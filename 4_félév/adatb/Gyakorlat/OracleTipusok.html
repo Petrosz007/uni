@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Hajas&nbsp;Csilla&nbsp;Adatbazisok-I.gyakorlat</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="../styles/style.css" media="screen">
+</head>
+
+
+<body alink="blue" link="blue" vlink="blue">
+
+
+
+
+
+
+<div id="wrap">
+<div style="background-color: rgb(255, 255, 255);" id="content"><a name="_top"></a><b> </b>Az Oracle n&eacute;h&aacute;ny alapvető adatt&iacute;pusa<br>
+
+<br>
+
+-- SZ&Aacute;MOK --------------------------------------------------------------------<br>
+
+-- number(x,y)&nbsp; -- max. x jegyű sz&aacute;m, ebből y tizedesjegy. (pozit&iacute;v/negat&iacute;v)<br>
+
+-- number(x)&nbsp;&nbsp;&nbsp; -- max. x jegyű sz&aacute;m,&nbsp; 0&nbsp;&nbsp; tizedesjeggyel. (pozit&iacute;v/negat&iacute;v)<br>
+
+-- int = integer = number(38)<br>
+
+-- numeric(x,y) = number(x,y)<br>
+
+-- positive &eacute;s natural&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- csak PL/SQL-ben van.<br>
+
+<br>
+
+-- STRINGEK ------------------------------------------------------------------<br>
+
+-- varchar2(17) -- String. Meg kell adni a maxim&aacute;lis hossz&aacute;t.<br>
+
+-- varchar() = varchar2()<br>
+
+-- T&uacute;l hossz&uacute; string &eacute;rt&eacute;k&uuml;l ad&aacute;sa hib&aacute;t eredm&eacute;nyez.<br>
+
+<br>
+
+-- char(15)&nbsp;&nbsp;&nbsp;&nbsp; -- Fix hossz&uacute;s&aacute;g&uacute; string.<br>
+
+-- T&uacute;l hossz&uacute; ==&gt; HIBA<br>
+
+-- T&uacute;l r&ouml;vid&nbsp; ==&gt; kieg&eacute;sz&iacute;ti sz&oacute;k&ouml;z&ouml;kkel.<br>
+
+<br>
+
+-- A karakter liter&aacute;lok char() t&iacute;pus&uacute;ak. <br>
+
+-- Char() t&iacute;pus eset&eacute;n
+&ouml;sszehasonl&iacute;t&aacute;skor eltekint a sorv&eacute;gi
+sz&oacute;k&ouml;z&ouml;ktől.&nbsp;&nbsp; <br>
+
+&nbsp; &nbsp; Pl: 'str' = 'str&nbsp; '&nbsp; (!!!)<br>
+
+-- p&eacute;ld&aacute;ul: SELECT * FROM dolgozo WHERE 'str ' = 'str';&nbsp; -&gt; az &ouml;sszes sorra igaz<br>
+
+<br>
+
+-- varchar2 t&iacute;pus&uacute; adatok
+&ouml;sszehasonl&iacute;t&aacute;sakor sz&aacute;m&iacute;t a
+sorv&eacute;gi sz&oacute;k&ouml;z<br>
+
+-- p&eacute;ld&aacute;ul: SELECT * FROM dolgozo WHERE CAST('str ' AS VARCHAR(4)) = 'str';&nbsp; <br>
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -&gt; az &ouml;sszes sorra hamis<br>
+
+<br>
+
+-- Stringen bel&uuml;l megk&uuml;l&ouml;nb&ouml;zteti a kis- &eacute;s nagybetűket. Pl: 'str' != 'STR'<br>
+
+-- Varchar2() eset&eacute;n sz&aacute;m&iacute;t a sorv&eacute;gi sz&oacute;k&ouml;z is.<br>
+
+<br>
+
+<br>
+
+-- D&Aacute;TUM &Eacute;S IDŐ --------------------------------------------------------------<br>
+
+-- date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- d&aacute;tum,
+&eacute;s idő (m&aacute;sodperc pontoss&aacute;ggal van t&aacute;rolva)<br>
+
+<br>
+
+-- Mi is megv&aacute;ltoztathatjuk&nbsp; a
+d&aacute;tumform&aacute;tumot (max 38 karakter hossz&uacute;
+d&aacute;tum fog ki&iacute;r&oacute;dni):<br>
+
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD (fmDay) HH24:MI:SS';<br>
+
+ALTER SESSION SET NLS_DATE_LANGUAGE='hungarian'; -- english, american, french, german<br>
+
+SELECT sysdate FROM dual;<br>
+
+SELECT to_char(sysdate, 'day') FROM dual;<br>
+
+<br>
+
+-- D&aacute;tumform&aacute;tumok l&aacute;sd dokument&aacute;ci&oacute;<br>
+
+<br>
+
+-- D&aacute;tum aritmetika:<br>
+
+-- Tfh. d, d1, d2 egy-egy date t&iacute;pus&uacute; objektum (pl. egy-egy t&aacute;bla oszlopa).<br>
+
+--
+d+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- d-hez k&eacute;pest holnap ilyenkor<br>
+
+--
+d-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- d-hez k&eacute;pest tegnap előtt ilyenkor<br>
+
+--
+sysdate+7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- egy h&eacute;t m&uacute;lva ilyenkor<br>
+
+--
+d+1/24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- d-hez k&eacute;pest egy &oacute;ra m&uacute;lva<br>
+
+--
+d2-d1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- d1 &eacute;s d2 k&ouml;zt eltelt idő napokban<br>
+
+-- (d2-d1)*24*60*60&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- d1 &eacute;s d2 k&ouml;zt eltelt idő m&aacute;sodpercekben<br>
+
+-- months_between(d2,d1)&nbsp; -- d1 &eacute;s d2 k&ouml;zt eltelt idő h&oacute;napokban<br>
+
+-- Az ut&oacute;bbi h&aacute;rom esetben pozit&iacute;v illetve negat&iacute;v eredm&eacute;nyt is kaphatunk.<br>
+
+-- d2 &gt; d1&nbsp; =&gt;&nbsp; (+)<br>
+
+-- d2 &lt; d1&nbsp; =&gt;&nbsp; (-)<br>
+
+<br>
+
+-- Tov&aacute;bbi d&aacute;tumf&uuml;ggv&eacute;nyek l&aacute;sd dokument&aacute;ci&oacute;<br>
+
+<br>
+
+<br>
+
+-- Konverzi&oacute; -----------------------------------------------------------------<br>
+
+-- to_date('2030-OCT-28')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- NLS_DATE_FORMAT alapj&aacute;n konvert&aacute;lja<br>
+
+-- to_date('2030-12','YYYY-MM')&nbsp;&nbsp; -- form&aacute;tum megad&aacute;sa&nbsp; =&gt;&nbsp; 2030-12-01 0:00.00<br>
+
+-- Amit nem adunk meg, az default &eacute;rt&eacute;k lesz.<br>
+
+-- Default d&aacute;tum: foly&oacute; &eacute;v, foly&oacute; h&oacute;, elseje, &eacute;jf&eacute;l<br>
+
+--
+to_date(2462803,'J')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- Julianus napt&aacute;r 2462803-adik napja, &eacute;jf&eacute;l<br>
+
+--
+to_char(datum)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- NLS_DATE_FORMAT alapj&aacute;n &aacute;ll&iacute;tja elő<br>
+
+-- to_char(datum, 'HH24:MI:SS')&nbsp;&nbsp; -- form&aacute;tum alapj&aacute;n &aacute;ll&iacute;tja elő a stringet<br>
+
+--
+to_char(127.14)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- sz&aacute;m&nbsp;&nbsp; -&gt; string<br>
+
+-- to_number('135.00167')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- string -&gt; sz&aacute;m<br>
+
+--
+to_number('abc')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-- ORA-01722: invalid number<br>
+
+<br>
+
+<br>
+
+-- Nincs Boolean t&iacute;pus&nbsp; (PL/SQL-ben van: TRUE, FALSE, NULL)<br>
+
+<br>
+
+-- B&aacute;rmilyen t&iacute;pus&uacute; oszlopban lehet NULL (kit&ouml;ltetlen cella).<br>
+
+-- K&eacute;t NULL soha sem egyenlő, de az sem igaz r&aacute;juk, hogy nem egyenlők (&lt;&gt;).<br>
+
+-- Annak vizsg&aacute;lata, hogy valami NULL-e:<br>
+
+--&nbsp; x IS NULL<br>
+
+--&nbsp; x IS NOT NULL<br>
+
+<br>
+
+-- pl. SELECT * FROM&nbsp;&nbsp; dolgozo WHERE jutalek IS NOT NULL;<br>
+&nbsp; <br>
+
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

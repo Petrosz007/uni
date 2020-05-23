@@ -1,0 +1,102 @@
+/* SELECT ... INTO ...
+Írjunk meg egy függvényt, amelyik visszaadja egy adott fizetési kategóriába tartozó
+dolgozók átlagfizetését.
+*/
+CREATE OR REPLACE FUNCTION kat_atlag(n integer) RETURN number IS
+Tesztelés:
+SELECT kat_atlag(2) FROM dual;
+----------------------------------------------------------------
+/* SELECT ... INTO ...
+Írjunk meg egy procedúrát, amelyik kiírja azon dolgozók számát és átlagfizetését,
+akiknek a belépési dátuma a paraméterül megadott nevû napon (pl. Hétfõ') volt.
+*/
+CREATE OR REPLACE PROCEDURE nap_atl(d varchar2) IS
+...
+set serveroutput on
+call nap_atl('Csütörtök'); -- példa output: Dolgozók száma: 4, Átlag fiz: 2481,25
+
+Tippek: 1. to_char(hiredate, 'Day', 'nls_date_language=hungarian')
+        2. vigyázzunk a to_char által visszaadott nap névre, a végén szóközök lehetnek
+----------------------------------------------------------------
+/* Cursor
+Írjunk meg egy procedúrát, amelyik veszi a paraméterül megadott osztály dolgozóit ábécé 
+szerinti sorrendben, és kiírja a foglalkozásaikat egy karakterláncban összefûzve.
+*/
+CREATE OR REPLACE PROCEDURE print_foglalkozas(o_nev varchar2) IS
+...
+set serveroutput on
+call print_foglalkozas('ACCOUNTING');  -- példa output: MANAGER-PRESIDENT-CLERK
+----------------------------------------------------------------
+/* Asszociatív tömb  --> TABLE OF ... INDEX BY ...
+Írjunk meg egy procedúrát, amelyik veszi az elsõ n prímszámot (1. prímszám: 2, 2. prímszám: 3, stb.)
+és beleteszi azokat egy asszociatív tömbbe. A procedúra a végén írja ki a tömb utolsó elemét és a
+prímszámok összegét.
+*/
+CREATE OR REPLACE PROCEDURE primes(n integer) IS
+...
+set serveroutput on
+execute primes(100);
+----------------------------------------------------------------
+/* Cursor és asszociatív tömb 
+Írjunk meg egy procedúrát, amelyik veszi a dolgozókat ábácé szerinti sorrendben, 
+és minden páratlan sorszámú dolgozó nevét és fizetését beleteszi egy asszociatív tömbbe. 
+A procedúra a végén írja ki a tömb utolsó elõtti elemében szereplõ nevet és fizetést.
+*/
+CREATE OR REPLACE PROCEDURE curs_tomb IS
+...
+set serveroutput on
+execute curs_tomb();
+----------------------------------------------------------------
+/* Insert, Delete, Update 
+Írjunk meg egy procedúrát, amelyik megnöveli azoknak a dolgozóknak a fizetését, akiknek a 
+fizetési kategóriája ugyanaz, mint a procedúra paramétere. A növelés mértéke a dolgozó
+osztályában elõforduló legkisebb fizetés legyen.
+A procedúra a módosítás után írja ki a módosított (új) fizetések átlagát két tizedesjegyre kerekítve.
+*/
+CREATE OR REPLACE PROCEDURE kat_novel(p_kategoria NUMBER) IS 
+...
+set serveroutput on
+execute kat_novel(2);
+----------------------------------------------------------------
+/* Módosítás kurzorral
+Írjunk meg egy procedúrát, amelyik módosítja a paraméterében megadott osztályon a fizetéseket, és 
+kiírja a dolgozó nevét és új fizetését.  A módosítás mindenki fizetéséhez adjon hozzá n*10 ezret, 
+ahol n a dolgozó nevében levõ magánhangzók száma (a, e, i, o, u).
+*/
+CREATE OR REPLACE PROCEDURE fiz_mod(p_oazon INTEGER) IS 
+Tesztelés:
+set serveroutput on
+execute fiz_mod(10);
+----------------------------------------------------------------
+/* Exception
+Írjunk meg egy függvényt, amelyik egy karakteres típusú paraméterben egy dátumot 
+kap a következõ formátumban: 'éééé.hh.nn' vagy 'nn.hh.éééé'. 
+A függvény adja vissza a nap nevét, pl. 'kedd'.
+Ha a megadott karakterlánc nem egy érvényes dátum, akkor adja vissza, hogy 'rossz dátum'.
+*/
+CREATE OR REPLACE FUNCTION nap_nev(p_kar VARCHAR2) RETURN VARCHAR2 IS
+...
+SELECT nap_nev('2017.05.01'), nap_nev('02.05.2017'), nap_nev('2017.13.13') FROM dual;
+----------------------------------------------------------------
+/* Exception, SQLCODE
+Írjunk meg egy procedúrát, amelyik a paraméterében kapott számra külön sorokba kiírja 
+annak reciprokát, négyzetgyökét, és faktoriálisát. Ha bármelyik nem értelmezhetõ vagy
+túlcsordulást okoz, akkor erre a részre írja ki a kapott hibakódot. (SQLCODE).
+*/
+CREATE OR REPLACE PROCEDURE szamok(n number) IS
+Tesztelés:
+set serveroutput on
+execute szamok(0);
+execute szamok(-2);
+execute szamok(40);
+----------------------------------------------------------------
+/*
+Írjunk meg egy függvényt, amelyik visszaadja a paraméterként szereplõ '+'-szal 
+elválasztott számok és kifejezések összegét. Ha valamelyik kifejezés nem szám,
+akkor azt az összeadásnál hagyja figyelmen kívül, vagyis 0-nak tekintse.
+*/
+CREATE OR REPLACE FUNCTION osszeg2(p_char VARCHAR2) RETURN NUMBER IS
+...
+SELECT osszeg2('1+21 + bubu + y1 + 2 + -1 ++') FROM dual;
+----------------------------------------------------------------
+

@@ -1,0 +1,15 @@
+drop table employees;
+drop table departments;
+drop table locations;
+drop table countries;
+drop table regions;
+drop table jobs;
+drop table job_history;
+
+create or replace synonym employees for hr.employees;
+create or replace synonym departments for hr.departments;
+create or replace synonym locations for hr.locations;
+create or replace synonym countries for hr.countries;
+create or replace synonym regions for hr.regions;
+create or replace synonym jobs for hr.jobs;
+create or replace synonym job_history for hr.job_history;

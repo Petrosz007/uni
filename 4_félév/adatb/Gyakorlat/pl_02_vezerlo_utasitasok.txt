@@ -1,0 +1,74 @@
+-- Vezérlõ utasítások
+
+-- IF THEN
+IF condition THEN
+  statements
+END IF;
+
+-- IF THEN ELSE
+IF condition THEN
+  statements
+ELSE
+  else_statements
+END IF;
+
+-- IF THEN ELSIF
+IF condition_1 THEN
+  statements_1
+ELSIF condition_2 THEN
+  statements_2
+[ ELSIF condition_3 THEN
+    statements_3
+]...
+[ ELSE
+    else_statements
+]
+END IF;
+
+-- Simple CASE utasítás  CASE_NOT_FOUND exception ha egyik sem teljesül
+CASE selector 
+WHEN selector_value_1 THEN statements_1
+WHEN selector_value_2 THEN statements_2
+...
+WHEN selector_value_n THEN statements_n
+[ ELSE   else_statements ]
+END CASE;
+
+-- Searched CASE utasítás   CASE_NOT_FOUND exception ha egyik sem teljesül
+CASE
+WHEN condition_1 THEN statements_1
+WHEN condition_2 THEN statements_2
+...
+WHEN condition_n THEN statements_n
+[ ELSE   else_statements ]
+END CASE;
+
+-- Basic LOOP
+[ label ] LOOP
+  statements
+END LOOP [ label ];
+
+-- kilépés a ciklusból / újabb iteráció kezdése
+EXIT
+EXIT WHEN 
+CONTINUE
+CONTINUE WHEN
+
+-- WHILE LOOP
+[ label ] WHILE condition LOOP
+  statements
+END LOOP [ label ];
+
+-- FOR LOOP (ha alsó határ > felsõ határ, egyszer sem hajtódik végre)
+[ label ] FOR index IN [ REVERSE ] lower_bound..upper_bound LOOP
+  statements
+END LOOP [ label ];
+
+-- NULL utasítás
+NULL;
+
+-- GOTO utasítás (a cimkének végrehajtható utasítás vagy blokk elõtt kell lennie
+GOTO label
+
+-- RETURN utasítás (visszatérés alprogramból vagy név nélküli blokkból)
+

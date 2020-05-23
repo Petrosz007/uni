@@ -1,0 +1,96 @@
+/* Írjunk meg egy függvényt, amelyik visszaadja n faktoriálisát */
+CREATE OR REPLACE FUNCTION myfakt_f(n integer) RETURN integer IS
+...
+
+Egy lehetséges megoldás:
+create or replace function myfakt_f (n number) RETURN number
+is
+begin
+ if n > 1
+ then
+  RETURN n * myfakt_f(n-1);
+ else
+  RETURN 1;
+ end if;
+end;
+Tesztelése:
+a)
+SELECT myfakt_f(10) FROM dual;
+b)
+set serveroutput on;
+declare 
+ e number := 5;
+begin
+ dbms_output.put_line(e || '!=' || myfakt_f(e));
+end;
+
+---------------------------------------------------------
+
+/* Írjunk meg egy tárolt eljárást, amelyik kiszámolja n faktoriálisát */
+CREATE OR REPLACE PROCEDURE myfakt_p (n in out number) IS
+...
+
+Egy lehetséges megoldás:
+create or replace procedure myfakt_p (n in out number )
+ is
+ n_l number;
+ begin
+  IF n > 1 THEN
+    n_l := n;
+    n := n-1;
+    myfakt_p(n);
+    n := n * n_l;
+  ELSE
+    n := 1;
+  END IF;
+ end;
+ 
+A tesztelése: 
+set serveroutput on;
+declare 
+ e number := 5;
+begin
+ myfakt_p(e);
+ dbms_output.put_line(e);
+end;
+
+További feladatok:
+---------------------------------------------------------
+
+/* Írjunk meg egy függvényt, amelyik eldönti egy számról, hogy prím-e. igen/nem -> 1/0 */
+CREATE OR REPLACE FUNCTION prim(n integer) RETURN number IS
+...
+SELECT prim(26388279066623) from dual;
+---------------------------------------------------------
+
+/* Írjunk meg egy procedúrát, amelyik kiírja az n-edik Fibonacchi számot 
+   fib_1 = 0, fib_2 = 1, fib_3 = 1, fib_4 = 2 ... fib_i = a megelõzõ kettõ összege
+*/
+CREATE OR REPLACE PROCEDURE fib(n integer) IS
+...
+set serveroutput on
+call fib(10);
+---------------------------------------------------------
+
+/* Írjunk meg egy függvényt, amelyik visszaadja két szám legnagyobb közös osztóját */
+CREATE OR REPLACE FUNCTION lnko(p1 integer, p2 integer) RETURN number IS
+...
+SELECT lnko(3570,7293) FROM dual;
+---------------------------------------------------------
+
+/* Írjunk meg egy függvényt, amelyik megadja, hogy hányszor fordul elõ egy 
+   karakterláncban -> p1 egy másik részkarakterlánc -> p2 
+*/
+CREATE OR REPLACE FUNCTION hanyszor(p1 VARCHAR2, p2 VARCHAR2) RETURN integer IS
+...
+SELECT hanyszor ('ab c ab ab de ab fg', 'ab') FROM dual;
+---------------------------------------------------------
+
+/* Írjunk meg egy függvényt, amelyik visszaadja a paraméterként szereplõ '+'-szal 
+   elválasztott számok összegét.
+*/
+CREATE OR REPLACE FUNCTION osszeg(p_char VARCHAR2) RETURN number IS
+...
+SELECT osszeg('1 + 4 + 13 + 0') FROM dual;
+---------------------------------------------------------
+

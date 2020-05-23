@@ -1,0 +1,23 @@
+drop synonym employees;
+drop synonym departments;
+drop synonym locations;
+drop synonym countries;
+drop synonym regions;
+drop synonym jobs;
+drop synonym job_history;
+
+drop table employees;
+drop table departments;
+drop table locations;
+drop table countries;
+drop table regions;
+drop table jobs;
+drop table job_history;
+
+create table job_history as select * from hr.job_history;
+create table jobs as select * from hr.jobs;
+create table regions as select * from hr.regions;
+create table countries as select * from hr.countries;
+create table locations as select * from hr.locations;
+create table departments as select * from hr.departments;
+create table employees as select * from hr.employees;
