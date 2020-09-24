@@ -1,0 +1,6 @@
+{
+	"haziPont": {"max":20,"elert":10 },
+	"1zhPont": {"max":20,"elert":10,"min":10},
+	"mininetPont": {"max":20,"elert":20},
+	"2zhPont": {"max":20,"min":10}
+}

@@ -1,0 +1,13 @@
+1. Készítsünk egy programot, amelyben a main() metódus dob egy RuntimeException-t. Vizsgáljuk meg a hibaüzenetet, figyelmet fordítva a "main thread" kifejezésre.
+
+2.  Készítsünk egy programot, amelyben a main() metódus elindít egy thread-et, ami dob egy Runtime Exception-t. Látunk hibaüzenetet? Kapjuk el a kivételt a run() metódusban és hívjuk meg a printStackTrace() függvényt, értelmezzük a hibaüzenetet.
+
+3.  Készítsünk egy programot , ami $n$ szálat indít el, amik nem csinálnak semmit sem. Mekkora lehet $n$ maximális értéke a futtató gépen?
+
+4.  Készítsünk egy programot, ami $n$ elindít $n$ szálat, amelyek mindegyike elindít egy végtelen ciklust. Most mekkora lehet $n$?
+
+5. (házi)  Készítsünk egy programot, amely elindít egy szálat és terminál. Az elindított szál is indítson egy másik szálat, majd termináljon, majd így tovább. Mi történik?
+
+6 (házi folytatása)  Készítsünk egy programot, amely az előző példához hasonlóan indít thread-eket, de most legyen véges. ( Adjunk hozzá egy konstruktor paramétert a thread osztályunkhoz, ami meghatározza, hogy milyen mélységig folytatódjon a lánc)
+
+7.  Készítsünk egy "fork-bomb" programot; elindít egy thread-et, ami aztán elindít még két thread-et, amelyek szintén elindítanak két thread-et, és így tovább...

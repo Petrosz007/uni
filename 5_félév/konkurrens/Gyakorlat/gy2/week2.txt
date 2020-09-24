@@ -1,0 +1,24 @@
+1. Create a program with a main() throwing a RuntimeException. Observe
+that the error message refers to the "main thread".
+
+2. Create a program with the main() creating a thread which throws a
+RuntimeException. Is there any error message? Catch the exception in
+run() and call printStackTrace(). Analyse the error message.
+
+3. Create a program which starts $n$ threads, which do just nothing.
+How big can $n$ be on your machine?
+
+4. Create a program which starts $n$ threads, each performing an
+infinite loop. How big can $n$ be on your machine?
+
+5. (homework) Create a program which starts a thread and stops. The
+thread should start another thread and stop. The other thread behaves
+the same way as the previous one. Observe what happens.
+
+6. (cont.) Create a program which starts a chain of threads like in the
+previous exercise, but now of a finite length. (Add a constructor
+parameter to your thread class which tells how long a chain to start by
+a given thread.)
+
+7. Create a fork-bomb: a program starts a thread, which starts two
+threads, both of which start two similar threads...

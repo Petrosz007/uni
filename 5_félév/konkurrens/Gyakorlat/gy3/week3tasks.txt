@@ -1,0 +1,22 @@
+- Run the programs in the lecture slides.
+    - Observe what happens if you have two threads writing some
+      (different) strings to the screen in infinite loop
+      (e.g. "Hi!" and "Bye").
+    - Observe what happens if the strings written out are long
+      (e.g. 200 times '*' versus 200 times '_').
+    - Observe what happens if you put `Thread.yield()` in the loops.
+    - Rewrite the programs using `Runnable`.
+    - Rewrite the programs using *lambda*s.
+- Create a parallel implementation of the prime computing program.
+  Rewrite the naive algorithm (which goes through all integers between
+  2 and $n$, and checks each number $k$ whether it is a prime by going
+  through all integers between 2 and $\sqrt(k)$ and checking
+  divisability). Modify this naive algorithm in such a way that you
+  start a thread which finds all prime numbers between 2 and $n/2$,
+  and in the meantime the main thread finds the prime numbers between
+  $n/2$ and $n$. The main thread waits for the termination of the
+  started thread (use `join()`) and then concatenates and returns
+  results.
+- Homework: modify the above program to start as many threads as many
+  cores you have (use `Runtime.getRuntime().availableProcessors()`) and
+  split up the search space equally among all these threads.
