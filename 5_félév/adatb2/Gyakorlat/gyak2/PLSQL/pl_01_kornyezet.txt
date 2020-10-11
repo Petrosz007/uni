@@ -1,0 +1,171 @@
+
+/*************** érvényesség, láthatóság *************/
+<<cimke1>>
+DECLARE
+  a  NUMBER;
+BEGIN
+  a:=2;
+  <<cimke2>>
+  DECLARE
+    a number;
+  BEGIN
+    a:=4;
+    dbms_output.put_line(cimke1.a);
+    dbms_output.put_line(cimke2.a);
+    dbms_output.put_line(a);
+  END;
+  dbms_output.put_line(a);
+END;
+/
+EREDMÉNY:
+---------
+2
+4
+4
+2
+
+
+/************** külső (bind) változók használata *************/
+/* az alábbi egy szerver oldali változó */
+/* egy pointert kap meg a program, így értéket adhat a változónak */
+Variable v number;
+BEGIN
+ :v := mod(121,3);
+END;
+/
+print v;
+
+
+/************** képernyőre írás *************/
+set serveroutput on
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Hello World!');
+END;
+/
+
+/*
+ A SET SERVEROUTPUT ON  utasítás kiadása SQL*Plus-ban azzal egyenértékű, mintha kiadnánk a 
+ DBMS_OUTPUT.ENABLE (buffer_size => NULL); utasítást. DBMS_OUTPUT.DISABLE esetén nem ír a pufferbe.
+ A PL/SQL program valójában nem a képernyőre, hanem egy pufferbe ír. A futtató környezet 
+ (sqlplus, SqlDeveloper) ír a képernyőre, úgy, hogy kiolvassa a pufferből a sorokat a 
+ GET_LINE procedúrával, mint az alábbi program.
+*/
+
+SET SERVEROUTPUT ON
+DECLARE
+  v_status  INTEGER := 0;
+  v_line    VARCHAR2(100); 
+  v_buff    VARCHAR2(1000);
+BEGIN 
+  DBMS_OUTPUT.PUT_LINE('bubu'); DBMS_OUTPUT.PUT_LINE('bibi'); DBMS_OUTPUT.PUT_LINE('baba');
+  WHILE v_status = 0 LOOP
+    DBMS_OUTPUT.GET_LINE (v_line, v_status);
+    v_buff := v_buff || v_line;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE(v_buff);
+END;
+/
+EREDMÉNY:
+---------
+bububibibaba
+
+
+/*
+A futtató környezet csak a PL/SQL program lefutása után olvassa a puffert, és írja ki a képernyőre.
+Ha egy SQL utasítást futtatunk, ami explicit vagy implicit módon meghív egy alprogramot, akkor
+a pufferbe írt adatok ott is maradnak és nem íródnak ki a képernyőre.
+*/
+
+CREATE OR REPLACE FUNCTION printf(msg VARCHAR) RETURN NUMBER IS
+BEGIN
+   DBMS_OUTPUT.PUT_LINE(msg); 
+   return 1;
+END;
+/
+SELECT printf('Hello') FROM dual;   -- nem ír ki semmit, a pufferben marad a szöveg, mert SQL utasítás
+
+DECLARE
+ v number;
+BEGIN 
+  v:= printf('Hello2');  -- kiír a képernyőre 
+END; 
+/
+
+CREATE OR REPLACE PROCEDURE printp(msg VARCHAR) IS
+BEGIN
+   DBMS_OUTPUT.PUT_LINE(msg); 
+END;
+/
+CALL printp('Hello');   -- kiírja
+
+-- Az alábbi után kiíródik a szöveg, mert az egy PL/SQL blokkban futtatja a procedúrát.
+EXECUTE printp('Hello')
+
+-- Az előző hívás ekvivalens a következővel:  
+BEGIN printp('Hello'); END;
+
+
+SET SERVEROUTPUT OFF  -- OFF és nem ON !!!
+BEGIN 
+  DBMS_OUTPUT.PUT_LINE('első program');     -- nem kerül bele a szöveg a pufferbe
+END;
+/
+
+
+/****************** adatbekérés a felhasználótól ****************/
+/* az alábbi v1, v2 kliens oldali változók DEFINE/UNDEFINE-al is létrehozhatók/törölhetők  */
+/* még az SQL utasítás szerverhez való elküldése előtt behelyettesítődik az értékük */
+/* lásd az SQL*Plus Referenciában az ACCEPT utasítást */
+
+ACCEPT v1 NUMBER FORMAT '99' PROMPT 'Adja meg az osztály azonosítót:'
+ACCEPT v2 DATE FORMAT 'yyyy.mm.dd' DEFAULT "1982.01.01" PROMPT 'Dátum (formátum: 2013.01.30)'
+SET verify on          -- írja ki a változó behelyettesítés után az utasításokat
+set serveroutput on
+DECLARE 
+  v_osszeg NUMBER;
+BEGIN
+  SELECT sum(fizetes) INTO v_osszeg FROM dolgozo WHERE oazon = &v1 AND belepes < to_date('&v2', 'yyyy.mm.dd');
+  dbms_output.put_line(v_osszeg);
+END;
+/
+
+
+/****************** rekordok ****************/
+DECLARE
+  TYPE rektip IS RECORD(m1 INTEGER, m2 VARCHAR2(10));
+  rec rektip;
+BEGIN
+  rec.m1 := 1; rec.m2 := 'Bubu';
+  DBMS_OUTPUT. PUT_LINE(rec.m2);
+END;
+
+
+/****************** rekordok, tömbök ****************/
+set serveroutput on
+DECLARE
+  TYPE rek_type IS RECORD(f1 INTEGER DEFAULT 10, f2 osztaly%ROWTYPE);  -- beágyazott rekord
+  rec rek_type;
+  TYPE tab_type IS TABLE OF INTEGER INDEX BY BINARY_INTEGER;   -- asszociatív tömb (index by tömb)
+  TYPE rek_type2 IS RECORD(f1 INTEGER, f2 tab_type);           -- mezőbe ágyazott tömb
+  rec2 rek_type2;
+  rec_oszt osztaly%ROWTYPE;     -- ez is rekord
+BEGIN
+ rec_oszt.onev := 'SALES';
+ dbms_output.put_line(rec.f1);                             -- mező default értéke
+ 
+ SELECT * INTO rec.f2 FROM osztaly WHERE oazon = 10;       -- rec (beágyazott rekord)
+ dbms_output.put_line(rec.f2.telephely);
+ 
+ rec2.f2(1) := 100; rec2.f2(2) := 200; rec2.f2(3) := 300;  -- rec2 (mezőbe ágyazott tömb)
+ FOR i IN rec2.f2.FIRST .. rec2.f2.LAST LOOP
+   dbms_output.put_line(rec2.f2(i));
+ END LOOP;
+END;
+/
+EREDMÉNY:
+---------
+10
+NEW YORK
+100
+200
+300

@@ -1,0 +1,190 @@
+-- példák cursor használatára (implicit és explicit kurzor)
+
+DECLARE 
+  CURSOR curs1 IS SELECT oazon, dnev FROM dolgozo WHERE oazon = 10;
+  rec curs1%ROWTYPE;
+BEGIN
+  OPEN curs1;
+  LOOP
+    FETCH curs1 INTO rec;
+    EXIT WHEN curs1%NOTFOUND;
+    dbms_output.put_line(to_char(rec.oazon)||' - '||rec.dnev);
+  END LOOP;
+  CLOSE curs1;
+END;
+/
+
+Kurzor attribútumok:
+  %ISOPEN    nyitva van a kurzor?
+  %FOUND     talált sort a legutolsó FETCH?
+  %NOTFOUND  előző ellenkezője
+  %ROWCOUNT  hány sort olvastunk eddig
+
+-- Implicit kurzor (DELETE utasításhoz)
+DECLARE
+  v_rows_deleted VARCHAR2(30);
+  v_fogl dolgozo.foglalkozas%TYPE := 'SALESMAN';
+BEGIN
+  DELETE FROM dolgozo WHERE foglalkozas = v_fogl;
+  v_rows_deleted := (SQL%ROWCOUNT ||' row deleted.');
+  DBMS_OUTPUT.PUT_LINE (v_rows_deleted);
+  ROLLBACK;
+END;
+/
+
+-- példa a kurzor használat 3 formájára, és paraméteres kurzorra
+DECLARE 
+  CURSOR curs1(p_oazon NUMBER DEFAULT 10) IS SELECT dnev, fizetes FROM dolgozo WHERE oazon = p_oazon;
+  CURSOR curs2(p_oazon NUMBER) IS SELECT dnev, fizetes from dolgozo where oazon = p_oazon;
+  rec curs1%ROWTYPE;
+BEGIN
+  OPEN curs1();           -- default paraméter
+  LOOP
+    FETCH curs1 INTO rec;
+    EXIT WHEN curs1%NOTFOUND;
+    dbms_output.put_line('curs1: '||rec.dnev||' - '||to_char(rec.fizetes));
+  END LOOP;
+  CLOSE curs1;
+
+  FOR rec IN curs2(20) LOOP             -- paraméter
+    dbms_output.put_line('curs2: '||rec.dnev||' - '||to_char(rec.fizetes));
+  END LOOP;
+
+  FOR rec IN (SELECT dnev, fizetes FROM dolgozo WHERE oazon=30) LOOP
+    dbms_output.put_line('c3: '||rec.dnev||' - '||to_char(rec.fizetes));
+  END LOOP;
+END;
+/
+
+-- módosítás kurzorral  -> WHERE CURRENT OF
+-- a FOR UPDATE zárolja (lock) az érintett sorokat
+DECLARE 
+  CURSOR curs1 IS SELECT dnev, fizetes FROM dolgozo WHERE oazon = 10 FOR UPDATE;
+  rec curs1%ROWTYPE;
+BEGIN
+  OPEN curs1;
+  LOOP
+    FETCH curs1 INTO rec;
+    EXIT WHEN curs1%NOTFOUND;
+    UPDATE dolgozo SET fizetes = fizetes+1 WHERE CURRENT OF curs1;
+    dbms_output.put_line(rec.dnev||' - '||to_char(rec.fizetes));
+  END LOOP;
+  CLOSE curs1;
+  COMMIT;
+END;
+/
+
+-- Mi történik, ha a kurzor olvasása közben módosítjuk a táblát?
+-- Válasz: a kurzor nem látja a módosításokat
+-- A kurzor megnyitásakor eldől, hogy mi lesz a "result set"
+set serveroutput on
+DECLARE
+ v_datum    date := SYSDATE + 1;
+BEGIN
+  FOR rec IN (SELECT * FROM osztaly for update) LOOP
+    dbms_output.put(to_char(sysdate, 'hh24:mi:ss')||' --> ');
+    dbms_output.put_line(rec.oazon);
+    SELECT SYSDATE + 2/(24*60*60) INTO v_datum FROM dual; -- 2 másodpercet várunk
+    WHILE sysdate < v_datum LOOP  NULL;   END LOOP;   
+    update osztaly set oazon = oazon+1;
+  END LOOP;
+END;
+/
+Eredmény
+---------------
+23:05:00 --> 10
+23:05:02 --> 20
+23:05:04 --> 30
+23:05:06 --> 40
+
+select * from osztaly;
+rollback;
+
+-- Még több táblás lekérdezés kurzora is módosítható
+-- Amelyik tábla nincs zárolva az nem módosítható
+-- a loc oszlop az iteráció minden lépésénél módosul
+-- A SELECT és így a kurzor eredménye:
+-- TURNER  SALES
+-- MARTIN  SALES
+-- WARD    SALES
+-- ALLEN   SALES
+
+DECLARE
+  CURSOR c1 IS  SELECT ename, dname  FROM emp, dept
+    WHERE emp.deptno = dept.deptno AND job = 'SALESMAN' FOR UPDATE OF loc;
+BEGIN
+  FOR rec IN c1 LOOP
+   -- UPDATE emp SET sal = sal + 1 WHERE CURRENT OF c1;
+    UPDATE dept SET loc = loc|| '1' WHERE CURRENT OF c1;
+  END LOOP;
+END;
+/
+SELECT * FROM dept;
+...
+30 SALES CHICAGO1111
+...
+rollback;
+
+
+-- kurzor változó 
+-- lehet erősen típusos (visszatérési értékkel) vagy gyengén típusos (típus nélkül)
+DECLARE 
+  TYPE empcurtyp IS REF CURSOR RETURN emp%ROWTYPE;  -- strong
+  TYPE genericcurtyp IS REF CURSOR;                 -- weak
+  TYPE t_cur IS REF CURSOR;
+  v_cur t_cur;
+  
+  PROCEDURE megnyit(p_cur IN OUT t_cur) IS            -- a procedúra csak megnyitja a kurzort
+  BEGIN
+    OPEN p_cur FOR SELECT dnev FROM dolgozo WHERE fizetes > 3000;
+  END;
+  
+  FUNCTION olvas(p_cur IN t_cur) RETURN varchar2 IS    -- a függvény olvas a kurzorból
+    v dolgozo.dnev%TYPE;
+  BEGIN
+    FETCH p_cur INTO v;
+    RETURN v;
+  END;
+BEGIN
+  megnyit(v_cur);
+  dbms_output.put_line(olvas(v_cur));
+  CLOSE v_cur;
+END;
+/
+
+-- egy kurzorváltozó különböző lekérdezésekhez
+CREATE OR REPLACE PACKAGE admin_data AS
+  TYPE gencurtyp IS REF CURSOR;
+  PROCEDURE open_cv (generic_cv IN OUT gencurtyp, choice INT);
+END admin_data;
+/
+CREATE OR REPLACE PACKAGE BODY admin_data AS
+  PROCEDURE open_cv (generic_cv IN OUT gencurtyp, choice INT) IS
+  BEGIN
+    IF choice = 1 THEN
+      OPEN generic_cv FOR SELECT * FROM emp;
+    ELSIF choice = 2 THEN
+      OPEN generic_cv FOR SELECT * FROM dept;
+    ELSIF choice = 3 THEN
+      OPEN generic_cv FOR SELECT * FROM salgrade;
+    END IF;
+  END;
+END admin_data;
+/
+
+-- kurzor változót nem deklarálhatunk package specifikációs részben
+CREATE OR REPLACE PACKAGE emp_data AS
+  TYPE EmpCurTyp IS REF CURSOR RETURN employees%ROWTYPE;
+  -- emp_cv EmpCurTyp;                  -- not allowed
+  PROCEDURE open_emp_cv;
+END emp_data;
+/
+CREATE OR REPLACE PACKAGE BODY emp_data AS
+  -- emp_cv EmpCurTyp;                   -- not allowed
+  PROCEDURE open_emp_cv IS
+    emp_cv EmpCurTyp; -- this is legal
+  BEGIN
+    OPEN emp_cv FOR SELECT * FROM employees;
+  END open_emp_cv;
+END emp_data;
+/

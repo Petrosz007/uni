@@ -1,0 +1,75 @@
+Dinamikus SQL
+
+Metaadat áttekintés (lesz még particionálás és kleszterezés).
+
+Papíron megoldandó feladat
+==========================
+
+Bitmap index
+------------
+
+DKOD DNEV   FIZETES  FOGLALKOZAS  BELEPES  OAZON
+---------------------------------------------------
+1    SMITH     800   CLERK        1980     20   
+2    ALLEN    1600   SALESMAN     1981     30	   
+3    WARD     1250   SALESMAN     1981     30	   
+4    JONES    2975   MANAGER      1981     20	   
+5    MARTIN   1250   SALESMAN     1981     30	   
+6    BLAKE    2850   MANAGER      1981     30	   
+7    CLARK    2450   MANAGER      1981     10	   
+8    SCOTT    3000   ANALYST      1982     20	   
+9    KING     5000   PRESIDENT    1981     10	   
+10   TURNER   1500   SALESMAN     1981     30	   
+11   ADAMS    1100   CLERK        1983     20	   
+12   JAMES     950   CLERK        1981     30	   
+13   FORD     3000   ANALYST      1981     20	   
+14   MILLER   1300   CLERK        1982     10	 
+
+
+Készítsen bitmap indexet a dolgozó tábla OAZON oszlopára és adja meg a bitvektorokat.
+
+Tegyük fel, hogy a FOGLALKOZAS, a BELEPES és az OAZON oszlopokra létezik bitmap index (3 index).
+Készítsük el az alábbi lekérdezésekhez szükséges bitvektorokat, majd végezzük el rajtuk a szükséges 
+műveleteket, és adjuk meg azt az előállt bitvektort, ami alapján a végeredmény sorok megkaphatók.
+Ellenőrzésképpen adjuk meg a lekérdezést SQL-ben is.
+ 
+- Adjuk meg azoknak a dolgozóknak a nevét, akik 1981-ben léptek be és a foglalkozásuk hivatalnok (CLERK),
+  vagy a 20-as osztályon dolgoznak és a foglalkozásuk MANAGER.
+
+- Adjuk meg azoknak a dolgozóknak a nevét, akik nem 1981-ben léptek be és a 10-es vagy a 30-as 
+  osztályon dolgoznak.
+
+Tömörítse a következő bitvektort a szakaszhossz kódolással. (lásd UW_szakaszhossz_kodolas.doc)
+0000000000000000000000010000000101
+
+Fejtsük vissza a következő, szakaszhossz kódolással tömörített bitvektort:
+1111010101001011
+
+
+
+B+ fa index
+-----------
+Az alábbi feladatban a tankönyben leírt és az előadáson is bemutatott algoritmussal 
+építsünk fel egy B+ fát!
+
+Tegyük fel, hogy egy B+ fa blokkjaiba 3 kulcs fér el plusz 4 mutató. A kulcsok 
+különbözőek. Szúrjuk be a B+ fába az alábbi kulcsértékeket a megadott sorrendben:
+39,15,50,70,79,83,72,43,75,45
+Adjuk meg a B+ fa minden olyan állapotát, amikor egy csomópont kettéosztására volt szükség.
+Például, az első kettéosztás utáni állapot:
+                          50
+                    15|39    50|70
+
+Egy kis segítség:
+----------------
+
+Levél csúcs kettéosztásakor minden kulcsot megőrzünk a régi és az új (szomszédos) csúcsban.
+1 új kulcs-mutató párt küldünk felfelé a szülő csúcsba, amit ott kell elhelyezni.
+
+Belső csúcs kettéosztásakor (N,M csúcsra) a mutatók első fele az N-be kerül, a második az M-be.
+A kulcsok első fele az N-be kerül a második fele az M-be, de középen kimarad egy kulcs,
+ami az M-en keresztül (első gyermekén keresztül) elérhető legkisebb kulcsot tartalmazza. 
+Ez nem kerül sem N-be, sem M-be, hanem ez megy fölfelé N és M közös szülőjébe az M-re mutató
+mutatóval együtt.
+
+

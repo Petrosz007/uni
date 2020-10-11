@@ -1,0 +1,56 @@
+Adatbázisok II. gyakorlat 2019/2020 1. félév
+Gyakorlatvezető: dr. Vincellér Zoltán
+
+A gyakorlati jegy megszerzésének feltételei:
+
+A feltételeket a Hallgatói követelményrendszer meghatározza, azoktól eltérni nem
+tudunk. A jelen leírás második felében kiemeltem a legfontosabb 
+paragrafusokat a szabályzatból, amelyeket a jobb érthetőség kedvéért megpróbálok
+a saját szavaimmal is megfogalmazni.
+
+- A gyakorlatokon való jelenlét (maximum 3 hiányzás megengedett -> 66. § (1) b), c)). 
+  Ennél több hiányzás esetén gyakjegy uv-val sem szerezheto meg a gyakorlati jegy.
+
+- A félév során megírandó 2 zh mindegyikén 1-estől különböző jegy megszerzése. 
+  A szorgalmi feladatokra kapott %pontok a rákövetkező ZH eredményéhez hozzáadódnak!
+  A gyakorlati jegyet a 2 ZH érdemjegyének átlaga adja. 
+
+- A ponthatárok:
+     0-49 Elégtelen
+    50-59 Elégséges
+    60-74 Közepes
+    75-84 Jó
+    85-   Jeles
+
+- Az egyik 1-es zh a vizsgaidőszak első hetében javítható.
+
+- A javítás után is 1-es zh-val rendelkező hallgató gyakorlati jegye elégtelen. Ennek 
+  kijavítására gyakorlati jegy uv-val van lehetőség a vizsgaidőszak második hetében. -> 66. § (6)
+
+
+
+ELTE SZMSZ II. kötet Hallgatói követelményrendszer:
+http://www.elte.hu/file/ELTE_SZMSZ_II.pdf
+
+63. §
+(2) A gyakorlaton és a szemináriumon a részvétel és a gyakorlati követelmények teljesítése kötelező. 
+    A gyakorlaton való jelenlétet az oktatónak egyértelmű módon ellenőriznie kell, és nyilván kell tartania.
+(3) Gyakorlati és szemináriumi jegy megszerzése érdekében teljesítendő gyakorlati követelmény lehet:
+ a) a gyakorlaton végzett feladatokról történő beszámolás és/vagy,
+ b) a gyakorlat idején kívül elvégzendő feladat és/vagy,
+ c) zárthelyi dolgozat és/vagy,
+ d) más, a képzési tervben meghatározott követelmény.
+
+66. §
+(1) a) az oktató a gyakorlati jegyet nem tagadhatja meg, ha a hallgató a meghirdetett
+       foglalkozások legfeljebb negyedéről hiányzott;
+    b) egynegyed és egyharmad közötti távollét esetén az oktató jogosult
+       többletfeladatot előírni vagy a gyakorlati jegyet megtagadni, az erre vonatkozó
+       elvi döntését azonban a félév első óráján előre közölnie kell;
+    c) egyharmadot meghaladó távollét esetén a gyakorlati jegyet meg kell tagadni.
+
+(6)       
+    Elégtelen gyakorlati jegy kijavítására – ha a szak (ideértve a felsőoktatási
+    szakképzést is) képzési tervének rendelkezése, illetve annak hiányában a kurzuskínálat ezt
+    lehetővé teszi – a vizsgaidőszak első két hetében kell egy alkalommal lehetőséget biztosítani.
+

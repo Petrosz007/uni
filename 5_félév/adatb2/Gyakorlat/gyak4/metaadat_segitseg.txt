@@ -1,0 +1,253 @@
+Kérdések és válaszok
+
+1. Honnan kaphatunk információkat az adatbázisban tárolt dolgokról és azok tulajdonságairól?
+
+- az adatszótár nézetekből, amiknek a neve általában a következő karakterláncok valamelyikével 
+  kezdődik:
+
+  USER (az adott user tulajdonában lévő objektumok) pl. USER_TABLES
+  ALL  (amihez joga van az adott usernek) pl. ALL_TABLES
+  DBA  (az adatbázis összes objektuma) pl. DBA_TABLES
+
+2. Mely táblák vannak például egy adott felhasználó tulajdonában?
+
+- A DBA_TABLES adatszótár az összes táblát felsorolja
+
+SELECT table_name FROM dba_tables WHERE owner='HR';
+
+table_name
+-----------
+DEPARTMENTS
+EMPLOYEES
+JOBS
+JOB_HISTORY
+...
+
+3. Milyen nevű és típusú oszlopai vannak egy táblának, melyik az első, második oszlopa stb.?
+
+- A DBA_TAB_COLUMNS adatszótár minden fontos információt tartalmaz, lásd pl. az alábbit:
+
+ CREATE TABLE proba1
+  (c10 CHAR(10) DEFAULT 'bubu',   vc20 VARCHAR2(20),     blo BLOB,
+   num NUMBER,                    num10_2 NUMBER(10,2),  num10 NUMBER(10) DEFAULT 100,  
+   dat DATE DEFAULT TO_DATE('2007.01.01', 'yyyy.mm.dd'), rid ROWID);
+
+ A fenti tábla adatainak lekérdezése:
+
+ SELECT column_id, column_name, data_type, data_length, data_precision, data_scale, data_default
+ FROM dba_tab_columns WHERE owner='NIKOVITS' AND table_name='PROBA1' ORDER BY column_id;
+
+c_id  c_name  data_type  data_length  prec   scale    data_default
+----------------------------------------------------------------------------------------
+1	C10	CHAR		10			'bubu'
+2	VC20	VARCHAR2	20			
+3	BLO	BLOB		4000			
+4	NUM	NUMBER		22			
+5	NUM10_2	NUMBER		22	10	2	
+6	NUM10	NUMBER		22	10	0	100
+7	DAT	DATE		7			TO_DATE('2007.01.01', 'yyyy.mm.dd')
+8	RID	ROWID		10			
+
+
+4. Milyen további dolgok vannak még az adatbázisban a táblákon kívül?
+
+- Sok egyéb dolg van, pl. nézetek, indexek, procedúrák stb. Minden fel van sorolva a típusával 
+  együtt a DBA_OBJECTS adatszótárban.
+
+ SELECT object_name, object_type FROM DBA_OBJECTS WHERE owner='NIKOVITS';
+
+object_name     object_type
+-------------------------------
+CIKK		TABLE
+CIKK_IOT_PK	INDEX
+CIKK_PROJ_DB	VIEW
+CIMLISTA_TAB	TYPE
+CITIES_SPIDX	INDEX
+CL1		CLUSTER
+ELADASOK	TABLE
+ELADASOK	TABLE PARTITION
+GEOM2SVG	PROCEDURE
+...
+
+
+5. Mennyi helyet foglal el egy tábla (index) az adatbázisban?
+
+- Először is nem mindegyik objektum foglal el ténylegesen tárhelyet az adatbázisban (lemezen).
+  Egy nézet vagy procedúra például nem foglal helyet, egy tábla vagy index viszont igen.
+  Amikor olyan objektumot hozunk létre, amelyik helyet foglal, az adatbáziskezelő létrehoz egy (vagy több) 
+  adatszegmenst, amely további kisebb részekből áll. Ezek a kisebb részek az extensek, amelyek
+  adatblokkokból épülnek fel.
+  Fő szabály szerint egy objektum egy szegmenst jelent, de vannak speciális objektumok, pl. a partícionált
+  tábla, amelyik több szegmensből is állhat.
+  Ha tehát azt szeretnénk megtudni, hogy egy tábla vagy index mennyi helyet foglal, akkor a hozzá tartozó
+  szegmens tulajdonságait kell megnéznünk a DBA_SEGMENTS szótárban.
+
+ SELECT owner, segment_name, segment_type, extents, blocks, bytes 
+ FROM dba_segments WHERE owner='SH' AND segment_name IN ('CUSTOMERS', 'CUSTOMERS_PK');
+
+owner  segment_name  segment_type   extents   blocks    bytes
+----------------------------------------------------------------
+SH	CUSTOMERS_PK	INDEX		16	128	1048576
+SH	CUSTOMERS	TABLE		27	1536	12582912
+
+A fentiekből az is látható, hogy az objektum hány extensből áll, hány adatblokkot és bájtot foglal.
+Azok az objektumok, amelyek nem foglalnak helyet (pl. egy nézet) nem jelennek meg a DBA_SEGMENTS
+adatszótárban, vagyis hozzájuk nem tartozik szegmens.
+
+
+6. Hol vannak ténylegesen tárolva az adatok?
+
+- Az adatok adatfájlokban vannak tárolva, a fájlok adatblokkokból állnak. A DBA_DATA_FILES
+  adatszótár megmondja, hogy mely fájlokból áll az adatbázis, hol helyezkednek el a lemezen
+  és mekkora a méretük bájtokban és blokkokban.
+
+ SELECT file_id, file_name, bytes, blocks FROM dba_data_files;
+ 
+file_id    file_name                                     bytes          blocks
+------------------------------------------------------------------------------
+1	/u01/app/oracle/oradata/ablinux/system01.dbf	734003200	89600
+2	/u01/app/oracle/oradata/ablinux/sysaux01.dbf	1289748480	157440
+3	/u01/app/oracle/oradata/ablinux/undotbs01.dbf	671088640	81920
+4	/u01/app/oracle/oradata/ablinux/users01.dbf	456130560	55680
+5	/u01/app/oracle/oradata/ablinux/example01.dbf	1572864000	192000
+6	/u01/app/oracle/oradata/ablinux/users02.dbf	1048576000	128000
+
+
+7. Hogyan tudhatom meg pontosabban, hogy egy táblához mely adatblokkok tartoznak?
+
+- Erről az extensek adnak pontosabb képet. Az extens egy összefüggő (szomszédos blokkokból álló)
+  terület, amelyik teljes egészében egy adatfájlban van. A DBA_EXTENTS szótárból megnézhetjük, 
+  hogy melyik fájlban van, a fájlnak hányadik blokkjánál kezdődik és hány blokknyi a mérete.
+
+ SELECT segment_name, segment_type, file_id, block_id, blocks 
+ FROM dba_extents WHERE owner='NIKOVITS' AND segment_name='TABLA_123';
+
+segment_name  segment_type   file_id   block_id  blocks
+-------------------------------------------------------
+TABLA_123	TABLE		6	4168       8
+TABLA_123	TABLE		4	1736       8
+TABLA_123	TABLE		4	1744       8
+TABLA_123	TABLE		4	1992       8
+
+A fenti tábla két különböző fájlban (file_id=4, file_id=6) összesen 4 extenssel rendelkezik,
+mindegyik extens mérete 8 blokk.
+
+
+8. Mely objektumokhoz tartozik és melyekhez nem tartozik szegmens?
+
+ Nem csak onnak lehet tudni, hogy egy objektumnak nincs szegmense, hogy nem szerepel a DBA_SEGMENTS
+ szótárban, hanem ez már a DBA_OBJECTS szótárból is látható. Minden adatbázisbeli objektumnak van
+ egy egyedi objektum azonosítója (OBJECT_ID), és amelyikhez tartozik (vagy a későbbiekben tartozhat )
+ szegmens, annak egy úgynevezett adatobjektum azonosítója is van (DATA_OBJECT_ID). 
+ Amelyik objektumhoz nem tartozhat szegmens, annak az adatobjektum azonosítója NULL. 
+ Ezen utóbbi objektumokra azt mondjuk, hogy tényleges tárolást nem igénylő objektumok. 
+ Ezeknek csak a definíciója van (szövegesen) tárolva a szótárban.
+
+ SELECT object_name, object_type, object_id, data_object_id FROM dba_objects WHERE owner='NIKOVITS';
+
+object_name  object_type    object_id  data_object_id
+-----------------------------------------------------
+CIKK		TABLE		93589	93589
+C_CKOD		INDEX		98330	98330
+GEOM2SVG	PROCEDURE	93211	(null)
+CIMLISTA_TAB	TYPE		91577   (null)	
+CL1		CLUSTER		96055	96055
+CIKK_PROJ_DB	VIEW		99572	(null)
+ 
+
+9. Mik azok a táblaterek?
+
+A táblaterek olyan logikai egységek, amelyekbe az adatbázisban tárolt objektumokat tehetjük.
+Azért logikai egységek, mert fizikailag több adatfájlból állhatnak, amelyek akár különböző
+lemezeken is lehetnek. Nagyon sok tárolással kapcsolatos paramétert a táblaterek szintjén
+lehet megadni, így például a blokkok méretét is. Így egy adatbázisban több különböző méretű
+adatblokk is lehet, de egy táblatérben csak egyféle méret lehetséges. 
+Sokféle adminisztrációs művelet is elvégezhető táblatér szinten, pl. leállítás, mentés,
+és így nem kell az egész adatbázist leállítanunk ezek elvégzéséhez.
+A tárolt adatobjektumok, a szegmensek mindig egy táblatérhez tartoznak. 
+Egy táblatéren tárolhatunk "normális" adatokat, temporális (lekérdezés közben szükséges
+átmeneti) adatokat vagy a naplózáshoz szükséges (ugynevezett UNDO) adatokat. A fenti 3-ból
+a táblatér csak egyfélét tárolhat, ezt a táblatér létrehozásakor meg kell adnunk.
+Az adatbázisban vannak kötelezően létező táblaterek (SYSTEM, SYSAUX), amelyek az 
+adatszótár táblákat és egyéb belső információkat tárolnak.
+
+ SELECT tablespace_name, status, block_size, CONTENTS FROM dba_tablespaces;
+
+TABLESPACE_NAME                STATUS    BLOCK_SIZE             CONTENTS  
+------------------------------ --------- ---------------------- --------- 
+SYSTEM                         ONLINE    8192                   PERMANENT 
+SYSAUX                         ONLINE    8192                   PERMANENT 
+UNDOTBS1                       ONLINE    8192                   UNDO      
+TEMP                           ONLINE    8192                   TEMPORARY 
+USERS                          ONLINE    8192                   PERMANENT 
+EXAMPLE                        ONLINE    8192                   PERMANENT 
+RDF_USERS                      ONLINE    8192                   PERMANENT
+
+
+10. A ROWID
+
+Az Oracle sok esetben használ olyan mutatókat, amelyek egy tábla valamelyik sorára mutatnak.
+Például az indexek is tartalmaznak ilyen mutatókat a kulcsérték mellett.
+Ezek a mutatók megadják, hogy az adott sor melyik szegmensben (adatobjektumban),
+melyik fájlban, annak melyik (hányadik) blokkjában és a blokkon belül hányadik sorban van.
+A fenti információk mindegyikét egy egész számmal megadott azonosító tartalmazza, hiszen minden 
+adatobjektumnak, fájlnak, blokknak és sornak van egy sorszáma. A ROWID ezeket az információkat 
+kódolva tárolja a következő formában: OOOOOOFFFBBBBBBRRR.
+
+A ROWID-ből a számot visszanyerni a DBMS_ROWID package függvényeivel lehet.
+Például ha azt szeretnénk megtudni, hogy a táblának egy sora melyik adatobjektumban (szegmensben),
+melyik adatfájlban, azon belül melyik blokkban van, kérdezzük le a következőt:
+
+ SELECT dnev, dbms_rowid.rowid_object(ROWID) adatobj, 
+        dbms_rowid.rowid_relative_fno(ROWID) fajl,
+        dbms_rowid.rowid_block_number(ROWID) blokk,
+        dbms_rowid.rowid_row_number(ROWID) sor
+ FROM dolgozo WHERE dnev = 'KING';
+
+DNEV       ADATOBJ                FAJL BLOKK SOR     
+---------- ---------------------- ---- ----- --- 
+KING       248453                 6    54988  19   
+
+A kapott első két szám megtalálható a DBA_OBJECTS.DATA_OBJECT_ID és a DBA_DATA_FILES. FILE_ID
+oszlopokban.
+
+ SELECT owner, object_name, object_type FROM dba_objects WHERE data_object_id=248453;
+
+OWNER                          OBJECT_NAME    OBJECT_TYPE         
+------------------------------ -------------- ------------------- 
+NIKOVITS                       DOLGOZO        TABLE               
+
+
+ SELECT file_name, tablespace_name FROM dba_data_files WHERE file_id=6;
+
+FILE_NAME                                       TABLESPACE_NAME  
+----------------------------------------------- ---------------
+/home/oracle/oradata/ORA11G/users02.dbf         USERS
+
+
+11. Késleltetett szegmens létrehozás
+
+Amikor egy táblát létrehozunk, de még nincs egyetlen sora sem, a rendszer lehetséges, hogy nem fog 
+adatblokkokat lefoglalni a tábla számára, vagyis nem fog létrehozni szegmenst. Ezt a fajta viselkedést
+egy külön paraméter beállításával kérhetjük. A paraméter neve: deferred_segment_creation. 
+A paramétert beállíthatjuk az egész instanciára vonatkozóan (system) vagy csak az aktuális session-re vonatkozóan.
+(Az instancia szintű beállítást általában csak a DBA teheti meg.)
+Ha ilyen paraméterrel hoztuk létre a táblát, akkor csak az első sor beszúrásakor fog tényleges adatblokkokat
+lefoglalni, korábban nem. 
+
+-- alter system set deferred_segment_creation=false;
+alter session set deferred_segment_creation=true;
+create table aaa(o int);
+-- a tábla már létrejött, adatobjektum azonosítója is van, de még nincs szegmense
+select * from user_tables where table_name like 'AA%';
+select * from user_objects where object_name like 'AA%';
+select * from user_segments where segment_name like 'AA%';
+insert into aaa values(1);
+-- kérdezzük le ismét az előző hármat, most már lesz szegmense
+drop table aaa;
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+-- altípusok
+
+-- unconstrained (ez csak egy alias nevet ad meg, pl. ANSI kompatibilitás céljából)
+SUBTYPE CHARACTER IS CHAR;
+
+-- constrained (az alaptípusnak egy valódi részhalmazát jelöli ki)
+SUBTYPE INTEGER IS NUMBER(38,0);
+
+-- Az előre definiált altípusok a STANDARD package-ben vannak, lásd az alábbi lekérdezéssel:
+SELECT text FROM all_source WHERE type='PACKAGE' and name='STANDARD' ORDER BY line;
+
+-- néhány példa a package-ből:
+/*
+  type BOOLEAN is (FALSE, TRUE);
+  subtype INTEGER is NUMBER(38,0);
+  subtype DECIMAL is NUMBER(38,0);
+  subtype BINARY_INTEGER is INTEGER range '-2147483647'..2147483647;
+  subtype NATURAL is BINARY_INTEGER range 0..2147483647;
+  subtype NATURALN is NATURAL not null;
+
+  type sys_refcursor is ref cursor;
+*/
+
+-- user-defined subtypes (record, table, type inheritance + constraint)
+DECLARE
+  SUBTYPE BirthDate IS DATE NOT NULL;         -- Based on DATE type
+  SUBTYPE Counter IS NATURAL;                 -- Based on NATURAL subtype
+  
+  SUBTYPE pinteger IS PLS_INTEGER RANGE -9..9;  
+
+  TYPE NameList IS TABLE OF VARCHAR2(10);
+  SUBTYPE DutyRoster IS NameList;             -- Based on TABLE type
+  
+  TYPE TimeRec IS RECORD (minutes INTEGER, hours INTEGER);
+  SUBTYPE FinishTime IS TimeRec;                -- Based on RECORD type
+  SUBTYPE ID_Num IS employees.employee_id%TYPE; -- Based on column type
+BEGIN
+  NULL;
+END;
+/
+
+-- implicit konverzió CHAR -> NUMBER
+set serveroutput on
+DECLARE
+  start_time   CHAR(5);
+  finish_time  CHAR(5);
+  elapsed_time NUMBER(5);
+BEGIN
+  -- Get system time as seconds past midnight:
+  SELECT TO_CHAR(SYSDATE,'SSSSS') INTO start_time FROM sys.DUAL;
+  -- Get system time again:
+  SELECT TO_CHAR(SYSDATE,'SSSSS') INTO finish_time FROM sys.DUAL;
+  elapsed_time := finish_time - start_time;                           -- CHAR -> NUMBER
+  DBMS_OUTPUT.PUT_LINE ('Elapsed time: ' || TO_CHAR(elapsed_time));
+END;
+/
+---------------
+Elapsed time: 0
+
+
+-- Vigyázzunk a blank-padded szemantikára a CHAR típus esetén !!!
+-- Ha bármelyik VARCHAR2 lenne akkor már nem lenne egyenlő
+set serveroutput on
+DECLARE
+  last_name1 CHAR(5)  := 'BELLO';     -- no trailing blanks
+  last_name2 CHAR(10) := 'BELLO   ';  -- trailing blanks
+BEGIN
+  IF last_name1 = last_name2 THEN
+    DBMS_OUTPUT.PUT_LINE(last_name1 || '(hossz:'|| length(last_name1)||') equals ' ||
+    last_name2  || '(hossz:'|| length(last_name2)||')');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(last_name2 || ' does not equal ' || last_name1);
+  END IF;
+END;
+/
+-----------------------------------------
+BELLO(hossz:5) equals BELLO     (hossz:10)
+
+

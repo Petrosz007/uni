@@ -1,0 +1,65 @@
+/****************** BULK COLLECT és FORALL ****************/
+
+Asszociatív tömbre (at) és beágyazott táblára (bt) is működik.
+Gyorsabban végrehajtódik, mintha ciklust írnánk.
+
+set serveroutput on
+DECLARE
+  TYPE t_dolgozo_at IS TABLE OF dolgozo%ROWTYPE INDEX BY binary_integer;  -- asszociatív tömb
+  v_dolgozo_at t_dolgozo_at;
+  TYPE t_oazon_bt IS TABLE OF dolgozo.oazon%TYPE;                         -- nested table
+  v_oazon_bt t_oazon_bt := t_oazon_bt(10,20,30,40);                       -- inicializálás
+BEGIN
+  SELECT * BULK COLLECT INTO v_dolgozo_at FROM dolgozo WHERE oazon = 10;  -- egyetlen utasítással feltölti a tömböt
+  FOR i IN v_dolgozo_at.FIRST .. v_dolgozo_at.LAST LOOP
+    dbms_output.put_line(v_dolgozo_at(i).dnev);
+  END LOOP;
+
+  FORALL i IN 1..v_oazon_bt.COUNT                                       -- a tömb minden elemére végrehajtja
+    UPDATE dolgozo set fizetes=fizetes+1 WHERE oazon = v_oazon_bt(i);
+  dbms_output.put_line('összes sor: '||SQL%ROWCOUNT);                   -- összes érintett sor
+-- lekérdezhetjük az egyes iterációkban érintett sorok számát	
+  FOR i IN 1..v_oazon_bt.COUNT LOOP
+    dbms_output.put_line('módosított sorok száma: '||SQL%BULK_ROWCOUNT(i));  -- egyes utasítások által érintett
+  END LOOP;
+END;
+/
+EREDMÉNY:
+---------
+CLARK
+KING
+MILLER
+összes sor: 14
+módosított sorok száma: 3
+módosított sorok száma: 5
+módosított sorok száma: 6
+módosított sorok száma: 0
+
+
+-- BULK COLLECT kurzorból olvasva. Itt sem kell soronként FETCH-elni.
+set serveroutput on
+DECLARE
+  TYPE IdTab  IS TABLE OF emp.empno%TYPE index by binary_integer;
+  TYPE NameTab IS TABLE OF emp.ename%TYPE index by binary_integer;
+
+  ids    IdTab;
+  names  NameTab;
+  CURSOR c1 IS SELECT empno, ename FROM emp WHERE job = 'SALESMAN';
+BEGIN
+  OPEN c1;
+  FETCH c1 BULK COLLECT INTO ids, names;
+  CLOSE c1;
+  -- Process collection elements
+  FOR i IN ids.FIRST .. ids.LAST LOOP
+    DBMS_OUTPUT.PUT(ids(i)|| ' --> ');
+    DBMS_OUTPUT.PUT_LINE( names(i) );
+  END LOOP;
+END;
+/
+Eredmény
+---------------
+7499 --> ALLEN
+7521 --> WARD
+7654 --> MARTIN
+7844 --> TURNER
+

@@ -1,0 +1,65 @@
+Az alábbi feladatokban kiszámoljuk, illetve sok helyen csak megbecsüljük egy tábla sorainak
+vagy adatblokkjainak a számát, egy index méretét, vagy egy lekérdezés végrehajtása során 
+előálló köztes részeredmény méretét (sorainak vagy blokkjainak számát).
+Vannak olyan feladatok is, ahol azt számoljuk ki (becsüljük meg), hogy milyen költséggel
+lehet egy lekérdezést, vagy annak egy lépését végrehajtani.
+Mindezeknek az a jelentősége, hogy megértjük, milyen nagy különbséget jelenhet futásidőben, 
+ha egy lekérdezéshez például van megfelelő index létrehozva, vagy ha egy bonyolult lekérdezés
+egyik lépését egy jobb algoritmussal, és így kisebb költséggel lehet végrehajtani.
+A költségek tekintetében többnyire a szükséges adatblokk olvasások/írások száma a legjelentősebb.
+------------------------------------------------------------------------------------------------
+
+1. Feladat
+----------
+Van egy R táblánk, egy I1 sűrű és egy I2 ritka (egy szintű) indexünk az alábbi paraméterekkel:
+T(R) = 10000, bf(R) = 20, bf(I1) = 100, bf(I2) = 100
+Számoljuk ki a következőket:
+B(R)  = ?   ->  B(R) = T(R)/bf(R) = 500
+                A tábla sorainak száma osztva a blokkolási faktorral
+B(I1) = ?   ->  B(I1) = T(I1)/bf(I1) = 100
+                I1 sűrű index, így T(I1)=T(R), mert a tábla minden sorához tartozik egy (kulcs, mutató)
+                pár az indexben.
+B(I2) = ?   ->  B(I2) = T(I2)/bf(I2) = 5
+                I2 ritka, így T(I2)=B(R), mert csak a tábla blokkjaihoz tartozik egy (kulcs, mutató) pár.
+
+Megjegyzés: Látható, hogy a ritka index sokkal kevesebb helyet foglal, mint a sűrű. Persze a ritka indexhez
+            szükséges, hogy az indexelt adatok rendezetten legyenek tárolva.
+
+
+2. feladat
+----------
+Számoljuk ki az előző feladatbeli értékeket, ha a blokkok csak 80%-ban lehetnek tele.
+-> bf(R) = 0.8 * 20; bf(I1) = 0.8 * 100, a számolás egyebekben hasonló az előzőhöz
+
+
+3. Feladat
+----------
+T(R) = 1000000, bf(R) = 20, egy kulcs oszlopra készítünk B+ fa indexet, amelyre bf(I) = 50. 
+Számoljuk ki a következőket:
+B(I) = ?    (segítség: számítsuk ki szintenként az indexblokkok számát, a levél szinttel kezdve)
+
+Megoldás:
+A legalsó (levél) szint egy sűrű index, annyi (kulcs, mutató) párt tartalmaz, ahány sora van a táblának.
+-> itt a blokkok száma tehát: T(R)/bf(I) = 20000.
+A második (és további szintek) ritka indexek az alattuk levő szintekre, vagyis annyi (kulcs, mutató)
+párt tartalmaznak, ahány blokk az alattuk levő szinten van.
+-> 2. szint: 20000/bf(I) = 400
+-> 3. szint: 400/bf(I) = 8
+-> 4. szint: 8/bf(I) = 1 blokk (ez a gyökér blokk, ami nincs tele)
+-> összesen 20409 blokkja lesz az indexnek, vagyis B(I) = 20409
+
+Mennyi a műveletigénye blokkolvasásokban egy A = c típusú keresésnek (legrosszabb esetben) ha
+a) a tábla sorai rendezetlenül vannak tárolva és nem használunk indexet  
+-> B(R) (ami egyenlő T(R)/bf(R)-rel = 50000), vagyis a táblának 50000 blokkját be kell olvasni legrosszabb esetben.
+
+b) a tábla sorai rendezetten vannak tárolva és nem használunk indexet    
+-> log2(B(R))
+   rendezett esetben bináris keresést alkalmazhatunk, ami jelen esetben ~16 blokk olvasást jelent.
+
+c) a fenti B+ fa indexet használjuk.
+-> ht(I) + 1 = 5 (ht(I) a fa magassága, jelen esetben 4, plusz még be kell olvasnunk a megtalált blokkot.
+
+Megjegyzés: A fenti eredmények megmutatják, hogy miért nem érdemes egyszintű indexet létrehozni, hanem helyette
+            B+ fát. A B+ fa nem foglal sokkal több helyet, mint egy sűrű index, de sokkal gyorsabban lehet
+            a segítségével keresni.
+

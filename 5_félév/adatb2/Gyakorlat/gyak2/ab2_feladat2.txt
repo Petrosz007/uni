@@ -1,0 +1,110 @@
+Adadbázisok II.
+2. gyak.
+
+Táblák oszlopai (DBA_TAB_COLUMNS)
+---------------------------------
+Az alábbi kérdésekkel egy tábla oszlopait vizsgálhatjuk meg részletesen, vagyis
+az oszlop nevét, sorszámát (hányadik oszlop), típusát, azt hogy elfogadja-e a NULL
+értéket, van-e alapértelmezett értéke, stb.
+--------------------------------------------------------------------------------
+
+Hány oszlopa van a nikovits.emp táblának? (darab)
+
+Milyen típusú a nikovits.emp tábla 6. oszlopa? (data_type)
+
+Adjuk meg azoknak a tábláknak a tulajdonosát és nevét, amelyeknek van 'Z' betűvel 
+kezdődő oszlopa. (owner, table_name)
+
+Adjuk meg azoknak a tábláknak a tulajdonosát és nevét, amelyeknek legalább 8 
+darab dátum tipusú oszlopa van. (owner, table_name)
+
+Adjuk meg azoknak a tábláknak a tulajdonosát és nevét, amelyeknek 1. es 4. oszlopa is
+VARCHAR2 tipusú, az oszlop hossza mindegy. (owner, table_name)
+
+-----------------------------------------------------------------------
+Írjunk meg egy plsql procedúrát, amelyik a paraméterül kapott karakterlánc alapján 
+kiírja azoknak a tábláknak a nevét és tulajdonosát, amelyek az adott karakterlánccal 
+kezdődnek. (Ha a paraméter kisbetűs, akkor is működjön a procedúra!)
+     PROCEDURE table_print(p_kar VARCHAR2) 
+A fenti procedúra segítségével írjuk ki a Z betűvel kezdődő táblák nevét és tulajdonosát.
+
+
+Szorgalmi feladat (beküldendő a vzoli@inf.elte.hu email címre)
+-----------------
+Írjunk meg egy plsql procedúrát, amelyik a paraméterül kapott táblára kiírja 
+az őt létrehozó CTREATE TABLE utasítást. 
+   PROCEDURE cr_tab(p_owner VARCHAR2, p_tabla VARCHAR2) 
+Elég ha az oszlopok típusát és DEFAULT értékeit kíírja, és elég ha a következő típusú 
+oszlopokra működik.
+ CHAR, VARCHAR2, NCHAR, NVARCHAR2, BLOB, CLOB, NCLOB, NUMBER, FLOAT, BINARY_FLOAT, DATE, ROWID
+
+Teszteljétek a procedúrát az alábbi táblával.
+CREATE TABLE tipus_proba(c10 CHAR(10) DEFAULT 'bubu', vc20 VARCHAR2(20), nc10 NCHAR(10), 
+  nvc15 NVARCHAR2(15), blo BLOB, clo CLOB, nclo NCLOB, num NUMBER, num10_2 NUMBER(10,2), 
+  num10 NUMBER(10) DEFAULT 100, flo FLOAT, bin_flo binary_float DEFAULT '2e+38', 
+  bin_doub binary_double DEFAULT 2e+40,
+  dat DATE DEFAULT TO_DATE('2007.01.01', 'yyyy.mm.dd'), rid ROWID);
+
+
+-------------------------------------------------------------------------------
+Adattárolással kapcsolatos fogalmak
+-----------------------------------
+(DBA_TABLES, DBA_DATA_FILES, DBA_TEMP_FILES, DBA_TABLESPACES, DBA_SEGMENTS, DBA_EXTENTS, DBA_FREE_SPACE)
+
+Adjuk meg az adatbázishoz tartozó adatfile-ok (és temporális fájlok) nevét és méretét
+méret szerint csökkenő sorrendben. (név, méret)
+
+Adjuk meg, hogy milyen táblaterek vannak létrehozva az adatbazisban,
+az egyes táblaterek hány adatfájlbol állnak, és mekkora az összméretük.
+(tablater_nev, fajlok_szama, osszmeret)
+!!! Vigyázat, van temporális táblatér is.
+
+Mekkora az adatblokkok merete a USERS táblatéren?
+
+Van-e olyan táblatér, amelynek nincs DBA_DATA_FILES-beli adatfájlja?
+Ennek adatai hol tárolódnak? -> DBA_TEMP_FILES
+
+Melyik a legnagyobb méretű tábla szegmens az adatbázisban és hány extensből áll? 
+(tulajdonos, szegmens_név, darab)
+(A particionált táblákat most ne vegyük figyelembe.)
+
+Melyik ket felhasznalo objektumai foglalnak osszesen a legtobb helyet az adatbazisban?
+Vagyis ki foglal a legtöbb helyet, és ki a második legtöbbet?
+
+Hány extens van a 'users02.dbf' adatfájlban? Mekkora ezek összmérete? (darab, össz)
+Hány összefüggő szabad terület van a 'users02.dbf' adatfájlban? Mekkora ezek összmérete? (darab, össz)
+Hány százalékban foglalt a 'users02.dbf' adatfájl?
+
+Van-e a NIKOVITS felhasználónak olyan táblája, amelyik több adatfájlban is foglal helyet? (Aramis)
+
+Válasszunk ki a fenti táblákból egyet (pl. tabla_123) és adjuk meg, hogy ez a 
+tábla mely adatfájlokban foglal helyet.
+
+Melyik táblatéren van az ORAUSER felhasználó DOLGOZO táblája? (táblatér)
+
+Melyik táblatéren van a NIKOVITS felhasználó ELADASOK táblája? (táblatér)
+(Miért lesz null?)
+
+-----------------------------------------------------------------------
+14.
+Írjunk meg egy PLSQL procedúrát, amelyik a paraméterül kapott felhasználónévre kiírja 
+a felhasználó legutoljára létrehozott tábláját, annak méretét byte-okban, valamint a létrehozás
+dátumát.
+
+CREATE OR REPLACE PROCEDURE uj_tabla(p_user VARCHAR2) IS 
+...
+Teszt:
+SET SERVEROUTPUT ON
+EXECUTE uj_tabla('NIKOVITS');
+
+Megjegyzés!
+Próbáljuk ki a procedúrát saját magunkra az alábbi tábla létrehozása után:
+  CREATE TABLE t_without_segment(o INT) SEGMENT CREATION DEFERRED;
+Majd szúrjunk be 1 sort és próbáljuk ki újra.
+  INSERT INTO t_without_segment VALUES(100);
+-----------------------------------------------------------------------
+
+
+
+
+

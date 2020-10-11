@@ -1,0 +1,163 @@
+Partícionálás
+-------------
+(DBA_PART_TABLES, DBA_PART_INDEXES, DBA_TAB_PARTITIONS, DBA_IND_PARTITIONS, 
+DBA_TAB_SUBPARTITIONS, DBA_IND_SUBPARTITIONS, DBA_PART_KEY_COLUMNS)
+
+1.
+Adjuk meg a NIKOVITS felhasználó tulajdonában levő partícionált táblák nevét és a 
+particionálás típusát.
+---------------------------------------------------------------------------
+SELECT table_name, partitioning_type FROM dba_part_tables WHERE owner = 'NIKOVITS';
+
+2.
+Soroljuk fel a NIKOVITS.ELADASOK tábla partícióit valamint, hogy hány blokkot foglalnak
+az egyes partíciók. (Vigyázat! Egyes adatszótárak csak becsült méretet tartalmaznak.
+A pontos méreteket az extenseknél és szegmenseknél keressük.)
+---------------------------------------------------------------------------
+SELECT partition_name, blocks FROM dba_tab_partitions WHERE table_owner='NIKOVITS' AND table_name='ELADASOK';
+
+SELECT segment_name, partition_name, blocks 
+FROM dba_segments WHERE owner='NIKOVITS' AND segment_type='TABLE PARTITION' and segment_name='ELADASOK';
+
+3.
+Adjuk meg, hogy a NIKOVITS.ELADASOK tábla mely oszlop(ok) szerint van particionálva.
+---------------------------------------------------------------------------
+SELECT column_name, column_position FROM dba_part_key_columns 
+WHERE owner='NIKOVITS' AND name='ELADASOK' AND object_type='TABLE';
+
+4.
+Adjuk meg, hogy a NIKOVITS.ELADASOK3 tábla második partíciójában milyen értékek szerepelhetnek.
+---------------------------------------------------------------------------
+SELECT partition_name, partition_position pos, high_value, partition_position FROM dba_tab_partitions 
+WHERE table_owner='NIKOVITS' AND table_name='ELADASOK3' AND partition_position=2;
+
+5.
+Adjuk meg egy partícionált tábla logikai és fizikai részeit (pl. NIKOVITS.ELADASOK). 
+Maga a tábla most is logikai objektum, a partíciói vannak fizikailag tárolva.
+Nézzük meg az objektumok és a szegmensek között is.
+---------------------------------------------------------------------------
+SELECT object_name, object_type, subobject_name, object_id, data_object_id
+FROM dba_objects WHERE owner='NIKOVITS' AND object_name='ELADASOK';
+
+SELECT * FROM dba_segments WHERE owner='NIKOVITS' AND segment_name='ELADASOK';
+
+6.
+Illetve ha alpartíciói is vannak (pl. nikovits.eladasok4), akkor csak az alpartíciók 
+vannak tárolva. Nézzük meg az objektumok és a szegmensek között is.
+---------------------------------------------------------------------------
+SELECT object_name, object_type, subobject_name, object_id, data_object_id
+FROM dba_objects WHERE owner='NIKOVITS' AND object_name='ELADASOK4';
+
+SELECT * FROM dba_segments WHERE owner='NIKOVITS' AND segment_name='ELADASOK4';
+
+7.
+Melyik a legnagyobb méretű partícionált tábla az adatbázisban a partíciók 
+összméretét tekintve? (az alpartícióval rendelkező táblákat is vegyük figyelembe)
+---------------------------------------------------------------------------
+SELECT owner, segment_name, SUM(bytes) FROM dba_segments 
+WHERE segment_type LIKE 'TABLE%PARTITION'
+GROUP BY owner, segment_name
+ORDER BY SUM(bytes) DESC;
+
+Dinamikus SQL utasítások PL/SQL programban
+------------------------------------------
+8.
+Írjunk meg egy PLSQL procedúrát, amelyik kiírja a paraméterül kapott táblára,
+hogy annak hány üres blokkja van. A procedúrát úgy írjuk meg, hogy az partícionált táblára
+is működjön. 
+grant select on eladasok to public;
+CREATE OR REPLACE PROCEDURE empty_blocks(p_owner VARCHAR2, p_table VARCHAR2) IS
+...
+SET SERVEROUTPUT ON
+EXECUTE empty_blocks('nikovits','cikk');
+EXECUTE empty_blocks('nikovits','eladasok');
+EXECUTE empty_blocks('nikovits','hivas');  -- ez kb. 1 percig is futhat
+
+Tipp: 
+Nézzük meg, hogy összesen hány blokkot tartalmaz(nak) a tábla szegmense(i). (partícionált is lehet !)
+Számoljuk meg az olyan blokkok számát, amelyek nem üresek. A fenti kettő különbsége adja a végeredményt.
+Mivel a tábla nevét csak futásidőben fogjuk megtudni, ezért úgynevezett dinamikus SQL utasítást
+kell használnunk. Ehhez lásd: pl_dinamikusSQL.txt
+
+create or replace PROCEDURE empty_blocks(p_owner VARCHAR2, p_table VARCHAR2) IS
+ v_full integer := 0;
+ v_sum  integer := 0;
+BEGIN
+ SELECT sum(blocks) into v_sum FROM dba_segments 
+ WHERE segment_type like 'TABLE%' AND upper(owner) = upper(p_owner)
+ AND upper(segment_name) = upper(p_table);
+ EXECUTE IMMEDIATE 'SELECT count(distinct substr(rowid,1,15)) FROM '
+                   ||p_owner||'.'||p_table INTO v_full;
+  dbms_output.put_line('empty blocks: '||to_char(v_sum-v_full)); 
+END;
+/
+--------------------------------------------------------------------------------
+
+
+Klaszter (CLUSTER)
+------------------
+(DBA_CLUSTERS, DBA_CLU_COLUMNS, DBA_TABLES, DBA_CLUSTER_HASH_EXPRESSIONS)
+
+Hozzunk létre egy DOLGOZO(dazon, nev, beosztas, fonoke, fizetes, oazon ... stb.) 
+és egy OSZTALY(oazon, nev, telephely ... stb.) nevű táblát. 
+(lásd NIKOVITS.DOLGOZO és NIKOVITS.OSZTALY)
+A két táblának az osztály azonosítója (oazon) lesz a közös oszlopa. A két táblát 
+egy index alapú CLUSTEREN hozzuk létre. (Előbb persze létre kell hozni a clustert is.)
+Majd tegyünk bele 3 osztályt, és osztályonként két dolgozót.
+
+9.
+Adjunk meg egy olyan clustert az adatbázisban (ha van ilyen), amelyen még nincs
+egy tábla sem. 
+---------------------------------------------------------------------------
+SELECT owner, cluster_name FROM dba_clusters  
+ MINUS
+SELECT owner, cluster_name FROM dba_tables;
+
+10.
+Adjunk meg egy olyant, amelyiken legalább 2 (esetleg 3) darab tábla van.
+---------------------------------------------------------------------------
+SELECT owner, cluster_name FROM dba_tables WHERE cluster_name IS NOT NULL
+GROUP BY owner, cluster_name HAVING COUNT(*) >= 2;
+
+11.
+Adjunk meg egy olyan clustert, amelynek a cluster kulcsa 3 oszlopból áll.
+(Vigyázat!!! Több tábla is lehet rajta)
+---------------------------------------------------------------------------
+SELECT owner, cluster_name FROM dba_clu_columns  
+GROUP BY owner, cluster_name HAVING COUNT(DISTINCT clu_column_name) = 3;
+
+12.
+HASH CLUSTER
+Hány olyan hash cluster van az adatbázisban, amely nem az oracle alapértelmezés 
+szerinti hash függvényén alapul?
+---------------------------------------------------------------------------
+SELECT COUNT(*) FROM
+(SELECT owner, cluster_name, hash_expression FROM dba_cluster_hash_expressions);
+
+13.
+Hozzunk létre egy hash clustert és rajta két táblát, majd szúrjunk be a 
+táblákba sorokat úgy, hogy a két táblának 2-2 sora ugyanabba a blokkba 
+kerüljön. Ellenőrizzük is egy lekérdezéssel, hogy a 4 sor valóban ugyanabban 
+a blokkban van-e. (A ROWID lekérdezésével)
+TIPP: A sorok elhelyezését befolyásolni tudjuk a HASH IS megadásával.
+
+-- klaszter példa
+CREATE CLUSTER hash_cluster(id_ske NUMBER(2))
+ HASHKEYS 20
+HASH IS MOD(id_ske,20);
+--
+CREATE TABLE t11
+(
+ id NUMBER(2),
+ name VARCHAR(20)
+) CLUSTER hash_cluster(id);
+
+CREATE TABLE t12
+(
+ id NUMBER(2),
+ name VARCHAR(20)
+) CLUSTER hash_cluster(id);
+
+
+
+

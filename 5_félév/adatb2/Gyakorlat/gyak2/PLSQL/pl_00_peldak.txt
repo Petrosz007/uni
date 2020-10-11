@@ -1,0 +1,387 @@
+-- A blokk részei: deklarációs, végrehajtható, kivétel kezelő
+
+set serveroutput on
+DECLARE                 
+  v NUMBER := 0;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Ez még lefutott ...');
+  v := 1/v;
+  DBMS_OUTPUT.PUT_LINE('Ez már nem fog ...');
+EXCEPTION
+  WHEN ZERO_DIVIDE THEN
+    DBMS_OUTPUT.PUT_LINE('Nullával osztás történt');
+END;
+/      -- mindig tegyünk a blokk után '/' karaktert!
+
+/***************
+A PL/SQL nyelv lexikális elemei: delimiterek, azonosítók, literálok, commentek
+
+Példák delimiterekre:
++   Addition operator
+:=  Assignment operator
+<<  Label delimiter (begin)
+>>  Label delimiter (end)
+!=  Relational operator (not equal)
+
+Azonosítók a következő PL/SQL objektumokat jelölhetnek:
+Constants, Cursors,  Exceptions, Keywords, Labels,  Packages
+Reserved words, Subprograms, Variables, Types
+
+Vannak előre definiált azonosítók, ezeket a STANDARD package-ben deklarálták, pl. ZERO_DIVIDE kivétel
+Felhasználó által definiált azonosítók: betűvel kezdődnek, lehet benne $, #, _, max. 30 karakter lehet.
+Idézőjeles azonosítók: lehet benne bármilyen karakter kivéve idézőjel pl. "a + b"
+
+Literálok (numerikus, karakter, string, logikai, dátum)
+egész:       12
+valós:       12.0
+karakter:    'a'
+string:      'abc', ''  (null string, értéke NULL)
+logikai:     TRUE, FALSE, NULL
+dátum:       DATE '2011-12-25' 
+
+commentek: egysoros és több soros
+***************/
+-- egysoros komment
+/* több soros
+   komment
+*/
+
+
+-- delimiter belsejébe nem tehetünk szóközt (értékadás)
+BEGIN
+  count := count + 1;   -- correct
+  count : = count + 1;  -- incorrect
+END;
+/
+
+-- DATETIME és INTERVAL típusú literálok
+DECLARE
+  d1 DATE      := DATE '1998-12-25';
+  t1 TIMESTAMP := TIMESTAMP '1997-10-22 13:01:01';
+  t2 TIMESTAMP WITH TIME ZONE :=   TIMESTAMP '1997-01-31 09:26:56.66 +02:00';
+  
+  -- Three years and two months
+  -- For greater precision, use the day-to-second interval
+  i1 INTERVAL YEAR TO MONTH := INTERVAL '3-2' YEAR TO MONTH;
+ 
+  -- Five days, four hours, three minutes, two and 1/100 seconds
+   i2 INTERVAL DAY TO SECOND := INTERVAL '5 04:03:02.01' DAY TO SECOND;
+BEGIN
+  NULL;
+END;
+/
+
+-- változó deklarációk
+DECLARE
+  part_number       NUMBER(6);     -- SQL data type
+  part_name         VARCHAR2(20);  -- SQL data type
+  in_stock          BOOLEAN;       -- PL/SQL-only data type
+  part_price        NUMBER(6,2);   -- SQL data type
+  part_description  VARCHAR2(50);  -- SQL data type
+BEGIN
+  NULL;
+END;
+/
+
+-- konstans deklarációk
+DECLARE
+  credit_limit     CONSTANT REAL    := 5000.00;  -- SQL data type
+  max_days_in_year CONSTANT INTEGER := 366;      -- SQL data type
+  urban_legend     CONSTANT BOOLEAN := FALSE     -- PL/SQL-only data type;
+BEGIN
+  NULL;
+END;
+/
+
+-- kezdeti értékadás
+DECLARE
+  hours_worked    INTEGER := 40;
+  employee_count  INTEGER := 0;
+  pi     CONSTANT REAL := 3.14159;
+  radius          REAL := 1;
+  area            REAL := (pi * radius**2);
+BEGIN
+  NULL;
+END;
+/
+
+-- Alapértelmezett kezdeti érték (ne használjuk ki).
+DECLARE
+  counter INTEGER;  -- initial value is NULL by default
+BEGIN
+  counter := counter + 1;  -- NULL + 1 is still NULL
+  IF counter IS NULL THEN
+    DBMS_OUTPUT.PUT_LINE('counter is NULL.');
+  END IF;
+END;
+/
+
+----------------
+counter is NULL.
+
+-- Mindegyik változó NULL értékű lesz:
+DECLARE
+  null_string  VARCHAR2(80) := TO_CHAR('');
+  address      VARCHAR2(80);
+  zip_code     VARCHAR2(80) := SUBSTR(address, 25, 0);
+  name         VARCHAR2(80);
+  valid        BOOLEAN      := (name != '');
+BEGIN
+  NULL;
+END;
+/
+
+-- %TYPE korábban deklarált objektumtól vagy adatbázisbeli tábla oszlopától örökli
+-- az adattípust és a megszorítást (oszlop esetén ez utóbbit nem)
+DECLARE
+  v_name  emp.ename%TYPE;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('name=' || v_name);
+END;
+/
+
+DECLARE
+  name     VARCHAR(25) NOT NULL := 'Smith';
+  surname  name%TYPE := 'Jones';               -- a NOT NULL-t is örökli
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('name=' || name);
+  DBMS_OUTPUT.PUT_LINE('surname=' || surname);
+END;
+/
+
+-- %ROWTYPE rekord típus öröklése táblától, nézettől, kurzortól
+-- Csak a név (mezőnév) és a típus öröklődik, a constraint és a kezdeti érték nem
+CREATE TABLE employees_temp (
+  empid NUMBER(6) NOT NULL PRIMARY KEY,
+  deptid NUMBER(6) CONSTRAINT c_employees_deptid CHECK (deptid BETWEEN 100 AND 200),
+  deptname VARCHAR2(30) DEFAULT 'Sales' );
+
+DECLARE
+  emprec  employees_temp%ROWTYPE;
+BEGIN
+  emprec.empid := NULL;        -- NOT Null constraint not inherited
+  emprec.deptid := 50;         -- Check constraint not inherited
+  DBMS_OUTPUT.PUT_LINE ('emprec.deptname: ' || emprec.deptname); -- Initial value not inherited
+END;
+/
+
+-- hibás ha kétszer deklarálunk ugyanolyan nevű azonosítót egy PL/SQL egységben (unit)
+DECLARE
+  id  BOOLEAN;
+  id  VARCHAR2(5);  -- duplicate identifier
+BEGIN
+  id := FALSE;
+END;
+/
+
+/* PL/SQL unit a következők valamelyike:
+- PL/SQL anonymous block
+- FUNCTION
+- LIBRARY
+- PACKAGE
+- PACKAGE BODY
+- PROCEDURE
+- TRIGGER
+- TYPE
+- TYPE BODY
+*/
+
+-- minősített nevek ütközése -> a procedúrán belül a lokális változóra hivatkozik 
+<<echo>>               -- egy label neve
+DECLARE
+  x  NUMBER := 5;
+  
+  PROCEDURE echo AS    -- egy procedúra neve
+    x  NUMBER := 0;
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('x = ' || x);             -- 0
+    DBMS_OUTPUT.PUT_LINE('echo.x = ' || echo.x);   -- 0 (a procedúra változója)
+  END;
+ 
+BEGIN
+  echo;
+END;
+/
+
+-- értékadás logikai típusú változónak
+DECLARE
+  done    BOOLEAN;                -- Initial value is NULL by default
+  counter NUMBER := 0;
+BEGIN
+  done := FALSE;                  -- Assign literal value
+  WHILE done != TRUE              -- Compare to literal value
+  LOOP
+    counter := counter + 1;
+    done := (counter > 500);      -- Assign value of BOOLEAN expression
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE(counter);  -- 501 
+END;
+/
+
+-- értékadás SELECT segítségével
+set serveroutput on
+DECLARE
+  bonus   NUMBER(7,2);
+BEGIN
+  SELECT sal * 0.10 INTO bonus
+  FROM emp
+  WHERE empno = 7900;
+  DBMS_OUTPUT.PUT_LINE('bonus = ' || TO_CHAR(bonus));
+END;
+/
+
+
+-- két NULL nem egyenlő, de az sem igaz, hogy !=
+set serveroutput on
+DECLARE
+  a NUMBER := NULL;
+  b NUMBER := NULL;
+BEGIN
+  IF a = b THEN                     -- yields NULL, not TRUE
+    DBMS_OUTPUT.PUT_LINE('a = b');  -- not run
+  ELSIF a != b THEN                 -- yields NULL, not TRUE
+    DBMS_OUTPUT.PUT_LINE('a != b'); -- not run
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Can''t tell if two NULLs are equal');
+  END IF;
+END;
+/
+Eredmény
+---------------------------------
+Can't tell if two NULLs are equal
+
+-- a konkatenáció operátor figyelmen kívül hagyja a NULL-t, de az eredmény nem NULL lesz
+set serveroutput on
+BEGIN
+  DBMS_OUTPUT.PUT_LINE ('apple' || NULL || NULL || 'sauce');  -- applesauce
+END;
+/
+
+-- használjunk zárójelet, és ne támaszkodjunk a kiértékelési sorrendre
+DECLARE
+  a INTEGER := 2**2*3**2;
+  b INTEGER := (2**2)*(3**2);
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('a = ' || TO_CHAR(a));   -- 36
+  DBMS_OUTPUT.PUT_LINE('b = ' || TO_CHAR(b));   -- 36
+END;
+/
+
+-- a kifejezések kiértékelése megáll, amint az eredmény eldőlt
+DECLARE
+  on_hand  INTEGER := 0;
+  on_order INTEGER := 100;
+BEGIN
+  -- Nem okoz ZERO_DIVIDE hibát, a kiértékelés megáll az első kifejezés után
+  
+  IF (on_hand = 0) OR ((on_order / on_hand) < 5) THEN  -- nem kapunk ZERO_DIVIDE kivételt
+    DBMS_OUTPUT.PUT_LINE('On hand quantity is zero.');
+  END IF;
+END;
+/
+
+-- egyszerű CASE kifejezés (ez nem utasítás) !!!
+set serveroutput on
+DECLARE
+  grade CHAR(1) := 'B';
+  appraisal VARCHAR2(20);
+BEGIN
+  appraisal :=
+    CASE grade
+      WHEN 'A' THEN 'Excellent'
+      WHEN 'B' THEN 'Very Good'
+      WHEN 'C' THEN 'Good'
+      WHEN 'D' THEN 'Fair'
+      WHEN 'F' THEN 'Poor'
+      ELSE 'No such grade'
+    END;
+    DBMS_OUTPUT.PUT_LINE ('Grade ' || grade || ' is ' || appraisal);  -- Very Good
+END;
+/
+Eredmény
+--------------------
+Grade B is Very Good
+
+-- olyan mintha grade = NULL -t vizsgálnánk, ami nem lesz TRUE !!!
+-- használjuk a következő példabeli másik formát
+set serveroutput on
+DECLARE
+  grade CHAR(1); -- NULL by default
+  appraisal VARCHAR2(20);
+BEGIN
+  appraisal :=
+  CASE grade
+    WHEN NULL THEN 'No grade assigned'
+    WHEN 'A' THEN 'Excellent'
+    WHEN 'B' THEN 'Very Good'
+    WHEN 'C' THEN 'Good'
+    WHEN 'D' THEN 'Fair'
+    WHEN 'F' THEN 'Poor'
+    ELSE 'No such grade'
+  END;
+  DBMS_OUTPUT.PUT_LINE ('Grade ' || grade || ' is ' || appraisal);  -- No such grade
+END;
+/
+Eredmény
+-----------------------
+Grade  is No such grade
+
+-- logikai kifejezések lehetnek a WHEN után
+-- az első igaz ág eredményét adja vissza, a továbbiakat nem vizsgálja
+set serveroutput on
+DECLARE
+  grade CHAR(1); -- NULL by default
+  appraisal VARCHAR2(20);
+BEGIN
+  appraisal :=
+    CASE
+      WHEN grade IS NULL THEN 'No grade assigned'
+      WHEN grade = 'A' THEN 'Excellent'
+      WHEN grade = 'B' THEN 'Very Good'
+      WHEN grade = 'C' THEN 'Good'
+      WHEN grade = 'D' THEN 'Fair'
+      WHEN grade = 'F' THEN 'Poor'
+      ELSE 'No such grade'
+    END;
+    DBMS_OUTPUT.PUT_LINE ('Grade ' || grade || ' is ' || appraisal);  -- No grade assigned
+END;
+/
+Eredmény
+---------------------------
+Grade  is No grade assigned
+
+-- a FOR ciklus indexe lokális a ciluson belül
+set serveroutput on
+<<main>>  -- Label block.
+DECLARE
+  i NUMBER := 5;
+BEGIN
+  FOR i IN 1..3 LOOP
+    DBMS_OUTPUT.PUT_LINE ('local: ' || TO_CHAR(i) || ', global: ' || TO_CHAR(main.i));
+  END LOOP;
+END main;
+/
+Eredmény
+-------------------
+local: 1, global: 5
+local: 2, global: 5
+local: 3, global: 5
+
+-- Ciklus indexek egymásba ágyazott ciklusokra
+set serveroutput on
+BEGIN
+  <<outer_loop>>
+  FOR i IN 1..3 LOOP
+    <<inner_loop>>
+    FOR i IN 1..3 LOOP
+      IF outer_loop.i = 2 THEN
+        DBMS_OUTPUT.PUT_LINE('outer: ' || TO_CHAR(outer_loop.i) || ' inner: ' || TO_CHAR(inner_loop.i));
+      END IF;
+    END LOOP inner_loop;
+  END LOOP outer_loop;
+END;
+/
+-----------------
+outer: 2 inner: 1
+outer: 2 inner: 2
+outer: 2 inner: 3

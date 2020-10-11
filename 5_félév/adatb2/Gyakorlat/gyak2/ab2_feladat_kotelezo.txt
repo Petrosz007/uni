@@ -1,0 +1,16 @@
+A mai gyakorlaton kötelezõen megoldandó feladat.
+
+Hozzunk létre egy táblát, ami eleget tesz az alábbi követelményeknek.
+
+A tábla neve azonos a felhasználó nevével, plusz még az van hozzáfûzve, hogy '_X1'.
+A táblának 5 oszlopa van.
+A táblának egyetlen dátum (DATE) típusú oszlopa van.
+A táblának van NUMBER(10,4) típusú oszlopa.
+A dátum típusú oszlopnak van alapértelmezett (DEFAULT) értéke.
+
+Házi feladat:
+Írjunk egy lekérdezést, ami kiírja, hogy kik hoztak létre megfelelõ táblát.
+Próbáljunk meg olyan táblát létrehozni, ami a fenti 5 feltétel közül 4-nek
+eleget tesz, és nézzük meg, hogy a lekérdezés észreveszi-e, hogy ez a tábla
+nem felel meg minden feltételnek.
+

@@ -1,0 +1,205 @@
+ROWID adattípus formátuma és jelentése (lásd még DBMS_ROWID package)
+--------------------------------------------------------------------
+
+18 karakteren irodik ki, a kovetkezo formaban: OOOOOOFFFBBBBBBRRR
+OOOOOO -  az objektum azonositoja (egészen pontosan az úgynevezett adatobjektum azonosítója)
+FFF    -  fajl azonositoja (tablateren beluli relativ sorszam)
+BBBBBB -  blokk azonosito (a fajlon beluli sorszam)
+RRR    -  sor azonosito (a blokkon beluli sorszam)
+
+A ROWID megjeleniteskor 64-es alapu kodolasban jelenik meg (Base64). 
+Az egyes szamoknak (0-63) a következo karakterek felelnek meg:
+A-Z -> (0-25), a-z -> (26-51), 0-9 -> (52-61), '+' -> (62), '/' -> (63)
+
+Pl. 'AAAAAB' -> 000001
+
+1.
+A NIKOVITS felhasználó CIKK táblája hány blokkot foglal le az adatbázisban?
+(Vagyis hány olyan blokk van, ami ehhez a táblához van rendelve és így
+azok már más táblákhoz nem adhatók hozzá?)
+------------------------------------------
+SELECT bytes, blocks FROM dba_segments 
+WHERE owner='NIKOVITS' AND segment_name='CIKK' AND segment_type='TABLE';
+
+2.
+A NIKOVITS felhasználó CIKK táblájának adatai hány blokkban helyezkednek el?
+(Vagyis a tábla sorai ténylegesen hány blokkban vannak tárolva?)
+!!! -> Ez a kérdés nem ugyanaz mint az előző.
+---------------------------------------------
+SELECT DISTINCT dbms_rowid.rowid_relative_fno(ROWID) fajl,
+       dbms_rowid.rowid_block_number(ROWID) blokk
+FROM nikovits.cikk;
+
+Vagy rögtön megszámolva az elő lekérdezés által felsorolt adatblokkokat:
+------------------------------------------------------------------------ 
+SELECT count(*) FROM
+(SELECT DISTINCT dbms_rowid.rowid_relative_fno(ROWID) fajl,
+        dbms_rowid.rowid_block_number(ROWID) blokk
+ FROM nikovits.cikk);
+
+3.
+Az egyes blokkokban hány sor van? (file_id, blokk_id, darab)
+------------------------------------------------------------
+SELECT dbms_rowid.rowid_relative_fno(ROWID) fajl,
+       dbms_rowid.rowid_block_number(ROWID) blokk, count(*)
+FROM nikovits.cikk
+GROUP BY dbms_rowid.rowid_relative_fno(ROWID), dbms_rowid.rowid_block_number(ROWID);
+
+Hozzunk létre egy táblát az EXAMPLE táblatéren, amelynek szerkezete azonos a nikovits.cikk 
+tábláéval és pontosan 128 KB helyet foglal az adatbázisban. Foglaljunk le manuálisan további 
+128 KB helyet a táblához. Vigyünk fel sorokat addig, amig az első blokk tele nem 
+lesz, és 1 további sora lesz még a táblának a második blokkban.
+(A felvitelt plsql programmal végezzük és ne kézzel, mert úgy kicsit sokáig tartana.)
+További segítség és példák találhatók az ab2_oracle.docx állományban.
+-------------------------------------------------------------------------------------
+ALTER SESSION SET deferred_segment_creation = FALSE;
+
+A fenti utasítás egy inicializációs paraméter értékét változtatja meg. Ha a paraméter 
+értéke TRUE lenne, akkor csak késleltetve, az első beszúráskor jönne létre a szegmens.
+Az inicializációs paraméter(ek) aktuális értékét megnézhetjük session szinten:
+-> SELECT * FROM v$parameter WHERE name like '%deferred%segment%';  
+illetve instance szinten:
+-> SELECT * FROM v$system_parameter WHERE name like '%deferred%segment%';
+
+-- Létrehozzuk a táblát a megfelelő helyfoglalási paraméterekkel:
+CREATE TABLE proba
+TABLESPACE example
+STORAGE (INITIAL 128K  MINEXTENTS 1  MAXEXTENTS 200  PCTINCREASE 0)
+AS 
+SELECT * FROM nikovits.cikk WHERE 1=2;
+
+-- Újabb extenst foglalunk le a tábla számára (a táblatér egy létező fájlja legyen !!!)
+ALTER TABLE proba ALLOCATE EXTENT 
+(SIZE 128K DATAFILE '/u01/app/oracle/oradata/aramis/example01.dbf');
+
+-- Majd egyesével sorokat szúrunk be, és mindig megnézzük, hogy van-e már 2 blokk
+DECLARE
+ v_blokkszam NUMBER := 0; -- nemüres blokkok száma 
+ v_sorsz NUMBER := 1;
+BEGIN
+  WHILE v_blokkszam < 2 AND v_sorsz < 1000 LOOP     
+    INSERT INTO proba SELECT * FROM nikovits.cikk WHERE ckod=v_sorsz;
+    v_sorsz := v_sorsz + 1;
+    SELECT COUNT(DISTINCT dbms_rowid.rowid_relative_fno(ROWID)||
+                dbms_rowid.rowid_block_number(ROWID)) INTO v_blokkszam
+    FROM nikovits.proba;
+  END LOOP;
+  COMMIT;
+END;
+/
+-- A végén ellenőrizhetjük, hogy tényleg 2 blokkban vannak a sorok:
+SELECT dbms_rowid.rowid_relative_fno(ROWID) fajl,
+       dbms_rowid.rowid_block_number(ROWID) blokk, count(*)
+FROM nikovits.proba
+GROUP BY dbms_rowid.rowid_relative_fno(ROWID), dbms_rowid.rowid_block_number(ROWID);
+
+
+Próbáljuk ki az előzőt ismét, de most a PCTFREE értéket állítsuk 40-re. 
+Mindkét esetben ellenőrizzük is, hogy a sorok tényleg két blokkban vannak,
+és a másodikban csak egyetlen sor van.
+--------------------------------------------------------------------------
+DROP TABLE proba;
+CREATE TABLE proba
+TABLESPACE example PCTFREE 40
+STORAGE (INITIAL 128K  MINEXTENTS 1  MAXEXTENTS 200  PCTINCREASE 0)
+AS 
+SELECT * FROM nikovits.cikk WHERE 1=2;
+
+A PL/SQL programot ismét lefuttatva, látható, hogy most kevesebb sor fér el a 2 blokkban.
+
+4.
+Állapítsuk meg, hogy a NIKOVITS.ELADASOK táblának a következő adatokkal azonosított sora
+(szla_szam=100) melyik adatfájlban van, azon belül melyik blokkban, és a blokkon belül hányadik a sor?
+(file_név, blokk_id, sorszám)
+--------------------------------------------------------------
+SELECT  dbms_rowid.rowid_object(ROWID) adatobj, 
+        dbms_rowid.rowid_relative_fno(ROWID) fajl,
+        dbms_rowid.rowid_block_number(ROWID) blokk,
+        dbms_rowid.rowid_row_number(ROWID) sor
+FROM nikovits.eladasok 
+WHERE szla_szam=100;
+
+Az előző feladatban megadott sor melyik partícióban van?
+Mennyi az objektum azonosítója, és ez milyen objektum?
+-------------------------------------------------------
+SELECT  o.object_name, o.subobject_name, o.object_type,o.data_object_id
+FROM nikovits.eladasok e, dba_objects o
+WHERE dbms_rowid.rowid_object(e.ROWID) = o.data_object_id 
+AND szla_szam=100;
+
+-----------------------------------------------------------------------
+5.
+Írjunk meg egy PLSQL procedúrát, amelyik kiírja, hogy a NIKOVITS.TABLA_123 táblának melyik 
+adatblokkjában hány sor van. (file_id, blokk_id, darab)
+-- előtte GRANT SELECT ON tabla_123 to PUBLIC;
+CREATE OR REPLACE PROCEDURE num_of_rows IS 
+...
+SET SERVEROUTPUT ON
+EXECUTE num_of_rows();
+-------------------------------------------------------
+create or replace procedure num_of_rows IS
+ cnt NUMBER;
+BEGIN 
+ FOR rec IN (select file_id, block_id, blocks from dba_extents 
+             where owner='NIKOVITS' and segment_name='TABLA_123' order by 1,2,3)
+ LOOP
+  FOR i in 1..rec.blocks LOOP
+   SELECT count(*) into cnt FROM nikovits.tabla_123 
+   WHERE dbms_rowid.rowid_relative_fno(ROWID) = rec.file_id
+   AND dbms_rowid.rowid_block_number(ROWID) = rec.block_id+i-1;
+   dbms_output.put_line(rec.file_id||'.'||to_char(rec.block_id+i-1)||'->'||cnt);
+  END LOOP;
+ END LOOP;
+END;
+/
+========================================================
+
+További példák a ROWID használatára
+-----------------------------------
+Hozzunk letre egy EXCEPTIONS nevu tablat az utlexcpt.sql nevu script 
+alapjan, majd egy olyan constraintet, amelyet a tablaban levo sorok
+kozul nehany megsert. (Emiatt a constraint letrehozasa hibauzenetet
+kell, hogy eredmenyezzen.) Allapitsuk meg az EXCEPTIONS nevu tabla 
+segitsegevel, hogy mely sorok sertik meg az imenti constraintet. 
+
+Az utlexcpt.sql nevű script a következő utasítást tartalmazza:
+
+CREATE TABLE exceptions(row_id rowid, owner varchar2(30),
+    table_name varchar2(30), constraint varchar2(30));
+
+
+-------------------------------
+
+Adatok tömörítése
+A szakaszhossz-kódolással ismerkedünk meg, amely egy adatvesztés nélküli tömörítéses kódolás.
+A módszer akkor előnyös, ha sok 0, és viszonylag kevéskre 1-es van egy kódsorozatban:
+
+0000001000000000000010001011
+
+ 
+
+1. első lépésben felbontjuk a számsort olyan részekre, melyek utolsó jegye 1-es, és az összes előtte álló jegy 0:
+
+0000001 | 00000000000001 | 0001 | 01 | 1
+
+ 
+
+2. minden szakaszban meghatározzuk a nullák számát bináris alakban (i), és az i jegyeinek számát (j).
+
+ 
+
+3/a. ha i>1, akkor a szakasz kódja: j-1 db 1-es | 0 | „i”,
+
+3/b. ha i=1, akkor a szakasz kódja 01,
+
+3/c. ha i=0, akkor a szakasz kódja 00.
+
+ 
+
+Ezek alapján az előző számsor tömörített alakja:
+
+1101101110110110100100
+
+Házi feladatként gondoljuk meg, hogyan lehet az előző sorból visszafejteni a kódolt számsort!
+
+ 

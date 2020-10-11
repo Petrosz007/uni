@@ -1,0 +1,187 @@
+/*********
+
+Kollekciók
+
+Ezek a szerkezetek a programozási nyelvek tömbjeihez hasonlóak. 
+Háromféle kollekciót kezel a plsql, a beágyazott táblát, a dinamikus tömböt és az asszociatív tömböt. 
+
+A kollekciók mindig egydimenziósak, de elemei lehetnek maguk is kollekciók. 
+Az asszociatív tömb csak plsql programban használható, a másik két kollekció típus 
+létrehozható adatbázis objektumként a CREATE TYPE utasítással, és adatbázistábla 
+oszlopában is tárolható.
+
+A kollekciók egész értékekkel indexelhetők, kivéve az asszociatív tömböt, 
+amely VARCHAR2 típusú adattal is indexelhető. Az indexek 1-től indulnak. 
+A dinamikus tömbben nem lehetnek lyukak, legfeljebb egyes elemek NULL értékűek.
+A kollekciótípusokat először deklarálni kell:
+
+Asszociatív tömb 
+TYPE t_név IS TABLE OF adattípus [NOT NULL] INDEX BY indextípus;
+Az indextípus lehet BINARY_INTEGER, PLS_INTEGER, VARCHAR2, vagy ezek altípusa.
+
+Beágyazott tábla 
+TYPE t_név IS TABLE OF adattípus [NOT NULL];
+
+Dinamikus tömb 
+TYPE t_név IS VARRAY(méret) OF adattípus [NOT NULL];
+
+A dinamikus tömb és a beágyazott tábla tulajdonképpen speciális objektumtípusok. 
+A deklarációval egy referencia típusú változó jön létre, aminek automatikusan NULL a kezdőértéke. 
+
+Inicializálni a típus konstruktorával tudjuk őket. 
+Az asszociatív tömböket viszont nem lehet inicializálni.
+A kollekciók lehetnek függvények paraméterei is, vagy a függvény által visszaadott 
+érték is lehet kollekció típusú.
+
+Kollekció metódusok
+
+EXISTS(n) boolean -> létezik-e az n-edik elem
+COUNT     number  -> hány nem törölt eleme van a kollekciónak
+LIMIT     number  -> VARRAY maximális mérete, a másik kettőre NULL-t ad
+FIRST     indextípus a legelső index értékét adja vissza, (NULL-t, ha üres)
+LAST      indextípus az utolsó index értékét adja vissza, (NULL-t, ha üres)
+PRIOR(n)  indextípus az n index előtti index (NULL ha nincs előtte index)
+NEXT(n)   indextípus az n index utáni index (NULL ha nincs utána index)
+EXTEND(n[,m])        bővíti a dinamikus tömböt vagy beágyazott táblát
+  n elemmel bővíti, NULL értékekkel, illetve az m-edik elemet teszi be n-szer
+TRIM(n)              eltávolítja din. tömb vagy beágyazott t. utolsó elemeit
+DELETE(n)            az n-edik elemet törli
+DELETE(m, n)         m-től n-ig törli az elemeket
+DELETE               az összes elemet törli. Din tömbre csak így használható
+
+Amíg egy kollekcióelemnek nem adtunk értéket addig az nem létezik. 
+Ha hivatkozunk rá akkor a NO_DATA_FOUND kivételt generálja a rendszer.
+
+*******/
+
+
+
+/****************** rekord és asszociatív tömb ****************/
+     
+rec:  | 10 | King |
+
+tab: Bubu
+     Baba
+     Bobo
+
+tab2:  10 | ACCOUNTING | NEW YORK
+       ...
+
+set serveroutput on
+DECLARE
+  TYPE rek_type IS RECORD(f1 INTEGER DEFAULT 10, f2 dolgozo.dnev%TYPE);  -- típus deklaráció
+  rec rek_type;                                                          -- változó definíció
+  TYPE tab_type IS TABLE OF VARCHAR2(30) INDEX BY BINARY_INTEGER;        -- asszociatív tömb típus
+  tab tab_type;                                                          -- tömb változó
+  rec_oszt osztaly%ROWTYPE;                                              -- ez is rekord változó
+  TYPE tab_type2 IS TABLE OF rec_oszt%ROWTYPE INDEX BY BINARY_INTEGER;   -- rekordokból álló tömb
+  tab2 tab_type2;
+BEGIN
+  rec.f2 := 'KING';
+  dbms_output.put_line(rec.f1||' -- '||rec.f2);                          -- default érték  
+  tab(1) := 'Bubu'; tab(2) := 'Baba'; tab(3) := 'Bobo';
+  FOR i IN tab.FIRST .. tab.LAST LOOP
+    dbms_output.put_line(tab(i));
+  END LOOP;
+  SELECT * INTO rec_oszt FROM osztaly WHERE oazon = 10;
+  tab2(1) := rec_oszt;                                                   -- rekord értékadás
+  dbms_output.put_line(tab2(1).oazon||' -- '||tab2(1).onev||' -- '||tab2(1).telephely);
+END;
+/
+EREDMÉNY
+--------
+10 -- KING
+Bubu
+Baba
+Bobo
+10 -- ACCOUNTING -- NEW YORK
+
+
+
+/****************** beágyazott tábla és dinamikus tömb ****************/
+-- Ezeket inicializálni kell mielőtt hivatkoznánk rájuk.
+-- Ezek tulajdonképpen objektumok
+ 
+set serveroutput on
+DECLARE
+ TYPE t_bt IS TABLE OF INTEGER;  -- VARRAY(10) is lehetne TABLE helyett
+  v_bt t_bt;        
+BEGIN
+  -- v_bt(1) := 10;   -- nem létező elemre nem lehet hivatkozni
+  IF v_bt IS NULL THEN dbms_output.put_line('még null az egész kollekció'); END IF;
+  -- dbms_output.put_line(v_bt.count);  -- még így sem lehet hivatkozni rá
+  
+  v_bt := t_bt();  -- inicializálás
+
+  IF v_bt IS NOT NULL THEN dbms_output.put('már nem null, '); END IF;
+  dbms_output.put_line('de elemszám: '||v_bt.count);
+  -- v_bt(1) := 10;   még mindig nem lehet 
+  
+  v_bt.EXTEND(2);  -- kibővítjük két null elemmel
+  dbms_output.put_line('elemszám: '||v_bt.count);
+
+  IF v_bt(1) IS NULL THEN dbms_output.put_line('az eleme null'); END IF;
+  v_bt := t_bt(10,20,30);
+
+  FOR i IN v_bt.FIRST .. v_bt.LAST LOOP
+    dbms_output.put_line(to_char(i)||'. elem: '||v_bt(i));
+  END LOOP;
+END;
+/
+EREDMÉNY
+--------
+még null az egész kollekció
+már nem null, de elemszám: 0
+elemszám: 2
+az eleme null 
+1. elem: 10
+2. elem: 20
+3. elem: 30
+
+
+/****************** kollekciók (3-féle tömb) ****************/
+set serveroutput on
+DECLARE
+ TYPE t_oazon_bt IS TABLE OF dolgozo.oazon%TYPE;                             -- beágyazott tábla
+ TYPE t_nev_dt  IS VARRAY(10) OF dolgozo.dnev%TYPE;                          -- dinamikus tömb
+ TYPE t_fiz_at  IS TABLE OF dolgozo.fizetes%TYPE INDEX BY dolgozo.dnev%TYPE; -- asszociatív tömb
+ TYPE t_nev_at  IS TABLE OF VARCHAR2(20) INDEX BY BINARY_INTEGER;            -- asszociatív tömb
+ v_oazon_bt t_oazon_bt := t_oazon_bt(10,20,30,40);        -- inicializáció
+ v_nev_dt   t_nev_dt   := t_nev_dt('név1', 'név2');       -- inicializáció
+ v_fiz_at   t_fiz_at;                                     -- ezt nem lehet inicializálni
+ v_nev_at   t_nev_at;                                     -- ezt nem lehet inicializálni
+BEGIN
+  SELECT fizetes INTO v_fiz_at('KING') FROM dolgozo WHERE dnev='KING';   -- értékadások
+  FOR i IN 1 .. 3 LOOP
+    v_nev_at(i) := 'Bubu'||to_char(i);
+  END LOOP;
+  v_nev_at(1) := 'első'; v_oazon_bt(1) := 1; v_nev_dt(1) := 'egy';     
+  v_nev_dt.EXTEND(2); v_nev_dt(4) := 'négy';                           -- bővíteni kell előzőleg
+  
+  dbms_output.put_line('KING fizetése: '||v_fiz_at('KING'));           -- elemek elérése
+  FOR i IN v_oazon_bt.FIRST .. v_oazon_bt.LAST LOOP
+    dbms_output.put_line('oazon: '||v_oazon_bt(i));
+  END LOOP;
+  FOR i IN v_nev_at.FIRST .. v_nev_at.LAST LOOP
+    dbms_output.put_line('szöveg: '||v_nev_at(i));
+  END LOOP;
+  FOR i IN v_nev_dt.FIRST .. v_nev_dt.LAST LOOP
+    dbms_output.put_line('nev: '||v_nev_dt(i));
+  END LOOP;
+END;
+/
+EREDMÉNY
+--------
+KING fizetése: 5000
+oazon: 1
+oazon: 20
+oazon: 30
+oazon: 40
+szöveg: első
+szöveg: Bubu2
+szöveg: Bubu3
+nev: egy
+nev: név2
+nev:
+nev: négy
+

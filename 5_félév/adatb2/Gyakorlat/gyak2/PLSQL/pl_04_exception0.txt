@@ -1,0 +1,48 @@
+/* Az alábbi program bemutatja, hogyan kell kivételt deklarálni, és hibakódot 
+   rendelni hozzá, valamint azt, hogy a beágyazott blokk deklarációs részében 
+   előforduló hibát csak a külső blokkban tudjuk elkapni és lekezelni. 
+*/
+set serveroutput on
+declare
+ hiba exception;
+ pragma exception_init(hiba, -20000);
+begin
+ raise_application_error('-20001', 'hiba2');  -- tegyük kommentbe ezt a sort
+ raise hiba;                                  -- majd ezt is 
+ declare
+  v number := 1/0;  -- ezt a hibát csak a külső blokkban kezelhetjük le
+ begin
+  null;
+ exception when others then dbms_output.put_line('belső: '||sqlcode||'~'||sqlerrm);
+ end;
+exception when others then dbms_output.put_line('külső: '||sqlcode||'~'||sqlerrm);
+end;
+/
+
+
+/* Az alábbi alprogram 3 különböző hibát is előidéz: Oracle belső hibát (zero_divide),
+   felhasználó által definiált, névvel rendelkező hibát (hiba1) és hibakóddal rendelkező
+   de névvel nem deklarált hibát. Tegyük kommentbe az egyes sorokat, illetve a hibájukat
+   lekezelő részt.
+   Ha alprogramban dobunk hibát a raise_application_error procedúrával, azt is 
+   le tudjuk kezelni magában az alprogramban.
+*/
+set serveroutput on
+declare
+ v1 number :=0;
+ function f1 return number is
+  hiba1 exception;
+ begin
+  v1:=1/v1;                                         -- tegyük kommentbe
+  raise hiba1;  -- SQLCODE 1 lesz                   -- tegyük kommentbe
+  raise_application_error('-20000', 'hibaüzenet');  -- tegyük kommentbe
+  return 10;
+ exception 
+  when zero_divide then return 20;
+  when hiba1 then return 30;                        -- tegyük kommentbe
+  when others then return 40;                       -- tegyük kommentbe     
+ end;
+begin
+ v1 := f1; dbms_output.put_line(v1);
+exception when others then dbms_output.put_line(sqlcode||'~'||sqlerrm);
+end;

@@ -1,0 +1,68 @@
+Előre deklarált kivételek lekérdezése:
+
+SELECT text FROM all_source WHERE type = 'PACKAGE'
+AND name = 'STANDARD' AND lower(text) LIKE '%zero_divide%';
+
+/* Az alábbi program 3 egymásba ágyazott blokkot tartalmaz.
+   Nézzük meg, hogy az egyes kivételeket melyik kivételkezelő rész kezeli le.
+*/
+set serveroutput on
+begin                   
+  declare
+    v1 dolgozo.fizetes%TYPE;
+    v2 dolgozo.jutalek%TYPE;
+    v3 integer := 0;
+  begin
+  -- v3 := 1/v3;   -- vegyük ki commentből és futtassuk úgy is
+    begin
+      select fizetes, jutalek into v1, v2 from dolgozo where dnev like 'W%';  -- like X% like S%
+      dbms_output.put_line('belső blokk');
+    exception
+      when too_many_rows then dbms_output.put_line('belső: túl sok sor');
+    end;
+  dbms_output.put_line('középső blokk');
+  exception
+    when zero_divide then dbms_output.put_line('középső: nullával osztás');
+    when too_many_rows then dbms_output.put_line('középső: túl sok sor');
+  end;
+  dbms_output.put_line('külső blokk');
+exception
+  when others then dbms_output.put_line('külső: '||sqlcode || ' -- ' || sqlerrm);
+end;
+/
+
+
+Hibakódoknak megfelelő hibaüzenet kiíratása:
+
+set serveroutput on
+begin
+ dbms_output.put_line(SQLERRM(-6502));
+end;
+/
+
+set serveroutput on
+begin                      -- 3 egymásba ágyazott blokk
+ declare
+  v1 dolgozo.fizetes%TYPE;
+  v2 dolgozo.jutalek%TYPE;
+  v3 integer := 0;
+ begin
+ -- v3 := 'a';  -- vegyük ki commentből és futtassuk úgy is
+  begin
+   select fizetes, jutalek into v1, v2 from dolgozo where dnev like 'S%';
+  exception
+   when no_data_found then 
+    begin
+     v1 := 1; v2 := 2;
+    end;
+  end;
+  dbms_output.put_line(to_char(v1)||' -- '|| nvl(to_char(v2), 'null'));
+ 
+ exception
+  when zero_divide then dbms_output.put_line('nullával osztás');
+  when too_many_rows then dbms_output.put_line('túl sok sor');
+  when others then dbms_output.put_line(sqlcode || ' -- ' || sqlerrm);
+ end;
+ dbms_output.put_line('főprogram');
+end;
+/

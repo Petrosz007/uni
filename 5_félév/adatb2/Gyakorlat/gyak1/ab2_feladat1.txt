@@ -1,0 +1,72 @@
+Adadbázisok II.
+1. gyak.
+A rendszerkatalógus maga is egy adatbázisnak tekinthetõ, amit lekérdezve egyre többet
+tudhatunk meg az ORACLE adatbázisban tárolt dolgokról és azok tulajdonságairól.
+A rendszerkatalógus tábláinak (nézeteinek) elnevezése: DBA_..., ALL_..., USER_...
+A rendszerkatalógus másik szokásos elnevezése: adatszótár (Data Dictionary)
+
+Vigyázat !!!
+Az alábbiakban ha egy objektumnak vagy egy felhasználónak a neve kisbetűvel 
+szerepel a feladat szövegében, az nem jelenti, hogy ez az adatszótárban is kisbetűvel
+van tárolva. Pl. orauser - ORAUSER felhasználó, emp - EMP tábla.
+
+CREATE table proba(o integer);  --> A tábla neve az adatszótárakban 'PROBA' lesz.
+CREATE table "proba"(o integer);  --> A tábla neve az adatszótárakban 'proba' lesz.
+
+Adatbázis objektumok (DBA_OBJECTS)
+----------------------------------
+Az alábbi lekérdezések segítenek feltérképezni, hogy milyen objektumok
+vannak egy Oracle adatbázisban, ki a tulajdonosuk, mikor hozták létre azokat, stb.
+A kérdések után zárójelben az elvárt végeredmény oszlopai szerepelnek.
+---------------------------------------------------------------------------------
+
+Adjunk meg SQL lekérdezést, illetve írjunk PL/SQL programot (ahol ez van megadva)
+az alábbi kérdésekre.
+
+1.
+Kinek a tulajdonában van a DBA_TABLES nevű nézet (illetve a DUAL nevű tábla)? (owner)
+
+2.
+Kinek a tulajdonában van a DBA_TABLES nevű szinonima (illetve a DUAL nevű)?
+ (Az iménti két lekérdezés megmagyarázza, hogy miért tudjuk elérni õket
+ anélkül, hogy minõsítenénk a tulajdonos nevével.)
+
+3.
+Milyen típusú objektumai vannak az orauser nevű felhasználónak az adatbázisban?
+
+4.
+Hány különbözõ típusú objektum van nyilvántartva az adatbázisban?
+
+
+5.
+Melyek ezek a típusok? (object_type)
+
+6.
+Kik azok a felhasználók, akiknek több mint 10 féle objektumuk van?
+
+7.
+Kik azok a felhasználók, akiknek van triggere és nézete is?
+
+8.
+Kik azok a felhasználók, akiknek van nézete, de nincs triggere?
+
+9.
+Kik azok a felhasználók, akiknek több mint 40 táblájuk, de maximum 37 indexük van?
+
+10.
+Melyek azok az objektum típusok, amelyek tényleges tárolást igényelnek, vagyis
+tartoznak hozzájuk adatblokkok? (object_type)
+ (Az olyan objektumoknak, amik nem igényelnek tényleges tárolást, pl. nézet,
+  csak a definíciója tárolódik az adatszótárban. A megoldáshoz a data_object_id oszlopot
+  vizsgáljuk meg.)
+
+11.
+Melyek azok az objektum típusok, amelyek nem igényelnek tényleges tárolást, vagyis nem
+tartoznak hozzájuk adatblokkok? (object_type)
+ Az utóbbi két lekérdezés metszete nem üres. Vajon miért? -> lásd majd partícionálás
+
+12.
+Keressük meg az utóbbi két lekérdezés metszetét. (object_type)
+ (Ezek olyan objektum típusok, amelyekbõl elõfordul adatblokkokal rendelkezõ
+ és adatblokkokal nem rendelkezõ is.)
+

@@ -1,0 +1,168 @@
+-- Néhány egyszerű példa a pl/sql függvények
+-- és procedúrák használatára vonatkozóan
+
+-- Az alábbi blokk alprogramjai nem tároltak, azok csak a blokk utasításaiban hívhatók 
+DECLARE
+  num number(6);
+
+  FUNCTION func_plus_1(num number) RETURN number IS
+    v NUMBER(6);
+  BEGIN
+    v := num + 1;
+    return(v);
+  END;
+
+  PROCEDURE proc_plus_1(num number) is
+    v NUMBER(6);
+  BEGIN
+    v := num + 1;
+    dbms_output.put_line(TO_CHAR(v));
+  END;
+
+BEGIN
+  num := func_plus_1(100);
+  proc_plus_1(num);
+END;
+/
+
+-- Az alábbi alprogramok viszont tárolt alprogramok, azok az adatbázisban
+-- tárolódnak és a késobbiekben bármikor meghívhatók.
+-- A fv SQL utasitasban is hasznalhato (a procedura csak PL/SQL-ben).
+
+-- Ahhoz hogy egy függvényt SQL utasításban is használhassunk, az alábbi megszorításoknak kell eleget tennie:
+1. tárolt fv legyen
+2. egy sorra vonatkozó legyen és ne egy csoportra
+3. csak IN módú paraméterei legyenek
+4. paramétereinek típusa Oracle belső típus legyen, és ne PLSQL típus
+5. a visszaadott értékének típusa Oracle belső típus legyen
+
+CREATE OR REPLACE FUNCTION func_plus_2(num number) RETURN number IS
+  v NUMBER(6);
+BEGIN
+  v := num + 2;
+  return(v);
+END;
+/      
+SELECT func_plus_2(1000) FROM dual;    -- a függvény meghívása SQL utasításban
+
+DECLARE                             
+  v number;
+BEGIN
+  v := func_plus_2(1000);              -- a függvény meghívása PLSQL utasításban
+  dbms_output.put_line(TO_CHAR(v));
+END;
+/
+
+CREATE OR REPLACE PROCEDURE proc_plus_2(num number) is
+  v NUMBER(6);
+BEGIN
+  v := num + 2;
+  dbms_output.put_line(TO_CHAR(v));
+END;
+/
+
+BEGIN
+  proc_plus_2(2000);           -- procedúra csak PLSQL utasításként hívható meg
+END;
+/
+-- Vagy a fentivel ekvivalens meghívási mód SqlDeveloperből
+EXECUTE proc_plus_2(2000); 
+
+-- "EXECUTE valami"-t -> "BEGIN valami; END;"-re cseréli az SqlDeveloper
+
+CALL proc_plus_2(2000);   -- a CALL egy SQL utasítás, lefutása után a puffer tartalma nem íródik ki
+
+
+-- paraméter nélküli alprogram
+set serveroutput on
+DECLARE
+  szam number(6) := 1;
+  PROCEDURE pr1 is           -- nem szabad zárójelet írni: pr1()
+    lokalis_valtozo NUMBER(6);
+  BEGIN
+    lokalis_valtozo := szam + 1;
+    dbms_output.put_line(TO_CHAR(lokalis_valtozo));
+  END;
+BEGIN
+  pr1();    -- itt lehet zárójelet írni, de nem kötelező: pr1 is jó lenne
+END;
+/
+
+/****************** túlterhelés ****************/
+set serveroutput on
+DECLARE
+  PROCEDURE elj(p IN NUMBER) IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('number param');
+  END elj;
+
+  PROCEDURE elj(p IN VARCHAR2) IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('varchar2 param');
+  END elj;
+BEGIN
+  elj(100);
+  elj('100');
+END;
+/
+EREDMÉNY:
+---------
+number param
+varchar2 param
+
+
+/****************** előre deklaráció ****************/
+set serveroutput on
+DECLARE
+  PROCEDURE elj2(p IN NUMBER);
+
+  PROCEDURE elj1(p IN NUMBER) IS
+  BEGIN
+    IF p < 10 THEN  DBMS_OUTPUT.PUT_LINE(p); elj2(p+1);  END IF;
+  END elj1;
+
+  PROCEDURE elj2(p IN NUMBER) IS
+  BEGIN
+    IF p < 10 THEN  DBMS_OUTPUT.PUT_LINE(p); elj1(p*2);  END IF;
+  END elj2;
+BEGIN
+  elj1(0);
+END;
+/
+EREDMÉNY:
+---------
+0; 1; 2; 3; 6; 7;
+
+
+-- A formális paraméter egy függvény értékét kapja meg kezdeti értékül
+DECLARE
+  cnt pls_integer := 0;
+
+  FUNCTION dflt RETURN pls_integer IS
+  BEGIN
+    cnt := cnt + 1;
+    RETURN 42;
+  END dflt;
+
+  PROCEDURE p (i IN pls_integer := dflt() ) IS    -- mellékhatása is van
+  BEGIN
+    DBMS_Output.Put_Line(i);
+  END p;
+
+BEGIN
+  FOR j IN 1..3 LOOP
+   p(j);      -- Megadjuk az aktuális paramétert, a függvény nem hívódik meg
+  END loop;
+  DBMS_Output.Put_Line('cnt: '||cnt);
+  p();        -- Nincs aktuális paraméter, a fv meghívódik, és mellékhatása van
+  DBMS_Output.Put_Line('cnt: '||cnt);
+END;
+/
+EREDMÉNY:
+---------
+1
+2
+3
+Cnt: 0
+42
+Cnt: 1

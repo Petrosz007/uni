@@ -1,0 +1,96 @@
+Dinamikus SQL
+================
+-> EXECUTE IMMEDIATE
+A dinamikus SQL azt jelenti, hogy olyan utasításokat futtatunk a PL/SQL
+programban, amelyeket fordítási időben még nem ismerünk. A futtatandó
+utasítás egy karakterláncban jön létre futási időben.
+Ezzel a módszerrel DDL utasításokat is futtathatunk (pl. CREATE ...),
+amelyeket egyébként nem lehetne egy PL/SQL programban szerepeltetni.
+
+set serveroutput on
+DECLARE
+ v_str VARCHAR2(2000);
+BEGIN
+  v_str :=  'CREATE TABLE dolgozo1 (dkod NUMBER(4) NOT NULL,'
+            || 'dnev VARCHAR2(30) NOT NULL,'
+            || 'foglalkozas VARCHAR2(30),'
+            || 'belepes DATE,'
+            || 'fizetes NUMBER(7,2))';
+  EXECUTE IMMEDIATE v_str;
+EXCEPTION
+  WHEN OTHERS THEN dbms_output.put_line(sqlcode||' -- '||sqlerrm);
+END;
+/
+
+Használhatjuk az implicit kurzor attribútumokat -> SQL%ROWCOUNT
+Futtatás előtt adjuk ki -> create table emp1 as select * from emp where 1=2;
+
+set serveroutput on
+DECLARE
+ v_str VARCHAR2(2000);
+BEGIN
+  v_str :=  'INSERT INTO emp1 (empno, ename, job, hiredate, sal)'
+            ||' SELECT empno, ename, job, hiredate, sal FROM emp'
+            ||' WHERE empno IN (7900, 7902)';
+  EXECUTE IMMEDIATE v_str;
+  dbms_output.put_line(SQL%ROWCOUNT ||' rows inserted ');
+EXCEPTION
+  WHEN OTHERS THEN dbms_output.put_line(sqlcode||' -- '||sqlerrm);
+END;
+/
+--------------
+2 rows inserted
+
+
+Úgynevezett helykitöltőket (placeholder) is használhatunk, ha többször kell ugyanazt 
+az utasítást futtatnunk, más-más adatokra. A kettősponttal jelölt változókat (helykitöltőket)
+nem kell deklarálnunk, azok helyére a USING után megadott adatok kerülnek.
+
+set serveroutput on
+DECLARE
+ v_str     VARCHAR2(2000);
+ v_ename   emp.ename%TYPE;
+ v_sal     emp.sal%TYPE;
+ v_empno   emp.empno%TYPE := 7900;
+BEGIN
+  v_str :=  'SELECT ename, sal FROM emp WHERE empno = :x AND ename = :y';
+  EXECUTE IMMEDIATE v_str INTO v_ename, v_sal USING v_empno, 'JAMES';
+  dbms_output.put_line(v_ename||' -- '||v_sal);
+EXCEPTION
+  WHEN OTHERS THEN dbms_output.put_line(sqlcode||' -- '||sqlerrm);
+END;
+/
+------------
+JAMES -- 950
+
+
+Az alábbi példa azt mutatja be, hogyan használhatunk Cursor-t dinamikus SQL utasításban.
+(OPEN ... FOR str)
+
+set serveroutput on
+DECLARE
+  TYPE CurTyp  IS REF CURSOR;
+  v_cursor  CurTyp;
+  rec       emp%ROWTYPE;
+  v_str     VARCHAR2(200);
+BEGIN
+  v_str := 'SELECT * FROM emp WHERE job = :x';
+  OPEN v_cursor FOR v_str USING 'SALESMAN';
+  LOOP
+    FETCH v_cursor INTO rec;
+    EXIT WHEN v_cursor%NOTFOUND;
+    dbms_output.put_line(rec.ename);
+  END LOOP;
+  CLOSE v_cursor;
+END;
+/
+------
+ALLEN
+WARD
+MARTIN
+TURNER
+
+
+
+
+
