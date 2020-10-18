@@ -37,16 +37,16 @@ JOB_HISTORY
  SELECT column_id, column_name, data_type, data_length, data_precision, data_scale, data_default
  FROM dba_tab_columns WHERE owner='NIKOVITS' AND table_name='PROBA1' ORDER BY column_id;
 
-c_id  c_name  data_type  data_length  prec   scale    data_default
+c_id  c_name  data_type   data_length   prec    scale     data_default
 ----------------------------------------------------------------------------------------
-1	C10	CHAR		10			'bubu'
-2	VC20	VARCHAR2	20			
-3	BLO	BLOB		4000			
-4	NUM	NUMBER		22			
-5	NUM10_2	NUMBER		22	10	2	
-6	NUM10	NUMBER		22	10	0	100
-7	DAT	DATE		7			TO_DATE('2007.01.01', 'yyyy.mm.dd')
-8	RID	ROWID		10			
+1	    C10	    CHAR		    10			                        'bubu'
+2	    VC20	  VARCHAR2	  20			
+3	    BLO	    BLOB		    4000			
+4	    NUM	    NUMBER		  22			
+5	    NUM10_2	NUMBER		  22	          10	    2	
+6	    NUM10	  NUMBER		  22	          10	    0	        100
+7	    DAT	    DATE		    7			                          TO_DATE('2007.01.01', 'yyyy.mm.dd')
+8	    RID	    ROWID		    10			
 
 
 4. Milyen további dolgok vannak még az adatbázisban a táblákon kívül?
@@ -58,15 +58,15 @@ c_id  c_name  data_type  data_length  prec   scale    data_default
 
 object_name     object_type
 -------------------------------
-CIKK		TABLE
-CIKK_IOT_PK	INDEX
-CIKK_PROJ_DB	VIEW
-CIMLISTA_TAB	TYPE
-CITIES_SPIDX	INDEX
-CL1		CLUSTER
-ELADASOK	TABLE
-ELADASOK	TABLE PARTITION
-GEOM2SVG	PROCEDURE
+CIKK		        TABLE
+CIKK_IOT_PK	    INDEX
+CIKK_PROJ_DB	  VIEW
+CIMLISTA_TAB	  TYPE
+CITIES_SPIDX	  INDEX
+CL1		          CLUSTER
+ELADASOK	      TABLE
+ELADASOK	      TABLE PARTITION
+GEOM2SVG	      PROCEDURE
 ...
 
 
@@ -85,10 +85,10 @@ GEOM2SVG	PROCEDURE
  SELECT owner, segment_name, segment_type, extents, blocks, bytes 
  FROM dba_segments WHERE owner='SH' AND segment_name IN ('CUSTOMERS', 'CUSTOMERS_PK');
 
-owner  segment_name  segment_type   extents   blocks    bytes
-----------------------------------------------------------------
-SH	CUSTOMERS_PK	INDEX		16	128	1048576
-SH	CUSTOMERS	TABLE		27	1536	12582912
+owner   segment_name  segment_type    extents   blocks    bytes
+-------------------------------------------------------------------
+SH	    CUSTOMERS_PK	INDEX		        16	      128	      1048576
+SH	    CUSTOMERS	    TABLE		        27	      1536	    12582912
 
 A fentiekből az is látható, hogy az objektum hány extensből áll, hány adatblokkot és bájtot foglal.
 Azok az objektumok, amelyek nem foglalnak helyet (pl. egy nézet) nem jelennek meg a DBA_SEGMENTS
@@ -103,14 +103,14 @@ adatszótárban, vagyis hozzájuk nem tartozik szegmens.
 
  SELECT file_id, file_name, bytes, blocks FROM dba_data_files;
  
-file_id    file_name                                     bytes          blocks
-------------------------------------------------------------------------------
-1	/u01/app/oracle/oradata/ablinux/system01.dbf	734003200	89600
-2	/u01/app/oracle/oradata/ablinux/sysaux01.dbf	1289748480	157440
-3	/u01/app/oracle/oradata/ablinux/undotbs01.dbf	671088640	81920
-4	/u01/app/oracle/oradata/ablinux/users01.dbf	456130560	55680
-5	/u01/app/oracle/oradata/ablinux/example01.dbf	1572864000	192000
-6	/u01/app/oracle/oradata/ablinux/users02.dbf	1048576000	128000
+file_id    file_name                                      bytes           blocks
+----------------------------------------------------------------------------------
+1	        /u01/app/oracle/oradata/ablinux/system01.dbf	  734003200	      89600
+2	        /u01/app/oracle/oradata/ablinux/sysaux01.dbf	  1289748480	    157440
+3	        /u01/app/oracle/oradata/ablinux/undotbs01.dbf	  671088640	      81920
+4	        /u01/app/oracle/oradata/ablinux/users01.dbf	    456130560	      55680
+5	        /u01/app/oracle/oradata/ablinux/example01.dbf	  1572864000	    192000
+6	        /u01/app/oracle/oradata/ablinux/users02.dbf	    1048576000	    128000
 
 
 7. Hogyan tudhatom meg pontosabban, hogy egy táblához mely adatblokkok tartoznak?
@@ -122,12 +122,12 @@ file_id    file_name                                     bytes          blocks
  SELECT segment_name, segment_type, file_id, block_id, blocks 
  FROM dba_extents WHERE owner='NIKOVITS' AND segment_name='TABLA_123';
 
-segment_name  segment_type   file_id   block_id  blocks
--------------------------------------------------------
-TABLA_123	TABLE		6	4168       8
-TABLA_123	TABLE		4	1736       8
-TABLA_123	TABLE		4	1744       8
-TABLA_123	TABLE		4	1992       8
+segment_name  segment_type    file_id   block_id   blocks
+----------------------------------------------------------
+TABLA_123	    TABLE		        6	        4168       8
+TABLA_123	    TABLE		        4	        1736       8
+TABLA_123	    TABLE		        4	        1744       8
+TABLA_123	    TABLE		        4	        1992       8
 
 A fenti tábla két különböző fájlban (file_id=4, file_id=6) összesen 4 extenssel rendelkezik,
 mindegyik extens mérete 8 blokk.
@@ -145,14 +145,14 @@ mindegyik extens mérete 8 blokk.
 
  SELECT object_name, object_type, object_id, data_object_id FROM dba_objects WHERE owner='NIKOVITS';
 
-object_name  object_type    object_id  data_object_id
+object_name   object_type     object_id   data_object_id
 -----------------------------------------------------
-CIKK		TABLE		93589	93589
-C_CKOD		INDEX		98330	98330
-GEOM2SVG	PROCEDURE	93211	(null)
-CIMLISTA_TAB	TYPE		91577   (null)	
-CL1		CLUSTER		96055	96055
-CIKK_PROJ_DB	VIEW		99572	(null)
+CIKK		      TABLE		        93589	      93589
+C_CKOD		    INDEX		        98330	      98330
+GEOM2SVG	    PROCEDURE	      93211	      (null)
+CIMLISTA_TAB	TYPE		        91577       (null)	
+CL1		        CLUSTER		      96055	      96055
+CIKK_PROJ_DB	VIEW		        99572	      (null)
  
 
 9. Mik azok a táblaterek?
