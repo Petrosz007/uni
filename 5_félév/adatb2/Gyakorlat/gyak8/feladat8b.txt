@@ -1,0 +1,97 @@
+Lekérdezések a NIKOVITS.CIKK, SZALLITO, PROJEKT, SZALLIT táblák alapján
+-----------------------------------------------------------------------
+
+1. Adjuk meg azon szállítások összmennyiségét, ahol ckod=2 és szkod=2.
+
+a) Adjuk meg úgy a lekérdezést, hogy ne használjon indexet.
+b) A végrehajtási tervben két indexet használjon, és képezze a sorazonosítók metszetét (AND-EQUAL).
+
+2. Adjuk meg a Pecs-i telephelyű szállítók által szállított piros cikkek összmennyiségét. 
+
+a) Adjuk meg úgy a lekérdezést, hogy a szallit táblát először a cikk táblával join-olja az oracle.
+b) Adjuk meg úgy a lekérdezést, hogy a szallit táblát először a szallito táblával join-olja az oracle.
+
+
+3. Adjuk meg azon szállítások összmennyiségét, ahol ckod=1 vagy szkod=2. 
+
+a) Adjuk meg úgy a lekérdezést, hogy ne használjon indexet.
+b) A végrehajtási tervben két indexet használjon, és képezze a kapott sorok unióját (CONCATENATION).
+
+
+
+4. Adjunk meg egy olyan lekérdezést a fenti táblákra (hintekkel együtt ha szükséges), aminek az alábbi
+   lesz a végrehajtási terve:
+
+TERV (OPERATION + OPTIONS + OBJECT_NAME)
+----------------------------------------
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    TABLE ACCESS + FULL + CIKK
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    TABLE ACCESS + BY INDEX ROWID + CIKK
+      INDEX + UNIQUE SCAN + C_CKOD
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    HASH JOIN +  + 
+      TABLE ACCESS + FULL + PROJEKT
+      TABLE ACCESS + FULL + SZALLIT
+
+
+SELECT STATEMENT +  + 
+  HASH + GROUP BY + 
+    HASH JOIN +  + 
+      TABLE ACCESS + FULL + PROJEKT
+      TABLE ACCESS + FULL + SZALLIT
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    MERGE JOIN +  + 
+      SORT + JOIN + 
+        TABLE ACCESS + BY INDEX ROWID BATCHED + CIKK
+          INDEX + RANGE SCAN + C_SZIN
+      SORT + JOIN + 
+        TABLE ACCESS + FULL + SZALLIT
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    HASH JOIN +  + 
+      NESTED LOOPS +  + 
+        TABLE ACCESS + BY INDEX ROWID + SZALLITO
+          INDEX + UNIQUE SCAN + SZO_SZKOD
+        TABLE ACCESS + FULL + PROJEKT
+      TABLE ACCESS + FULL + SZALLIT
+
+
+SELECT STATEMENT +  + 
+  FILTER +  + 
+    HASH + GROUP BY + 
+      HASH JOIN +  + 
+        NESTED LOOPS +  + 
+          TABLE ACCESS + BY INDEX ROWID + SZALLITO
+            INDEX + UNIQUE SCAN + SZO_SZKOD
+          TABLE ACCESS + FULL + PROJEKT
+        TABLE ACCESS + FULL + SZALLIT
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    HASH JOIN + ANTI NA + 
+      TABLE ACCESS + FULL + SZALLIT
+      TABLE ACCESS + FULL + CIKK
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    HASH JOIN + SEMI + 
+      TABLE ACCESS + FULL + SZALLIT
+      TABLE ACCESS + FULL + CIKK
+
+  
+

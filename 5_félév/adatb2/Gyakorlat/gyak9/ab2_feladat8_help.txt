@@ -1,0 +1,42 @@
+A 8. feladatsor két feladatának megoldását feltettem ide.
+A végrehajtási terv szerkezetének elemzésével, a benne szereplő táblák és indexek
+ismeterében nem lehetetlen visszakövetkeztetni a lekérdezésre.
+A többi feladat ennél egyszerűbb, így azokat próbálják meg önállóan megoldani.
+
+Adjunk meg egy olyan lekérdezést a fenti táblákra (hintekkel együtt ha szükséges), aminek az alábbi
+lesz a végrehajtási terve:
+
+TERV (OPERATION + OPTIONS + OBJECT_NAME)
+-------------------------------------------------------------
+SELECT STATEMENT +  + 
+  FILTER +  + 
+    HASH + GROUP BY + 
+      HASH JOIN +  + 
+        NESTED LOOPS +  + 
+          TABLE ACCESS + BY INDEX ROWID + SZALLITO
+            INDEX + UNIQUE SCAN + SZO_SZKOD
+          TABLE ACCESS + FULL + PROJEKT
+        TABLE ACCESS + FULL + SZALLIT
+
+select /*+ full(sz) */ sum(mennyiseg), ckod
+from nikovits.szallit sz, nikovits.szallito szto, nikovits.projekt p
+where sz.pkod=p.pkod and sz.szkod=szto.szkod and szto.szkod=15
+and helyszin='Szeged' and telephely='Pecs'
+group by ckod having ckod>100;
+
+
+
+SELECT STATEMENT +  + 
+  SORT + AGGREGATE + 
+    HASH JOIN + SEMI + 
+      TABLE ACCESS + FULL + SZALLIT
+      TABLE ACCESS + FULL + CIKK
+
+select /*+ leading(sz) */ sum(mennyiseg)
+from nikovits.szallit sz
+where exists
+  (select /*+ hash_sj */ ckod from nikovits.cikk c where c.ckod=sz.ckod and szin='piros');
+  
+
+
+

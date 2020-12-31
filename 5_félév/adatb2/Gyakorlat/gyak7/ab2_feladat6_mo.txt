@@ -1,0 +1,149 @@
+Az alábbi feladatokban kiszámoljuk, illetve sok helyen csak megbecsüljük egy tábla sorainak
+vagy adatblokkjainak a számát, egy index méretét, vagy egy lekérdezés végrehajtása során 
+előálló köztes részeredmény méretét (sorainak vagy blokkjainak számát).
+Vannak olyan feladatok is, ahol azt számoljuk ki (becsüljük meg), hogy milyen költséggel
+lehet egy lekérdezést, vagy annak egy lépését végrehajtani.
+Mindezeknek az a jelentősége, hogy megértjük, milyen nagy különbséget jelenhet futásidőben, 
+ha egy lekérdezéshez például van megfelelő index létrehozva, vagy ha egy bonyolult lekérdezés
+egyik lépését egy jobb algoritmussal, és így kisebb költséggel lehet végrehajtani.
+A költségek tekintetében többnyire a szükséges adatblokk olvasások/írások száma a legjelentősebb.
+------------------------------------------------------------------------------------------------
+
+1. Feladat
+----------
+Van egy R táblánk, egy I1 sűrű és egy I2 ritka (egy szintű) indexünk az alábbi paraméterekkel:
+T(R) = 10000, bf(R) = 20, bf(I1) = 100, bf(I2) = 100
+Számoljuk ki a következőket:
+B(R)  = ?   ->  B(R) = T(R)/bf(R) = 500
+                A tábla sorainak száma osztva a blokkolási faktorral
+B(I1) = ?   ->  B(I1) = T(I1)/bf(I1) = 100
+                I1 sűrű index, így T(I1)=T(R), mert a tábla minden sorához tartozik egy (kulcs, mutató)
+                pár az indexben.
+B(I2) = ?   ->  B(I2) = T(I2)/bf(I2) = 5
+                I2 ritka, így T(I2)=B(R), mert csak a tábla blokkjaihoz tartozik egy (kulcs, mutató) pár.
+
+Megjegyzés: Látható, hogy a ritka index sokkal kevesebb helyet foglal, mint a sűrű. Persze a ritka indexhez
+            szükséges, hogy az indexelt adatok rendezetten legyenek tárolva.
+
+
+2. feladat
+----------
+Számoljuk ki az előző feladatbeli értékeket, ha a blokkok csak 80%-ban lehetnek tele.
+-> bf(R) = 0.8 * 20; bf(I1) = 0.8 * 100, a számolás egyebekben hasonló az előzőhöz
+
+
+3. Feladat
+----------
+T(R) = 1000000, bf(R) = 20, egy kulcs oszlopra készítünk B+ fa indexet, amelyre bf(I) = 50. 
+Számoljuk ki a következőket:
+B(I) = ?    (segítség: számítsuk ki szintenként az indexblokkok számát, a levél szinttel kezdve)
+
+Megoldás:
+A legalsó (levél) szint egy sűrű index, annyi (kulcs, mutató) párt tartalmaz, ahány sora van a táblának.
+-> itt a blokkok száma tehát: T(R)/bf(I) = 20000.
+A második (és további szintek) ritka indexek az alattuk levő szintekre, vagyis annyi (kulcs, mutató)
+párt tartalmaznak, ahány blokk az alattuk levő szinten van.
+-> 2. szint: 20000/bf(I) = 400
+-> 3. szint: 400/bf(I) = 8
+-> 4. szint: 8/bf(I) = 1 blokk (ez a gyökér blokk, ami nincs tele)
+-> összesen 20409 blokkja lesz az indexnek, vagyis B(I) = 20409
+
+Mennyi a műveletigénye blokkolvasásokban egy A = c típusú keresésnek (legrosszabb esetben) ha
+a) a tábla sorai rendezetlenül vannak tárolva és nem használunk indexet  
+-> B(R) (ami egyenlő T(R)/bf(R)-rel = 50000), vagyis a táblának 50000 blokkját be kell olvasni legrosszabb esetben.
+
+b) a tábla sorai rendezetten vannak tárolva és nem használunk indexet    
+-> log2(B(R))
+   rendezett esetben bináris keresést alkalmazhatunk, ami jelen esetben ~16 blokk olvasást jelent.
+
+c) a fenti B+ fa indexet használjuk.
+-> ht(I) + 1 = 5 (ht(I) a fa magassága, jelen esetben 4, plusz még be kell olvasnunk a megtalált blokkot.
+
+Megjegyzés: A fenti eredmények megmutatják, hogy miért nem érdemes egyszintű indexet létrehozni, hanem helyette
+            B+ fát. A B+ fa nem foglal sokkal több helyet, mint egy sűrű index, de sokkal gyorsabban lehet
+            a segítségével keresni.
+
+
+4. Feladat (optimization.pptx, 11. old.)
+-----------
+Tekintsük a következő paraméterekkel rendelkező R relációt:
+T(R)=1000000, blokkméret = 4096 byte, L(R)=128 byte, V(R,A)=500, és legyen W a következő
+lekérdezés eredménye:
+W <-- SELECT c1,c2,c3 FROM R WHERE A=x;
+Számoljuk ki B(R)-t és B(W)-t ha L(W)=64 byte.  
+-> B = T/bf, de most előzőleg ki kell számolnunk T-t és bf-et. 
+bf(R) = blokkméret/L(R) = 2^12/2^7 = 2^5
+T(W) = T(R)/V(R,A), bf(W) = blokkméret/L(W)
+
+Megjegyzés: Egy lekérdezés során a köztes eredményeket sokszor lemezen kell tárolnia az ABKR-nek,
+            ezért fontos kiszámolni (megbecsülni) a méretüket.
+
+
+5. Feladat  (optimization.pptx, 21. old.)
+-----------  
+Tegyük fel, hogy a memória mérete 101 blokk (M=101), és van egy R relációnk, amelyre B(R)=1000000.
+Mennyi a költsége (I/O műveletekben kifejezve) a fenti reláció külső összefuttatásos rendezésének?
+-> 2*B(R) + 2*B(R)*log[B(R)/M] - B(R)  (a logaritmus alapja M-1)
+
+
+6. Feladat  (output_estimate.pptx 17. old.)
+----------
+T(R) = 1000000, V(R,A) = 500, V(R,B) = 1000
+Számoljuk ki T(W)-t az egyenletességi feltételezéssel élve, ha W a következő lekérdezés eredménye:
+a) W <-- SELECT * FROM R WHERE A=x;           -> T(R)/V(R,A) = 2000
+b) W <-- SELECT * FROM R WHERE A=x AND B=y;   -> T(R)*(1/V(R,A))*(1/V(R,B)) = 2
+c) W <-- SELECT * FROM R WHERE A=x OR B=y;    -> T(R)*(1-[1-1/V(R,A)]*[1-1/V(R,B)])
+
+Átalakítás után:  V(R,A) -> v1, V(R,B) -> v2 
+T*[1-(1-1/v1)*(1-1/v2)] = T*[(v1*v2)/(v1*v2) - (v1-1)*(v2-1)/(v1*v2)] =
+= T*[(v1 + v2 -1)/(v1*v2)] = T/v2 + T/v1 - T/(v1*v2)
+
+A fenti átalakítást felhasználva c) feladat eredménye könnyen kiszámolható:
+T(R)/V(R,A) + T(R)/V(R,B) - T(R)/[V(R,A)*V(R,B)]
+
+
+7. Feladat  (output_estimate.pptx 13-16. old.)
+----------
+T(R) = 10000, T(S) = 4000, a két tábla közös oszlopa: A, ahol ugyanazok az értékek fordulnak elő.
+V(R,A) = 500, V(S,A) = 500.
+Számoljuk ki T(W)-t ha W a következő lekérdezés eredménye:
+a) W <-- SELECT * FROM R CROSS JOIN S;    -> T(R)*T(S) = 40M
+b) W <-- SELECT * FROM R NATURAL JOIN S;  -> T(R)*T(S)/V(R,A) = 80e
+
+Megjegyzés: A fenti feladat azt illusztrálja, hogy mennyire költséges lehet egy lekérdezés végrehajtása,
+            ha köztes eredményként direkt szorzatot kell létrehozni, és esetleg temporálisan tárolni.
+
+
+8. Feladat  (optimization.pptx a) 28-29., b) 32., c) 21. és 31. old., operation_cost_examples.pptx)
+----------  
+Tegyük fel, hogy a memóriánk 101 blokknyi (M=101), és van egy 1000000 soros R táblánk
+T(R) = 1000000, amelynek 10 sora fér el egy blokkban bf(R) = 10, valamint egy 60000 soros S táblánk, 
+T(S) = 60000, amelynek 12 sora fér el egy blokkban bf(S) = 12. 
+Mennyi a blokkolvasási és írási költsége (I/O költsége) egy egyenlőséges összekapcsolás műveletnek 
+(WHERE R.A = S.A) az alábbi algoritmusok esetén:
+a) beágyazott ciklusú algoritmus (block-nested loop)  
+-> B(R)*B(S)/(M-1) + B(S)   ~ 5M blokk I/O
+b) HASH alapú algoritmus (hash-join)                  
+-> 3*[B(S)+B(R)]    ~ 315e blokk I/O 
+c) RENDEZÉS alapú algoritmus (sort-merge join)        
+-> (Menetek száma)*[2*B(S)+2*B(R)] + B(S)+B(R)
+   ahol a Menetek száma különböző lehet a két relációra, és a következő képlettel becsülhető:
+   log[B(R)/M] felső egészrésze (a logaritmus alapja M-1)
+
+Megjegyzés: Hatalmas futásidő különbség lehet egy HASH-JOIN és egy NESTED-LOOP join között, és 
+            sok esetben a lekérdezés szintaxisa dönti, el, hogy melyik használható.
+
+
+9. Feladat  (optimization.pptx 30. old., operation_cost_examples.pptx 19-21. old.)
+----------  
+Mennyi az I/O költsége az előző feladatbeli két tábla index alapú összekapcsolásának (index-join), 
+ha R-re van indexünk (amit végig a memóriában tartunk), R nem nyaláboltan van tárolva és
+a) V(R,A) = 1000000    -> B(S) + T(S) * T(R)/V(R,A)  ~ 65e blokk I/O
+b) V,R,A) = 10000      -> B(S) + T(S) * T(R)/V(R,A)  ~ 6M  blokk I/O
+
+Megjegyzés: A fenti eredmények azt illusztrálják, hogy az indexek használata akkor hatékony,
+            ha kevés sor felel meg a feltételeknek, vagyis a tábla méretéhez képest kevés sort
+            kell beolvasnunk.
+
+
+

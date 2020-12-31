@@ -1,0 +1,43 @@
+Az alábbi táblák csak az ARAMIS adatbázisban vannak létrehozva.
+
+Magyarázat a táblák tartalmához
+-------------------------------
+Magyarországon a vezetékes telefonszolgáltatás úgynevezett primer körzetekre van osztva,
+minden körzetnek van egy egyedi száma 0 és 99 között. Ez az előhívó szám, amit a 06 
+után megadunk. A körzetekről tároljuk a számát, a körzet központjául szolgáló várost,
+a szolgáltató megnevezését és a megyét.
+Egy primer körzetben sok telefonközpont van, ezekről most csak egy azonosítót és a nevüket
+tároljuk, plusz a körzetszámukat. Az előfizetői vonalak a telefonközpontokba vannak bekötve.
+A telefonhívásokról összesítve az alábbi adatokat tároljuk.
+A hívó és fogadó fél telefonközpontja, a szolgáltatás típusa, a hívások napja (dátuma),
+a hívás indításának órasávja (0-23), az adott órasávban kezdeményezett hívások összes darabszáma
+az adott központok között, valamint az adott órasáv hívásainak összes beszélt másodperce.
+
+A lekérdezett táblák: HIVAS, KOZPONT, PRIMER
+
+HIVAS   (kozp_azon_hivo, kozp_azon_fog, szol_azon, datum, ora, darab, masodperc)  ~ 45M sor
+KOZPONT (primer, kozp_azon, kozp_nev)                                             ~ 1250 sor
+PRIMER  (korzet, varos, szolgaltato, megye)                                       ~ 70 sor
+
+Hasonlítsuk össze az alábbi két lekérdezést, amelyek nagyon hasonlóak, és végeredményük megegyezik.
+Az egyik nagyon gyorsan le is fut, a másik viszont meglehetősen lassan.
+Vajon mi okozza a futásidőbeli különbséget?
+
+
+A lekérdezés
+------------
+Vegyük 2012. februárjának első hétfőjét, és adjuk meg, hogy összesen
+hány darab telefonhívást kezdeményeztek a megelőző napon a Szentendrei primer körzetből.
+
+-- futásidő: 12 sec 
+SELECT sum(darab) FROM nikovits.hivas, nikovits.kozpont, nikovits.primer
+WHERE hivas.kozp_azon_hivo=kozpont.kozp_azon AND kozpont.primer=primer.korzet
+AND primer.varos = 'Szentendre' 
+AND datum + 1 = next_day(to_date('2012.01.31', 'yyyy.mm.dd'),'hétfő');
+
+
+-- futásidő: 1 sec
+SELECT sum(darab) FROM nikovits.hivas, nikovits.kozpont, nikovits.primer
+WHERE hivas.kozp_azon_hivo=kozpont.kozp_azon AND kozpont.primer=primer.korzet
+AND primer.varos = 'Szentendre' 
+AND datum = next_day(to_date('2012.01.31', 'yyyy.mm.dd'),'hétfő') - 1;

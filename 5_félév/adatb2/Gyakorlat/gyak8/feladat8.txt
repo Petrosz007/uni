@@ -1,0 +1,253 @@
+Adatbázisok 2
+8. gyakorlat
+------------------
+Végrehajtási terv
+-----------------
+A lekérdezések végrehajtási tervét az Oracle egy PLAN_TABLE nevű táblába
+vagy egy ezzel azonos szerkezetű táblába teszi, ha erre megkérjük.
+Egy hosszú futási idejű lekérdezés esetén mindig érdemes megvizsgálni
+a végrehajtási tervet, megnézni az abban szereplő műveleteket és azok költségeit.
+Mindezt az alábbi 3 lépéssel tehetjük meg.
+
+1. PLAN_TABLE létrehozása -> egy CREATE TABLE utasítás futtatása 
+   (az utasítást lásd lejjebb, általában a szerveren az utlxplan.sql nevű állományban van)
+   Oracle 10-től már nem szükséges létrehozni! (automatikusan létrejön rá egy publikus szinonima)
+
+2. Végrehajtási terv létrehozása a PLAN_TABLE nevű táblába:
+   (Szükséges, hogy legyen olyan nevű táblánk, amit a SELECT lekérdez.)
+
+  EXPLAIN PLAN SET statement_id='ut1'  -- ut1 -> az utasításnak egyedi nevet adunk
+  FOR 
+  SELECT avg(fizetes) FROM dolgozo;
+
+3. Majd a végrehajtási terv fa struktúrájának kiíratása egy hierarchikus (rekurzív)
+   lekérdezéssel: 
+
+SELECT LPAD(' ', 2*(level-1))||operation||' + '||options||' + '||object_name terv
+FROM plan_table
+START WITH id = 0 AND statement_id = 'ut1'                 -- az utasítás neve szerepel itt
+CONNECT BY PRIOR id = parent_id AND statement_id = 'ut1'   -- meg itt
+ORDER SIBLINGS BY position;
+
+A fenti lekérdezés csak a végrehajtási terv szerkezetét íratja ki, vagyis azt, hogy a fa
+csomópontjaiban milyen művelet hajtódik végre. A csomópontokra vonatkozóan azonban
+a PLAN_TABLE sok más hasznos információt is tartalmaz, ezeket is érdemes kiíratni.
+Az alábbi lekérdezésben még az első eredményoszlop (terv) hosszát is korlátoztuk 50 karakterre,
+hogy könnyebben lehessen szöveges fájlba menteni.
+
+SELECT SUBSTR(LPAD(' ', 2*(LEVEL-1))||operation||' + '||options||' + '||object_name, 1, 50) terv,
+  cost, cardinality, bytes, io_cost, cpu_cost
+FROM plan_table
+START WITH ID = 0 AND STATEMENT_ID = 'ut1'                 -- az utasítás neve szerepel itt
+CONNECT BY PRIOR id = parent_id AND statement_id = 'ut1'   -- meg itt
+ORDER SIBLINGS BY position;
+
+Vagy egy package (dbms_xplan) segítségével is kiírathatjuk a végrehajtási tervet,
+ezek használatához is van két előre adott script (utlxpls.sql, utlxplp.sql)
+------------------------
+utlxpls.sql tartalma:
+
+select plan_table_output from table(dbms_xplan.display('plan_table','ut1','all'));
+paraméterek: tábla_név, statement_id, részletesség (basic, typical, all, serial) 
+------------------------
+utlxplp.sql tartalma:
+
+select plan_table_output from table(dbms_xplan.display());
+
+------------------------
+utlxplan.sql tartalma:
+
+create table PLAN_TABLE (
+        statement_id       varchar2(30),
+        plan_id            number,
+        timestamp          date,
+        remarks            varchar2(4000),
+        operation          varchar2(30),
+        options            varchar2(255),
+        object_node        varchar2(128),
+        object_owner       varchar2(30),
+        object_name        varchar2(30),
+        object_alias       varchar2(65),
+        object_instance    numeric,
+        object_type        varchar2(30),
+        optimizer          varchar2(255),
+        search_columns     number,
+        id                 numeric,
+        parent_id          numeric,
+        depth              numeric,
+        position           numeric,
+        cost               numeric,
+        cardinality        numeric,
+        bytes              numeric,
+        other_tag          varchar2(255),
+        partition_start    varchar2(255),
+        partition_stop     varchar2(255),
+        partition_id       numeric,
+        other              long,
+        distribution       varchar2(30),
+        cpu_cost           numeric,
+        io_cost            numeric,
+        temp_space         numeric,
+        access_predicates  varchar2(4000),
+        filter_predicates  varchar2(4000),
+        projection         varchar2(4000),
+        time               numeric,
+        qblock_name        varchar2(30),
+        other_xml          clob
+);
+
+----------------------------------------
+Lekérdezés-optimalizálás
+------------------------
+Végrehajtási tervek előállítása
+
+Készítsük el az alábbi utasítások végrehajtási tervét.
+Ezután tegyük is láthatóvá a tervek fa struktúráját a megfelelő lekérdezéssel.
+
+1. Feladat
+----------
+Az VZOLI felhasználó Dolgozo, Osztaly es Fiz_kategoria (fizetési kategóriák) tábláiból 
+hozzunk létre saját példányokat CTAS utasítással (CREATE TABLE dolgozo AS SELECT * FROM vzoli.dolgozo; ... stb.), 
+és a saját táblákra vonatkozóan adjuk meg az alábbi lekérdezést.
+------------------------------------------------------------------------------------------
+DOLGOZO       (dkod, dnev, foglalkozas, fonoke, belepes, fizetes, jutalek, oazon)
+OSZTALY       (oazon, onev, telephely)
+Fiz_kategoria (kategoria, also, felso)
+------------------------------------------------------------------------------------------
+Lekérdezés:
+Adjuk meg azoknak az osztályoknak a neveit, amelyeknek van olyan dolgozója,
+aki az 1-es fizetési kategóriába esik.
+
+Hozzunk létre indexet valamelyik táblához, majd adjuk meg a rendszer által
+létrehozott új végrehajtási tervet. Olyan indexet hozzunk létre, amit
+a lekérdezésben használni tud a rendszer és ez legyen is látható az új tervből.
+------------------------------------------------------------------------------
+
+2. Feladat
+----------
+Hasonlítsuk össze a futas_tesztek.txt állomány két lekérdezésének végrehajtási tervét,
+és állapítsuk meg a különbséget. Miért gyorsabb lényegesen az egyik verzió?
+
+EXPLAIN PLAN SET statement_id='BUBU2'  
+  FOR SELECT sum(darab) 
+FROM nikovits.hivas, nikovits.kozpont, nikovits.primer
+WHERE hivas.kozp_azon_hivo=kozpont.kozp_azon 
+AND kozpont.primer=primer.korzet
+AND primer.varos = 'Szentendre' 
+AND datum = next_day(to_date('2012.01.31', 'yyyy.mm.dd'),'hétfő') - 1;
+
+select plan_table_output from table(dbms_xplan.display('plan_table','BUBU2','all'));
+--
+
+EXPLAIN PLAN SET statement_id='BUBU3'  
+  FOR SELECT sum(darab) FROM nikovits.hivas, nikovits.kozpont, nikovits.primer
+WHERE hivas.kozp_azon_hivo=kozpont.kozp_azon AND kozpont.primer=primer.korzet
+AND primer.varos = 'Szentendre' 
+AND datum + 1 = next_day(to_date('2012.01.31', 'yyyy.mm.dd'),'hétfő');
+
+select plan_table_output from table(dbms_xplan.display('plan_table','BUBU3','all'));
+
+select * from dba_objects
+where owner='NIKOVITS'
+and object_name='HIVAS';
+--------------------------------------------------------------
+
+
+Végrehajtási tervek megváltoztatása tippek (hint) segítségével
+--------------------------------------------------------------
+
+Tekintsük a következő táblákat a NIKOVITS sémában:
+--------------------------------------------
+CIKK(ckod, cnev, szin, suly)
+SZALLITO(szkod, sznev, statusz, telephely)
+PROJEKT(pkod, pnev, helyszin)
+SZALLIT(szkod, ckod, pkod, mennyiseg, datum)
+--------------------------------------------
+A táblákban tárolt adatok jelentése a következő: 
+A szállítók cikkeket szállítanak a projektekhez, különböző időpontokban, különböző mennyiségben.
+A szállításokra vonatkozó információk a SZALLIT táblában találhatók. 
+
+A táblákhoz indexek is vannak létrehozva, ezek tulajdonságait
+a katalógusból nézhetik meg, ha szükség van rá.
+
+Adjuk meg a következő lekérdezéseket és a hozzájuk tartozó végrehajtási
+tervek fa struktúráját. Minden esetben lehet hinteket használni.
+
+3. Feladat
+----------
+Adjuk meg a piros cikkekre vonatkozó szállitások összmennyiségét.
+(vagyis a szallit táblabeli mennyiségek összegét adjuk meg)
+
+a) Adjuk meg úgy a lekérdezést, hogy egyik táblára se használjon indexet az oracle. 
+b) Adjuk meg úgy a lekérdezést, hogy csak az egyik táblára használjon indexet az oracle. 
+c) Adjuk meg úgy a lekérdezést, hogy mindkét táblára használjon indexet az oracle. 
+d) Adjuk meg úgy a lekérdezést, hogy a két táblát SORT-MERGE módszerrel kapcsolja össze. 
+e) Adjuk meg úgy a lekérdezést, hogy a két táblát NESTED-LOOPS módszerrel kapcsolja össze. 
+f) Adjuk meg úgy a lekérdezést, hogy a két táblát HASH-JOIN módszerrel kapcsolja össze. 
+g) Adjuk meg úgy a lekérdezést, hogy a két táblát NESTED-LOOPS módszerrel kapcsolja össze,
+   és ne használjon indexet. 
+
+=========================================================================================
+Az alábbi példán bemutatom egy index létrehozását, és annak megjelenését a végrehajtási
+tervben. 
+Feladat: 
+Adjuk meg cikk nevenként a piros színű cikkek átlagos súlyát (cnev, atlag), 
+úgy hogy a lekérdezés használjon indexet a szin attributumra!
+
+Az alábbi csupán egy példa, amelyben bemutatom az egyes lépéseket.
+Az ilyen feladatok esetén kérem elküldeni:
+  a SELECT utasítást, az esetleges hintekkel együtt (+ az indexet létrehozó utasítást),
+  a lekérdezés végeredményét, 
+  és a végrehajtási tervet.
+
+Először létrehozok egy átmeneti táblát csak a példa kedvéért:
+  CREATE TABLE cikk_tmp AS SELECT * FROM nikovits.cikk;
+
+Lekérdezés (ebben még nincsenek hintek, még nem fogja a megfelelő végrehajtási tervet eredményezni)
+---------  
+SELECT cnev, ROUND(AVG(suly)) atlag FROM cikk_tmp WHERE szin='piros' GROUP BY cnev;
+
+A lekérdezés eredménye: 
+-----------------------
+taska     14
+toll      10
+nyomtato  19
+kabat     14
+gep       21
+kalap     14
+papir     18
+munkaruha 12
+szek      13
+PC        13
+asztal    16
+kasza     11
+kapa      20
+
+A lekérdezés végrehajtási terve:  (ez a terv még nem használ indexet, ez még nem jó)
+--------------------------------
+SELECT STATEMENT +  + 
+  HASH + GROUP BY + 
+    TABLE ACCESS + FULL + CIKK_TMP
+
+Létrehozunk egy indexet a táblára:
+  CREATE INDEX szin_idx ON cikk_tmp(szin);
+
+A lekérdezés, amiben hint is van, hogy mindenképpen használja az indexet: (ez a végleges SELECT)
+-------------------------------------------------------------------------
+  SELECT /*+ index(cikk_tmp) */ cnev, ROUND(AVG(suly)) FROM cikk_tmp WHERE szin='piros' GROUP BY cnev;
+
+Az új végrehajtási terv, amiben már látható az index: 
+-----------------------------------------------------
+SELECT STATEMENT +  + 
+  HASH + GROUP BY + 
+    TABLE ACCESS + BY INDEX ROWID BATCHED + CIKK_TMP
+      INDEX + RANGE SCAN + SZIN_IDX
+
+
+A fenti csak egy példa volt, a hasonló feladatok esetén a megfelelő, hinteket is tartalmazó
+SELECT utasítást, annak futtatásával kapott végeredményt és a végrehajtási tervet kell elküldeni.
+
+
+
+
+

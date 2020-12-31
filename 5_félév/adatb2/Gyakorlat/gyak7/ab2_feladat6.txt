@@ -1,0 +1,89 @@
+Az alábbi feladatokban kiszámoljuk, illetve sok helyen csak megbecsüljük egy tábla sorainak
+vagy adatblokkjainak a számát, egy index méretét, vagy egy lekérdezés végrehajtása során 
+előálló köztes részeredmény méretét (sorainak vagy blokkjainak számát).
+Vannak olyan feladatok is, ahol azt számoljuk ki (becsüljük meg), hogy milyen költséggel
+lehet egy lekérdezést, vagy annak egy lépését végrehajtani.
+Mindezeknek az a jelentősége, hogy megértjük, milyen nagy különbséget jelenhet futásidőben, 
+ha egy lekérdezéshez például van megfelelő index létrehozva, vagy ha egy bonyolult lekérdezés
+egyik lépését egy jobb algoritmussal, és így kisebb költséggel lehet végrehajtani.
+A költségek tekintetében többnyire a szükséges adatblokk olvasások/írások száma a legjelentősebb.
+------------------------------------------------------------------------------------------------
+
+1. Feladat
+----------
+Van egy R táblánk, egy I1 sűrű és egy I2 ritka (egy szintű) indexünk az alábbi paraméterekkel:
+T(R) = 10000, bf(R) = 20, bf(I1) = 100, bf(I2) = 100
+Számoljuk ki a következőket:
+B(R)  = ?   
+B(I1) = ?   
+B(I2) = ?   
+
+
+2. feladat
+----------
+Számoljuk ki az előző feladatbeli értékeket, ha a blokkok csak 80%-ban lehetnek tele.
+
+
+3. Feladat
+----------
+T(R) = 1000000, bf(R) = 20, egy "A" kulcs oszlopra készítünk B+ fa indexet, amelyre bf(I) = 50. 
+Számoljuk ki a következőket:
+B(I) = ?    (segítség: számítsuk ki szintenként a blokkok számát, a levél szinttel kezdve)
+
+Mennyi a műveletigénye blokkolvasásokban egy A = c típusú keresésnek (legrosszabb esetben) ha
+a) a tábla sorai rendezetlenül vannak tárolva és nem használunk indexet  
+b) a tábla sorai rendezetten vannak tárolva és nem használunk indexet    
+c) a fenti B+ fa indexet használjuk.                                     
+
+4. Feladat (optimization.pptx, 11. old.)
+-----------
+Tekintsük a következő paraméterekkel rendelkező R relációt:
+T(R)=1000000, blokkméret = 4096 byte, L(R)=128 byte, V(R,A)=500, és legyen W a következő
+lekérdezés eredménye:
+W <-- SELECT c1,c2,c3 FROM R WHERE A=x;
+Számoljuk ki B(R)-t és B(W)-t ha L(W)=64 byte.
+
+
+5. Feladat  (optimization.pptx, 21. old.)
+-----------  
+Tegyük fel, hogy a memória mérete 101 blokk (M=101), és van egy R relációnk, amelyre B(R)=1000000.
+Mennyi a költsége (I/O műveletekben kifejezve) a fenti reláció külső összefuttatásos rendezésének?
+
+
+6. Feladat  (output_estimate.pptx 17. old.)
+----------
+T(R) = 1000000, V(R,A) = 500, V(R,B) = 1000
+Számoljuk ki T(W)-t az egyenletességi feltételezéssel élve, ha W a következő lekérdezés eredménye:
+a) W <-- SELECT * FROM R WHERE A=x;           
+b) W <-- SELECT * FROM R WHERE A=x AND B=y;   
+c) W <-- SELECT * FROM R WHERE A=x OR B=y;    
+
+
+7. Feladat  (output_estimate.pptx 13-16. old.)
+----------
+T(R) = 10000, T(S) = 4000, a két tábla közös oszlopa: A, ahol ugyanazok az értékek fordulnak elő.
+V(R,A) = 500, V(S,A) = 500.
+Számoljuk ki T(W)-t ha W a következő lekérdezés eredménye:
+a) W <-- SELECT * FROM R CROSS JOIN S;    
+b) W <-- SELECT * FROM R NATURAL JOIN S;  
+
+
+8. Feladat  (optimization.pptx a) 28-29., b) 32., c) 21. és 31. old.)
+----------  
+Tegyük fel, hogy a memóriánk 101 blokknyi (M=101), és van egy 1000000 soros R táblánk
+T(R) = 1000000, amelynek 10 sora fér el egy blokkban bf(R) = 10, valamint egy 60000 soros S táblánk, 
+T(S) = 60000, amelynek 12 sora fér el egy blokkban bf(S) = 12. 
+Mennyi a blokkolvasási és írási költsége (I/O költsége) egy egyenlőséges összekapcsolás műveletnek 
+(WHERE R.A = S.A) az alábbi algoritmusok esetén:
+a) beágyazott ciklusú algoritmus (block-nested loop)  
+b) HASH alapú algoritmus (hash-join)                  
+c) RENDEZÉS alapú algoritmus (sort-merge join)        
+
+
+9. Feladat  (optimization.pptx 30. old., operation_cost_examples.pptx 19-21. old.)
+----------  
+Mennyi az I/O költsége az előző feladatbeli két tábla index alapú összekapcsolásának (index-join), 
+ha R-re van indexünk (amit végig a memóriában tartunk), R nem nyaláboltan van tárolva és
+a) V(R,A) = 1000000    
+b) V,R,A) = 10000      
+

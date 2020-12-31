@@ -1,0 +1,96 @@
+Elméleti kérdések:
+------------------
+Mit jelent az, hogy két ütemezés konfliktus-ekvivalens?
+Mit jelent az, hogy egy ütemezés konfliktus-sorbarendezhető?
+Mi az a megelőzési gráf és hogyan épül fel?
+Mit állíthatunk konzisztens, kétfázisú tranzakciók jogszerű ütemezéséről?
+Igaz-e, hogy konzisztens tranzakciók jogszerű ütemezése konfliktus-sorbarendezhető? (ellenpélda)
+Igaz-e, hogy konzisztens, kétfázisú tranzakciók esetén nem alakulhat ki holtpont? (ellenpélda)
+Mi az a várakozási gráf és hogyan épül fel?
+--------------------------------------------------------------------------------
+
+Adott az alábbi három tranzakció. Adjuk meg az X adatbáziselem lehetséges
+értékeit a trazakciók lefutása után, feltéve, hogy a tranzakciók ütemezése
+soros, és X kezdeti értéke 100.
+T1: READ(X,t); t:=t+100; WRITE(X,t);
+T2: READ(X,t); t:=t*2; WRITE(X,t);
+T3: READ(X,t); t:=t+10; WRITE(X,t);
+
+--------------------------------------------------------------------------------
+9.1.2 Feladat (ehhez hasonló)
+Hányféle különböző ütemezése van a fenti 3 tranzakciónak?  
+Hányféle soros ütemezése van a fenti 3 tranzakciónak?      
+
+--------------------------------------------------------------------------------
+9.2.1 Feladat
+Adott az alábbi két tranzakció. Igazoljuk, hogy a (T1,T2) és (T2,T1) soros 
+ütemezések ekvivalensek, vagyis az adatbázison való hatásuk azonos.
+T1: READ(A,t); t:=t+2; WRITE(A,t); READ(B,t); t:=t*3; WRITE(B,t);
+T2: READ(B,s); s:=s*2; WRITE(B,s); READ(A,s); s:=s+3; WRITE(A,s);
+
+Adjunk példát a fenti 12 művelet sorba rendezhető és nem sorba rendezhető ütemezésére is.
+
+--------------------------------------------------------------------------------
+9.2.2 Feladat
+Az előző feladat tranzakcióiban csak az írási és olvasási műveleteket jelölve a 
+következő két tranzakciót kapjuk:
+T1: R1(A); W1(A); R1(B); W1(B);
+T2: R2(B); W2(B); R2(A); W2(A);
+- A fenti 8 művelet ütemezései közül hány darab konfliktusekvivalens a 
+  (T1,T2) soros sorrenddel? 
+- A fenti 8 művelet ütemezései közül hány darab konfliktus sorbarendezhető?
+--------------------------------------------------------------------------------
+9.2.3 Feladat
+Adjuk meg a konfliktus-sorbarendezhető ütemezések számát az alábbi két tranzakcióra.
+T1: R1(A); W1(A); R1(B); W1(B);
+T2: R2(A); W2(A); R2(B); W2(B);
+--------------------------------------------------------------------------------
+9.2.4 Feladat
+Adjuk meg az alábbi ütemezések (S1,S2,S3) megelőzési gráfját.
+S1: R1(A); R2(A); R3(B); W1(A); R2(C); R2(B); W2(B); W1(C);
+S2: R1(A); R2(A); W1(B); W2(B); R1(B); R2(B); W2(C); W1(D);
+S3: R1(A); R2(A); R1(B); R2(B); R3(A); R4(B); W1(A); W2(B);
+--------------------------------------------------------------------------------
+9.3.2 Feladat
+T1: l1(A); R1(A); W1(A); l1(B); R1(B); W1(B); u1(A); u1(B);
+T2: l2(B); R2(B); W2(B); l2(A); R2(A); W2(A); u2(B); u2(A);
+Kétfázisú-e a fenti két tranzakció?
+Hány jogszerű ütemezést tudunk készíteni a fenti tranzakciók műveleteiből?
+Adjunk példát egy olyan tranzakcióra, amely nem kétfázisú.
+--------------------------------------------------------------------------------
+Adjuk meg az alábbi ütemezésekre, hogy jogszerűek-e, valamint a bennük szereplő tranzakciókról,
+hogy melyek konzisztensek illetve kétfázisúak.
+a) l1(A); W1(A); l1(B); u1(A); l2(A); W2(A); u2(A); R1(B); l2(C); W2(C); u2(C); u1(B)
+b) l1(A); W1(A); u1(A); l2(A); W2(A); l1(B); u2(A); R1(B); l2(C); W2(C); u2(C); u1(B)
+c) l1(A); W1(A); l2(A); W2(A); l1(B); u1(a); u2(A); R1(B); l2(C); W2(C); u2(C); u1(B)
+--------------------------------------------------------------------------------
+
+9.3.4 Feladat
+Tekintsük a következő, két műveletet: r1(A), w1(B), valamint a szükséges 
+l1(A), u1(A), l1(B), u1(B) zárkezelő műveleteket. 
+Adjuk meg, hogy a műveleteknek hányféle lehetséges sorrendje lehet úgy, hogy az
+előálló tranzakció
+a) konzisztens legyen 
+b) konzisztens de nem kétfázisú legyen 
+c) konzisztens és kétfázisú legyen 
+d) kétfázisú legyen
+e) se nem konzisztens, se nem kétfázisú legyen
+--------------------------------------------------------------------------------
+
+9.4.7 Feladat
+Az alábbi ütemezésből egy művelet hiányzik a kérdőjelek helyén:
+R1(A); R2(B); ???; W1(C); W2(A);
+Adjunk meg egy olyan olvasási műveletet ide, amely esetén az ütemezés nem konfliktus-sorbarendezhető.
+Adjunk meg egy olyan írási műveletet ide, amely esetén az ütemezés nem konfliktus-sorbarendezhető.
+--------------------------------------------------------------------------------
+
+Rajzoljuk fel a következő ütemezéshez tartozó várakozási gráfot a 7., és 9. lépés után.
+(tegyük fel, hogy egy felszabaduló zárat az a várakozó fog megkapni, aki a legrégebben vár)
+l1(A); l2(B); l3(C); l1(D); l2(A); l3(D); l4(B); u1(A); l2(C); ...
+Milyen műveletek következhetnek a 10. lépésben, hogy az ütemezés jogszerű legyen?
+--------------------------------------------------------------------------------
+
+Rajzoljuk fel a következő ütemezéshez tartozó várakozási gráfot a 8., 10. és 12. lépés után (S/X modell).
+(tegyük fel, hogy egy felszabaduló zárat az a várakozó fog megkapni, aki a legrégebben vár)
+sl1(A); xl2(B); sl3(C); sl3(D); sl1(B); xl4(C); sl2(D); xl3(A); u2(B); sl2(C); u1(A); u3(C) ...
+
